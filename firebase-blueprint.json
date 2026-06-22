@@ -1,0 +1,31 @@
+{
+  "entities": {
+    "CharacterVotes": {
+      "title": "CharacterVotes",
+      "description": "Stores the accumulated vote count for a specific fictional chatbot character.",
+      "type": "object",
+      "properties": {
+        "characterId": {
+          "type": "string",
+          "description": "Unique identifier matching the character ID in characters.ts."
+        },
+        "votes": {
+          "type": "integer",
+          "description": "Total number of votes accumulated for this character."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this vote record was last updated."
+        }
+      },
+      "required": ["characterId", "votes"]
+    }
+  },
+  "firestore": {
+    "votes/{characterId}": {
+      "schema": "CharacterVotes",
+      "description": "Collection where each document represents the voting stats for a single character."
+    }
+  }
+}
