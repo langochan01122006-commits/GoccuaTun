@@ -510,8 +510,9 @@ export default function App() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="w-full max-w-4xl z-10 flex flex-col gap-5"
           >
-            {/* Back button to Welcome Portal */}
-            <div className="flex justify-start">
+            {/* Top Navigation Row */}
+            <div className="flex justify-between items-center">
+              {/* Back button to Welcome Portal */}
               <button
                 onClick={() => {
                   playClickSound(500, 0.1);
@@ -522,6 +523,42 @@ export default function App() {
                 <ArrowLeft className="w-3.5 h-3.5 text-[#EDC5E4] transition-transform group-hover:-translate-x-0.5" />
                 <span>Quay lại</span>
               </button>
+
+              {/* Minimalist round tool buttons at the top right */}
+              <div className="flex items-center gap-1.5 md:gap-2">
+                {/* Cycle backgrounds selector */}
+                <button
+                  onClick={cycleBackdropTheme}
+                  id="top-cycle-theme"
+                  className="p-2.5 transition duration-150 bg-white hover:bg-slate-50 border border-slate-100 rounded-full shadow-sm text-slate-600 active:scale-95 flex items-center justify-center cursor-pointer"
+                  title={`Giao diện hiện tại: ${
+                    backdropTheme === "pastel" ? "Pastel Nhật Bản" : backdropTheme === "sunset" ? "Hoàng Hôn Lãng Mạn" : "Thiên Hà Huyền Bí"
+                  }`}
+                >
+                  {backdropTheme === "cosmic" ? (
+                    <Sun className="w-4 h-4 text-amber-500" />
+                  ) : (
+                    <Moon className="w-4 h-4 text-indigo-500" />
+                  )}
+                </button>
+
+                {/* General Back/Reset system buttons if active */}
+                {(chattingCharacter || searchQuery || activeTag !== "Tất cả") && (
+                  <button
+                    onClick={() => {
+                      playClickSound(300, 0.1);
+                      setChattingCharacter(null);
+                      searchQuery && setSearchQuery("");
+                      activeTag !== "Tất cả" && setActiveTag("Tất cả");
+                    }}
+                    id="top-reset-general"
+                    className="p-2.5 transition duration-150 bg-blue-500 hover:bg-blue-600 rounded-full shadow-md text-white active:scale-95 flex items-center justify-center cursor-pointer"
+                    title="Quay lại ban đầu"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Announcement bar */}
@@ -549,67 +586,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Top Minimalist Navigation / Action Panel */}
-            <header 
-              className="relative flex flex-col items-center justify-center p-6 md:p-8 rounded-3xl shadow-lg" 
-              style={{ 
-                backgroundColor: "rgba(255, 255, 255, 0.15)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid rgba(255, 255, 255, 0.25)"
-              }}
-            >
-              <div className="flex flex-col items-center text-center">
-                <h1 
-                  className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] leading-tight tracking-wider mb-2 font-sans"
-                  style={{ textShadow: "0px 2px 4px rgba(0, 0, 0, 0.8)" }}
-                >
-                  𝙶𝚘́𝚌 𝚌𝚞̉𝚊 𝚃𝚞𝚗
-                </h1>
-                <p 
-                  className="text-sm md:text-base font-bold text-[#FFFFFF] font-sans"
-                  style={{ textShadow: "0px 2px 4px rgba(0, 0, 0, 0.8)" }}
-                >
-                  𝘙𝘰𝘭𝘦𝘱𝘭𝘢𝘺 𝘊𝘩𝘢𝘳𝘢𝘤𝘵𝘦𝘳
-                </p>
-              </div>
 
-              {/* Minimalist round tool buttons at the top right */}
-              <div className="absolute right-4 top-4 md:top-1/2 md:-translate-y-1/2 flex items-center gap-1.5 md:gap-2">
-                {/* Cycle backgrounds selector */}
-                <button
-                  onClick={cycleBackdropTheme}
-                  id="top-cycle-theme"
-                  className="p-2.5 transition duration-150 bg-white hover:bg-slate-50 border border-slate-100 rounded-full shadow-sm text-slate-600 active:scale-95 flex items-center justify-center cursor-pointer"
-                  title={`Giao diện hiện tại: ${
-                    backdropTheme === "pastel" ? "Pastel Nhật Bản" : backdropTheme === "sunset" ? "Hoàng Hôn Lãng Mạn" : "Thiên Hà Huyền Bí"
-                  }`}
-                >
-                  {backdropTheme === "cosmic" ? (
-                    <Sun className="w-4 h-4 text-amber-500" />
-                  ) : (
-                    <Moon className="w-4 h-4 text-indigo-500" />
-                  )}
-                </button>
-
-                {/* General Back/Reset system buttons if active */}
-                {(chattingCharacter || searchQuery || activeTag !== "Tất cả") && (
-                  <button
-                    onClick={() => {
-                      playClickSound(300, 0.1);
-                      setChattingCharacter(null);
-                      setSearchQuery("");
-                      setActiveTag("Tất cả");
-                    }}
-                    id="top-reset-general"
-                    className="p-2.5 transition duration-150 bg-blue-500 hover:bg-blue-600 rounded-full shadow-md text-white active:scale-95 flex items-center justify-center cursor-pointer"
-                    title="Quay lại ban đầu"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-            </header>
 
             {/* Conditional Flow: Active chatbot screen vs Home list screen */}
             <AnimatePresence mode="wait">
