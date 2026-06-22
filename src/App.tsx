@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, CSSProperties } from "react";
 import { CHARACTERS, Character } from "./characters";
-import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic } from "lucide-react";
+import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
@@ -800,6 +800,18 @@ export default function App() {
                           <BookOpen className="w-4 h-4" />
                           Cốt truyện
                         </button>
+
+                        {/* Profile Button */}
+                        <a
+                          href={featuredHubby.profileUrl || "#"}
+                          target={featuredHubby.profileUrl ? "_blank" : undefined}
+                          rel={featuredHubby.profileUrl ? "noopener noreferrer" : undefined}
+                          id={`featured-profile-btn-${featuredHubby.id}`}
+                          className="flex-1 md:w-32 flex items-center justify-center gap-1.5 px-4 py-3 text-amber-200 bg-amber-950/50 hover:bg-amber-900/40 border border-amber-500/30 text-xs font-black rounded-xl transition duration-150 active:scale-95 cursor-pointer"
+                        >
+                          <User className="w-4 h-4" />
+                          Profile
+                        </a>
                       </div>
                     </motion.div>
                   )}
@@ -926,6 +938,18 @@ export default function App() {
                                 <BookOpen className="w-3.5 h-3.5" />
                                 Cốt truyện
                               </button>
+
+                              {/* Profile Button */}
+                              <a
+                                href={char.profileUrl || "#"}
+                                target={char.profileUrl ? "_blank" : undefined}
+                                rel={char.profileUrl ? "noopener noreferrer" : undefined}
+                                id={`profile-btn-${char.id}`}
+                                className="flex-1 md:w-28 flex items-center justify-center gap-1 px-3 py-2.5 text-pink-600 bg-pink-50 hover:bg-pink-100 border border-pink-200/50 text-xs font-bold rounded-xl transition duration-150 active:scale-95 cursor-pointer"
+                              >
+                                <User className="w-3.5 h-3.5" />
+                                Profile
+                              </a>
                             </div>
                           </motion.div>
                           );
