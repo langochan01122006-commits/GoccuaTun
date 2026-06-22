@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, CSSProperties } from "react";
 import { CHARACTERS, Character } from "./characters";
-import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User } from "lucide-react";
+import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User, Package, PackageOpen, Megaphone, Star, Info, PenTool } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
@@ -18,8 +18,8 @@ const playlist = [
   { id: 7, title: "Bye", playlist: "Playlist #7", url: "https://files.catbox.moe/ap4m1x.mp3" }
 ];
 
-const welcomeBgUrl = "https://i.pinimg.com/736x/dd/67/ba/dd67bac0e301af9afa05de6c2494c80e.jpg";
-const mainBgUrl = "https://i.pinimg.com/736x/06/cb/e4/06cbe483611ba5fbd0bc25c2e41bf67c.jpg";
+const welcomeBgUrl = "https://i.pinimg.com/736x/8a/fd/3d/8afd3dee4740c895aca5af0194db18d2.jpg";
+const mainBgUrl = "https://i.pinimg.com/736x/8a/fd/3d/8afd3dee4740c895aca5af0194db18d2.jpg";
 
 export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
@@ -46,7 +46,8 @@ export default function App() {
   const [musicDuration, setMusicDuration] = useState(0);
   const [isPlaylistViewOpen, setIsPlaylistViewOpen] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [floatingNotes, setFloatingNotes] = useState<{ id: number; text: string; left: string; size: string; duration: string }[]>([]);
+  const [gachaResult, setGachaResult] = useState<Character | null>(null);
+  const [floatingNotes, setFloatingNotes] = useState<{ id: number; text: string; left: string; size: string; duration: string; color: string }[]>([]);
 
   useEffect(() => {
     if (!isPlaying) {
@@ -54,20 +55,28 @@ export default function App() {
       return;
     }
 
-    const noteSymbols = ["🎵", "🎶", "♩", "♪", "♫"];
+    const noteSymbols = ["🎵", "🎶", "🎼"];
+    const colors = ["#FFE79A", "#FFAE34", "#FBCFE8", "#F9A8D4"];
     const interval = setInterval(() => {
-      const id = Date.now() + Math.random();
-      const text = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
-      const left = `${Math.floor(Math.random() * 40) - 20}px`; // random offset
-      const size = `${Math.random() * 8 + 14}px`; // random size
-      const duration = `${Math.random() * 1.5 + 2}s`; // custom speed
+      setFloatingNotes((prev) => {
+        if (prev.length >= 3) {
+          return prev; // limit max concurrent notes
+        }
+        const id = Date.now() + Math.random();
+        const text = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
+        const left = `${Math.floor(Math.random() * 30) - 15}px`; // random gentler offset
+        const size = `${Math.random() * 6 + 14}px`; // slightly smaller, gentler size
+        const duration = `1.5s`; // shorter duration
+        const color = colors[Math.floor(Math.random() * colors.length)];
 
-      setFloatingNotes((prev) => [...prev, { id, text, left, size, duration }]);
+        // schedule removal after 1500ms
+        setTimeout(() => {
+          setFloatingNotes((oldList) => oldList.filter((note) => note.id !== id));
+        }, 1500);
 
-      setTimeout(() => {
-        setFloatingNotes((prev) => prev.filter((note) => note.id !== id));
-      }, 3500);
-    }, 700);
+        return [...prev, { id, text, left, size, duration, color }];
+      });
+    }, 1000); // 1000ms interval for fewer notes
 
     return () => clearInterval(interval);
   }, [isPlaying]);
@@ -430,35 +439,29 @@ export default function App() {
               </button>
             </div>
 
-            {/* Cute animated bow with sparkles */}
+            {/* Cute animated crown with sparkles */}
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.8 }}
               className="relative mb-[-3rem] z-10 flex items-center justify-center pointer-events-none"
             >
-              {/* Bow SVG with pulse effect */}
+              {/* Crown SVG with floating effect */}
               <motion.div
-                animate={{ scale: [1, 1.05, 1], opacity: [0.9, 1, 0.9] }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                className="relative mt-4"
+                className="relative mt-4 crown-floating"
               >
-                {/* SVG for a cute blue bow */}
-                <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
-                  {/* Left Ribbon */}
-                  <path d="M60 40 C30 -20, 5 10, 10 40 C15 70, 40 80, 60 40 Z" fill="#38BDF8" />
-                  {/* Right Ribbon */}
-                  <path d="M60 40 C90 -20, 115 10, 110 40 C105 70, 80 80, 60 40 Z" fill="#38BDF8" />
-                  {/* Left Tail */}
-                  <path d="M50 40 C45 60, 20 80, 15 75 C25 60, 40 45, 50 40 Z" fill="#0284C7" />
-                  {/* Right Tail */}
-                  <path d="M70 40 C75 60, 100 80, 105 75 C95 60, 80 45, 70 40 Z" fill="#0284C7" />
-                  {/* Center Knot */}
-                  <ellipse cx="60" cy="40" rx="14" ry="18" fill="#7DD3FC" />
-                  <ellipse cx="60" cy="40" rx="6" ry="8" fill="#BAE6FD" />
+                {/* SVG for an elegant golden crown */}
+                <svg width="100" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_10px_rgba(255,174,52,0.8)]">
+                  <path d="M15 55 L85 55 L90 25 L70 38 L50 15 L30 38 L10 25 Z" fill="#FFAE34" stroke="#FFE79A" strokeWidth="2" strokeLinejoin="round" />
+                  <circle cx="50" cy="15" r="4" fill="#FFE79A" />
+                  <circle cx="10" cy="25" r="4" fill="#FFE79A" />
+                  <circle cx="90" cy="25" r="4" fill="#FFE79A" />
+                  <circle cx="30" cy="38" r="3" fill="#FFE79A" />
+                  <circle cx="70" cy="38" r="3" fill="#FFE79A" />
+                  <rect x="20" y="55" width="60" height="6" fill="#F59E0B" rx="3" />
                 </svg>
 
-                {/* Sparkles around the bow */}
+                {/* Sparkles around the crown */}
                 {/* Top left sparkle */}
                 <motion.div
                   animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5] }}
@@ -496,8 +499,8 @@ export default function App() {
 
             {/* Card Container */}
             <div 
-              className="rounded-[24px] p-8 md:p-12 shadow-2xl flex flex-col items-center justify-center space-y-6 text-center w-[90%] max-w-sm mx-auto"
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255, 255, 255, 0.2)' }}
+              className="p-8 md:p-12 text-center w-[90%] max-w-sm mx-auto welcome-magic-card flex flex-col items-center justify-center space-y-6"
+              style={{ borderRadius: '24px' }}
             >
               {/* Typography center title block */}
               <div className="space-y-3 drop-shadow-md">
@@ -505,16 +508,16 @@ export default function App() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.8 }}
-                  className="text-4xl md:text-5xl font-black tracking-tight leading-none text-white pb-2 select-none"
+                  className="text-3xl md:text-4xl font-black pb-2 select-none welcome-title-magic"
                 >
-                  𝚆𝙴𝙻𝙲𝙾𝙼𝙴 𝚃𝙾 𝙼𝚈 𝙷𝙾𝚄𝚂𝙴
+                  KHU GIẢI TRÍ CỦA TUN
                 </motion.h2>
 
                 <motion.p
                   initial={{ y: 15, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
-                  className="text-sm md:text-base font-bold tracking-wider text-white uppercase drop-shadow-sm flex items-center justify-center"
+                  className="text-sm md:text-base font-bold tracking-wider text-[#FFAE34] uppercase drop-shadow-sm flex items-center justify-center"
                 >
                   【 𝐆𝐨́𝐜 𝐜𝐮̉𝐚 𝐓𝐮𝐧 】
                 </motion.p>
@@ -523,11 +526,11 @@ export default function App() {
               {/* Romantic description tag */}
               <motion.p
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.8 }}
+                animate={{ opacity: 0.9 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="text-xs text-white font-medium italic max-w-[200px] drop-shadow-sm"
+                className="text-xs text-[#FFE79A]/80 font-medium italic max-w-[240px] drop-shadow-sm"
               >
-                "Nhà nhỏ của Tun nơi tìm thấy một nửa của thế giới"
+                "Nơi những câu chuyện ma thuật bắt đầu..."
               </motion.p>
 
               {/* Cute bottom action trigger */}
@@ -544,36 +547,53 @@ export default function App() {
                     setIsPlaying(true);
                   }}
                   id="welcome-enter-btn"
-                  className="w-full py-3.5 text-white text-base font-bold rounded-2xl shadow-lg hover:shadow-pink-400/40 hover:opacity-90 transform hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 font-sans"
-                  style={{ backgroundColor: '#F7BCF0' }}
+                  className="w-full py-3.5 text-base font-bold shadow-lg hover:opacity-95 transform hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 font-sans welcome-ticket-btn"
                 >
-                  ౨ৎ Ghé nhà của Tun ౨ৎ
+                  XÉ VÉ VÀO CỔNG 🎟️
                 </button>
               </motion.div>
             </div>
 
-            {/* Social Links Outside */}
+            {/* Social Links Outside styled as Tarot Cards */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.8 }}
-              className="flex items-center justify-center gap-3 mt-6"
+              className="tarot-cards-container"
             >
               <a
                 href="https://discord.gg/UXYJmxXBY"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-black/45 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/10 hover:bg-black/60 transition-all active:scale-95 flex items-center gap-1.5"
+                className="tarot-card"
+                onClick={() => playClickSound(600, 0.1)}
               >
-                Discord 💬
+                <div className="tarot-inner-dashed"></div>
+                <div className="tarot-card-top-dec">✨ ✦ ✨</div>
+                <div className="tarot-card-body">
+                  <div className="tarot-card-icon-container">
+                    💬
+                  </div>
+                  <span className="tarot-card-title">Discord</span>
+                </div>
+                <div className="tarot-card-bottom-dec">✦ T A R O T ✦</div>
               </a>
               <a
                 href="https://www.facebook.com/share/18yG86eq1t/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-black/45 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/10 hover:bg-black/60 transition-all active:scale-95 flex items-center gap-1.5"
+                className="tarot-card"
+                onClick={() => playClickSound(600, 0.1)}
               >
-                Facebook 🌐
+                <div className="tarot-inner-dashed"></div>
+                <div className="tarot-card-top-dec">✨ ✦ ✨</div>
+                <div className="tarot-card-body">
+                  <div className="tarot-card-icon-container">
+                    🌐
+                  </div>
+                  <span className="tarot-card-title">Facebook</span>
+                </div>
+                <div className="tarot-card-bottom-dec">✦ T A R O T ✦</div>
               </a>
             </motion.div>
           </motion.div>
@@ -642,18 +662,17 @@ export default function App() {
                 playClickSound(500, 0.1);
                 setIsAnnouncementModalOpen(true);
               }}
-              className="w-full overflow-hidden rounded-full py-2 md:py-2.5 px-3 md:px-4 shadow-lg cursor-pointer border border-white/20 hover:border-white/40 group flex transition-all text-white items-center gap-2 relative z-20"
-              style={{ backgroundColor: 'transparent' }}
+              className="w-full py-2 md:py-2.5 px-3 md:px-4 cursor-pointer group flex transition-all items-center gap-2 relative z-20 royal-ribbon-bar"
             >
               <div className="shrink-0 flex items-center z-10">
-                <div className="flex items-center justify-center bg-white/80 rounded-full text-slate-800 shadow-sm w-6 h-6 md:w-7 md:h-7 shrink-0 font-bold">
-                  📢
+                <div className="flex items-center justify-center w-6 h-6 md:w-7 md:h-7 shrink-0">
+                  <Megaphone className="w-4 h-4 md:w-5 md:h-5 text-[#FFAE34]" style={{ color: '#FFAE34' }} fill="#FFAE34" />
                 </div>
               </div>
               <div className="flex-1 overflow-hidden relative h-5 md:h-6 flex items-center" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
                 <div 
-                  className="flex animate-marquee whitespace-nowrap text-xs md:text-sm font-bold tracking-wide text-white"
-                  style={{ textShadow: "1px 1px 4px rgba(0, 0, 0, 0.85)" }}
+                  className="flex animate-marquee whitespace-nowrap text-xs md:text-sm font-bold tracking-wide"
+                  style={{ textShadow: "1px 1px 4px rgba(0, 0, 0, 0.85)", color: '#FFE79A' }}
                 >
                   <span className="px-4">Chào mừng các nhỏ đến với góc của Tun! Nếu có thắc mắc hãy vào góc hỗ trợ hoặc ib trực tiếp qua FB của Tun</span>
                   <span className="px-4" aria-hidden="true">Chào mừng các nhỏ đến với góc của Tun! Nếu có thắc mắc hãy vào góc hỗ trợ hoặc ib trực tiếp qua FB của Tun</span>
@@ -691,7 +710,7 @@ export default function App() {
                   className="space-y-6"
                 >
                   {/* Interactive Option Buttons panel */}
-                  <div className="grid grid-cols-3 gap-2 md:gap-3 w-full">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 w-full">
                     {/* Pink sen button (Góc trái) */}
                     <button
                       onClick={() => {
@@ -699,10 +718,11 @@ export default function App() {
                         setIsVoteModalOpen(true);
                       }}
                       id="welcome-vote-btn"
-                      className="w-full flex items-center justify-center gap-1.5 py-3 px-2 rounded-2xl font-bold bg-[#F6BFD3] hover:bg-[#F2ADC6] text-slate-800 shadow-md active:scale-95 transform hover:-translate-y-0.5 transition-all text-[11px] md:text-sm border border-pink-300/30 cursor-pointer text-center"
+                      className="w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap"
                     >
-                      <BarChart3 className="w-4 h-4 md:w-5 md:h-5" />
-                      <span>Bình chọn</span>
+                      <div className="ticket-stub-line"></div>
+                      <Star className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" fill="#FFAE34" />
+                      <span className="relative z-10">Vé Ưu Tiên ⭐</span>
                     </button>
 
                     {/* Orange button (Góc phải) - Updated to Blue Donate✨ */}
@@ -712,10 +732,11 @@ export default function App() {
                         setIsDonateModalOpen(true);
                       }}
                       id="welcome-donate-btn"
-                      className="w-full flex items-center justify-center gap-1.5 py-3 px-2 rounded-2xl font-bold bg-[#87D0E8] hover:bg-[#70C5E2] text-slate-800 shadow-md active:scale-95 transform hover:-translate-y-0.5 transition-all text-[11px] md:text-sm border border-blue-300/30 cursor-pointer text-center"
+                      className="w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap"
                     >
-                      <Gift className="w-4 h-4 md:w-5 md:h-5" />
-                      <span>Donate✨</span>
+                      <div className="ticket-stub-line"></div>
+                      <Sparkles className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" />
+                      <span className="relative z-10">Giếng Ước Nguyện ⛲</span>
                     </button>
 
                     {/* Command button */}
@@ -725,24 +746,39 @@ export default function App() {
                         setIsCommandModalOpen(true);
                       }}
                       id="welcome-command-btn"
-                      className="w-full flex items-center justify-center gap-1.5 py-3 px-2 rounded-2xl font-bold bg-[#F2BF8F] hover:bg-[#EDA96B] text-slate-800 shadow-md active:scale-95 transform hover:-translate-y-0.5 transition-all text-[11px] md:text-sm border border-amber-300/30 cursor-pointer text-center"
+                      className="w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap"
                     >
-                      <ScrollText className="w-4 h-4 md:w-5 md:h-5" />
-                      <span>Hỗ trợ 🤝</span>
+                      <div className="ticket-stub-line"></div>
+                      <Info className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" />
+                      <span className="relative z-10">Quầy Hướng Dẫn ℹ️</span>
                     </button>
+
+                    {/* Feedback button */}
+                    <a
+                      href="https://ngl.link/gnhocuatun"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => playClickSound(500, 0.1)}
+                      id="welcome-feedback-btn"
+                      className="w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap"
+                    >
+                      <div className="ticket-stub-line"></div>
+                      <PenTool className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" />
+                      <span className="relative z-10">Lưu Bút Du Khách ✍️</span>
+                    </a>
                   </div>
 
                   <div className="space-y-4">
                     <div className="relative w-full">
-                      <span className="absolute inset-y-0 left-4 flex items-center text-slate-400">
-                        <Search className="w-5 h-5 text-blue-400" />
+                      <span className="absolute inset-y-0 left-4 flex items-center">
+                        <Search className="w-5 h-5 text-[#FFAE34]" />
                       </span>
                       <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Tìm một nửa... 🔍"
-                        className="w-full pl-12 pr-4 py-3.5 bg-slate-900/40 border border-white/10 rounded-2xl shadow-sm text-[#FAF9F6] placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 backdrop-blur-md transition"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-2xl text-sm magic-search-input shadow-sm"
                       />
                       {searchQuery && (
                         <button
@@ -755,6 +791,22 @@ export default function App() {
                           Clear
                         </button>
                       )}
+                    </div>
+
+                    {/* Gacha Random Button */}
+                    <div className="magic-ticket-wrapper">
+                      <button
+                        onClick={() => {
+                          playClickSound(600, 0.1);
+                          const randomIndex = Math.floor(Math.random() * CHARACTERS.length);
+                          setGachaResult(CHARACTERS[randomIndex]);
+                        }}
+                        className="magic-ticket focus:outline-none"
+                      >
+                        <div className="magic-ticket-inner">
+                          Cốc Cốc Cốc ai gọi đó 🐰
+                        </div>
+                      </button>
                     </div>
 
                     {/* Tag Filters list matching theme colors (Primary: Blue "Tất cả", Secondary: Pink categories tags) */}
@@ -1524,28 +1576,56 @@ export default function App() {
       </AnimatePresence>
 
       {/* Footer system branding bar */}
-      <footer className="mt-12 text-center text-slate-400 font-sans text-[10px] md:text-xs py-6 flex flex-col items-center gap-3 z-10 w-full max-w-4xl border-t border-white/10">
-        {hasEntered && (
-          <div className="flex items-center gap-3">
-            <a
-              href="https://discord.gg/UXYJmxXBY"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-1.5 bg-black/45 backdrop-blur-md text-white text-[10px] font-bold rounded-full border border-white/10 hover:bg-black/60 transition-all active:scale-95 flex items-center gap-1.5"
+      <footer className={`mt-12 text-center text-slate-400 py-6 flex flex-col items-center gap-3 z-10 w-full max-w-4xl ${hasEntered ? "border-t border-white/10 font-sans text-[10px] md:text-xs" : ""}`}>
+        {hasEntered ? (
+          <>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://discord.gg/UXYJmxXBY"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mini-oval-tag"
+              >
+                Discord 💬
+              </a>
+              <a
+                href="https://www.facebook.com/share/18yG86eq1t/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mini-oval-tag"
+              >
+                Facebook 🌐
+              </a>
+            </div>
+            <p 
+              className="select-none text-center max-w-lg px-4 mt-1" 
+              style={{ 
+                fontFamily: "'Georgia', 'Times New Roman', serif", 
+                fontSize: "12px", 
+                color: "#FFE79A", 
+                opacity: 0.55, 
+                letterSpacing: "1.5px",
+                lineHeight: "1.6"
+              }}
             >
-              Discord 💬
-            </a>
-            <a
-              href="https://www.facebook.com/share/18yG86eq1t/?mibextid=wwXIfr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-1.5 bg-black/45 backdrop-blur-md text-white text-[10px] font-bold rounded-full border border-white/10 hover:bg-black/60 transition-all active:scale-95 flex items-center gap-1.5"
-            >
-              Facebook 🌐
-            </a>
-          </div>
+              ✦ Chào mừng đến với Khu giải trí của Tun • Bản đồ ảo ảnh mở ra thế giới của những câu chuyện huyền bí ✦
+            </p>
+          </>
+        ) : (
+          <p 
+            className="select-none text-center max-w-lg px-4" 
+            style={{ 
+              fontFamily: "'Georgia', 'Times New Roman', serif", 
+              fontSize: "12px", 
+              color: "#FFE79A", 
+              opacity: 0.55, 
+              letterSpacing: "1.5px",
+              lineHeight: "1.6"
+            }}
+          >
+            ✦ Chào mừng đến với Khu giải trí của Tun • Bản đồ ảo ảnh mở ra thế giới của những câu chuyện huyền bí ✦
+          </p>
         )}
-        <p className="font-semibold" style={{ color: '#EDB4E7' }}>Character Simulator by Tun</p>
       </footer>
 
       {/* Floating Music Button */}
@@ -1557,12 +1637,14 @@ export default function App() {
               {floatingNotes.map((note) => (
                 <span
                   key={note.id}
-                  className="absolute animate-float-up-fade text-[#93C5FD]/90 font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] select-none pointer-events-none"
+                  className="absolute animate-float-up-fade font-bold select-none pointer-events-none"
                   style={{
-                    left: note.left,
-                    bottom: '45px',
+                    left: `calc(50% - 12px + ${note.left})`,
+                    bottom: '20px',
                     fontSize: note.size,
+                    color: note.color,
                     animationDuration: note.duration,
+                    filter: `drop-shadow(0 0 6px ${note.color})`,
                   }}
                 >
                   {note.text}
@@ -1576,11 +1658,13 @@ export default function App() {
               playClickSound(300, 0.08);
               setIsMusicModalOpen(true);
             }}
-            className={`p-4 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.15)] border border-slate-200/50 hover:scale-105 active:scale-95 transition-all group flex items-center justify-center relative ${isPlaying ? 'bg-white text-slate-800 animate-spin-slow' : 'bg-white/80 hover:bg-white text-slate-700'}`}
+            className={`music-ticket-btn hover:shadow-[0_0_15px_rgba(255,174,52,0.6)] active:scale-95 transition-all group ${isPlaying ? 'animate-sway' : ''}`}
           >
-            <Music className="w-6 h-6 text-slate-700 group-hover:text-slate-900" />
-            {isPlaying && (
-              <span className="absolute top-1 right-1 w-3 h-3 bg-pink-400 rounded-full animate-ping"></span>
+            <div className="music-ticket-inner-border"></div>
+            {isPlaying ? (
+              <Music className="w-6 h-6 text-[#FFAE34] relative z-10 animate-pulse" style={{ filter: 'drop-shadow(0 0 6px rgba(255,174,52,0.8))' }} />
+            ) : (
+              <Music className="w-6 h-6 text-[#FFAE34] relative z-10" style={{ filter: 'drop-shadow(0 0 4px rgba(255,174,52,0.4))' }} />
             )}
           </button>
         </div>
@@ -1741,6 +1825,48 @@ export default function App() {
 
             </motion.div>
           </div>
+        )}
+      </AnimatePresence>
+
+      {/* Gacha Modal */}
+      <AnimatePresence>
+        {gachaResult && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              className="bg-[#FAF9F6] rounded-[32px] p-6 md:p-8 max-w-sm w-full shadow-2xl relative text-center border-4 border-pink-200 flex flex-col items-center"
+            >
+              <div className="absolute -top-10 flex justify-center w-full left-0">
+                <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center shadow-lg border-4 border-[#FAF9F6] text-4xl">
+                  {gachaResult.avatar}
+                </div>
+              </div>
+              <div className="mt-8 mb-4">
+                <h2 className="text-xl md:text-2xl font-black text-pink-500 tracking-tight">
+                  Tôi là {gachaResult.name} đây !!!
+                </h2>
+              </div>
+              <div className="text-sm md:text-base text-slate-700 font-medium leading-relaxed bg-pink-50/80 p-4 rounded-xl border border-pink-100 shadow-sm mb-6 max-h-48 overflow-y-auto no-scrollbar">
+                {gachaResult.description}
+              </div>
+              <button
+                onClick={() => {
+                  playClickSound(300, 0.05);
+                  setGachaResult(null);
+                }}
+                className="w-full py-3.5 bg-gradient-to-r from-pink-400 to-rose-400 text-white font-bold rounded-2xl shadow-lg hover:shadow-pink-400/40 hover:scale-105 active:scale-95 transition-all duration-200"
+              >
+                Gặp người khác ✨
+              </button>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 

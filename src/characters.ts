@@ -2345,7 +2345,7 @@ Mong rằng mình sẽ không chết.`
     name: "Trầm Luân",
     avatar: "🃏",
     avatarBg: "from-slate-700/80 to-slate-900/80",
-    tags: ["Xuyên không", "tội phạm", "Dark Romance", "BG","Bắc Myanmar","2 COUPLE"],
+    tags: ["Xuyên không", "tội phạm", "Dark Romance", "BG","Bắc Myanmar","2 COUPLE","NP"],
     description: "Bị bắt cóc và bất ngờ xuyên vào thế giới tiểu thuyết đen tối Trầm Luân đầy rẫy nguy hiểm ở Bắc Myanmar.",
     story: "Chuyến xuyên không đầy hoảng hốt của bạn và cô bạn thân Khương Đồng vào đúng hang ổ tội phạm ở vùng Tam Giác Vàng.",
     welcomeMessage: "*Bạn mở mắt ra trong căn phòng tối, tay chân bị trói chặt:* \"Lục Dã? Lô hàng? Vãi cứt... Nửa đêm say rượu dại dột đi taxi, giờ lại xuyên không thật rồi à?!\"",
