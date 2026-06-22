@@ -496,8 +496,8 @@ export default function App() {
 
             {/* Card Container */}
             <div 
-              className="rounded-[24px] p-8 md:p-12 shadow-2xl flex flex-col items-center justify-center space-y-6 text-center w-[90%] max-w-sm mx-auto border-2 border-white/20"
-              style={{ backgroundColor: '#9FC1ED' }}
+              className="rounded-[24px] p-8 md:p-12 shadow-2xl flex flex-col items-center justify-center space-y-6 text-center w-[90%] max-w-sm mx-auto"
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255, 255, 255, 0.2)' }}
             >
               {/* Typography center title block */}
               <div className="space-y-3 drop-shadow-md">
