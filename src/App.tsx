@@ -430,76 +430,151 @@ export default function App() {
               </button>
             </div>
 
-            {/* Typography center title block */}
-            <div className="space-y-4 drop-shadow-xl">
-              <motion.h2
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none text-[#FFFFFF] drop-shadow-lg pb-3 pt-4 select-none"
+            {/* Cute animated bow with sparkles */}
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.8 }}
+              className="relative mb-[-3rem] z-10 flex items-center justify-center pointer-events-none"
+            >
+              {/* Bow SVG with pulse effect */}
+              <motion.div
+                animate={{ scale: [1, 1.05, 1], opacity: [0.9, 1, 0.9] }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                className="relative mt-4"
               >
-                𝚆𝙴𝙻𝙲𝙾𝙼𝙴 𝚃𝙾 𝙼𝚈 𝙷𝙾𝚄𝚂𝙴
-              </motion.h2>
+                {/* SVG for a cute blue bow */}
+                <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
+                  {/* Left Ribbon */}
+                  <path d="M60 40 C30 -20, 5 10, 10 40 C15 70, 40 80, 60 40 Z" fill="#38BDF8" />
+                  {/* Right Ribbon */}
+                  <path d="M60 40 C90 -20, 115 10, 110 40 C105 70, 80 80, 60 40 Z" fill="#38BDF8" />
+                  {/* Left Tail */}
+                  <path d="M50 40 C45 60, 20 80, 15 75 C25 60, 40 45, 50 40 Z" fill="#0284C7" />
+                  {/* Right Tail */}
+                  <path d="M70 40 C75 60, 100 80, 105 75 C95 60, 80 45, 70 40 Z" fill="#0284C7" />
+                  {/* Center Knot */}
+                  <ellipse cx="60" cy="40" rx="14" ry="18" fill="#7DD3FC" />
+                  <ellipse cx="60" cy="40" rx="6" ry="8" fill="#BAE6FD" />
+                </svg>
 
+                {/* Sparkles around the bow */}
+                {/* Top left sparkle */}
+                <motion.div
+                  animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5] }}
+                  transition={{ repeat: Infinity, duration: 1.5, delay: 0.2, ease: "easeInOut" }}
+                  className="absolute -top-2 left-2 text-yellow-300 pointer-events-none"
+                >
+                  <Sparkles className="w-4 h-4" fill="currentColor" />
+                </motion.div>
+                {/* Top right sparkle */}
+                <motion.div
+                  animate={{ opacity: [0, 1, 0], scale: [0.5, 1.3, 0.5], rotate: [0, 45, 90] }}
+                  transition={{ repeat: Infinity, duration: 1.8, delay: 0.5, ease: "easeInOut" }}
+                  className="absolute -top-4 right-4 text-white pointer-events-none"
+                >
+                  <Sparkles className="w-5 h-5" fill="currentColor" />
+                </motion.div>
+                {/* Bottom left sparkle */}
+                <motion.div
+                  animate={{ opacity: [0, 1, 0], scale: [0.5, 1.1, 0.5] }}
+                  transition={{ repeat: Infinity, duration: 2.1, delay: 0.1, ease: "easeInOut" }}
+                  className="absolute bottom-2 left-6 text-yellow-100 pointer-events-none"
+                >
+                  <Sparkles className="w-3 h-3" fill="currentColor" />
+                </motion.div>
+                {/* Bottom right sparkle */}
+                <motion.div
+                  animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5], rotate: [0, -45, -90] }}
+                  transition={{ repeat: Infinity, duration: 1.6, delay: 0.8, ease: "easeInOut" }}
+                  className="absolute bottom-1 right-2 text-yellow-300 pointer-events-none"
+                >
+                  <Sparkles className="w-4 h-4" fill="currentColor" />
+                </motion.div>
+              </motion.div>
+            </motion.div>
+
+            {/* Card Container */}
+            <div 
+              className="rounded-[24px] p-8 md:p-12 shadow-2xl flex flex-col items-center justify-center space-y-6 text-center w-[90%] max-w-sm mx-auto border-2 border-white/20"
+              style={{ backgroundColor: '#9FC1ED' }}
+            >
+              {/* Typography center title block */}
+              <div className="space-y-3 drop-shadow-md">
+                <motion.h2
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                  className="text-4xl md:text-5xl font-black tracking-tight leading-none text-white pb-2 select-none"
+                >
+                  𝚆𝙴𝙻𝙲𝙾𝙼𝙴 𝚃𝙾 𝙼𝚈 𝙷𝙾𝚄𝚂𝙴
+                </motion.h2>
+
+                <motion.p
+                  initial={{ y: 15, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                  className="text-sm md:text-base font-bold tracking-wider text-white uppercase drop-shadow-sm flex items-center justify-center"
+                >
+                  【 𝐆𝐨́𝐜 𝐜𝐮̉𝐚 𝐓𝐮𝐧 】
+                </motion.p>
+              </div>
+
+              {/* Romantic description tag */}
               <motion.p
-                initial={{ y: 15, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-base md:text-lg font-bold tracking-wider text-[#FFFFFF] uppercase drop-shadow-md"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.8 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="text-xs text-white font-medium italic max-w-[200px] drop-shadow-sm"
               >
-                【 𝐆𝐨́𝐜 𝐜𝐮̉𝐚 𝐓𝐮𝐧 】
+                "Nhà nhỏ của Tun nơi tìm thấy một nửa của thế giới"
               </motion.p>
+
+              {/* Cute bottom action trigger */}
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.7, duration: 0.8 }}
+                className="pt-2 w-full flex flex-col items-center"
+              >
+                <button
+                  onClick={() => {
+                    playClickSound(650, 0.15);
+                    setHasEntered(true);
+                    setIsPlaying(true);
+                  }}
+                  id="welcome-enter-btn"
+                  className="w-full py-3.5 text-white text-base font-bold rounded-2xl shadow-lg hover:shadow-pink-400/40 hover:opacity-90 transform hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 font-sans"
+                  style={{ backgroundColor: '#F7BCF0' }}
+                >
+                  ౨ৎ Ghé nhà của Tun ౨ৎ
+                </button>
+              </motion.div>
             </div>
 
-            {/* Romantic description tag */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.8 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-xs text-[#FFFFFF] italic max-w-sm drop-shadow-md"
-            >
-              "Nhà nhỏ của Tun nơi tìm thấy một nửa của thế giới"
-            </motion.p>
-
-            {/* Cute bottom action trigger */}
+            {/* Social Links Outside */}
             <motion.div
-              initial={{ y: 30, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-              className="pt-4 flex flex-col items-center gap-4"
+              transition={{ delay: 0.9, duration: 0.8 }}
+              className="flex items-center justify-center gap-3 mt-6"
             >
-              <button
-                onClick={() => {
-                  playClickSound(650, 0.15);
-                  setHasEntered(true);
-                  setIsPlaying(true);
-                }}
-                id="welcome-enter-btn"
-                className="px-8 py-4 text-slate-900 text-base font-bold rounded-full shadow-lg hover:shadow-pink-400/20 transform hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center gap-2.5 mx-auto border-2 border-white/60 font-sans"
-                style={{ backgroundColor: '#FCC5E3' }}
+              <a
+                href="https://discord.gg/UXYJmxXBY"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-black/45 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/10 hover:bg-black/60 transition-all active:scale-95 flex items-center gap-1.5"
               >
-                Ghé nhà của Tun 🎀
-              </button>
-
-              {/* Social Links */}
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://discord.gg/UXYJmxXBY"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-black/45 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/10 hover:bg-black/60 transition-all active:scale-95 flex items-center gap-1.5"
-                >
-                  Discord 💬
-                </a>
-                <a
-                  href="https://www.facebook.com/share/18yG86eq1t/?mibextid=wwXIfr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-black/45 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/10 hover:bg-black/60 transition-all active:scale-95 flex items-center gap-1.5"
-                >
-                  Facebook 🌐
-                </a>
-              </div>
+                Discord 💬
+              </a>
+              <a
+                href="https://www.facebook.com/share/18yG86eq1t/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-black/45 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/10 hover:bg-black/60 transition-all active:scale-95 flex items-center gap-1.5"
+              >
+                Facebook 🌐
+              </a>
             </motion.div>
           </motion.div>
         ) : (
