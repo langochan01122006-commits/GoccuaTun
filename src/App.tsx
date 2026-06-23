@@ -624,12 +624,12 @@ export default function App() {
               {/* Glowing hollow royal crown floating precisely on top edge with floating stars */}
               <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 flex flex-col items-center z-20 pointer-events-none select-none">
                 {/* Sparkles / Twinkling stars */}
-                <div className="relative w-36 h-16 sm:w-40 sm:h-20 overflow-visible -mb-3 flex justify-center">
+                <div className="relative w-44 h-20 sm:w-52 sm:h-24 overflow-visible flex justify-center">
                   {/* Sparkle 1: Gold, top center-left */}
                   <motion.div
                     animate={{ y: [0, -4, 0], opacity: [0.4, 1, 0.4], scale: [0.8, 1.2, 0.8] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-2 left-6 sm:left-8 w-3 h-3 text-[#FFAE34] filter drop-shadow-[0_0_4px_#FFAE34]"
+                    className="absolute top-2 left-6 sm:left-10 w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFF6C5] filter drop-shadow-[0_0_6px_#FFE79A]"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
@@ -640,7 +640,7 @@ export default function App() {
                   <motion.div
                     animate={{ y: [-3, 1, -3], opacity: [0.6, 1, 0.6], scale: [1, 0.7, 1] }}
                     transition={{ duration: 2.7, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                    className="absolute top-0 right-8 sm:right-10 w-4 h-4 text-[#4DEEEA] filter drop-shadow-[0_0_6px_#4DEEEA]"
+                    className="absolute top-0 right-10 sm:right-12 w-4.5 h-4.5 sm:w-5 sm:h-5 text-[#FFF6C5] filter drop-shadow-[0_0_8px_#FFD700]"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
@@ -651,18 +651,18 @@ export default function App() {
                   <motion.div
                     animate={{ y: [2, -2, 2], opacity: [0.2, 0.9, 0.2] }}
                     transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-                    className="absolute top-6 left-2 sm:left-4 w-2.5 h-2.5 text-[#FFE79A] filter drop-shadow-[0_0_3px_#FFE79A]"
+                    className="absolute top-8 left-2 sm:left-4 w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFE79A] filter drop-shadow-[0_0_4px_#FFE79A]"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
                     </svg>
                   </motion.div>
 
-                  {/* Sparkle 4: Cyan/Blue, further right, tiny */}
+                  {/* Sparkle 4: Gold, further right, tiny */}
                   <motion.div
                     animate={{ y: [-1, 3, -1], opacity: [0.3, 0.8, 0.3] }}
                     transition={{ duration: 2.3, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
-                    className="absolute top-5 right-3 sm:right-5 w-2.5 h-2.5 text-[#60a5fa] filter drop-shadow-[0_0_3px_#60a5fa]"
+                    className="absolute top-6 right-3 sm:right-5 w-3 h-3 text-[#FFD700] filter drop-shadow-[0_0_5px_#FFD700]"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
@@ -674,50 +674,83 @@ export default function App() {
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex items-center justify-center -mt-6 sm:-mt-8"
+                  className="flex items-center justify-center -mt-10 sm:-mt-14"
                 >
-                  <svg viewBox="0 0 100 65" className="w-24 h-20 sm:w-28 sm:h-24 overflow-visible select-none drop-shadow-[0_0_12px_rgba(255,215,0,0.8)] filter">
-                    {/* Crown base solid dark fill to prevent background border crossing */}
+                  <svg 
+                    viewBox="0 0 100 65" 
+                    className="w-32 h-26 sm:w-40 sm:h-32 overflow-visible select-none"
+                    style={{ filter: "drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5))" }}
+                  >
+                    <defs>
+                      <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFF2A8" />
+                        <stop offset="50%" stopColor="#FFD700" />
+                        <stop offset="100%" stopColor="#FF8C00" />
+                      </linearGradient>
+                      <linearGradient id="goldGradientBase" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#FFD700" />
+                        <stop offset="100%" stopColor="#E69500" />
+                      </linearGradient>
+                    </defs>
+
+                    {/* Masking dark fill to prevent background from shining through transparent parts (if any) */}
                     <path
                       d="M 12 43 L 22 18 L 38 36 L 50 10 L 62 36 L 78 18 L 88 43 L 85 50 L 15 50 Z"
                       fill="rgba(110, 35, 20, 0.98)"
                     />
                     
-                    {/* Crown Body Path (Hollow style) */}
+                    {/* Crown Body Solid Base */}
                     <path
-                      d="M 15 50 L 12 43 L 22 18 L 38 36 L 50 10 L 62 36 L 78 18 L 88 43 L 85 50"
-                      fill="none"
-                      stroke="#FFD700"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
+                      d="M 15 50 L 12 43 L 22 18 L 38 36 L 50 10 L 62 36 L 78 18 L 88 43 L 85 50 Z"
+                      fill="url(#goldGradient)"
+                      stroke="#FFEA70"
+                      strokeWidth="1.5"
                       strokeLinejoin="round"
                     />
                     
                     {/* Crown Base Line */}
                     <path
-                      d="M 8 50 L 92 50"
-                      stroke="#FFC107"
-                      strokeWidth="3.5"
+                      d="M 8 50 L 92 50 L 88 56 L 12 56 Z"
+                      fill="url(#goldGradientBase)"
+                      stroke="#FFEA70"
+                      strokeWidth="1"
                       strokeLinecap="round"
                     />
                     
-                    {/* Thin royal inner accent line */}
+                    {/* Thin royal inner accent lines */}
                     <path
                       d="M 14 46 L 86 46"
                       stroke="#FFF6C5"
+                      strokeWidth="1.5"
+                      opacity="0.9"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 16 53 L 84 53"
+                      stroke="#FFF6C5"
                       strokeWidth="1.2"
                       opacity="0.8"
+                      strokeLinecap="round"
                     />
                     
-                    {/* Peaks royal jewels */}
-                    <circle cx="22" cy="18" r="3" fill="#FFF6C5" stroke="#FFD700" strokeWidth="1" />
-                    <circle cx="50" cy="10" r="3.5" fill="#FFF6C5" stroke="#FFD700" strokeWidth="1" />
-                    <circle cx="78" cy="18" r="3" fill="#FFF6C5" stroke="#FFD700" strokeWidth="1" />
+                    {/* Inner glowing contours */}
+                    <path
+                      d="M 22 18 L 26 43 M 38 36 L 38 45 M 50 10 L 50 45 M 62 36 L 62 45 M 78 18 L 74 43"
+                      stroke="#FFF6C5"
+                      strokeWidth="1.5"
+                      opacity="0.75"
+                      strokeLinecap="round"
+                    />
+                    
+                    {/* Peaks royal jewels - bright diamond white/blueish to pop against gold */}
+                    <circle cx="22" cy="18" r="3.5" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1" />
+                    <circle cx="50" cy="10" r="4.5" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1" />
+                    <circle cx="78" cy="18" r="3.5" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1" />
                     
                     {/* Inner accent diamond in the center */}
-                    <path d="M 50 25 L 46 31 L 50 37 L 54 31 Z" fill="#FFC107" stroke="#FFD700" strokeWidth="0.5" />
-                    <circle cx="34" cy="38" r="1.5" fill="#FFD700" />
-                    <circle cx="66" cy="38" r="1.5" fill="#FFD700" />
+                    <path d="M 50 24 L 44 32 L 50 40 L 56 32 Z" fill="#FFFFFF" stroke="#FFC107" strokeWidth="1" />
+                    <circle cx="34" cy="36" r="2.5" fill="#FFFFFF" />
+                    <circle cx="66" cy="36" r="2.5" fill="#FFFFFF" />
                   </svg>
                 </motion.div>
               </div>
@@ -728,7 +761,7 @@ export default function App() {
               <div className="absolute bottom-1/4 left-6 text-blue-400/20 animate-pulse">✨</div>
 
               {/* Spacer for Floating Crown */}
-              <div className="h-6" />
+              <div className="h-8 sm:h-12 mt-2" />
 
               <h1 
                 className="text-3xl md:text-5xl font-serif italic font-black tracking-widest drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] mb-2 uppercase select-none"
