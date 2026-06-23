@@ -624,12 +624,12 @@ export default function App() {
               {/* Glowing hollow royal crown floating precisely on top edge with floating stars */}
               <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 flex flex-col items-center z-20 pointer-events-none select-none">
                 {/* Sparkles / Twinkling stars */}
-                <div className="relative w-32 h-14 overflow-visible -mb-3 flex justify-center">
+                <div className="relative w-36 h-16 sm:w-40 sm:h-20 overflow-visible -mb-3 flex justify-center">
                   {/* Sparkle 1: Gold, top center-left */}
                   <motion.div
                     animate={{ y: [0, -4, 0], opacity: [0.4, 1, 0.4], scale: [0.8, 1.2, 0.8] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-2 left-6 w-3 h-3 text-[#FFAE34] filter drop-shadow-[0_0_4px_#FFAE34]"
+                    className="absolute top-2 left-6 sm:left-8 w-3 h-3 text-[#FFAE34] filter drop-shadow-[0_0_4px_#FFAE34]"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
@@ -640,7 +640,7 @@ export default function App() {
                   <motion.div
                     animate={{ y: [-3, 1, -3], opacity: [0.6, 1, 0.6], scale: [1, 0.7, 1] }}
                     transition={{ duration: 2.7, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                    className="absolute top-0 right-8 w-4 h-4 text-[#4DEEEA] filter drop-shadow-[0_0_6px_#4DEEEA]"
+                    className="absolute top-0 right-8 sm:right-10 w-4 h-4 text-[#4DEEEA] filter drop-shadow-[0_0_6px_#4DEEEA]"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
@@ -651,7 +651,7 @@ export default function App() {
                   <motion.div
                     animate={{ y: [2, -2, 2], opacity: [0.2, 0.9, 0.2] }}
                     transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-                    className="absolute top-6 left-2 w-2.5 h-2.5 text-[#FFE79A] filter drop-shadow-[0_0_3px_#FFE79A]"
+                    className="absolute top-6 left-2 sm:left-4 w-2.5 h-2.5 text-[#FFE79A] filter drop-shadow-[0_0_3px_#FFE79A]"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
@@ -662,7 +662,7 @@ export default function App() {
                   <motion.div
                     animate={{ y: [-1, 3, -1], opacity: [0.3, 0.8, 0.3] }}
                     transition={{ duration: 2.3, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
-                    className="absolute top-5 right-3 w-2.5 h-2.5 text-[#60a5fa] filter drop-shadow-[0_0_3px_#60a5fa]"
+                    className="absolute top-5 right-3 sm:right-5 w-2.5 h-2.5 text-[#60a5fa] filter drop-shadow-[0_0_3px_#60a5fa]"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
@@ -674,9 +674,9 @@ export default function App() {
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex items-center justify-center -mt-4"
+                  className="flex items-center justify-center -mt-6 sm:-mt-8"
                 >
-                  <svg viewBox="0 0 100 65" className="w-20 h-16 overflow-visible select-none filter drop-shadow-[0_0_15px_rgba(255,174,52,0.95)]">
+                  <svg viewBox="0 0 100 65" className="w-24 h-20 sm:w-28 sm:h-24 overflow-visible select-none drop-shadow-[0_0_12px_rgba(255,215,0,0.8)] filter">
                     {/* Crown base solid dark fill to prevent background border crossing */}
                     <path
                       d="M 12 43 L 22 18 L 38 36 L 50 10 L 62 36 L 78 18 L 88 43 L 85 50 L 15 50 Z"
@@ -687,7 +687,7 @@ export default function App() {
                     <path
                       d="M 15 50 L 12 43 L 22 18 L 38 36 L 50 10 L 62 36 L 78 18 L 88 43 L 85 50"
                       fill="none"
-                      stroke="#FFAE34"
+                      stroke="#FFD700"
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -696,7 +696,7 @@ export default function App() {
                     {/* Crown Base Line */}
                     <path
                       d="M 8 50 L 92 50"
-                      stroke="#FFAE34"
+                      stroke="#FFC107"
                       strokeWidth="3.5"
                       strokeLinecap="round"
                     />
@@ -704,20 +704,20 @@ export default function App() {
                     {/* Thin royal inner accent line */}
                     <path
                       d="M 14 46 L 86 46"
-                      stroke="#FFE79A"
+                      stroke="#FFF6C5"
                       strokeWidth="1.2"
                       opacity="0.8"
                     />
                     
                     {/* Peaks royal jewels */}
-                    <circle cx="22" cy="18" r="3" fill="#FFE79A" stroke="#FFAE34" strokeWidth="1" />
-                    <circle cx="50" cy="10" r="3.5" fill="#FFE79A" stroke="#FFAE34" strokeWidth="1" />
-                    <circle cx="78" cy="18" r="3" fill="#FFE79A" stroke="#FFAE34" strokeWidth="1" />
+                    <circle cx="22" cy="18" r="3" fill="#FFF6C5" stroke="#FFD700" strokeWidth="1" />
+                    <circle cx="50" cy="10" r="3.5" fill="#FFF6C5" stroke="#FFD700" strokeWidth="1" />
+                    <circle cx="78" cy="18" r="3" fill="#FFF6C5" stroke="#FFD700" strokeWidth="1" />
                     
                     {/* Inner accent diamond in the center */}
-                    <path d="M 50 25 L 46 31 L 50 37 L 54 31 Z" fill="#FFE79A" stroke="#FFAE34" strokeWidth="0.5" />
-                    <circle cx="34" cy="38" r="1.5" fill="#FFE79A" />
-                    <circle cx="66" cy="38" r="1.5" fill="#FFE79A" />
+                    <path d="M 50 25 L 46 31 L 50 37 L 54 31 Z" fill="#FFC107" stroke="#FFD700" strokeWidth="0.5" />
+                    <circle cx="34" cy="38" r="1.5" fill="#FFD700" />
+                    <circle cx="66" cy="38" r="1.5" fill="#FFD700" />
                   </svg>
                 </motion.div>
               </div>
@@ -737,15 +737,15 @@ export default function App() {
                   textShadow: "0 0 10px #FFAE34",
                 }}
               >
-                KHU GIẢI TRÍ CỦA TUN
+                WONDER WORLD
               </h1>
               
               <div className="text-sm font-serif font-black text-[#FFE79A] tracking-[0.15em] mb-5 uppercase select-none">
-                [ Góc của Tun ]
+                🎠 Góc của Tun 🎠
               </div>
 
               <p className="text-sm md:text-base text-white/90 leading-relaxed font-serif italic max-w-sm mb-8 filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] select-none">
-                “Nơi những câu chuyện ma thuật bắt đầu...”
+                “Viết nên chương truyện kỳ ảo của riêng ta...”
               </p>
 
               <motion.button
@@ -1378,8 +1378,8 @@ export default function App() {
                   className="flex animate-marquee whitespace-nowrap text-xs md:text-sm font-bold tracking-wide"
                   style={{ textShadow: "1px 1px 4px rgba(0, 0, 0, 0.85)", color: '#FFE79A' }}
                 >
-                  <span className="px-4">Chào mừng các nhỏ đến với góc của Tun! Nếu có thắc mắc hãy vào góc hỗ trợ hoặc ib trực tiếp qua FB của Tun</span>
-                  <span className="px-4" aria-hidden="true">Chào mừng các nhỏ đến với góc của Tun! Nếu có thắc mắc hãy vào góc hỗ trợ hoặc ib trực tiếp qua FB của Tun</span>
+                  <span className="px-4">Chào mừng đến trung tâm giải trí của Tun, Hãy đến quầy hưỡng dẫn để lấy vẽ vào khu vui chơi nhé 🌟</span>
+                  <span className="px-4" aria-hidden="true">Chào mừng đến trung tâm giải trí của Tun, Hãy đến quầy hưỡng dẫn để lấy vẽ vào khu vui chơi nhé 🌟</span>
                 </div>
               </div>
             </div>
@@ -1558,15 +1558,15 @@ export default function App() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.35, delay: 0.1 }}
                       id="featured-hubby-banner"
-                      className="golden-ticket-pass-card pl-8 pr-6 py-5 md:py-6 flex flex-col md:flex-row items-center gap-5 justify-between transition-all duration-300 group"
+                      className="golden-ticket-pass-card pl-4 pr-3 py-3 md:pl-8 md:pr-6 md:py-4 flex flex-col md:flex-row items-center gap-3 md:gap-5 justify-between transition-all duration-300 group"
                     >
                       {/* Ambient background decoration */}
                       <div className="absolute top-0 right-0 -mr-12 -mt-12 w-40 h-40 bg-yellow-500/5 rounded-full blur-3xl pointer-events-none group-hover:bg-yellow-500/10 transition-all duration-500" />
                       
-                      <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left w-full relative z-10 pl-4">
+                      <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-5 text-center sm:text-left w-full relative z-10 pl-2 lg:pl-4">
                         {/* Avatar container with Royal Gacha Sphere & LIMITED tag */}
                         <div className="relative shrink-0 flex items-center justify-center">
-                          <div className="relative w-28 h-28 flex items-center justify-center">
+                          <div className="relative w-20 h-20 md:w-24 md:h-24 flex items-center justify-center">
                             {/* Glowing effect around royal capsule */}
                             <div className="absolute inset-x-0 inset-y-0 bg-yellow-400/25 rounded-full blur-[6px] opacity-80 animate-pulse pointer-events-none" />
                             <div className="absolute -inset-1 bg-gradient-to-tr from-amber-500 via-yellow-200 to-amber-300 rounded-full blur-[3px] opacity-70" />
@@ -1578,39 +1578,39 @@ export default function App() {
                                 <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/20 via-amber-400/25 to-yellow-300/30 animate-pulse" />
                                 
                                 {/* The featured plushie */}
-                                <span className="text-6xl drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)] z-10 select-none animate-bounce-slow">
+                                <span className="text-4xl md:text-5xl drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)] z-10 select-none animate-bounce-slow">
                                   {featuredHubby.avatar}
                                 </span>
                                 
                                 {/* 3D Glossy curved glare layer */}
                                 <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_35%_25%,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.25)_25%,rgba(0,0,0,0.25)_85%,rgba(255,255,255,0.35)_100%)] z-20 pointer-events-none">
-                                  <div className="absolute top-1 left-4 w-9 h-3.5 bg-gradient-to-b from-white/70 to-transparent rounded-full rotate-[-25deg]" />
-                                  <div className="absolute bottom-1 right-4 w-3.5 h-1.5 bg-white/40 rounded-full blur-[0.5px]" />
+                                  <div className="absolute top-0.5 left-2.5 w-6 h-2 md:w-8 md:h-3 bg-gradient-to-b from-white/70 to-transparent rounded-full rotate-[-25deg]" />
+                                  <div className="absolute bottom-1 right-2.5 w-2 h-1 md:w-3 md:h-1.5 bg-white/40 rounded-full blur-[0.5px]" />
                                 </div>
                               </div>
                             </div>
                           </div>
                           
                           {/* Secret/Limited Ribbon */}
-                          <span className="absolute -bottom-2 bg-gradient-to-r from-red-600 via-amber-500 to-yellow-500 text-white font-black text-[9px] px-3 py-1 rounded-full shadow-[0_4px_10px_rgba(239,68,68,0.5)] border border-amber-200 flex items-center gap-0.5 uppercase tracking-widest select-none z-30 animate-bounce-slow" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.9)' }}>
+                          <span className="absolute -bottom-2 bg-gradient-to-r from-red-600 via-amber-500 to-yellow-500 text-white font-black text-[7px] md:text-[8px] px-2 py-0.5 md:px-3 md:py-1 rounded-full shadow-[0_4px_10px_rgba(239,68,68,0.5)] border border-amber-200 flex items-center gap-0.5 uppercase tracking-widest select-none z-30 animate-bounce-slow whitespace-nowrap" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.9)' }}>
                             🔖 SECRET RARE
                           </span>
                         </div>
 
                         {/* Name & descriptive details */}
-                        <div className="space-y-1.5 w-full">
-                          <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
-                            <span className="px-4 py-1.5 font-sans text-[11px] md:text-xs tracking-wider bg-gradient-to-r from-[#4a370e] to-[#78350f] border-2 border-yellow-400 rounded-full shadow-[0_0_15px_rgba(234,179,8,0.45)] text-yellow-300 font-black uppercase flex items-center gap-1 select-none">
-                              🧸 SIÊU THÚ BÔNG HUYỀN THOẠI 🧸
+                        <div className="space-y-1 w-full">
+                          <div className="flex flex-wrap items-center gap-1.5 justify-center sm:justify-start">
+                            <span className="px-2 py-1 md:px-3 md:py-1.5 font-sans text-[8px] md:text-[9px] tracking-wider bg-gradient-to-r from-[#4a370e] to-[#78350f] border-2 border-yellow-400 rounded-full shadow-[0_0_15px_rgba(234,179,8,0.45)] text-yellow-300 font-black uppercase flex items-center gap-1 select-none whitespace-nowrap">
+                              🧸 SIÊU THÚ BÔNG <span className="hidden md:inline">HUYỀN THOẠI</span> 🧸
                             </span>
-                            <h4 className="text-xl md:text-2xl font-black text-[#FAF9F6] tracking-tight group-hover:text-amber-200 transition animate-pulse">
+                            <h4 className="text-lg md:text-xl font-black text-[#FAF9F6] tracking-tight group-hover:text-amber-200 transition animate-pulse">
                               {featuredHubby.name}
                             </h4>
                           </div>
 
                           {/* Rank categories list & dynamic values */}
-                          <div className="flex flex-wrap items-center gap-1.5 justify-center sm:justify-start mt-1">
-                            <span className="px-2.5 py-1 text-[9.5px] font-black bg-gradient-to-r from-yellow-400 to-amber-500 text-stone-950 rounded border border-yellow-200 uppercase tracking-wider select-none shadow-[0_0_8px_rgba(250,204,21,0.5)]">
+                          <div className="flex flex-wrap items-center gap-1 md:gap-1.5 justify-center sm:justify-start mt-0.5 lg:mt-1">
+                            <span className="px-1.5 py-0.5 md:px-2 md:py-1 text-[7px] md:text-[8px] font-black bg-gradient-to-r from-yellow-400 to-amber-500 text-stone-950 rounded border border-yellow-200 uppercase tracking-wider select-none shadow-[0_0_8px_rgba(250,204,21,0.5)]">
                               🔖 VÉ VÀNG VIP
                             </span>
                             {featuredHubby.tags.map((t, idx) => {
@@ -1618,7 +1618,7 @@ export default function App() {
                               return (
                                 <span
                                   key={idx}
-                                  className={`mini-ticket-stub ticket-sm ${getTicketColorClass(t)} select-none`}
+                                  className={`mini-ticket-stub ticket-sm ${getTicketColorClass(t)} select-none scale-[0.85] md:scale-100 origin-left`}
                                 >
                                   <span className="rune-prefix-icon">{symbol}</span>
                                   <span>{t}</span>
@@ -1627,36 +1627,36 @@ export default function App() {
                             })}
                             
                             {/* Unique Gacha gold priority votes */}
-                            <span className="px-3 py-0.5 text-[9.5px] font-black text-yellow-100 bg-gradient-to-r from-[#7c2d12] to-[#b45309] border border-yellow-500/30 rounded-full flex items-center gap-1 shadow-sm uppercase tracking-wider select-none">
-                              <span>🎟️ {(votes[featuredHubby.id] || 0).toLocaleString()} LỢT ƯU TIÊN VÀNG</span>
+                            <span className="px-2 py-0.5 text-[8px] md:text-[9px] font-black text-yellow-100 bg-gradient-to-r from-[#7c2d12] to-[#b45309] border border-yellow-500/30 rounded-full flex items-center gap-0.5 shadow-sm uppercase tracking-wider select-none whitespace-nowrap">
+                              <span>🎟️ {(votes[featuredHubby.id] || 0).toLocaleString()} <span className="hidden sm:inline">LỢT ƯU TIÊN VÀNG</span></span>
                             </span>
                           </div>
 
-                          <p className="text-xs md:text-sm text-slate-300 max-w-xl line-clamp-2 mt-1 leading-relaxed">
+                          <p className="text-[10px] md:text-[12px] text-slate-300 max-w-xl line-clamp-1 md:line-clamp-2 mt-0.5 md:mt-1 leading-snug lg:leading-relaxed">
                             {featuredHubby.description}
                           </p>
                         </div>
                       </div>
 
                       {/* Clickable Actions block */}
-                      <div className="flex items-center gap-2 w-full md:w-auto shrink-0 mt-2 md:mt-0 relative z-10 border-t md:border-t-0 border-white/10 pt-4 md:pt-0">
+                      <div className="flex items-center gap-1.5 md:gap-2 w-full md:w-auto shrink-0 mt-2 md:mt-0 relative z-10 border-t md:border-t-0 border-white/10 pt-2.5 md:pt-0">
                         {/* Interactive Chat Trigger */}
                         {!featuredHubby.chatbotUrl ? (
                           <button
                             disabled
                             id={`featured-chat-btn-${featuredHubby.id}`}
-                            className="flex-1 md:w-32 flex items-center justify-center gap-1.5 px-4 py-3 bg-[#555555]/85 text-white/80 font-black text-xs rounded-xl shadow-md cursor-not-allowed opacity-90 border border-transparent"
+                            className="flex-1 md:w-28 flex items-center justify-center gap-1 px-2 py-1.5 md:px-3 md:py-2.5 bg-[#555555]/85 text-white/80 font-black text-[9px] md:text-[10px] rounded-[10px] md:rounded-xl shadow-md cursor-not-allowed opacity-90 border border-transparent whitespace-nowrap"
                           >
-                            <MessageCircle className="w-4 h-4" />
+                            <MessageCircle className="w-3 h-3 md:w-3.5 md:h-3.5" />
                             Sắp ra mắt
                           </button>
                         ) : (
                           <button
                             onClick={() => handleStartChat(featuredHubby)}
                             id={`featured-chat-btn-${featuredHubby.id}`}
-                            className="flex-1 md:w-32 flex items-center justify-center gap-1.5 px-4 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-yellow-950 font-black text-xs rounded-xl shadow-md transition duration-150 active:scale-95 cursor-pointer border border-yellow-300/40"
+                            className="flex-1 md:w-28 flex items-center justify-center gap-1 px-2 py-1.5 md:px-3 md:py-2.5 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-yellow-950 font-black text-[9px] md:text-[10px] rounded-[10px] md:rounded-xl shadow-md transition duration-150 active:scale-95 cursor-pointer border border-yellow-300/40 whitespace-nowrap"
                           >
-                            <MessageCircle className="w-4 h-4 text-yellow-950" />
+                            <MessageCircle className="w-3 h-3 md:w-3.5 md:h-3.5 text-yellow-950" />
                             Chat Ngay
                           </button>
                         )}
@@ -1668,10 +1668,11 @@ export default function App() {
                             setStoryCharacter(featuredHubby);
                           }}
                           id={`featured-story-btn-${featuredHubby.id}`}
-                          className="flex-1 md:w-32 flex items-center justify-center gap-1.5 px-4 py-3 text-amber-200 bg-amber-950/50 hover:bg-amber-900/40 border border-amber-500/30 text-xs font-black rounded-xl transition duration-150 active:scale-95 cursor-pointer"
+                          className="flex-1 md:w-28 flex items-center justify-center gap-1 px-2 py-1.5 md:px-3 md:py-2.5 text-amber-200 bg-amber-950/50 hover:bg-amber-900/40 border border-amber-500/30 text-[9px] md:text-[10px] font-black rounded-[10px] md:rounded-xl transition duration-150 active:scale-95 cursor-pointer whitespace-nowrap"
                         >
-                          <BookOpen className="w-4 h-4" />
-                          Cốt truyện
+                          <BookOpen className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                          <span className="hidden sm:inline">Cốt truyện</span>
+                          <span className="sm:hidden">Truyện</span>
                         </button>
 
                         {/* Profile Button */}
@@ -1680,10 +1681,11 @@ export default function App() {
                           target={featuredHubby.profileUrl ? "_blank" : undefined}
                           rel={featuredHubby.profileUrl ? "noopener noreferrer" : undefined}
                           id={`featured-profile-btn-${featuredHubby.id}`}
-                          className="flex-1 md:w-32 flex items-center justify-center gap-1.5 px-4 py-3 text-amber-200 bg-amber-950/50 hover:bg-amber-900/40 border border-amber-500/30 text-xs font-black rounded-xl transition duration-150 active:scale-95 cursor-pointer"
+                          className="flex-1 md:w-28 flex items-center justify-center gap-1 px-2 py-1.5 md:px-3 md:py-2.5 text-amber-200 bg-amber-950/50 hover:bg-amber-900/40 border border-amber-500/30 text-[9px] md:text-[10px] font-black rounded-[10px] md:rounded-xl transition duration-150 active:scale-95 cursor-pointer whitespace-nowrap"
                         >
-                          <User className="w-4 h-4" />
-                          Profile
+                          <User className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                          <span className="hidden sm:inline">Profile</span>
+                          <span className="sm:hidden">Hồ sơ</span>
                         </a>
                       </div>
                     </motion.div>
@@ -1907,29 +1909,30 @@ export default function App() {
       )}
 
       {/* Character Voting Modal */}
-      <AnimatePresence>
-        {isVoteModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => {
-                playClickSound(300, 0.08);
-                setIsVoteModalOpen(false);
-              }}
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
-            />
-            
-            {/* Modal Body */}
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 30 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 30 }}
-              transition={{ type: "spring", duration: 0.6 }}
-              className="ticket-container-modal relative w-full max-w-lg select-none z-10 flex flex-col max-h-[85vh] text-[#1976D2]"
-            >
+      <div 
+        className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out ${
+          isVoteModalOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+        style={{ willChange: 'opacity, visibility' }}
+      >
+        {/* Backdrop */}
+        <div
+          onClick={() => {
+            playClickSound(300, 0.08);
+            setIsVoteModalOpen(false);
+          }}
+          className="absolute inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity duration-300"
+        />
+        
+        {/* Modal Body */}
+        <div
+          style={{ 
+            willChange: 'transform, opacity',
+            transform: isVoteModalOpen ? 'translate3d(0, 0, 0) scale(1)' : 'translate3d(0, 30px, 0) scale(0.95)',
+            transition: 'transform 0.3s ease-out, opacity 0.3s ease-out'
+          }}
+          className="ticket-container-modal relative w-full max-w-lg select-none z-10 flex flex-col max-h-[85vh] text-[#1976D2]"
+        >
               <div className="flex items-center justify-between pb-3 border-b border-[#1976D2]/30 relative z-10">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl animate-bounce text-[#FFD600]" style={{ filter: "drop-shadow(0 0 5px rgba(255,214,0,0.5))" }}>🎫</span>
@@ -2066,10 +2069,8 @@ export default function App() {
                   Đóng Bảng Vàng
                 </button>
               </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+        </div>
+      </div>
 
       {/* Wishing Well / Donate Modal */}
       <AnimatePresence>
@@ -2843,7 +2844,7 @@ export default function App() {
                 {/* Notice text written directly over the wooden plaque with hand-painted paint style */}
                 <div className="py-2.5 text-center">
                   <p className="wood-painted-handcrafted-text text-sm md:text-base selection:bg-yellow-800/20">
-                    Chào mừng đến trung tâm giải trí của Tun, Hãy đến quầy hướng dẫn để biết đi đâu chơi nhé 🌟
+                    Chào mừng đến trung tâm giải trí của Tun, Hãy đến quầy hưỡng dẫn để lấy vẽ vào khu vui chơi nhé 🌟
                   </p>
                 </div>
 
