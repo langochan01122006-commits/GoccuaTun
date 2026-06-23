@@ -20,8 +20,7 @@ service cloud.firestore {
     }
 
     function isValidVote(data) {
-      return data.characterId is string
-        && data.characterId.size() <= 64
+      return (data.characterId == null || (data.characterId is string && data.characterId.size() <= 64))
         && data.votes is int
         && data.votes >= 0
         && data.votes <= 10000000;
@@ -30,8 +29,14 @@ service cloud.firestore {
     // 2. Votes collection
     match /votes/{characterId} {
       allow get, list: if true;
-      allow create: if isValidId(characterId) && isValidVote(incoming()) && incoming().characterId == characterId;
-      allow update: if isValidId(characterId) && isValidVote(incoming()) && incoming().characterId == characterId && (incoming().votes == existing().votes + 1 || incoming().votes == existing().votes);
+      allow create: if isValidId(characterId)
+        && isValidVote(incoming())
+        && (incoming().characterId == null || incoming().characterId == characterId)
+        && (incoming().votes == 1 || incoming().votes == 0);
+      allow update: if isValidId(characterId)
+        && isValidVote(incoming())
+        && (incoming().characterId == null || incoming().characterId == characterId)
+        && (incoming().votes == existing().votes + 1 || incoming().votes == existing().votes - 1 || incoming().votes == existing().votes);
     }
   }
 }

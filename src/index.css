@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -563,6 +563,2073 @@
 .mini-oval-tag:active {
   transform: scale(0.95);
 }
+
+/* --- Nút Trở Về Cổng Chính --- */
+.portal-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px !important;
+  border-radius: 30px !important;
+  background: rgba(110, 35, 20, 0.4) !important;
+  border: 1px dashed #FFAE34 !important;
+  color: #FFE79A !important;
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.portal-back-btn:hover {
+  border-style: solid !important;
+  background: rgba(110, 35, 20, 0.6) !important;
+  color: #FFF !important;
+  box-shadow: 0 0 12px rgba(255, 174, 52, 0.5) !important;
+  transform: translateY(-1px);
+}
+
+.portal-back-btn:hover .portal-back-icon {
+  transform: translateX(-2px);
+  color: #FFF !important;
+}
+
+.portal-back-btn:active {
+  transform: scale(0.96);
+}
+
+.portal-back-icon {
+  transition: transform 0.2s ease;
+  color: #FFAE34;
+}
+
+/* --- Cây Nến Pháp Thuật (Magic Candle) --- */
+@keyframes flicker {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1) drop-shadow(0 0 2px rgba(255, 215, 0, 0.6));
+  }
+  50% {
+    transform: scale(1.15) rotate(4deg);
+    filter: brightness(1.2) drop-shadow(0 0 6px rgba(255, 215, 0, 0.9));
+  }
+}
+
+.magic-candle-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: rgba(110, 35, 20, 0.45) !important;
+  border: 1.5px solid #C49102 !important;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  user-select: none;
+}
+
+/* Base Flame Icon styling */
+.magic-candle-flame {
+  transition: all 0.4s ease;
+}
+
+/* LIT Mode (Dark theme "cosmic") */
+.magic-candle-btn.lit {
+  color: #FFAE34 !important;
+  box-shadow: 0 0 10px #FFD700, inset 0 0 4px rgba(255, 174, 52, 0.3) !important;
+}
+
+.magic-candle-btn.lit .magic-candle-flame {
+  color: #FFD700 !important;
+  filter: drop-shadow(0 0 5px #FFD700) !important;
+}
+
+/* UNLIT Mode (Light themes "pastel" / "sunset") */
+.magic-candle-btn.unlit {
+  color: #7a6e60 !important;
+  box-shadow: none !important;
+  border-color: rgba(196, 145, 2, 0.5) !important;
+}
+
+.magic-candle-btn.unlit .magic-candle-flame {
+  filter: grayscale(100%) opacity(0.3) !important;
+}
+
+/* Hover & flicker integration */
+.magic-candle-btn:hover {
+  background: rgba(110, 35, 20, 0.65) !important;
+  border-color: #FFAE34 !important;
+  transform: translateY(-2px) scale(1.08);
+}
+
+.magic-candle-btn.lit:hover .magic-candle-flame {
+  animation: flicker 0.5s infinite;
+}
+
+.magic-candle-btn.unlit:hover {
+  color: #a49685 !important;
+}
+
+.magic-candle-btn.unlit:hover .magic-candle-flame {
+  filter: grayscale(20%) opacity(0.8) !important;
+  transform: translateY(-1px);
+}
+
+.magic-candle-btn:active {
+  transform: scale(0.95);
+}
+
+
+/* ==========================================================================
+   TAROT CARD COLLECTION - BỘ SƯU TẬP THẺ BÀI TAROT
+   ========================================================================== */
+
+/* 3D Perspective Container */
+.tarot-card-container {
+  perspective: 1200px;
+  width: 275px;
+  height: 410px;
+  cursor: pointer;
+  position: relative;
+  transition: z-index 0.3s ease;
+}
+
+/* Inner 3D card rotator */
+.tarot-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1.05), box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  border-radius: 18px;
+}
+
+/* Hover up effect combined with dynamic 3D turns */
+.tarot-card-container:hover {
+  z-index: 50;
+}
+
+.tarot-card-container:hover .tarot-card-inner:not(.is-flipped) {
+  transform: translateY(-18px) scale(1.04);
+  box-shadow: 0 15px 35px rgba(255, 174, 52, 0.25), 0 0 15px rgba(255, 215, 0, 0.15);
+}
+
+.tarot-card-container:hover .tarot-card-inner.is-flipped {
+  transform: rotateY(180deg) translateY(-18px) scale(1.04);
+  box-shadow: 0 15px 35px rgba(255, 174, 52, 0.25), 0 0 15px rgba(255, 215, 0, 0.15);
+}
+
+/* Flipped State */
+.tarot-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Front & Back basic panels */
+.tarot-card-front,
+.tarot-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Front Design: Mystical Deep Purple, Gold Carved Trim */
+.tarot-card-front {
+  background: linear-gradient(135deg, #130a21 0%, #1e1338 50%, #0c0618 100%) !important;
+  border: 2.5px solid #C49102 !important;
+  box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Top Quality Hạng 1 Card Glow */
+.tarot-top-card-front {
+  background: linear-gradient(135deg, #261102 0%, #3d1b04 50%, #170800 100%) !important;
+  border: 2.5px solid #FFAE34 !important;
+  box-shadow: inset 0 0 20px rgba(255, 174, 52, 0.35), 0 4px 25px rgba(255, 165, 0, 0.2);
+}
+
+/* Inset Gold Magic dashed stitch border mimic */
+.tarot-card-inner-border {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px dashed rgba(255, 174, 52, 0.45);
+  border-radius: 14px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Back Design has the same thickness matching precisely */
+.tarot-card-back {
+  background: linear-gradient(135deg, #0d061a 0%, #140d2b 100%) !important;
+  border: 2.5px solid #C49102 !important;
+  box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.1), 0 4px 20px rgba(0, 0, 0, 0.4);
+  transform: rotateY(180deg);
+}
+
+.tarot-top-card-back {
+  background: linear-gradient(135deg, #1a0a00 0%, #2b1100 100%) !important;
+  border: 2.5px solid #FFAE34 !important;
+  box-shadow: inset 0 0 20px rgba(255, 174, 52, 0.2), 0 4px 25px rgba(255, 165, 0, 0.2);
+  transform: rotateY(180deg);
+}
+
+/* Scroll styled buttons on card back */
+.tarot-scroll-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  background: rgba(92, 28, 28, 0.6) !important;
+  border: 1px solid #C49102 !important;
+  color: #FFE79A !important;
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+.tarot-scroll-btn:hover {
+  background: rgba(120, 36, 36, 0.8) !important;
+  border-color: #FFAE34 !important;
+  color: #FFF !important;
+  box-shadow: 0 0 10px rgba(255, 174, 52, 0.35);
+  transform: translateY(-1px);
+}
+
+.tarot-scroll-btn:active {
+  transform: scale(0.96);
+}
+
+/* Specific Style for Story block */
+.tarot-scroll-btn-story {
+  background: rgba(74, 28, 92, 0.6) !important;
+  border-color: #A855F7 !important;
+  color: #F3E8FF !important;
+}
+
+.tarot-scroll-btn-story:hover {
+  background: rgba(94, 38, 115, 0.8) !important;
+  border-color: #D8B4FE !important;
+  color: #FFF !important;
+  box-shadow: 0 0 10px rgba(216, 180, 254, 0.35);
+}
+
+/* Specific Style for Profile block */
+.tarot-scroll-btn-profile {
+  background: rgba(28, 74, 92, 0.6) !important;
+  border-color: #06B6D4 !important;
+  color: #CFFAFE !important;
+}
+
+.tarot-scroll-btn-profile:hover {
+  background: rgba(38, 94, 115, 0.8) !important;
+  border-color: #67E8F9 !important;
+  color: #FFF !important;
+  box-shadow: 0 0 10px rgba(103, 232, 249, 0.35);
+}
+
+/* Sparkles ornamentations */
+.mystic-sparkle {
+  color: #FFE79A;
+  opacity: 0.5;
+  font-size: 10px;
+}
+
+/* --- Bùa Chú Khắc Rune (Rune Charms) --- */
+@keyframes runeFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rune-charm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px !important;
+  border-radius: 4px !important;
+  border: 0.8px solid #FFAE34 !important;
+  background: rgba(0, 0, 0, 0.45) !important;
+  color: #FFE79A !important;
+  font-family: 'Cinzel', 'Georgia', 'Times New Roman', serif !important;
+  font-size: 10px !important;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  backdrop-filter: blur(2px);
+  animation: runeFadeIn 0.8s ease-in-out;
+  cursor: default;
+}
+
+/* Hover effect */
+.rune-charm:hover {
+  box-shadow: 0 0 8px #FFAE34 !important;
+  font-weight: 700 !important;
+  background: rgba(110, 35, 20, 0.3) !important;
+  color: #FFF !important;
+  transform: translateY(-1px);
+}
+
+/* For interactive button filters */
+.rune-charm-filter {
+  cursor: pointer !important;
+  user-select: none;
+}
+
+.rune-charm-filter.selected {
+  background: rgba(110, 35, 20, 0.6) !important;
+  border-color: #FFAE34 !important;
+  color: #FFF !important;
+  box-shadow: 0 0 12px #FFAE34, inset 0 0 4px #FFAE34 !important;
+  font-weight: 700 !important;
+  transform: translateY(-1.5px);
+}
+
+.rune-charm-filter:hover {
+  box-shadow: 0 0 10px #FFAE34, 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.rune-charm-filter:active {
+  transform: scale(0.95);
+}
+
+.rune-prefix-icon {
+  font-size: 11px;
+  color: #FFAE34;
+  opacity: 0.85;
+  transition: transform 0.3s ease;
+}
+
+.rune-charm:hover .rune-prefix-icon {
+  transform: scale(1.2) rotate(15deg);
+  opacity: 1;
+}
+
+/* --- Constellation Orbs (Chòm Sao Định Mệnh) --- */
+@keyframes orbPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.2), inset 0 0 15px rgba(59, 130, 246, 0.15);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 42px rgba(139, 92, 246, 0.35), inset 0 0 25px rgba(59, 130, 246, 0.25);
+  }
+}
+
+.constellation-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 64px !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2.5rem !important;
+}
+
+.constellation-orb {
+  width: 96px;
+  height: 96px;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(23, 10, 48, 0.95) 0%, rgba(11, 4, 22, 0.8) 55%, rgba(0, 0, 0, 0) 100%) !important;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  text-decoration: none;
+  animation: orbPulse 7s ease-in-out infinite;
+  border: none !important;
+  outline: none !important;
+}
+
+.constellation-orb::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(59, 130, 246, 0.08) 45%, transparent 75%);
+  opacity: 0.8;
+  transition: all 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.constellation-orb:hover {
+  transform: translateY(-8px) scale(1.1) !important;
+}
+
+.constellation-orb:hover::before {
+  background: radial-gradient(circle, rgba(255, 231, 154, 0.22) 0%, rgba(139, 92, 246, 0.22) 45%, transparent 75%);
+  inset: -22px;
+  opacity: 1;
+}
+
+.constellation-svg {
+  width: 76px;
+  height: 76px;
+  z-index: 2;
+  overflow: visible;
+}
+
+.constellation-line {
+  stroke: #FFAE34;
+  stroke-width: 0.7;
+  stroke-dasharray: 3, 3;
+  opacity: 0.15;
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.constellation-orb:hover .constellation-line {
+  stroke-dasharray: 0;
+  stroke-width: 1.1;
+  opacity: 1;
+  filter: drop-shadow(0 0 1.5px #FFAE34);
+}
+
+.constellation-star {
+  fill: #FFF;
+  transition: all 0.5s ease;
+  opacity: 0.45;
+}
+
+.constellation-orb:hover .constellation-star {
+  fill: #FFAE34;
+  opacity: 1;
+  filter: drop-shadow(0 0 2.5px #FFAE34);
+}
+
+.constellation-overlay-icon {
+  fill: none;
+  stroke: rgba(255, 231, 154, 0.06);
+  stroke-width: 0.8;
+  transition: all 0.5s ease;
+}
+
+.constellation-orb:hover .constellation-overlay-icon {
+  stroke: rgba(255, 231, 154, 0.2);
+}
+
+.constellation-label {
+  position: absolute;
+  bottom: -22px;
+  font-family: 'Cinzel', 'Georgia', serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255, 231, 154, 0.45);
+  text-transform: uppercase;
+  transition: all 0.5s ease;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+}
+
+.constellation-orb:hover .constellation-label {
+  color: #FFAE34;
+  letter-spacing: 3px;
+  text-shadow: 0 0 6px rgba(255, 174, 52, 0.4);
+}
+
+/* ==========================================================================
+   ẤN KÝ NGỌN LỬA VĨNH HẰNG (ETERNAL FLAME FOR TOP 1)
+   ========================================================================== */
+
+@keyframes flameFlicker {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgba(255, 174, 52, 0.8)) drop-shadow(0 0 10px rgba(255, 85, 0, 0.5));
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    filter: drop-shadow(0 0 7px rgba(255, 231, 154, 0.9)) drop-shadow(0 0 13px rgba(255, 119, 0, 0.7)) drop-shadow(0 0 18px rgba(255, 51, 0, 0.4));
+    transform: scale(1.025) rotate(0.5deg);
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgba(255, 174, 52, 0.75)) drop-shadow(0 0 9px rgba(255, 60, 0, 0.45));
+    transform: scale(0.985) rotate(-0.5deg);
+  }
+  75% {
+    filter: drop-shadow(0 0 8px rgba(255, 231, 154, 0.95)) drop-shadow(0 0 15px rgba(255, 130, 0, 0.75)) drop-shadow(0 0 22px rgba(255, 30, 0, 0.5));
+    transform: scale(1.015) rotate(0.3deg);
+  }
+}
+
+@keyframes smokeHaze {
+  0%, 100% {
+    box-shadow: 0 10px 45px rgba(255, 110, 0, 0.18), 0 0 30px rgba(139, 92, 246, 0.12), inset 0 0 25px rgba(255, 174, 52, 0.12);
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+  }
+  50% {
+    box-shadow: 0 15px 55px rgba(255, 120, 0, 0.28), 0 0 40px rgba(139, 92, 246, 0.2), inset 0 0 35px rgba(255, 174, 52, 0.22);
+    filter: drop-shadow(0 8px 25px rgba(255, 110, 0, 0.15)) drop-shadow(0 5px 15px rgba(0,0,0,0.6));
+  }
+}
+
+.eternal-fire-panel {
+  border: 1.8px solid #FFAE34 !important;
+  background: linear-gradient(135deg, #1b0702 0%, #12030a 50%, #06010d 100%) !important;
+  animation: smokeHaze 5s ease-in-out infinite !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.eternal-fire-panel:hover {
+  border-color: #FFD700 !important;
+}
+
+/* Flame-shaped outline around avatar */
+.flame-avatar-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.flame-avatar-border-svg {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  pointer-events: none;
+  animation: flameFlicker 1.4s ease-in-out infinite;
+  z-index: 3;
+}
+
+.flame-avatar-inner-box {
+  width: 76px;
+  height: 76px;
+  border-radius: 50% 50% 48% 48% / 65% 65% 35% 35%; /* organic flame drop geometry */
+  background: linear-gradient(185deg, #FFB834 0%, #FF5A00 50%, #400400 100%);
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255, 76, 0, 0.4), inset 0 -4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.flame-avatar-emojispan {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #110502;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  line-height: 1;
+  user-select: none;
+  z-index: 2;
+}
+
+.gothic-imprint-text {
+  font-family: 'Cinzel', 'Georgia', 'Times New Roman', serif !important;
+  color: #FFD700 !important;
+  text-shadow: 0 0 10px rgba(255, 140, 0, 0.95), 0 0 20px rgba(255, 60, 0, 0.55);
+  font-weight: 850 !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+}
+
+/* ==========================================================================
+   BÀN THỜ CHIÊM BÁI (WORSHIP ALTAR DIALOG)
+   ========================================================================== */
+
+@keyframes scrollOpen {
+  0% {
+    transform: scaleX(0.5) scaleY(0.01) translateY(100px);
+    opacity: 0;
+    filter: brightness(3) contrast(2) blur(8px);
+  }
+  50% {
+    transform: scaleX(1) scaleY(0.08) translateY(20px);
+    opacity: 0.85;
+    filter: brightness(2) blur(4px);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1) translateY(0);
+    opacity: 1;
+    filter: brightness(1) blur(0);
+  }
+}
+
+.worship-altar-book {
+  border: 1.8px solid #FFAE34 !important;
+  background: linear-gradient(135deg, #180805 0%, #0d0302 50%, #060101 100%) !important;
+  box-shadow: 0 0 50px rgba(255, 174, 52, 0.35), inset 0 0 45px rgba(0, 0, 0, 0.98) !important;
+  border-radius: 8px !important;
+  padding: 24px !important;
+  animation: scrollOpen 0.7s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.worship-altar-book::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 0.8px double rgba(255, 174, 52, 0.25);
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Corner filigree ornaments */
+.filigree-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #FFAE34;
+  pointer-events: none;
+  z-index: 11;
+  opacity: 0.7;
+}
+.filigree-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.filigree-tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+.filigree-bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+.filigree-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* Bệ thờ item elements */
+.worship-pedestal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px !important;
+  background: linear-gradient(90deg, rgba(26, 11, 7, 0.9) 0%, rgba(12, 4, 3, 0.95) 100%) !important;
+  border-left: 2.5px solid #FFAE34 !important;
+  border-top: 0.8px solid rgba(255, 174, 52, 0.12) !important;
+  border-right: 0.8px solid rgba(255, 174, 52, 0.05) !important;
+  border-bottom: 0.8px solid rgba(255, 174, 52, 0.12) !important;
+  border-radius: 4px !important;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6) !important;
+}
+
+.worship-pedestal::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 174, 52, 0.03) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.worship-pedestal:hover {
+  transform: translateX(3px);
+  border-left-color: #FFF940 !important;
+  box-shadow: 0 0 18px rgba(255, 174, 52, 0.3), inset 0 0 8px rgba(255, 174, 52, 0.1) !important;
+  background: linear-gradient(90deg, rgba(42, 18, 12, 0.95) 0%, rgba(18, 6, 4, 0.98) 100%) !important;
+}
+
+/* Pedestal lit with fire */
+.worship-pedestal.lit-altar {
+  border-left-color: #FFF940 !important;
+  background: linear-gradient(90deg, rgba(54, 22, 13, 0.95) 0%, rgba(22, 7, 4, 0.98) 100%) !important;
+  box-shadow: 0 0 22px rgba(255, 110, 0, 0.25), inset 0 0 12px rgba(255, 174, 52, 0.15) !important;
+}
+
+/* Small candle light near name */
+.altar-candle-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 174, 52, 0.6);
+  position: relative;
+  box-shadow: 0 0 4px rgba(255, 174, 52, 0.5);
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+  animation: flameFlicker 0.4s infinite alternate;
+}
+
+.altar-candle-dot.lit {
+  background: #FFF940;
+  box-shadow: 0 0 10px #FFF940, 0 0 16px #FF5A00;
+}
+
+/* Candle thắp nến ritual button style */
+.ritual-candle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% !important;
+  border: 0.8px solid rgba(255, 174, 52, 0.3) !important;
+  background: rgba(14, 4, 2, 0.9) !important;
+  color: rgba(255, 174, 52, 0.5) !important;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.ritual-candle-btn:hover {
+  color: #FFAE34 !important;
+  border-color: #FFAE34 !important;
+  box-shadow: 0 0 8px rgba(255, 174, 52, 0.3);
+  transform: scale(1.05);
+}
+
+.ritual-candle-btn.lit {
+  color: #FFF940 !important;
+  border-color: #FFF940 !important;
+  background: rgba(255, 174, 52, 0.12) !important;
+  box-shadow: 0 0 12px #FFAE34, inset 0 0 6px #FFAE34 !important;
+  transform: scale(1.1);
+}
+
+.ritual-candle-btn.lit svg {
+  filter: drop-shadow(0 0 2.5px #FFF940) drop-shadow(0 0 5px #FF5A00);
+}
+
+/* Spiritual Wisps */
+.wisp-orb-stack {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+}
+
+.wisp-gem-particle {
+  width: 4.5px;
+  height: 4.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFFDEB 0%, #FDE68A 65%, rgba(253, 230, 138, 0) 100%);
+  filter: drop-shadow(0 0 2.5px #FFAE34);
+  animation: wispPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes wispPulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+.altar-gold-serif {
+  font-family: 'Cinzel', 'Georgia', serif !important;
+  color: #FDE68A !important;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   BẢN GIAO KÈO VỚI PHÁP SƯ (SORCERER'S PACT)
+   ========================================================================== */
+
+@keyframes scrollDown {
+  0% {
+    transform: scaleY(0.1) translateY(-100px);
+    opacity: 0;
+    transform-origin: top;
+    filter: brightness(1.6) blur(6px);
+  }
+  100% {
+    transform: scaleY(1) translateY(0);
+    opacity: 1;
+    transform-origin: top;
+    filter: brightness(1) blur(0);
+  }
+}
+
+.wizard-parchment-pact {
+  animation: scrollDown 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  background: radial-gradient(circle at 50% 30%, #fdf9e2 0%, #f5e9be 60%, #e2ce95 100%) !important;
+  border: 10px double #8c6239 !important;
+  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.75), inset 0 0 40px rgba(110, 75, 45, 0.15) !important;
+  color: #382212 !important;
+  border-radius: 4px !important;
+  position: relative;
+  transition: box-shadow 0.5s ease-in-out;
+}
+
+.wizard-parchment-pact:hover {
+  box-shadow: 0 0 54px rgba(139, 69, 19, 0.55), inset 0 0 30px rgba(110, 75, 45, 0.1) !important;
+}
+
+/* Antique Ornate filigree double lines */
+.parchment-inner-border {
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(140, 98, 57, 0.35);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.pact-title-serif {
+  font-family: 'Cinzel', 'Georgia', 'Playfair Display', serif !important;
+  color: #5c3818 !important;
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+  font-weight: 900 !important;
+  letter-spacing: 1px;
+}
+
+.pact-description-ink {
+  font-family: 'Cinzel', 'Georgia', serif;
+  color: #4a3319;
+  line-height: 1.6;
+}
+
+/* Luxury Oval QR Frame */
+.oval-qr-frame {
+  position: relative;
+  border-radius: 50% / 12% !important;
+  border: 3.5px double #a0703e !important;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 10px;
+  box-shadow: 0 6px 20px rgba(140, 98, 57, 0.25), inset 0 0 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.oval-qr-frame:hover {
+  border-color: #bfa571 !important;
+  box-shadow: 0 0 25px rgba(191, 165, 113, 0.55);
+}
+
+/* Magical Spell Lines for Bank list */
+.magical-spell-item {
+  background: rgba(255, 253, 245, 0.65) !important;
+  border: 1px solid rgba(140, 98, 57, 0.22) !important;
+  box-shadow: inset 0 1px 3px rgba(140, 98, 57, 0.08) !important;
+  transition: all 0.3s ease;
+}
+
+.magical-spell-item:hover {
+  background: rgba(255, 250, 230, 0.95) !important;
+  border-color: #8c6239 !important;
+}
+
+/* Quill style action button */
+.quill-btn {
+  background: rgba(140, 98, 57, 0.12) !important;
+  border: 1px solid rgba(140, 98, 57, 0.25) !important;
+  color: #5c3818 !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.quill-btn:hover {
+  background: #8c6239 !important;
+  color: #fffdec !important;
+  transform: scale(1.08) rotate(-4deg);
+}
+
+@keyframes quillGlowPulse {
+  0%, 100% { border-color: rgba(140, 98, 57, 0.25); box-shadow: none; }
+  50% { border-color: #d97706; box-shadow: 0 0 10px rgba(217, 119, 6, 0.45); }
+}
+
+.quill-glow {
+  animation: quillGlowPulse 0.8s ease-in-out infinite;
+}
+
+/* Wax Seal Style */
+.wax-seal {
+  width: 58px;
+  height: 58px;
+  background: radial-gradient(circle at 35% 35%, #b91c1c 0%, #881337 75%, #4c0519 100%);
+  border-radius: 54% 46% 52% 48% / 48% 54% 46% 52%; /* organic hand-melted edge mold */
+  border: 2px solid #9f1239;
+  box-shadow: 0 4px 10px rgba(76, 5, 25, 0.5), inset 2px 2px 4px rgba(255,255,255,0.35), inset -2px -2px 4px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wax-seal:hover {
+  transform: scale(1.1) rotate(8deg);
+}
+
+.wax-seal-text {
+  font-family: 'Cinzel', 'Georgia', serif;
+  font-size: 11px;
+  font-weight: 900;
+  color: #fecdd3;
+  text-shadow: 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.85);
+  letter-spacing: 1px;
+}
+
+/* --- Gramophone (Máy Hát Đĩa Than Cổ Điển) --- */
+@keyframes gramophone-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-record-spin {
+  animation: gramophone-rotate 10s linear infinite;
+}
+
+/* Brass controls carved styling */
+.brass-button {
+  background: linear-gradient(135deg, #f3d078 0%, #b88a30 40%, #765315 100%);
+  border: 1.5px solid #5a3c0a;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.45),
+    0 3px 5px rgba(0, 0, 0, 0.35);
+  color: #3b2302;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.brass-button:hover {
+  background: linear-gradient(135deg, #ffe08a 0%, #d8a73f 40%, #8e651c 100%);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.35),
+    0 5px 8px rgba(255, 174, 52, 0.4);
+  transform: translateY(-1px) scale(1.05);
+  color: #271601;
+}
+
+.brass-button:active {
+  background: linear-gradient(135deg, #b88a30 0%, #765315 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px) scale(0.95);
+}
+
+/* Floating gold dust particles */
+@keyframes gold-dust-float {
+  0% {
+    transform: translateY(20px) translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-90px) translateX(var(--dust-x, 15px)) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.gold-dust-particle {
+  animation: gold-dust-float var(--dust-dur, 4s) ease-in-out infinite;
+}
+
+/* --- Wizard's Notice Board (Bảng Thông Báo Của Pháp Sư) --- */
+@keyframes wizard-board-entrance {
+  0% {
+    transform: translateY(-120vh) rotate(-18deg);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(12px) rotate(3deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(-6px) rotate(-2deg);
+  }
+  80% {
+    transform: translateY(3px) rotate(1.5deg);
+  }
+  95% {
+    transform: translateY(-1px) rotate(-0.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes wizard-board-sway {
+  0%, 100% {
+    transform: rotate(-1.5deg) translateY(0);
+  }
+  50% {
+    transform: rotate(1.5deg) translateY(-2px);
+  }
+}
+
+.wizard-notice-board {
+  transform-origin: top center;
+  animation: 
+    wizard-board-entrance 1.3s cubic-bezier(0.25, 1.1, 0.5, 1.1) forwards,
+    wizard-board-sway 5s ease-in-out infinite 1.3s;
+}
+
+/* Aged paper board effect */
+.wizard-notice-parchment {
+  background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Summoning Circle (Vòng Tròn Triệu Hồi Ma Thuật) --- */
+@keyframes summon-rotate-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes summon-rotate-counter {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes summon-glow-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(168, 85, 247, 0.2),
+      inset 0 0 25px rgba(168, 85, 247, 0.25);
+    border-color: rgba(168, 85, 247, 0.35);
+  }
+  50% {
+    box-shadow: 
+      0 0 35px rgba(245, 158, 11, 0.45),
+      inset 0 0 35px rgba(168, 85, 247, 0.45);
+    border-color: rgba(245, 158, 11, 0.65);
+  }
+}
+
+.summon-rotate-cw {
+  animation: summon-rotate-clockwise 25s linear infinite;
+}
+
+.summon-rotate-ccw {
+  animation: summon-rotate-counter 15s linear infinite;
+}
+
+.summon-circle-container {
+  animation: summon-glow-pulse 4s ease-in-out infinite;
+}
+
+/* 3D summoning glow button */
+.magic-resummon-3d-btn {
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 50%, #4c1d95 100%);
+  border: 2px solid #c084fc;
+  box-shadow: 
+    0 4px 0 #581c87,
+    0 8px 15px rgba(124, 58, 237, 0.45),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.35);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.magic-resummon-3d-btn:hover {
+  background: linear-gradient(135deg, #c084fc 0%, #8b5cf6 50%, #5b21b6 100%);
+  box-shadow: 
+    0 4px 0 #6d28d9,
+    0 12px 22px rgba(168, 85, 247, 0.6),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.45);
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.magic-resummon-3d-btn:active {
+  box-shadow: 
+    0 1px 0 #4c1d95,
+    0 2px 6px rgba(124, 58, 237, 0.3),
+    inset 0 1px 4px rgba(0, 0, 0, 0.4);
+  transform: translateY(3px);
+}
+
+/* --- Mystic Divination Booth (Lều Tiên Tri Huyền Bí) --- */
+@keyframes divination-ball-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(59, 130, 246, 0.4),
+      0 0 15px rgba(139, 92, 246, 0.3),
+      inset 0 0 25px rgba(59, 130, 246, 0.45);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 55px rgba(139, 92, 246, 0.75),
+      0 0 25px rgba(14, 165, 233, 0.5),
+      inset 0 0 35px rgba(139, 92, 246, 0.65);
+    filter: brightness(1.25);
+  }
+}
+
+.crystal-ball-glow {
+  animation: divination-ball-pulse 4s ease-in-out infinite;
+}
+
+@keyframes divination-smoke-spread {
+  0% {
+    transform: translateY(15px) scale(0.3) rotate(0deg);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  20% {
+    opacity: 0.75;
+    filter: blur(3px);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1) rotate(15deg);
+    opacity: 0.5;
+    filter: blur(6px);
+  }
+  100% {
+    transform: translateY(-45px) scale(1.6) rotate(-20deg);
+    opacity: 0;
+    filter: blur(12px);
+  }
+}
+
+.divination-smoke-particle {
+  animation: divination-smoke-spread 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes curtain-sway-left {
+  0%, 100% { transform: scaleX(1) skewY(0.5deg); }
+  50% { transform: scaleX(1.03) skewY(-0.5deg); }
+}
+
+@keyframes curtain-sway-right {
+  0%, 100% { transform: scaleX(1) skewY(-0.5deg); }
+  50% { transform: scaleX(1.03) skewY(0.5deg); }
+}
+
+.divination-curtain-l {
+  animation: curtain-sway-left 7s ease-in-out infinite;
+  box-shadow: 12px 0 25px rgba(0, 0, 0, 0.95), inset -3px 0 10px rgba(0, 0, 0, 0.61);
+}
+
+.divination-curtain-r {
+  animation: curtain-sway-right 7s ease-in-out infinite;
+  box-shadow: -12px 0 25px rgba(0, 0, 0, 0.95), inset 3px 0 10px rgba(0, 0, 0, 0.61);
+}
+
+/* Glassy Divination options */
+.divination-path-card {
+  backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.15) 0%, rgba(30, 27, 75, 0.3) 100%);
+  border: 1.5px solid rgba(192, 132, 252, 0.22);
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(168, 85, 247, 0.1),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.divination-path-card:hover {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.28) 0%, rgba(76, 29, 149, 0.45) 100%);
+  border-color: rgba(253, 224, 71, 0.55);
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.75),
+    0 0 22px rgba(253, 224, 71, 0.35),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.divination-path-card:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+/* --- Traveler's Map (Bản Đồ Lữ Khách) --- */
+@keyframes parchment-unroll {
+  0% {
+    transform: scaleX(0.01) scaleY(0.9);
+    opacity: 0;
+  }
+  40% {
+    transform: scaleX(1) scaleY(0.9);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 1;
+  }
+}
+
+.parchment-container {
+  background-color: #f7ebdb;
+  background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
+  box-shadow: 
+    0 25px 65px rgba(0, 0, 0, 0.85),
+    inset 0 0 60px rgba(139, 90, 43, 0.35);
+  border: 8px solid #4e342e;
+  border-radius: 12px;
+}
+
+@keyframes map-path-flow {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.map-magic-path {
+  stroke-dasharray: 6, 8;
+  animation: map-path-flow 25s linear infinite;
+}
+
+/* Custom hand-written font loaded from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
+
+.font-handwritten {
+  font-family: 'Charm', cursive, serif;
+}
+
+.landmark-glow {
+  box-shadow: 
+    0 0 20px rgba(234, 179, 8, 0.6),
+    0 0 8px rgba(168, 85, 247, 0.4);
+}
+
+/* Sequencing Navigation Shimmer Sweep Active State */
+@keyframes sweep-shimmer-anim {
+  0% {
+    background-position: -200% center;
+    box-shadow: 0 0 8px rgba(255, 174, 52, 0.4);
+    border-color: #FFAE34;
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 231, 154, 1);
+    border-color: #FFFFFF;
+    transform: scale(1.06);
+  }
+  100% {
+    background-position: 200% center;
+    box-shadow: 0 0 8px rgba(255, 174, 52, 0.4);
+    border-color: #FFAE34;
+    transform: scale(1);
+  }
+}
+
+.shimmer-sweep-active {
+  animation: sweep-shimmer-anim 0.8s ease-in-out both;
+  background-image: linear-gradient(120deg, #6E2314 25%, #FFE79A 50%, #6E2314 75%) !important;
+  background-size: 200% auto !important;
+  z-index: 50 !important;
+}
+
+/* Custom Equalizer Waves animation for the music ticket */
+@keyframes eq-bar-1 {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+@keyframes eq-bar-2 {
+  0%, 100% { height: 8px; }
+  50% { height: 24px; }
+}
+@keyframes eq-bar-3 {
+  0%, 100% { height: 6px; }
+  50% { height: 20px; }
+}
+@keyframes eq-bar-4 {
+  0%, 100% { height: 10px; }
+  50% { height: 16px; }
+}
+
+.animate-eq-1 { animation: eq-bar-1 0.7s ease-in-out infinite; }
+.animate-eq-2 { animation: eq-bar-2 0.9s ease-in-out infinite; }
+.animate-eq-3 { animation: eq-bar-3 0.6s ease-in-out infinite; }
+.animate-eq-4 { animation: eq-bar-4 0.8s ease-in-out infinite; }
+
+/* Lucky Fountain stone/brick frame styles with mossy shadows */
+.fountain-brick-masonry {
+  border: 12px solid #5a6669 !important;
+  background: radial-gradient(circle at 50% 15%, #0c2d33 0%, #051419 65%, #02090d 100%) !important;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.95),
+    inset 0 0 40px rgba(6, 182, 212, 0.15),
+    inset 0 0 60px rgba(0, 0, 0, 0.9) !important;
+  border-radius: 28px !important;
+  position: relative;
+  outline: 4px solid #1c2729 !important;
+}
+
+@keyframes slow-swim {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+
+.animate-slow-swim {
+  animation: slow-swim 6s ease-in-out infinite;
+}
+
+@keyframes coin-float-fast {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(8deg); }
+}
+
+.animate-coin-float-fast {
+  animation: coin-float-fast 4s ease-in-out infinite;
+}
+
+@keyframes water-surface-ripple {
+  0% { transform: scale(0.9); opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 0.1; }
+}
+
+.animate-water-surface-ripple {
+  animation: water-surface-ripple 5s ease-in-out infinite alternate;
+}
+
+/* Custom Gacha Claw Machine CSS */
+@keyframes led-blink-neon {
+  0%, 100% { 
+    opacity: 1; 
+    text-shadow: 0 0 4px #22d3ee, 0 0 12px #22d3ee, 0 0 25px #0891b2; 
+    color: #e0f7fa; 
+  }
+  50% { 
+    opacity: 0.45; 
+    text-shadow: 0 0 2px #0891b2; 
+    color: #0891b2; 
+  }
+}
+
+.animate-led-blink-neon {
+  animation: led-blink-neon 1s infinite ease-in-out;
+}
+
+@keyframes claw-wiggle {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  50% { transform: translateX(-50%) rotate(2.5deg); }
+}
+
+@keyframes claw-grabbing-motion {
+  0%, 100% { transform: translateX(-50%) translateY(0) scaleY(1); }
+  30% { transform: translateX(-50%) translateY(16px) scaleY(1.05); }
+  60% { transform: translateX(-50%) translateY(16px) scaleY(0.95); }
+}
+
+.animate-claw-idle {
+  animation: claw-wiggle 3.5s ease-in-out infinite;
+}
+
+.animate-claw-grabbing {
+  animation: claw-grabbing-motion 1.2s ease-in-out infinite;
+}
+
+@keyframes capsule-shake-slow {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  33% { transform: translateY(-1.5px) rotate(-0.5deg); }
+  66% { transform: translateY(1px) rotate(0.5deg); }
+}
+
+.animate-capsule-shake {
+  animation: capsule-shake-slow 5s ease-in-out infinite;
+}
+
+.arcade-red-neon-btn {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 50%, #be123c 100%) !important;
+  border: 2px solid #fda4af !important;
+  box-shadow: 
+    0 5px 0 #9f1239,
+    0 8px 15px rgba(225, 29, 72, 0.4),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.45) !important;
+  text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.7);
+  transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+}
+
+.arcade-red-neon-btn:hover {
+  background: linear-gradient(135deg, #fb7185 0%, #f43f5e 50%, #da1b48 100%) !important;
+  box-shadow: 
+    0 5px 0 #be123c,
+    0 12px 20px rgba(244, 63, 94, 0.5),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.arcade-red-neon-btn:active {
+  box-shadow: 
+    0 1px 0 #9f1239,
+    0 2px 6px rgba(225, 29, 72, 0.25),
+    inset 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+  transform: translateY(4px) !important;
+}
+
+/* Golden Fast-Pass Leaderboard Styles */
+.royal-gold-glow-text {
+  background: linear-gradient(135deg, #ffe59c 0%, #ffd700 35%, #f59e0b 70%, #fffbf0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffd700;
+  text-shadow: 0 0 15px rgba(245, 158, 11, 0.45);
+  font-family: inherit;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.ticket-container-modal {
+  border: 2px solid #ffd700 !important;
+  background: linear-gradient(135deg, #110e0a 0%, #0c0805 50%, #050302 100%) !important;
+  box-shadow: 0 0 45px rgba(245, 158, 11, 0.25), inset 0 0 40px rgba(0, 0, 0, 0.98) !important;
+  border-radius: 20px !important;
+  padding: 24px !important;
+  animation: scrollOpen 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes metallic-shimmer-pass {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.golden-fastpass-ticket {
+  position: relative;
+  border: 1.5px solid rgba(245, 158, 11, 0.35) !important;
+  background: linear-gradient(90deg, rgba(30, 22, 14, 0.9) 0%, rgba(18, 12, 6, 0.95) 100%) !important;
+  border-radius: 14px !important;
+  padding: 14px 18px !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(245, 158, 11, 0.04) !important;
+}
+
+.golden-fastpass-ticket::before {
+  content: '';
+  position: absolute;
+  inset: 2.5px;
+  border: 1px dashed rgba(245, 158, 11, 0.15);
+  border-radius: 11px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.golden-fastpass-ticket:hover {
+  border-color: rgba(245, 158, 11, 0.8) !important;
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.25), inset 0 0 12px rgba(245, 158, 11, 0.08) !important;
+}
+
+/* Golden Fast-Pass Ticket Notch Left & Right cutouts */
+.ticket-notch-l {
+  position: absolute;
+  left: -8.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: #0c0805; /* Matches core modal container background */
+  border-right: 1.5px solid rgba(245, 158, 11, 0.5);
+  box-shadow: inset -3px 0 5px rgba(0, 0, 0, 0.8);
+  z-index: 20;
+}
+
+.ticket-notch-r {
+  position: absolute;
+  right: -8.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: #0c0805;
+  border-left: 1.5px solid rgba(245, 158, 11, 0.5);
+  box-shadow: inset 3px 0 5px rgba(0, 0, 0, 0.8);
+  z-index: 20;
+}
+
+/* Interactive Ticket Puncher Animations */
+@keyframes punch-squish {
+  0% { transform: scale(1); }
+  25% { transform: scale(0.68) rotate(-12deg); }
+  60% { transform: scale(1.22) rotate(6deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.animate-ticket-punch {
+  animation: punch-squish 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes ticket-rumble {
+  0%, 100% { transform: scale(1); }
+  15% { transform: translateY(-1.5px) rotate(-0.5deg); }
+  35% { transform: translateY(1.5px) rotate(0.5deg) scale(0.995); }
+  55% { transform: translateY(-1px) rotate(-0.3deg); }
+  75% { transform: translateY(1px) rotate(0.3deg) scale(1.002); }
+}
+
+.animate-ticket-rumble {
+  animation: ticket-rumble 0.55s ease-in-out forwards;
+}
+
+/* Ticket Puncher button styled like custom slot/arcade device */
+.ticket-puncher-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%) !important;
+  border: 2px solid #fef3c7 !important;
+  color: #1e1b4b !important;
+  cursor: pointer;
+  box-shadow: 
+    0 4px 0 #78350f,
+    0 6px 15px rgba(217, 119, 6, 0.4),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.5) !important;
+  transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ticket-puncher-btn:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%) !important;
+  box-shadow: 
+    0 4px 0 #78350f,
+    0 10px 18px rgba(245, 158, 11, 0.55),
+    inset 0 2px 0 rgba(255, 255, 255, 0.6) !important;
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.ticket-puncher-btn:active {
+  box-shadow: 
+    0 1px 0 #78350f,
+    0 2px 5px rgba(217, 119, 6, 0.25),
+    inset 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(4px) !important;
+}
+
+/* Active Punched Ticket State */
+.ticket-puncher-btn.punched {
+  background: linear-gradient(135deg, #fb7185 0%, #f43f5e 50%, #be123c 100%) !important;
+  border-color: #ffe4e6 !important;
+  color: #ffffff !important;
+  box-shadow: 
+    0 4px 0 #9f1239,
+    0 6px 15px rgba(244, 63, 94, 0.4),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.45) !important;
+}
+
+.ticket-puncher-btn.punched:hover {
+  background: linear-gradient(135deg, #fda4af 0%, #fb7185 50%, #e11d48 100%) !important;
+  box-shadow: 
+    0 4px 0 #9f1239,
+    0 10px 18px rgba(244, 63, 94, 0.55),
+    inset 0 2px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+.ticket-puncher-btn.punched:active {
+  box-shadow: 
+    0 1px 0 #9f1239,
+    0 2px 5px rgba(244, 63, 94, 0.25),
+    inset 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(4px) !important;
+}
+
+/* Custom Sparkles Exploding Particles container */
+.sparkle-punch-explosion {
+  position: absolute;
+  pointer-events: none;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+}
+
+@keyframes sparkle-particle-fly-1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-30px, -22px) scale(0); opacity: 0; }
+}
+@keyframes sparkle-particle-fly-2 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(32px, -18px) scale(0); opacity: 0; }
+}
+@keyframes sparkle-particle-fly-3 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-22px, 28px) scale(0); opacity: 0; }
+}
+@keyframes sparkle-particle-fly-4 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(26px, 27px) scale(0); opacity: 0; }
+}
+@keyframes sparkle-particle-fly-5 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(5px, -35px) scale(0); opacity: 0; }
+}
+
+.party-sparkle-1 { animation: sparkle-particle-fly-1 0.48s ease-out forwards; }
+.party-sparkle-2 { animation: sparkle-particle-fly-2 0.45s ease-out forwards; }
+.party-sparkle-3 { animation: sparkle-particle-fly-3 0.5s ease-out forwards; }
+.party-sparkle-4 { animation: sparkle-particle-fly-4 0.46s ease-out forwards; }
+.party-sparkle-5 { animation: sparkle-particle-fly-5 0.52s ease-out forwards; }
+
+/* ==========================================================================
+   GACHA PLUSHIE COLLECTION - BỘ SƯU TẬP THÚ BÔNG LƯU NIỆM
+   ========================================================================== */
+
+.plushie-card-container {
+  perspective: 1200px;
+  width: 275px;
+  height: 420px;
+  cursor: pointer;
+  position: relative;
+  transition: z-index 0.3s ease;
+}
+
+.plushie-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.1), box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  border-radius: 32px;
+}
+
+.plushie-card-container:hover {
+  z-index: 50;
+}
+
+.plushie-card-container:hover .plushie-card-inner:not(.is-flipped) {
+  transform: translateY(-16px) scale(1.05) rotate(1deg);
+}
+
+.plushie-card-container:hover .plushie-card-inner.is-flipped {
+  transform: rotateY(180deg) translateY(-16px) scale(1.05) rotate(-1deg);
+}
+
+.plushie-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.plushie-card-front,
+.plushie-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 32px !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.plushie-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Custom bounce slowing effect for cute toys */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 4s ease-in-out infinite;
+}
+
+/* Rounded pillow inner shadow and highlight details */
+.plushie-inner-border {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 26px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+
+/* ==========================================================================
+   MINI TICKET STUB FILTERS - BỘ LỌC CUỐNG VÉ CHƠI GAME MINI
+   ========================================================================== */
+
+.mini-ticket-stub {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 16px !important;
+  font-family: inherit;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 6px !important;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: visible !important;
+  border: 1.5px solid transparent;
+  
+  /* Mask cutout side circle notches to look like ticket stub */
+  -webkit-mask-image: radial-gradient(circle at 0px 50%, transparent 4px, black 5px),
+                      radial-gradient(circle at 100% 50%, transparent 4px, black 5px);
+  -webkit-mask-size: 51% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: left, right;
+  mask-image: radial-gradient(circle at 0px 50%, transparent 4px, black 5px),
+              radial-gradient(circle at 100% 50%, transparent 4px, black 5px);
+  mask-size: 51% 100%;
+  mask-repeat: no-repeat;
+  mask-position: left, right;
+}
+
+/* Red tear-off dashed line near the left side */
+.mini-ticket-stub::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 8px;
+  border-right: 1.5px dashed rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Pastel ticket paper color presets */
+.mini-ticket-stub.ticket-cream {
+  background: #FEF3C7 !important; /* Pastel soft yellow/gold */
+  color: #78350F !important;
+  border-color: #FCD34D !important;
+}
+.mini-ticket-stub.ticket-pink {
+  background: #FCE7F3 !important; /* Pastel rose */
+  color: #9D174D !important;
+  border-color: #FBCFE8 !important;
+}
+.mini-ticket-stub.ticket-blue {
+  background: #E0F2FE !important; /* Pastel sky blue */
+  color: #1E3A8A !important;
+  border-color: #BAE6FD !important;
+}
+.mini-ticket-stub.ticket-mint {
+  background: #ECEFDF !important; /* Light retro sage mint */
+  color: #1E4620 !important;
+  border-color: #D2DCA3 !important;
+}
+.mini-ticket-stub.ticket-lilac {
+  background: #F3E8FF !important; /* Pastel violet lilac */
+  color: #581C87 !important;
+  border-color: #E9D5FF !important;
+}
+.mini-ticket-stub.ticket-peach {
+  background: #FFEDD5 !important; /* Soft apricot peach */
+  color: #7C2D12 !important;
+  border-color: #FED7AA !important;
+}
+
+/* Hover effect: lift and subtle shadow */
+.mini-ticket-stub:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Selected ticket: brighter contrast, neon glow outline based on current text color */
+.mini-ticket-stub.selected {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 0 12px currentColor, inset 0 0 4px rgba(255, 255, 255, 0.5);
+  font-weight: 900 !important;
+}
+
+.mini-ticket-stub.selected.ticket-cream {
+  background: #FFFBEB !important;
+}
+.mini-ticket-stub.selected.ticket-pink {
+  background: #FFF1F2 !important;
+}
+.mini-ticket-stub.selected.ticket-blue {
+  background: #F0F9FF !important;
+}
+.mini-ticket-stub.selected.ticket-mint {
+  background: #F4F8EC !important;
+}
+.mini-ticket-stub.selected.ticket-lilac {
+  background: #FAF5FF !important;
+}
+.mini-ticket-stub.selected.ticket-peach {
+  background: #FFF7ED !important;
+}
+
+/* Ticket punch hole marker positioned top-right */
+.ticket-punched-mark {
+  position: absolute;
+  top: 1px;
+  right: 4px;
+  font-size: 8px;
+  color: currentColor;
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
+  animation: punchScaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes punchScaleIn {
+  from {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+}
+
+/* Golden Ticket Pass Card Container */
+.golden-ticket-pass-card {
+  position: relative;
+  background: linear-gradient(135deg, #fef08a 0%, #ca8a04 25%, #fbbf24 50%, #ca8a04 75%, #fef08a 100%) !important;
+  border: 3px solid #fef08a !important;
+  border-radius: 24px !important;
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.4) !important;
+  transition: all 0.35s ease;
+  overflow: visible !important;
+  z-index: 1;
+  
+  /* Retro ticket punch notch cutouts on sides */
+  -webkit-mask-image: radial-gradient(circle at 0px 50%, transparent 14px, black 15px),
+                      radial-gradient(circle at 100% 50%, transparent 14px, black 15px);
+  -webkit-mask-size: 51% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: left, right;
+  mask-image: radial-gradient(circle at 0px 50%, transparent 14px, black 15px),
+              radial-gradient(circle at 100% 50%, transparent 14px, black 15px);
+  mask-size: 51% 100%;
+  mask-repeat: no-repeat;
+  mask-position: left, right;
+}
+
+/* Semi-transparent dark overlay to ensure readability of text, badges, and avatar */
+.golden-ticket-pass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 11, 7, 0.65) !important;
+  backdrop-filter: blur(1.5px);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.golden-ticket-pass-card::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 20px;
+  border-right: 2px dashed rgba(251, 191, 36, 0.3);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.golden-ticket-pass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(251, 191, 36, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Small inner ticket stubs for profile and tags */
+.mini-ticket-stub.ticket-sm {
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  padding: 3px 10px !important;
+  border-radius: 4px !important;
+}
+
+.mini-ticket-stub.ticket-sm::before {
+  left: 5px;
+  border-right-width: 1px;
+}
+
+/* ==========================================================================
+   ARCADE TICKET SLOT VOTE BUTTON - KHE NHÉT VÉ THƯỞNG ARCADE 
+   ========================================================================== */
+
+.ticket-slot-arcade-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  min-w: 120px;
+  background: #110e1a !important; /* dark slot background */
+  border: 3px solid #d97706 !important; /* gold bezel edge */
+  border-radius: 8px !important;
+  color: #fff4e0 !important;
+  font-family: inherit;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 
+    0 3px 0 #78350f, 
+    0 4px 10px rgba(0, 0, 0, 0.45), 
+    inset 0 2px 4px rgba(0,0,0,0.8),
+    0 0 8px rgba(245, 158, 11, 0.25) !important;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.255);
+  overflow: hidden !important;
+}
+
+/* 3D Slot center slit (khe đút vé) */
+.ticket-slot-slit {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  right: 10px;
+  height: 4px;
+  background: #020108;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 10;
+}
+
+/* Neon LED chasing lights border styling */
+.ticket-slot-arcade-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 6px;
+  padding: 2px;
+  background: linear-gradient(90deg, #f59e0b, #e11d48, #3b82f6, #f59e0b);
+  background-size: 300% 100%;
+  animation: ticketSlotLEDMarquee 2.5s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.85;
+}
+
+@keyframes ticketSlotLEDMarquee {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* Hover mini golden ticket sliding in style */
+.ticket-slide-visual {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.7);
+  opacity: 0;
+  transition: all 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.ticket-slot-arcade-btn:hover {
+  border-color: #fbbf24 !important;
+  box-shadow: 
+    0 5px 0 #78350f, 
+    0 8px 16px rgba(245, 158, 11, 0.45), 
+    inset 0 1px 4px rgba(0,0,0,0.6),
+    0 0 14px rgba(245, 158, 11, 0.55) !important;
+}
+
+.ticket-slot-arcade-btn:hover .ticket-slide-visual {
+  right: 6px;
+  opacity: 1;
+  transform: translateY(-50%) scale(0.85) rotate(-5deg);
+}
+
+.ticket-slot-arcade-btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: 
+    0 1px 0 #78350f, 
+    0 2px 4px rgba(0, 0, 0, 0.35), 
+    inset 0 3px 6px rgba(0,0,0,0.9) !important;
+}
+
+/* Clean success green status for voted state */
+.ticket-slot-arcade-btn.punched {
+  background: #022c22 !important; 
+  border-color: #10b981 !important; 
+  box-shadow: 
+    0 3px 0 #064e3b, 
+    0 4px 10px rgba(0, 0, 0, 0.4), 
+    inset 0 2px 4px rgba(0,0,0,0.8),
+    0 0 10px rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Static neon border for Voted state */
+.ticket-slot-arcade-btn.punched::before {
+  background: #10b981;
+  animation: none;
+  opacity: 0.95;
+}
+
+.ticket-slot-arcade-btn.punched:hover {
+  border-color: #34d399 !important;
+  box-shadow: 
+    0 5px 0 #064e3b, 
+    0 8px 16px rgba(16, 185, 129, 0.5), 
+    inset 0 1px 4px rgba(0,0,0,0.6),
+    0 0 14px rgba(16, 185, 129, 0.5) !important;
+}
+
+.ticket-slot-arcade-btn.punched:active {
+  transform: translateY(2px) !important;
+  box-shadow: 
+    0 1px 0 #064e3b, 
+    0 2px 4px rgba(0, 0, 0, 0.35), 
+    inset 0 3px 6px rgba(0,0,0,0.9) !important;
+}
+
 
 
 
