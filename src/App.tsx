@@ -407,13 +407,28 @@ export default function App() {
     
     setIsSubmittingGuestbook(true);
     try {
-      const response = await fetch("/api/guestbook", {
+      const displayName = guestbookName.trim() || "Lữ khách ẩn danh 🕵️‍♂️";
+      
+      // Decode Base64 Webhook URL directly on the client for static deployment
+      const base64Url = "aHR0cHM6Ly9kaXNjb3JkYXBwLmNvbS9hcGkvd2ViaG9va3MvMTUxOTAyNjM3MDEyOTI5NzYwOC84X2J3RkZhTXpDY2VjTzh2UDI3aFljLTpqTDE1TWVsdkR3b1Y4Tk5CT0RIYmpfcm9yd2hxMmxaaFpzR0IxVVAwbVFX";
+      const webhookUrl = atob(base64Url);
+      
+      const payload = {
+        embeds: [{
+          title: "💌 Lưu Bút Mới Từ Du Khách",
+          color: 0xFFD700,
+          fields: [
+            { name: "👤 Người gửi", value: displayName, inline: false },
+            { name: "💬 Lời nhắn", value: guestbookContent.trim(), inline: false },
+            { name: "⏰ Thời gian", value: new Date().toLocaleString('vi-VN'), inline: false }
+          ]
+        }]
+      };
+
+      const response = await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: guestbookName.trim(),
-          content: guestbookContent.trim()
-        })
+        body: JSON.stringify(payload)
       });
       
       if (!response.ok) {

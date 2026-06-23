@@ -35,45 +35,6 @@ async function startServer() {
     res.json({ characters: CHARACTERS });
   });
 
-  // Guestbook endpoint
-  app.post("/api/guestbook", async (req: express.Request, res: express.Response) => {
-    try {
-      const { name, content } = req.body;
-      const displayName = name || "Lữ khách ẩn danh 🕵️‍♂️";
-      
-      // Decode Base64 Webhook URL on the server to keep it hidden from the client
-      const base64Url = "aHR0cHM6Ly9kaXNjb3JkYXBwLmNvbS9hcGkvd2ViaG9va3MvMTUxOTAyNjM3MDEyOTI5NzYwOC84X2J3RkZhTXpDY2VjTzh2UDI3aFljLTpqTDE1TWVsdkR3b1Y4Tk5CT0RIYmpfcm9yd2hxMmxaaFpzR0IxVVAwbVFX";
-      const webhookUrl = atob(base64Url);
-
-      const payload = {
-        embeds: [{
-          title: "💌 Lưu Bút Mới Từ Du Khách",
-          color: 0xFFD700,
-          fields: [
-            { name: "👤 Người gửi", value: displayName, inline: false },
-            { name: "💬 Lời nhắn", value: content, inline: false },
-            { name: "⏰ Thời gian", value: new Date().toLocaleString('vi-VN'), inline: false }
-          ]
-        }]
-      };
-
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        throw new Error(`Discord API responded with status ${response.status}`);
-      }
-
-      res.json({ success: true });
-    } catch (error: any) {
-      console.error("Guestbook Error:", error);
-      res.status(500).json({ error: "Có lỗi xảy ra khi gửi lưu bút." });
-    }
-  });
-
   // Chat endpoint
   app.post("/api/chat", async (req: express.Request, res: express.Response) => {
     try {
