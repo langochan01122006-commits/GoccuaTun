@@ -169,6 +169,10 @@ export default function App() {
   const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
   const [punchedTicketId, setPunchedTicketId] = useState<string | null>(null);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
+  const [isGuestbookModalOpen, setIsGuestbookModalOpen] = useState(false);
+  const [guestbookName, setGuestbookName] = useState("");
+  const [guestbookContent, setGuestbookContent] = useState("");
+  const [isSubmittingGuestbook, setIsSubmittingGuestbook] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
   const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
   const [isCrystalActivated, setIsCrystalActivated] = useState(false);
@@ -393,6 +397,64 @@ export default function App() {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
+  const handleSubmitGuestbook = async () => {
+    if (!guestbookContent.trim()) {
+      alert("Bạn chưa viết gì cả! Hãy nhập lời nhắn nhé.");
+      return;
+    }
+    
+    setIsSubmittingGuestbook(true);
+    try {
+      const displayName = guestbookName.trim() || "Lữ khách ẩn danh 🕵️‍♂️";
+      
+      const webhookUrl = "https://discordapp.com/api/webhooks/1519026370129297608/8_bwFFaMzCcecO8vP27hYc-2jL15MelvDwoV8NNBODHbj_rorwhq2lZhZsGBq1UP0mQW";
+      
+      const payload = {
+        embeds: [{
+          title: "💌 Lưu Bút Mới Từ Du Khách",
+          color: 0xFFD700,
+          fields: [
+            {
+              name: "👤 Người gửi",
+              value: displayName,
+              inline: false
+            },
+            {
+              name: "💬 Lời nhắn",
+              value: guestbookContent,
+              inline: false
+            },
+            {
+              name: "⏰ Thời gian",
+              value: new Date().toLocaleString('vi-VN'),
+              inline: false
+            }
+          ]
+        }]
+      };
+
+      await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      
+      setGuestbookName("");
+      setGuestbookContent("");
+      setIsGuestbookModalOpen(false);
+      
+      // small delay to let modal close before alert
+      setTimeout(() => {
+        alert("Đã lưu bút ! Lời nhắn của bạn đã được chuyển đến Tun ẩn danh rồi nhé! 🤫🌟");
+      }, 100);
+      
+    } catch (error) {
+      alert("Có lỗi xảy ra khi gửi. Vui lòng thử lại sau!");
+    } finally {
+      setIsSubmittingGuestbook(false);
+    }
   };
 
   const handleVote = async (characterId: string) => {
@@ -1255,10 +1317,7 @@ export default function App() {
                     style={{ left: "74%", top: "67%" }}
                     className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
                   >
-                    <a
-                      href="https://www.facebook.com/share/18yG86eq1t/?mibextid=wwXIfr"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
                       onMouseEnter={() => {
                         setHoveredLandmark(4);
                         playClickSound(480, 0.03);
@@ -1267,8 +1326,9 @@ export default function App() {
                       onClick={() => {
                         playClickSound(500, 0.1);
                         setIsMapOpen(false);
+                        setIsGuestbookModalOpen(true);
                       }}
-                      className="cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300 flex flex-col items-center"
+                      className="cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300 flex flex-col items-center border-none bg-transparent"
                     >
                       {/* Elegant handwriting feather & book scroll */}
                       <div className="relative flex flex-col items-center">
@@ -1280,7 +1340,7 @@ export default function App() {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </button>
                     <div className="mt-1 px-1.5 py-0.5 bg-[#fbf5e6]/95 border border-[#8d6e63]/40 rounded shadow-sm">
                       <span className="font-serif font-black text-[9px] text-[#4e342e] whitespace-nowrap">
                         Lưu Bút Du Khách 📜
@@ -1497,18 +1557,18 @@ export default function App() {
                     </button>
 
                     {/* Feedback button */}
-                    <a
-                      href="https://ngl.link/gnhocuatun"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => playClickSound(500, 0.1)}
+                    <button
+                      onClick={() => {
+                        playClickSound(500, 0.1);
+                        setIsGuestbookModalOpen(true);
+                      }}
                       id="welcome-feedback-btn"
-                      className={`w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap ${highlightedMenuIdx === 3 ? "shimmer-sweep-active" : ""}`}
+                      className={`w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap border-none ${highlightedMenuIdx === 3 ? "shimmer-sweep-active" : ""}`}
                     >
                       <div className="ticket-stub-line"></div>
                       <PenTool className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" />
                       <span className="relative z-10">Lưu Bút Du Khách 📜</span>
-                    </a>
+                    </button>
                   </div>
 
                   <div className="space-y-4">
@@ -2104,6 +2164,88 @@ export default function App() {
               </div>
         </div>
       </div>
+
+      {/* Guestbook Modal */}
+      <AnimatePresence>
+        {isGuestbookModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => {
+                playClickSound(300, 0.08);
+                setIsGuestbookModalOpen(false);
+              }}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+            />
+            
+            {/* Modal Body - Sunshine & Sky Theme */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 30 }}
+              transition={{ type: "spring", duration: 0.6 }}
+              className="relative w-full max-w-md bg-gradient-to-br from-sky-300 via-blue-200 to-amber-100 rounded-3xl p-6 shadow-[0_10px_40px_rgba(0,0,0,0.3)] border-4 border-white/60 z-10 flex flex-col items-center text-center overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 -mr-6 -mt-6 w-32 h-32 bg-yellow-300/40 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 -ml-6 -mb-6 w-32 h-32 bg-sky-400/30 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center shadow-md mb-4 relative z-10">
+                <span className="text-3xl filter drop-shadow-sm">💌</span>
+              </div>
+
+              <h3 className="text-lg md:text-xl font-black text-sky-900 mb-6 relative z-10 px-4 leading-tight">
+                Hãy lưu lại một chút yêu thương cho Tun nhá 🌟💞
+              </h3>
+
+              <div className="w-full space-y-4 relative z-10">
+                <input
+                  type="text"
+                  value={guestbookName}
+                  onChange={(e) => setGuestbookName(e.target.value)}
+                  placeholder="Tên của bạn (để trống nếu muốn ẩn danh)..."
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-sm font-medium"
+                />
+
+                <textarea
+                  value={guestbookContent}
+                  onChange={(e) => setGuestbookContent(e.target.value)}
+                  placeholder="Viết lưu bút hoặc góp ý của bạn tại đây..."
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-sm resize-none"
+                />
+
+                <button
+                  onClick={handleSubmitGuestbook}
+                  disabled={isSubmittingGuestbook}
+                  className="w-full py-3.5 bg-gradient-to-r from-yellow-300 to-amber-400 hover:from-yellow-400 hover:to-amber-500 text-sky-950 font-black text-sm md:text-base rounded-xl shadow-[0_4px_15px_rgba(251,191,36,0.4)] transition-all active:scale-95 flex items-center justify-center gap-2 border-2 border-yellow-200"
+                >
+                  {isSubmittingGuestbook ? (
+                    <span className="animate-pulse">Đang gửi...</span>
+                  ) : (
+                    <>
+                      <span>Lưu Bút</span>
+                      <PenTool className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <button
+                onClick={() => {
+                  playClickSound(300, 0.08);
+                  setIsGuestbookModalOpen(false);
+                }}
+                className="mt-4 text-xs font-bold text-sky-800/60 hover:text-sky-900 uppercase tracking-widest relative z-10"
+              >
+                Đóng
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Wishing Well / Donate Modal */}
       <AnimatePresence>
@@ -2701,7 +2843,14 @@ export default function App() {
                             </p>
                           </div>
 
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                          <div 
+                            className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)] cursor-pointer hover:bg-blue-50 active:scale-95 transition-all"
+                            onClick={() => {
+                              playClickSound(300, 0.08);
+                              setIsAnnouncementModalOpen(false);
+                              setIsGuestbookModalOpen(true);
+                            }}
+                          >
                             <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
                               📜 Lưu Bút Du Khách (Guestbook)
                             </h5>
