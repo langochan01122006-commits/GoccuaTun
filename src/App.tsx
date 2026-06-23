@@ -409,7 +409,12 @@ export default function App() {
     try {
       const displayName = guestbookName.trim() || "Lữ khách ẩn danh 🕵️‍♂️";
       
-      const webhookUrl = "https://discordapp.com/api/webhooks/1519026370129297608/8_bwFFaMzCcecO8vP27hYc-2jL15MelvDwoV8NNBODHbj_rorwhq2lZhZsGBq1UP0mQW";
+      const webhookUrl = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
+      if (!webhookUrl) {
+        alert("Tính năng gửi lưu bút hiện đang bảo trì, vui lòng thử lại sau!");
+        setIsSubmittingGuestbook(false);
+        return;
+      }
       
       const payload = {
         embeds: [{
