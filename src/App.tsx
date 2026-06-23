@@ -1719,7 +1719,7 @@ export default function App() {
                         </button>
                       </div>
                     ) : (
-                      <div className="flex flex-wrap gap-8 justify-center px-2 py-8">
+                      <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-8 justify-items-center justify-center px-2 py-4 sm:py-8">
                         {filteredCharacters.map((char, index) => {
                           const isTopCharacter = char.id === featuredHubby?.id;
                           const isFlipped = !!flippedCardIds[char.id];
@@ -1737,7 +1737,7 @@ export default function App() {
                               style={{ 
                                 transform: `rotate(${rotationAngle}deg)`,
                               }}
-                              className="plushie-card-container select-none"
+                              className={`plushie-card-container select-none ${isFlipped ? "flipped" : ""}`}
                               onClick={() => {
                                 playClickSound(350, 0.08);
                                 setFlippedCardIds(prev => ({
@@ -1746,27 +1746,31 @@ export default function App() {
                                 }));
                               }}
                             >
-                              <div className={`plushie-card-inner ${isFlipped ? "is-flipped" : ""}`}>
+                              <div className="plushie-card-inner">
                                 {/* Front Side */}
-                                <div className={`plushie-card-front ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative`}>
+                                <div 
+                                  className={`plushie-card-front ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative`}
+                                  style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}
+                                >
                                   <div className="plushie-inner-border"></div>
                                   
                                   {/* Top header of the plushie gacha certification card */}
-                                  <div className={`flex justify-between items-center text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
-                                    <span>🎈 Plushie № 0{char.id} 🎈</span>
-                                    <span className="font-bold opacity-90">{plushTheme.badge}</span>
+                                  <div className={`flex justify-between items-center text-[7px] sm:text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
+                                    <span>🎈 № 0{char.id} 🎈</span>
+                                    <span className="font-bold opacity-90 hidden sm:inline">{plushTheme.badge}</span>
+                                    <span className="font-bold opacity-90 sm:hidden">CERT</span>
                                   </div>
                                   
                                   {/* Gacha Sphere translucent sphere containing the chibi plushie */}
                                   <div className="flex flex-col items-center justify-center my-auto z-10 w-full">
-                                    <div className="relative w-32 h-32 flex items-center justify-center">
+                                    <div className="relative w-20 h-20 sm:w-32 sm:h-32 flex items-center justify-center">
                                       {/* Inner glowing core of the capsule */}
                                       <div className="absolute inset-2 bg-gradient-to-tr from-white/40 via-[#FFF9DC] to-white/50 rounded-full blur-[3px] animate-pulse pointer-events-none" />
                                       
                                       {/* Avatar/Plushie itself inside */}
                                       <div className="absolute z-10 scale-100 group-hover:scale-110 active:scale-95 transition-transform duration-300">
                                         {/* Dynamic movement / floating look */}
-                                        <span className="text-7xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.18)] inline-block select-none animate-bounce-slow">
+                                        <span className="text-5xl sm:text-7xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.18)] inline-block select-none animate-bounce-slow">
                                           {char.avatar}
                                         </span>
                                       </div>
@@ -1774,25 +1778,25 @@ export default function App() {
                                       {/* The glass capsule shiny front shell (semi-transparent plastic cover) */}
                                       <div className="absolute inset-0 rounded-full border-2 border-white/60 bg-[radial-gradient(circle_at_35%_25%,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.25)_25%,rgba(0,0,0,0.18)_85%,rgba(255,255,255,0.35)_100%)] shadow-[inset_0_-8px_16px_rgba(0,0,0,0.32),inset_0_8px_16px_rgba(255,255,255,0.45),0_12px_24px_rgba(0,0,0,0.22)] pointer-events-none z-20">
                                         {/* Light sheen crescent */}
-                                        <div className="absolute top-1.5 left-4.5 w-9 h-3.5 bg-gradient-to-b from-white/70 to-transparent rounded-full rotate-[-25deg]" />
+                                        <div className="absolute top-1 left-2.5 sm:top-1.5 sm:left-4.5 w-5 h-2 sm:w-9 sm:h-3.5 bg-gradient-to-b from-white/70 to-transparent rounded-full rotate-[-25deg]" />
                                         {/* Bottom specular glow reflecting */}
-                                        <div className="absolute bottom-1 right-3.5 w-3 h-1.5 bg-white/40 rounded-full blur-[0.5px]" />
+                                        <div className="absolute bottom-0.5 right-1.5 sm:bottom-1 sm:right-3.5 w-1.5 h-1 sm:w-3 sm:h-1.5 bg-white/40 rounded-full blur-[0.5px]" />
                                       </div>
                                     </div>
                                     
                                     {/* Name & Title */}
-                                    <h4 className={`text-lg md:text-xl font-black mt-4 ${plushTheme.textColor} text-center font-sans tracking-wide`}>
+                                    <h4 className={`text-sm sm:text-lg md:text-xl font-black mt-2 sm:mt-4 ${plushTheme.textColor} text-center font-sans tracking-wide leading-tight`}>
                                       {char.name}
                                     </h4>
                                     
                                     {/* Tags */}
-                                    <div className="flex flex-wrap gap-1 justify-center mt-2.5 max-w-full">
+                                    <div className="flex flex-wrap gap-0.5 sm:gap-1 justify-center mt-1.5 sm:mt-2.5 max-w-full">
                                       {char.tags.map((t, idx) => {
                                         const symbol = getRuneSymbol(t);
                                         return (
                                           <span
                                             key={idx}
-                                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border text-[9px] font-black uppercase font-sans tracking-tight transition-transform active:scale-95 ${plushTheme.tagBg}`}
+                                            className={`inline-flex items-center gap-0.5 sm:gap-1 px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full border text-[6px] sm:text-[9px] font-black uppercase font-sans tracking-tight transition-transform active:scale-95 ${plushTheme.tagBg}`}
                                           >
                                             <span>{symbol}</span>
                                             <span>{t}</span>
@@ -1803,34 +1807,38 @@ export default function App() {
                                   </div>
                                   
                                   {/* Footer of the Card front */}
-                                  <div className={`text-center text-[9px] ${plushTheme.noteText} font-sans font-bold tracking-wider pt-2 border-t border-black/5 z-10 flex items-center justify-center gap-1.5 w-full`}>
-                                    <span>✨ Nhấn để lật xem chứng nhận ✨</span>
+                                  <div className={`text-center text-[7px] sm:text-[9px] ${plushTheme.noteText} font-sans font-bold tracking-wider pt-1 sm:pt-2 border-t border-black/5 z-10 flex items-center justify-center gap-1 sm:gap-1.5 w-full`}>
+                                    <span>✨ Nhấn lật xem ✨</span>
                                   </div>
                                 </div>
 
                                 {/* Back Side */}
-                                <div className={`plushie-card-back ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative`}>
+                                <div 
+                                  className={`plushie-card-back ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative`}
+                                  style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                                >
                                   <div className="plushie-inner-border"></div>
                                   
                                   {/* Back Header */}
-                                  <div className={`flex justify-between items-center text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
-                                    <span>📜 CHỨNG NHẬN BẢO HÀNH 📜</span>
+                                  <div className={`flex justify-between items-center text-[7px] sm:text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
+                                    <span className="hidden sm:inline">📜 CHỨNG NHẬN BẢO HÀNH 📜</span>
+                                    <span className="sm:hidden">📜 CHỨNG NHẬN 📜</span>
                                     <span>#{char.id}</span>
                                   </div>
                                   
                                   {/* Back Content scroll/description body */}
-                                  <div className="my-auto flex flex-col gap-2.5 z-10 px-1 overflow-y-auto max-h-[190px] custom-scrollbar scroll-smooth">
-                                    <h5 className={`text-md font-bold ${plushTheme.textColor} text-center mt-1 font-sans`}>
+                                  <div className="my-auto flex flex-col gap-1.5 sm:gap-2.5 z-10 px-0.5 sm:px-1 overflow-y-auto max-h-[110px] sm:max-h-[190px] custom-scrollbar scroll-smooth">
+                                    <h5 className={`text-xs sm:text-md font-bold ${plushTheme.textColor} text-center mt-1 font-sans`}>
                                       {char.name}
                                     </h5>
                                     
-                                    <p className={`text-[11.5px] leading-relaxed ${plushTheme.textColor} opacity-90 text-justify italic font-serif px-2 bg-white/40 p-2.5 rounded-2xl border border-white/60 shadow-sm`}>
+                                    <p className={`text-[8px] sm:text-[11.5px] leading-tight sm:leading-relaxed ${plushTheme.textColor} opacity-90 text-justify italic font-serif px-1.5 sm:px-2 bg-white/40 p-1.5 sm:p-2.5 rounded-[10px] sm:rounded-2xl border border-white/60 shadow-sm`}>
                                       "{char.description}"
                                     </p>
                                   </div>
                                   
                                   {/* Back Action buttons themed beautifully */}
-                                  <div className="flex flex-col gap-2 z-10 mt-auto pt-3 border-t border-black/5 w-full">
+                                  <div className="flex flex-col gap-1.5 sm:gap-2 z-10 mt-auto pt-1.5 sm:pt-3 border-t border-black/5 w-full">
                                     {/* Row of buttons */}
                                     <div className="flex gap-2">
                                       {/* Chat Button */}
@@ -1838,10 +1846,11 @@ export default function App() {
                                         <button
                                           disabled
                                           onClick={(e) => e.stopPropagation()}
-                                          className="flex-1 select-none flex items-center justify-center gap-1 px-2.5 py-1.5 bg-[#444]/10 text-slate-400 font-bold text-[10px] rounded-xl border border-slate-300 cursor-not-allowed opacity-50"
+                                          className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-[#444]/10 text-slate-400 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl border border-slate-300 cursor-not-allowed opacity-50"
                                         >
-                                          <MessageCircle className="w-3 h-3" />
-                                          Sắp ra mắt
+                                          <MessageCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                                          <span className="hidden sm:inline">Sắp ra mắt</span>
+                                          <span className="sm:hidden">Sắp tới</span>
                                         </button>
                                       ) : (
                                         <button
@@ -1849,9 +1858,9 @@ export default function App() {
                                             e.stopPropagation();
                                             handleStartChat(char);
                                           }}
-                                          className="flex-1 select-none flex items-center justify-center gap-1 px-2.5 py-1.5 bg-gradient-to-r from-emerald-500/20 to-teal-600/30 text-emerald-800 hover:from-emerald-500/35 hover:to-teal-600/45 border border-emerald-500/30 font-bold text-[10px] rounded-xl transition duration-150 active:scale-95"
+                                          className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-emerald-500/20 to-teal-600/30 text-emerald-800 hover:from-emerald-500/35 hover:to-teal-600/45 border border-emerald-500/30 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95"
                                         >
-                                          <MessageCircle className="w-3 h-3" />
+                                          <MessageCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                                           Trò chuyện
                                         </button>
                                       )}
@@ -1863,10 +1872,10 @@ export default function App() {
                                           playClickSound(480, 0.08);
                                           setStoryCharacter(char);
                                         }}
-                                        className="flex-1 select-none flex items-center justify-center gap-1 px-2.5 py-1.5 bg-gradient-to-r from-purple-500/10 to-violet-600/20 text-purple-800 hover:from-purple-500/20 hover:to-violet-600/30 border border-purple-500/20 font-bold text-[10px] rounded-xl transition duration-150 active:scale-95"
+                                        className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-purple-500/10 to-violet-600/20 text-purple-800 hover:from-purple-500/20 hover:to-violet-600/30 border border-purple-500/20 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95"
                                       >
-                                        <BookOpen className="w-3 h-3" />
-                                        Tiểu sử truyện
+                                        <BookOpen className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                                        Tiểu sử
                                       </button>
                                     </div>
 
@@ -1876,10 +1885,11 @@ export default function App() {
                                       target={char.profileUrl ? "_blank" : undefined}
                                       rel={char.profileUrl ? "noopener noreferrer" : undefined}
                                       onClick={(e) => e.stopPropagation()}
-                                      className="select-none flex items-center justify-center gap-1 px-2.5 py-1.5 bg-gradient-to-r from-blue-500/10 to-cyan-600/20 text-blue-800 hover:from-blue-500/20 hover:to-cyan-600/30 border border-blue-500/20 font-bold text-[10px] rounded-xl transition duration-150 active:scale-95 text-center"
+                                      className="select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-blue-500/10 to-cyan-600/20 text-blue-800 hover:from-blue-500/20 hover:to-cyan-600/30 border border-blue-500/20 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95 text-center"
                                     >
-                                      <User className="w-3 h-3 inline-block" />
-                                      Xem Hồ sơ chi tiết
+                                      <User className="w-2.5 h-2.5 sm:w-3 sm:h-3 inline-block" />
+                                      <span className="hidden sm:inline">Xem Hồ sơ chi tiết</span>
+                                      <span className="sm:hidden">Hồ sơ</span>
                                     </a>
                                   </div>
                                 </div>

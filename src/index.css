@@ -2320,11 +2320,18 @@
 
 .plushie-card-container {
   perspective: 1200px;
-  width: 275px;
-  height: 420px;
+  width: 155px;
+  height: 240px;
   cursor: pointer;
   position: relative;
   transition: z-index 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .plushie-card-container {
+    width: 275px;
+    height: 420px;
+  }
 }
 
 .plushie-card-inner {
@@ -2334,22 +2341,37 @@
   text-align: center;
   transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.1), box-shadow 0.4s ease;
   transform-style: preserve-3d;
-  border-radius: 32px;
+  border-radius: 20px;
+}
+
+@media (min-width: 640px) {
+  .plushie-card-inner {
+    border-radius: 32px;
+  }
 }
 
 .plushie-card-container:hover {
   z-index: 50;
 }
 
-.plushie-card-container:hover .plushie-card-inner:not(.is-flipped) {
-  transform: translateY(-16px) scale(1.05) rotate(1deg);
+.plushie-card-container:hover:not(.flipped) .plushie-card-inner {
+  transform: translateY(-8px) scale(1.05) rotate(1deg);
 }
 
-.plushie-card-container:hover .plushie-card-inner.is-flipped {
-  transform: rotateY(180deg) translateY(-16px) scale(1.05) rotate(-1deg);
+.plushie-card-container.flipped:hover .plushie-card-inner {
+  transform: rotateY(180deg) translateY(-8px) scale(1.05) rotate(-1deg);
 }
 
-.plushie-card-inner.is-flipped {
+@media (min-width: 640px) {
+  .plushie-card-container:hover:not(.flipped) .plushie-card-inner {
+    transform: translateY(-16px) scale(1.05) rotate(1deg);
+  }
+  .plushie-card-container.flipped:hover .plushie-card-inner {
+    transform: rotateY(180deg) translateY(-16px) scale(1.05) rotate(-1deg);
+  }
+}
+
+.plushie-card-container.flipped .plushie-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -2362,12 +2384,20 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 32px !important;
+  border-radius: 20px !important;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 18px;
+  padding: 12px;
   box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .plushie-card-front,
+  .plushie-card-back {
+    border-radius: 32px !important;
+    padding: 18px;
+  }
 }
 
 .plushie-card-back {
@@ -2390,14 +2420,24 @@
 /* Rounded pillow inner shadow and highlight details */
 .plushie-inner-border {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
   border: 1.5px dashed rgba(255, 255, 255, 0.4);
-  border-radius: 26px;
+  border-radius: 16px;
   pointer-events: none;
   z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .plushie-inner-border {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border-radius: 26px;
+  }
 }
 
 
