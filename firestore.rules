@@ -20,8 +20,8 @@ service cloud.firestore {
     }
 
     function isValidVote(data) {
-      return (data.characterId == null || (data.characterId is string && data.characterId.size() <= 64))
-        && data.votes is int
+      return (!('characterId' in data) || (data.characterId is string && data.characterId.size() <= 64))
+        && data.votes is number
         && data.votes >= 0
         && data.votes <= 10000000;
     }
@@ -31,11 +31,11 @@ service cloud.firestore {
       allow get, list: if true;
       allow create: if isValidId(characterId)
         && isValidVote(incoming())
-        && (incoming().characterId == null || incoming().characterId == characterId)
+        && (!('characterId' in incoming()) || incoming().characterId == characterId)
         && (incoming().votes == 1 || incoming().votes == 0);
       allow update: if isValidId(characterId)
         && isValidVote(incoming())
-        && (incoming().characterId == null || incoming().characterId == characterId)
+        && (!('characterId' in incoming()) || incoming().characterId == characterId)
         && (incoming().votes == existing().votes + 1 || incoming().votes == existing().votes - 1 || incoming().votes == existing().votes);
     }
   }

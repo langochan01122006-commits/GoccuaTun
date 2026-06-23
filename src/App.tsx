@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, CSSProperties } from "react";
 import { CHARACTERS, Character } from "./characters";
-import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User, Package, PackageOpen, Megaphone, Star, Info, PenTool, DoorOpen, Flame, Shield, Map, Crown } from "lucide-react";
+import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User, Package, PackageOpen, Megaphone, Star, Info, PenTool, DoorOpen, Flame, Shield, Map, Crown, Leaf } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
@@ -1706,7 +1706,7 @@ export default function App() {
                     {filteredCharacters.length === 0 ? (
                       <div className="p-12 text-center rounded-3xl bg-white/55 border border-slate-200/60 shadow-sm flex flex-col items-center justify-center gap-2">
                         <span className="text-4xl text-slate-400">🍂</span>
-                        <p className="text-sm text-slate-500 font-medium">Các mỹ nam/mỹ nữ tag này vẫn đang xếp hàng chờ Tun duyệt...</p>
+                        <p className="text-sm text-slate-500 font-medium">Khu vui chơi này hiện chưa mở 🎢</p>
                         <button
                           onClick={() => {
                             playClickSound(300, 0.1);
@@ -1918,11 +1918,11 @@ export default function App() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 30 }}
               transition={{ type: "spring", duration: 0.6 }}
-              className="ticket-container-modal relative w-full max-w-lg select-none z-10 flex flex-col max-h-[85vh] text-white"
+              className="ticket-container-modal relative w-full max-w-lg select-none z-10 flex flex-col max-h-[85vh] text-[#1976D2]"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-amber-500/20 relative z-10">
+              <div className="flex items-center justify-between pb-3 border-b border-[#1976D2]/30 relative z-10">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl animate-bounce text-amber-400" style={{ filter: "drop-shadow(0 0 5px #f59e0b)" }}>🎫</span>
+                  <span className="text-2xl animate-bounce text-[#FFD600]" style={{ filter: "drop-shadow(0 0 5px rgba(255,214,0,0.5))" }}>🎫</span>
                   <h3 className="text-lg md:text-xl font-bold royal-gold-glow-text tracking-widest uppercase mb-0">
                     BẢNG VÀNG VÉ ƯU TIÊN
                   </h3>
@@ -1932,7 +1932,7 @@ export default function App() {
                     playClickSound(300, 0.08);
                     setIsVoteModalOpen(false);
                   }}
-                  className="p-1.5 rounded-lg hover:bg-black/45 text-amber-100 hover:text-white border border-amber-500/20 hover:border-amber-500/60 transition cursor-pointer relative z-20"
+                  className="p-1.5 rounded-lg hover:bg-[#1976D2]/10 text-[#1976D2] transition cursor-pointer relative z-20"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -1954,19 +1954,19 @@ export default function App() {
                   let rankColor: string | undefined = undefined;
                   let ticketSpecialBorder = '';
                   if (rank === 1) {
-                    rankColor = '#FFE79A';
-                    ticketSpecialBorder = 'border-amber-400/80 shadow-[0_0_15px_rgba(245,158,11,0.25)]';
+                    rankColor = '#1976D2';
+                    ticketSpecialBorder = 'border-[#1976D2]/80 shadow-[0_0_15px_rgba(25,118,210,0.35)]';
                   } else if (rank === 2) {
-                    rankColor = '#E2E8F0';
-                    ticketSpecialBorder = 'border-slate-300/70 shadow-[0_0_12px_rgba(226,232,240,0.15)]';
+                    rankColor = '#1976D2';
+                    ticketSpecialBorder = 'border-[#1976D2]/50 shadow-[0_0_12px_rgba(25,118,210,0.25)]';
                   } else if (rank === 3) {
-                    rankColor = '#FDBA74';
+                    rankColor = '#1976D2';
                   }
 
                   return (
                     <div
                       key={char.id}
-                      className={`golden-fastpass-ticket ${ticketSpecialBorder} ${isVoted ? 'border-amber-400 bg-gradient-to-r from-[#2c1d10] to-[#120803]' : ''} ${punchedTicketId === char.id ? 'animate-ticket-rumble' : ''}`}
+                      className={`golden-fastpass-ticket ${ticketSpecialBorder} ${isVoted ? 'border-[#1976D2] bg-[#FFD600]' : ''} ${punchedTicketId === char.id ? 'animate-ticket-rumble' : ''}`}
                     >
                       {/* Ticket Notches at left & right */}
                       <div className="ticket-notch-l" />
@@ -1975,19 +1975,19 @@ export default function App() {
                       <div className="flex items-center justify-between relative z-10 w-full">
                         <div className="flex items-center gap-3">
                           {/* Rank */}
-                          <div className="flex flex-col items-center justify-center w-6 shrink-0 font-sans font-black text-xs" style={{ color: rankColor || '#E2E8F0' }}>
+                          <div className="flex flex-col items-center justify-center w-6 shrink-0 font-sans font-black text-xs" style={{ color: rankColor || '#1976D2' }}>
                             {rank === 1 ? '👑' : `#${rank}`}
                           </div>
                           {/* Ticket avatar */}
-                          <div className={`w-11 h-11 rounded-full bg-gradient-to-tr ${char.avatarBg} flex items-center justify-center text-2xl shadow-md shrink-0 border ${rank <= 2 ? 'border-amber-400/65 shadow-[0_0_10px_rgba(245,158,11,0.25)]' : 'border-neutral-700/50'}`}>
+                          <div className={`w-11 h-11 rounded-full bg-gradient-to-tr ${char.avatarBg} flex items-center justify-center text-2xl shadow-md shrink-0 border ${rank <= 2 ? 'border-[#1976D2]/65 shadow-[0_0_10px_rgba(25,118,210,0.25)]' : 'border-[#1976D2]/30'}`}>
                             {char.avatar}
                           </div>
                           <div className="text-left">
-                            <h4 className="font-bold text-sm md:text-base text-amber-100 flex items-center gap-1 m-0" style={rank <= 2 ? { color: rankColor } : {}}>
+                            <h4 className="font-bold text-sm md:text-base text-[#1976D2] flex items-center gap-1 m-0" style={rank <= 2 ? { color: rankColor } : {}}>
                               {char.name}
-                              {isVoted && <span className="text-[9px] text-emerald-400 ml-1 font-semibold uppercase tracking-wider">● ĐÃ VOTE</span>}
+                              {isVoted && <span className="text-[9px] text-[#1976D2] ml-1 font-black uppercase tracking-wider">● ĐÃ VOTE</span>}
                             </h4>
-                            <span className="text-[9px] font-semibold text-amber-400/75 flex items-center gap-1 font-sans uppercase tracking-wider mt-0.5">
+                            <span className="text-[9px] font-bold text-[#1976D2]/80 flex items-center gap-1 font-sans uppercase tracking-wider mt-0.5">
                               <span>{getRuneSymbol(char.tags[0])}</span>
                               <span>{char.tags[0]}</span>
                             </span>
@@ -1995,13 +1995,13 @@ export default function App() {
                         </div>
 
                         {/* Votes & Puncher Action on the right side */}
-                        <div className="flex items-center gap-3 md:gap-4 pl-3 border-l border-amber-500/10">
+                        <div className="flex items-center gap-3 md:gap-4 pl-3 border-l border-[#1976D2]/20">
                           {/* Total gold pass tickets counted */}
                           <div className="text-right flex flex-col items-end justify-center min-w-[70px]">
-                            <div className="text-xs font-black font-sans text-amber-300 drop-shadow-[0_0_5px_rgba(245,158,11,0.4)]">
+                            <div className="text-xs font-black font-sans text-[#1976D2]">
                               {currentVotes} VÉ VÀNG
                             </div>
-                            <span className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest mt-0.5">
+                            <span className="text-[8px] font-bold text-[#1976D2]/70 uppercase tracking-widest mt-0.5">
                               Tích lũy
                             </span>
                           </div>
@@ -2022,11 +2022,11 @@ export default function App() {
                             {/* Sparkles explosion container rendered dynamically */}
                             {punchedTicketId === char.id && (
                               <div className="sparkle-punch-explosion">
-                                <span className="absolute text-yellow-300 text-xs party-sparkle-1">⭐</span>
-                                <span className="absolute text-amber-200 text-xs party-sparkle-2">✨</span>
-                                <span className="absolute text-yellow-500 text-xs party-sparkle-3">✦</span>
-                                <span className="absolute text-rose-300 text-xs party-sparkle-4">💫</span>
-                                <span className="absolute text-cyan-300 text-xs party-sparkle-5">✨</span>
+                                <span className="absolute text-[#FFD600] text-xs party-sparkle-1">⭐</span>
+                                <span className="absolute text-[#FFE033] text-xs party-sparkle-2">✨</span>
+                                <span className="absolute text-[#FFD600] text-xs party-sparkle-3">✦</span>
+                                <span className="absolute text-[#64B5F6] text-xs party-sparkle-4">💫</span>
+                                <span className="absolute text-[#42A5F5] text-xs party-sparkle-5">✨</span>
                               </div>
                             )}
 
@@ -2045,13 +2045,13 @@ export default function App() {
                 })}
               </div>
 
-              <div className="pt-4 border-t border-white/10 text-center relative z-10">
+              <div className="pt-4 border-t border-[#1976D2]/20 text-center relative z-10">
                 <button
                   onClick={() => {
                     playClickSound(300, 0.08);
                     setIsVoteModalOpen(false);
                   }}
-                  className="px-6 py-2 bg-gradient-to-r from-amber-600/20 to-amber-900/40 hover:from-amber-500/30 hover:to-amber-800/50 text-amber-200 border border-amber-500/30 hover:border-amber-500/60 font-bold text-xs rounded-full transition-all cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
+                  className="px-6 py-2 bg-[#FFD600] hover:bg-[#ffeb3b] text-[#1976D2] border-2 border-[#1976D2] font-bold text-xs rounded-full transition-all cursor-pointer shadow-[0_4px_12px_rgba(25,118,210,0.35)]"
                 >
                   Đóng Bảng Vàng
                 </button>
@@ -2083,7 +2083,7 @@ export default function App() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.85, opacity: 0, y: 45 }}
               transition={{ type: "spring", damping: 20, stiffness: 140 }}
-              className="fountain-brick-masonry relative w-full max-w-[380px] mx-auto p-5 md:p-6 shadow-2xl select-none z-10 flex flex-col space-y-4 px-5 overflow-hidden text-sky-100"
+              className="fountain-brick-masonry relative w-full max-w-[380px] mx-auto p-5 md:p-6 shadow-2xl select-none z-10 flex flex-col space-y-4 px-5 overflow-hidden text-[#1976D2]"
             >
               {/* Virtual Floating Coins in background layout */}
               <div className="absolute top-14 left-4 scale-125 z-20 animate-coin-float-fast font-serif select-none pointer-events-none opacity-80" style={{ animationDelay: "0s" }}>🪙</div>
@@ -2151,10 +2151,10 @@ export default function App() {
               <div className="absolute top-1 left-1 w-6 h-6 bg-emerald-600/15 rounded-full blur-[8px] pointer-events-none" />
               <div className="absolute bottom-1 right-2 w-8 h-8 bg-emerald-500/10 rounded-full blur-[10px] pointer-events-none" />
 
-              <div className="flex items-center justify-between pb-2.5 border-b border-cyan-800/40 relative z-10">
+              <div className="flex items-center justify-between pb-2.5 border-b border-[#1976D2]/20 relative z-10">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl animate-spin" style={{ animationDuration: '6s', filter: "drop-shadow(0 0 5px rgba(34, 211, 238, 0.4))" }}>⛲</span>
-                  <h3 className="text-sm md:text-base font-sans font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 drop-shadow-[0_0_8px_rgba(234,179,8,0.85)] uppercase tracking-wider">
+                  <span className="text-2xl animate-spin" style={{ animationDuration: '6s', filter: "drop-shadow(0 0 5px rgba(255,214,0,0.4))" }}>⛲</span>
+                  <h3 className="text-sm md:text-base font-sans font-black text-[#1976D2] drop-shadow-[0_0_8px_rgba(25,118,210,0.2)] uppercase tracking-wider">
                     ĐÀI PHUN NƯỚC MAY MẮN ✨
                   </h3>
                 </div>
@@ -2163,7 +2163,7 @@ export default function App() {
                     playClickSound(300, 0.08);
                     setIsDonateModalOpen(false);
                   }}
-                  className="p-1 px-1.5 rounded-lg bg-cyan-950/40 hover:bg-cyan-900/40 text-cyan-400 border border-cyan-800/30 transition cursor-pointer"
+                  className="p-1.5 rounded-lg hover:bg-[#1976D2]/10 text-[#1976D2] transition cursor-pointer relative z-20"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -2171,12 +2171,12 @@ export default function App() {
 
               <div className="space-y-4 text-center relative z-10">
                 {/* Visual Title */}
-                <h4 className="text-xs md:text-sm font-black text-cyan-300 font-sans tracking-wide uppercase drop-shadow-[0_2px_4px_rgba(34,211,238,0.4)]">
+                <h4 className="text-xs md:text-sm font-black text-[#1976D2] font-sans tracking-wide uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.1)]">
                   🔮 THẢ XU ĐỔI VẬN ĐỊNH MỆNH 🔮
                 </h4>
 
                 {/* Adorable Description */}
-                <p className="text-[10px] md:text-[11px] text-sky-200/80 font-serif leading-relaxed px-1">
+                <p className="text-[10px] md:text-[11px] text-[#1976D2]/80 font-serif leading-relaxed px-1">
                   Mỗi đồng xu lữ khách thả vào đài phun nước không chỉ mang lại may mắn lớn mà còn tiếp thêm năng lượng cho Vương Quốc của Tun phát triển mạnh mẽ hơn!
                 </p>
 
@@ -2184,11 +2184,11 @@ export default function App() {
                 <div className="relative py-2.5 flex justify-center">
                   
                   {/* Water Pond Background behind QR */}
-                  <div className="absolute w-48 h-48 rounded-full bg-gradient-to-tr from-[#00ffff]/12 via-[#0c4a5c] to-[#04202c] border border-cyan-500/20 shadow-inner flex items-center justify-center transform -translate-y-2 pointer-events-none">
+                  <div className="absolute w-48 h-48 rounded-full bg-[#E3F2FD] border border-[#1976D2]/20 shadow-inner flex items-center justify-center transform -translate-y-2 pointer-events-none">
                     {/* Ring Ripple concentric circles on the water */}
-                    <div className="absolute w-40 h-40 rounded-full border border-dashed border-cyan-400/10 animate-spin" style={{ animationDuration: '30s' }} />
-                    <div className="absolute w-32 h-32 rounded-full border border-dashed border-cyan-300/15 animate-water-surface-ripple" />
-                    <div className="absolute w-24 h-24 rounded-full border border-cyan-400/20 animate-pulse" />
+                    <div className="absolute w-40 h-40 rounded-full border border-dashed border-[#1976D2]/10 animate-spin" style={{ animationDuration: '30s' }} />
+                    <div className="absolute w-32 h-32 rounded-full border border-dashed border-[#1976D2]/15 animate-water-surface-ripple" />
+                    <div className="absolute w-24 h-24 rounded-full border border-[#1976D2]/20 animate-pulse" />
                   </div>
 
                   {/* Ripple elements triggered by active clicks */}
@@ -2198,40 +2198,40 @@ export default function App() {
                       initial={{ scale: 0.5, opacity: 0.9 }}
                       animate={{ scale: 2.5, opacity: 0 }}
                       transition={{ duration: 1.1, ease: "easeOut" }}
-                      className="absolute w-24 h-24 rounded-full border-[3px] border-dashed border-cyan-400 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-[calc(50%+8px)] z-20"
+                      className="absolute w-24 h-24 rounded-full border-[3px] border-dashed border-[#1976D2] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-[calc(50%+8px)] z-20"
                     />
                   ))}
 
                   {/* Swimming Float Ring styled around the QR (Bông hoa súng hoặc phao bơi) */}
                   <div className="relative z-10 animate-slow-swim pb-2">
-                    <div className="rounded-full border-[8px] border-double border-pink-400/90 p-2 bg-[#02090d]/80 shadow-[0_12px_30px_rgba(244,114,182,0.45),inset_0_0_12px_rgba(34,211,238,0.3)]">
+                    <div className="rounded-full border-[8px] border-double border-[#FFD600] p-2 bg-[#ffffff]/90 shadow-[0_12px_30px_rgba(25,118,210,0.2),inset_0_0_12px_rgba(25,118,210,0.1)]">
                       <img
                         src="https://img.vietqr.io/image/970418-3510790840-compact2.png?addInfo=Donete+cho+Tun+mua+bimbim&accountName=LA+NGOC+HAN"
                         alt="Fountain Well QR Code"
                         referrerPolicy="no-referrer"
-                        className="w-32 h-32 object-cover rounded-full border border-cyan-500/30 shadow-inner"
+                        className="w-32 h-32 object-cover rounded-full border border-[#1976D2]/20 shadow-inner"
                       />
                     </div>
                     
                     {/* Rebranded label badge inside the water */}
-                    <div className="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-500 to-amber-600 text-slate-950 text-[9px] uppercase font-black font-sans px-3.5 py-0.5 rounded-full shadow-[0_3px_12px_rgba(245,158,11,0.5)] tracking-wider border border-yellow-300/40 select-none">
-                      🪙 TÂM HỒ NHẬN XU
+                    <div className="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 bg-[#FFD600] hover:bg-[#ffeb3b] text-[#1976D2] text-[9px] uppercase font-black font-sans px-3.5 py-1 rounded-full shadow-[0_3px_12px_rgba(255,214,0,0.5)] tracking-wider border-2 border-[#1976D2] select-none transition-colors whitespace-nowrap">
+                      🪙 Ở TÂM HỒ NHẬN XU
                     </div>
                   </div>
                 </div>
 
                 {/* Detailed Bank Card copy info */}
                 <div className="space-y-2 pt-1.5 text-left">
-                  <p className="text-[10px] font-black text-cyan-300 uppercase tracking-widest pl-1">
+                  <p className="text-[10px] font-black text-[#1976D2] uppercase tracking-widest pl-1">
                     🪙 CHI TIẾT HỒ CÔNG ĐỨC
                   </p>
 
-                  <div className="p-2.5 space-y-2 font-serif rounded-xl border border-cyan-900/50 bg-[#061920]/75 backdrop-blur-sm">
+                  <div className="p-2.5 space-y-2 font-serif rounded-xl border border-[#1976D2]/20 bg-[#ffffff] backdrop-blur-sm">
                     {/* Bank Name */}
-                    <div className={`rounded-lg p-2 flex items-center justify-between gap-2 text-xs transition-all ${copiedField === 'bank' ? 'bg-cyan-950/80 border border-cyan-400/40 shadow-[0_0_10px_rgba(34,211,238,0.4)]' : 'bg-slate-950/40 border border-cyan-950/80'}`}>
+                    <div className={`rounded-lg p-2 flex items-center justify-between gap-2 text-xs transition-all ${copiedField === 'bank' ? 'bg-[#FFD600] border-2 border-[#1976D2] shadow-[0_0_10px_rgba(25,118,210,0.2)]' : 'bg-[#E3F2FD] border border-[#1976D2]/30'}`}>
                       <div>
-                        <span className="text-cyan-400/60 block text-[8px] uppercase font-black font-sans tracking-widest">💎 NƠI TIẾP NHẬN ĐỒNG XU</span>
-                        <span className="font-extrabold text-white text-xs md:text-sm tracking-wide">
+                        <span className="text-[#1976D2]/80 block text-[8px] uppercase font-black font-sans tracking-widest">💎 NƠI TIẾP NHẬN ĐỒNG XU</span>
+                        <span className="font-extrabold text-[#1976D2] text-xs md:text-sm tracking-wide">
                           BIDV (Ngân hàng Đầu tư và Phát triển VN)
                         </span>
                       </div>
@@ -2239,11 +2239,11 @@ export default function App() {
                         onClick={() => {
                           handleCopy("BIDV", "bank");
                         }}
-                        className="p-1.5 rounded-md bg-cyan-900/30 hover:bg-cyan-800/50 border border-cyan-800/40 hover:border-cyan-400/50 text-cyan-400 active:scale-90 transition cursor-pointer"
+                        className="p-1.5 rounded-md bg-[#FFD600] hover:bg-[#ffeb3b] border-2 border-[#1976D2] text-[#1976D2] active:scale-90 transition cursor-pointer"
                         title="Copy tên ngân hàng tiếp nhận"
                       >
                         {copiedField === "bank" ? (
-                          <Check className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
+                          <Check className="w-3.5 h-3.5 text-[#1976D2] animate-pulse" />
                         ) : (
                           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                             <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -2253,10 +2253,10 @@ export default function App() {
                     </div>
 
                     {/* Account number */}
-                    <div className={`rounded-lg p-2 flex items-center justify-between gap-2 text-xs transition-all ${copiedField === 'account' ? 'bg-cyan-950/80 border border-cyan-400/40 shadow-[0_0_10px_rgba(34,211,238,0.4)]' : 'bg-slate-950/40 border border-cyan-950/80'}`}>
+                    <div className={`rounded-lg p-2 flex items-center justify-between gap-2 text-xs transition-all ${copiedField === 'account' ? 'bg-[#FFD600] border-2 border-[#1976D2] shadow-[0_0_10px_rgba(25,118,210,0.2)]' : 'bg-[#E3F2FD] border border-[#1976D2]/30'}`}>
                       <div>
-                        <span className="text-cyan-400/60 block text-[8px] uppercase font-black font-sans tracking-widest">🔑 MÃ SỐ HỒ ƯỚC NGUYỆN</span>
-                        <span className="font-mono font-extrabold text-sm text-yellow-300 tracking-widest block mt-0.5">
+                        <span className="text-[#1976D2]/80 block text-[8px] uppercase font-black font-sans tracking-widest">🔑 MÃ SỐ HỒ ƯỚC NGUYỆN</span>
+                        <span className="font-mono font-extrabold text-sm text-[#1976D2] tracking-widest block mt-0.5">
                           3510790840
                         </span>
                       </div>
@@ -2264,11 +2264,11 @@ export default function App() {
                         onClick={() => {
                           handleCopy("3510790840", "account");
                         }}
-                        className="p-1.5 rounded-md bg-cyan-900/30 hover:bg-cyan-800/50 border border-cyan-800/40 hover:border-cyan-400/50 text-cyan-400 active:scale-90 transition cursor-pointer"
+                        className="p-1.5 rounded-md bg-[#FFD600] hover:bg-[#ffeb3b] border-2 border-[#1976D2] text-[#1976D2] active:scale-90 transition cursor-pointer"
                         title="Copy mã số hồ ước nguyện"
                       >
                         {copiedField === "account" ? (
-                          <Check className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
+                          <Check className="w-3.5 h-3.5 text-[#1976D2] animate-pulse" />
                         ) : (
                           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                             <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -2278,10 +2278,10 @@ export default function App() {
                     </div>
 
                     {/* Account holder name */}
-                    <div className={`rounded-lg p-2 flex items-center justify-between gap-2 text-xs transition-all ${copiedField === 'name' ? 'bg-cyan-950/80 border border-cyan-400/40 shadow-[0_0_10px_rgba(34,211,238,0.4)]' : 'bg-slate-950/40 border border-cyan-950/80'}`}>
+                    <div className={`rounded-lg p-2 flex items-center justify-between gap-2 text-xs transition-all ${copiedField === 'name' ? 'bg-[#FFD600] border-2 border-[#1976D2] shadow-[0_0_10px_rgba(25,118,210,0.2)]' : 'bg-[#E3F2FD] border border-[#1976D2]/30'}`}>
                       <div>
-                        <span className="text-cyan-400/60 block text-[8px] uppercase font-black font-sans tracking-widest">👑 THẦN GIỮ ĐÀI PHUN NƯỚC</span>
-                        <span className="font-extrabold text-[#fef08a] uppercase tracking-wider text-xs block mt-0.5">
+                        <span className="text-[#1976D2]/80 block text-[8px] uppercase font-black font-sans tracking-widest">👑 THẦN GIỮ ĐÀI PHUN NƯỚC</span>
+                        <span className="font-extrabold text-[#1976D2] uppercase tracking-wider text-xs block mt-0.5">
                           LA NGOC HAN
                         </span>
                       </div>
@@ -2289,11 +2289,11 @@ export default function App() {
                         onClick={() => {
                           handleCopy("LA NGOC HAN", "name");
                         }}
-                        className="p-1.5 rounded-md bg-cyan-900/30 hover:bg-cyan-800/50 border border-cyan-800/40 hover:border-cyan-400/50 text-cyan-400 active:scale-90 transition cursor-pointer"
+                        className="p-1.5 rounded-md bg-[#FFD600] hover:bg-[#ffeb3b] border-2 border-[#1976D2] text-[#1976D2] active:scale-90 transition cursor-pointer"
                         title="Copy danh tính thủ hộ"
                       >
                         {copiedField === "name" ? (
-                          <Check className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
+                          <Check className="w-3.5 h-3.5 text-[#1976D2] animate-pulse" />
                         ) : (
                           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                             <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -2303,10 +2303,10 @@ export default function App() {
                     </div>
 
                     {/* Syntax message */}
-                    <div className={`rounded-lg p-2 flex items-center justify-between gap-2 text-xs transition-all ${copiedField === 'note' ? 'bg-cyan-950/80 border border-cyan-400/40 shadow-[0_0_10px_rgba(34,211,238,0.4)]' : 'bg-slate-950/40 border border-cyan-950/80'}`}>
+                    <div className={`rounded-lg p-2 flex items-center justify-between gap-2 text-xs transition-all ${copiedField === 'note' ? 'bg-[#FFD600] border-2 border-[#1976D2] shadow-[0_0_10px_rgba(25,118,210,0.2)]' : 'bg-[#E3F2FD] border border-[#1976D2]/30'}`}>
                       <div>
-                        <span className="text-cyan-400/60 block text-[8px] uppercase font-black font-sans tracking-widest">🔮 PHÉP LÀNH HỒ ƯỚC</span>
-                        <span className="font-semibold text-cyan-200 italic tracking-wide">
+                        <span className="text-[#1976D2]/80 block text-[8px] uppercase font-black font-sans tracking-widest">🔮 PHÉP LÀNH HỒ ƯỚC</span>
+                        <span className="font-semibold text-[#1976D2] italic tracking-wide">
                           "Donate cho Tun"
                         </span>
                       </div>
@@ -2314,11 +2314,11 @@ export default function App() {
                         onClick={() => {
                           handleCopy("Donate cho Tun", "note");
                         }}
-                        className="p-1.5 rounded-md bg-cyan-900/30 hover:bg-cyan-800/50 border border-cyan-800/40 hover:border-cyan-400/50 text-cyan-400 active:scale-90 transition cursor-pointer"
+                        className="p-1.5 rounded-md bg-[#FFD600] hover:bg-[#ffeb3b] border-2 border-[#1976D2] text-[#1976D2] active:scale-90 transition cursor-pointer"
                         title="Copy lời khấn nguyện"
                       >
                         {copiedField === "note" ? (
-                          <Check className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
+                          <Check className="w-3.5 h-3.5 text-[#1976D2] animate-pulse" />
                         ) : (
                           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                             <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -2330,7 +2330,7 @@ export default function App() {
                 </div>
 
                 {/* Magical statement */}
-                <p className="text-[9.5px] text-cyan-200/60 font-serif italic text-center leading-relaxed">
+                <p className="text-[9.5px] text-[#1976D2]/60 font-serif italic text-center leading-relaxed">
                   "Mọi đồng xu công đức đều chuyển hóa thành năng lực vạn linh thúc đẩy vương quốc Tun bền vững hưng thịnh!"
                 </p>
 
@@ -2341,7 +2341,7 @@ export default function App() {
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 5 }}
-                      className="text-[10px] font-black text-center text-cyan-200 bg-cyan-900/40 border border-cyan-500/35 py-1.5 rounded-full font-sans"
+                      className="text-[10px] font-black text-center text-[#1976D2] bg-[#ffffff] border-2 border-[#1976D2]/30 py-1.5 rounded-full font-sans"
                     >
                       🪙 Đồng xu đã bay thẳng vào đài phun nước may mắn!
                     </motion.div>
@@ -2353,7 +2353,7 @@ export default function App() {
                   {/* Wax Seal with "TUN" rebranded as Coin dispenser lever badge */}
                   <div className="flex items-center gap-2">
                     <div 
-                      className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 border border-yellow-200 flex items-center justify-center cursor-pointer shadow-lg active:scale-95 transition-transform"
+                      className="w-10 h-10 rounded-full bg-[#FFD600] border-2 border-[#1976D2] flex items-center justify-center cursor-pointer shadow-[0_4px_10px_rgba(25,118,210,0.15)] active:scale-95 transition-transform"
                       onClick={() => {
                         // Play golden coin sound
                         playClickSound(1100, 0.12);
@@ -2361,9 +2361,9 @@ export default function App() {
                       }}
                       title="Huy hiệu Vận Mệnh của Đền Thần"
                     >
-                      <span className="text-slate-900 text-[9px] font-black font-mono">TUN</span>
+                      <span className="text-[#1976D2] text-[9px] font-black font-mono">TUN</span>
                     </div>
-                    <span className="text-[9.5px] text-cyan-200/50 italic font-serif text-left leading-tight">
+                    <span className="text-[9.5px] text-[#1976D2]/50 italic font-serif text-left leading-tight">
                       Vận Thuyết<br/>Chi Xu
                     </span>
                   </div>
@@ -2373,7 +2373,7 @@ export default function App() {
                       playClickSound(300, 0.08);
                       setIsDonateModalOpen(false);
                     }}
-                    className="flex-1 py-1.5 md:py-2.5 bg-gradient-to-b from-cyan-950 to-emerald-950 border border-cyan-800/40 text-cyan-300 font-bold text-xs rounded-xl hover:brightness-110 hover:border-cyan-500/50 transition cursor-pointer"
+                    className="flex-1 py-1.5 md:py-2.5 bg-[#FFD600] hover:bg-[#ffeb3b] border-2 border-[#1976D2] text-[#1976D2] font-bold text-xs rounded-xl shadow-[0_4px_12px_rgba(25,118,210,0.15)] active:scale-95 transition cursor-pointer"
                   >
                     Trở Lại Bản Đồ 🗺️
                   </button>
@@ -2387,12 +2387,12 @@ export default function App() {
       {/* Command Details Modal (The Mystic Divination Booth) */}
       <AnimatePresence>
         {isCommandModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-[8px] p-4 selection:bg-purple-950/40">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-[8px] p-4 selection:bg-emerald-950/40">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-gradient-to-b from-purple-950/10 via-black/50 to-black/80"
+              className="absolute inset-0 bg-gradient-to-b from-[#10b981]/10 via-black/50 to-black/80"
               onClick={() => {
                 playClickSound(300, 0.08);
                 setIsCommandModalOpen(false);
@@ -2404,32 +2404,32 @@ export default function App() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.85, opacity: 0, y: 45 }}
               transition={{ type: "spring", damping: 25, stiffness: 120 }}
-              className="relative w-full max-w-[430px] mx-auto select-none z-10 flex flex-col items-center bg-[#07020d]/90 rounded-[32px] p-6 pb-12 shadow-[0_30px_70px_rgba(0,0,0,0.95)] border border-purple-500/20 overflow-hidden"
+              className="relative w-full max-w-[430px] mx-auto select-none z-10 flex flex-col items-center bg-[#E3F2FD] rounded-[32px] p-6 pb-12 shadow-[0_20px_50px_rgba(25,118,210,0.45)] border-4 border-[#1976D2] overflow-hidden"
             >
               {/* Overlapping Velvet Hanging Drapes on Left and Right edges */}
               <div 
-                className="absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-[#1e0423] via-[#3d0246] to-[#5a1862]/30 border-r border-[#f472b6]/15 z-20 rounded-l-[32px] pointer-events-none divination-curtain-l"
+                className="absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-[#bbdefb] via-[#90caf9] to-[#64b5f6]/30 border-r border-[#1976D2]/30 z-20 rounded-l-[28px] pointer-events-none divination-curtain-l"
               >
                 {/* Visual folds on drapes using border overlays */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent opacity-70" />
-                <div className="absolute top-0 bottom-0 right-1.5 w-[2px] bg-[#f472b6]/20 blur-[1px] opacity-40" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent opacity-70" />
+                <div className="absolute top-0 bottom-0 right-1.5 w-[2px] bg-[#1976D2]/20 blur-[1px] opacity-40" />
               </div>
               <div 
-                className="absolute top-0 bottom-0 right-0 w-12 bg-gradient-to-l from-[#1e0423] via-[#3d0246] to-[#5a1862]/30 border-l border-[#f472b6]/15 z-20 rounded-r-[32px] pointer-events-none divination-curtain-r"
+                className="absolute top-0 bottom-0 right-0 w-12 bg-gradient-to-l from-[#bbdefb] via-[#90caf9] to-[#64b5f6]/30 border-l border-[#1976D2]/30 z-20 rounded-r-[28px] pointer-events-none divination-curtain-r"
               >
-                <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent opacity-70" />
-                <div className="absolute top-0 bottom-0 left-1.5 w-[2px] bg-[#f472b6]/20 blur-[1px] opacity-40" />
+                <div className="absolute inset-0 bg-gradient-to-l from-black/10 via-transparent to-transparent opacity-70" />
+                <div className="absolute top-0 bottom-0 left-1.5 w-[2px] bg-[#1976D2]/20 blur-[1px] opacity-40" />
               </div>
 
               {/* Astrological Cosmic Star Background in middle */}
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(88,28,135,0.2)_0%,transparent_70%)] pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(25,118,210,0.1)_0%,transparent_70%)] pointer-events-none" />
 
               {/* Booth Header/Title */}
               <div className="text-center pt-3 relative z-30 px-6">
-                <h3 className="font-serif italic font-extrabold text-[#fef08a] text-lg md:text-xl tracking-wider uppercase drop-shadow-[0_0_12px_rgba(234,179,8,0.85)]">
+                <h3 className="font-serif italic font-extrabold text-[#1976D2] text-lg md:text-xl tracking-wider uppercase drop-shadow-[0_1px_2px_rgba(25,118,210,0.1)]">
                   QUẦY VÉ HƯỚNG DẪN 🎰
                 </h3>
-                <p className="text-[10px] font-sans text-amber-400/70 uppercase tracking-widest mt-1">
+                <p className="text-[10px] font-sans text-[#1976D2]/80 font-bold uppercase tracking-widest mt-1">
                   The Retro Magic Arcade Dispenser
                 </p>
               </div>
@@ -2444,33 +2444,33 @@ export default function App() {
                 className="w-full flex flex-col items-center justify-center space-y-6 pt-8 pb-2 relative z-30 px-4"
               >
                 {/* Brass / Copper metallic retro vending device */}
-                <div className="w-full max-w-[340px] bg-gradient-to-ob from-[#601414] via-[#3a0a0a] to-[#1a0505] border-4 border-[#e5c158] rounded-2xl shadow-[0_20px_45px_rgba(0,0,0,0.9)] p-4 relative overflow-hidden flex flex-col items-center">
+                <div className="w-full max-w-[340px] bg-[#ffffff] border-4 border-[#1976D2] rounded-2xl shadow-[0_10px_20px_rgba(25,118,210,0.15)] p-4 relative overflow-hidden flex flex-col items-center">
                   
                   {/* Metal Rivet indicators at corners with classic polished brass glow */}
-                  <div className="absolute top-2.5 left-2.5 w-2 h-2 rounded-full bg-yellow-400 border border-amber-200/60 shadow-[0_0_5px_rgba(234,179,8,0.8)]" />
-                  <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-yellow-400 border border-amber-200/60 shadow-[0_0_5px_rgba(234,179,8,0.8)]" />
-                  <div className="absolute bottom-2.5 left-2.5 w-2 h-2 rounded-full bg-yellow-400 border border-amber-200/60 shadow-[0_0_5px_rgba(234,179,8,0.8)]" />
-                  <div className="absolute bottom-2.5 right-2.5 w-2 h-2 rounded-full bg-yellow-400 border border-amber-200/60 shadow-[0_0_5px_rgba(234,179,8,0.8)]" />
+                  <div className="absolute top-2.5 left-2.5 w-2 h-2 rounded-full bg-[#FFD600] border border-[#1976D2] shadow-[0_0_5px_rgba(255,214,0,0.8)]" />
+                  <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#FFD600] border border-[#1976D2] shadow-[0_0_5px_rgba(255,214,0,0.8)]" />
+                  <div className="absolute bottom-2.5 left-2.5 w-2 h-2 rounded-full bg-[#FFD600] border border-[#1976D2] shadow-[0_0_5px_rgba(255,214,0,0.8)]" />
+                  <div className="absolute bottom-2.5 right-2.5 w-2 h-2 rounded-full bg-[#FFD600] border border-[#1976D2] shadow-[0_0_5px_rgba(255,214,0,0.8)]" />
 
                   {/* Retro CRT Screen display */}
-                  <div className="w-full h-24 bg-gradient-to-b from-[#1c120c] to-[#0d0703] border-2 border-amber-700/80 rounded-xl p-3 overflow-hidden flex flex-col items-center justify-center relative shadow-[inset_0_0_15px_rgba(0,0,0,0.95),0_0_12px_rgba(245,158,11,0.25)]">
+                  <div className="w-full h-24 bg-[#E3F2FD] border-2 border-[#1976D2] rounded-xl p-3 overflow-hidden flex flex-col items-center justify-center relative shadow-[inset_0_0_15px_rgba(25,118,210,0.2),0_0_12px_rgba(25,118,210,0.15)]">
                     
                     {/* Retro Scanline effect dynamic overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-stone-900/10 via-transparent to-stone-900/20 pointer-events-none z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/5 pointer-events-none z-10" />
                     <div 
-                      className="absolute inset-0 opacity-[0.06] pointer-events-none z-20"
+                      className="absolute inset-0 opacity-[0.03] pointer-events-none z-20"
                       style={{
-                        backgroundImage: 'linear-gradient(rgba(255,255,255,1) 50%, rgba(0,0,0,1) 50%)',
+                        backgroundImage: 'linear-gradient(rgba(25,118,210,0.5) 50%, rgba(25,118,210,1) 50%)',
                         backgroundSize: '100% 4px',
                       }}
                     />
                     
                     {/* Golden Yellow neon phosphor text info display */}
                     <div className="text-center z-10 select-none flex flex-col items-center justify-center">
-                      <p className="text-xs md:text-sm font-sans font-black text-amber-400 tracking-wider flex items-center gap-1 drop-shadow-[0_0_8px_rgba(245,158,11,1)] animate-pulse">
+                      <p className="text-xs md:text-sm font-sans font-black text-[#1976D2] tracking-wider flex items-center gap-1 drop-shadow-[0_0_8px_rgba(25,118,210,0.3)] animate-pulse">
                         🎟️ TRẠM THÔNG TIN LỮ KHÁCH 🎟️
                       </p>
-                      <p className="text-[9px] font-mono text-amber-300/80 uppercase tracking-widest mt-2 drop-shadow-[0_0_3px_rgba(245,158,11,0.6)] font-bold">
+                      <p className="text-[9px] font-mono text-[#1976D2]/90 uppercase tracking-widest mt-2 font-bold">
                         VUI LÒNG CHỌN LOẠI VÉ BẠN MUỐN IN
                       </p>
                     </div>
@@ -2480,8 +2480,8 @@ export default function App() {
                   <div className="w-full grid grid-cols-2 gap-4 mt-4">
                     
                     {/* Left Dispensation Station (Vé Cẩm Nang) */}
-                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-gradient-to-b from-[#1a2d3e] to-[#0f1b29] rounded-xl border-2 border-amber-800/40 shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),0_4px_10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-500/80">
-                      <span className="text-[10px] font-black font-serif text-blue-300 tracking-wider">
+                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
+                      <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
                         CẨM NANG CHƠI
                       </span>
                       
@@ -2504,45 +2504,45 @@ export default function App() {
                             setIsArcadeSmoke(false);
                           }, 600);
                         }}
-                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-b from-cyan-400 to-blue-600 border-b-4 border-blue-800 shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
+                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#FFD600] border-b-4 border-[#1976D2] text-[#1976D2] shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
                         title="In Vé Cẩm Nang Hướng Dẫn"
                       >
-                        🔵
+                        🟡
                       </button>
 
                       {/* Ticket Slot - notch representation with marquee on hover */}
                       <div className="flex flex-col items-center space-y-1.5 w-full mt-1">
                         {/* Notch rãnh cắt ngang màu đen */}
-                        <div className="w-full h-1 bg-black rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.9)] opacity-80" />
+                        <div className="w-full h-1 bg-[#1976D2]/80 rounded shadow-[inset_0_1px_2px_rgba(25,118,210,0.5)] opacity-80" />
                         
                         {/* Elegant ticket slot LED flashing marquee */}
-                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-stone-950 shadow-inner w-full max-w-[110px]">
+                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-white shadow-inner w-full max-w-[110px] border border-[#1976D2]">
                           {/* Glowing flowing LED Marquee gradient border */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#22d3ee,#3b82f6,#22d3ee)] animate-spin" style={{ animationDuration: '1.2s' }} />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#FFD600,#ffeb3b,#FFD600)] animate-spin" style={{ animationDuration: '1.2s' }} />
                           {/* Glowing background fallback to ensure vibrant colors */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-cyan-400 blur-[3px] transition-opacity" />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-[#FFD600] blur-[3px] transition-opacity" />
                           
                           {/* The actual slot slit */}
-                          <div className="relative bg-black rounded-md flex items-center justify-center h-4 border border-amber-900/40 z-10 shadow-[inset_0_2px_5px_rgba(0,0,0,0.95)]">
-                            <div className="w-11/12 h-[2px] bg-cyan-950/80 rounded-full border-b border-cyan-500/30 relative overflow-hidden">
-                              <div className="absolute inset-x-0 bottom-0 h-[1x] bg-cyan-400/80 animate-pulse" />
+                          <div className="relative bg-[#1976D2]/80 rounded-md flex items-center justify-center h-4 border border-[#1976D2]/40 z-10 shadow-[inset_0_2px_5px_rgba(25,118,210,0.5)]">
+                            <div className="w-11/12 h-[2px] bg-[#FFD600]/80 rounded-full border-b border-[#ffeb3b]/30 relative overflow-hidden">
+                              <div className="absolute inset-x-0 bottom-0 h-[1x] bg-[#fef08a]/80 animate-pulse" />
                             </div>
                           </div>
                         </div>
 
-                        <p className="text-[7.5px] font-sans text-stone-400 group-hover:text-cyan-300 font-medium transition-colors uppercase tracking-tight">
+                        <p className="text-[7.5px] font-sans text-[#1976D2]/60 group-hover:text-[#1976D2] font-bold transition-colors uppercase tracking-tight">
                           Khử ấn nhận vé
                         </p>
                       </div>
                     </div>
 
                     {/* Right Dispensation Station (Vé Hộ Thân) */}
-                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-gradient-to-b from-[#3a1d1d] to-[#251010] rounded-xl border-2 border-amber-800/40 shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),0_4px_10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-500/80">
-                      <span className="text-[10px] font-black font-serif text-rose-400 tracking-wider">
+                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
+                      <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
                         BÙA HỘ THÂN
                       </span>
 
-                      {/* Big red arcade release button */}
+                      {/* Big yellow arcade release button */}
                       <button
                         onClick={() => {
                           if (dispensedTicket === 'ho_than') {
@@ -2563,33 +2563,33 @@ export default function App() {
                             setIsArcadeVibrating(false);
                           }, 550);
                         }}
-                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-b from-rose-400 to-red-600 border-b-4 border-red-800 shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
+                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#FFD600] border-b-4 border-[#1976D2] text-[#1976D2] shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
                         title="In Bùa Hộ Mệnh Lệnh Chỉ"
                       >
-                        🔴
+                        🟡
                       </button>
 
                       {/* Ticket Slot - notch representation with marquee on hover */}
                       <div className="flex flex-col items-center space-y-1.5 w-full mt-1">
-                        {/* Notch rãnh cắt ngang màu đen */}
-                        <div className="w-full h-1 bg-black rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.9)] opacity-80" />
+                        {/* Notch rãnh cắt ngang màu xanh nhạt dập ghim */}
+                        <div className="w-full h-1 bg-[#1976D2]/80 rounded shadow-[inset_0_1px_2px_rgba(25,118,210,0.5)] opacity-80" />
                         
                         {/* Elegant ticket slot LED flashing marquee */}
-                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-stone-950 shadow-inner w-full max-w-[110px]">
+                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-white shadow-inner w-full max-w-[110px] border border-[#1976D2]">
                           {/* Glowing flowing LED Marquee gradient border */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#f43f5e,#e11d48,#f43f5e)] animate-spin" style={{ animationDuration: '1.2s' }} />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#FFD600,#ffeb3b,#FFD600)] animate-spin" style={{ animationDuration: '1.2s' }} />
                           {/* Glowing background fallback to ensure vibrant colors */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-rose-500 blur-[3px] transition-opacity" />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-[#FFD600] blur-[3px] transition-opacity" />
                           
                           {/* The actual slot slit */}
-                          <div className="relative bg-black rounded-md flex items-center justify-center h-4 border border-amber-900/40 z-10 shadow-[inset_0_2px_5px_rgba(0,0,0,0.95)]">
-                            <div className="w-11/12 h-[2px] bg-rose-950/80 rounded-full border-b border-rose-500/30 relative overflow-hidden">
-                              <div className="absolute inset-x-0 bottom-0 h-[1px] bg-rose-400/80 animate-pulse" />
+                          <div className="relative bg-[#1976D2]/80 rounded-md flex items-center justify-center h-4 border border-[#1976D2]/40 z-10 shadow-[inset_0_2px_5px_rgba(25,118,210,0.5)]">
+                            <div className="w-11/12 h-[2px] bg-[#FFD600]/80 rounded-full border-b border-[#ffeb3b]/30 relative overflow-hidden">
+                              <div className="absolute inset-x-0 bottom-0 h-[1px] bg-[#fef08a]/80 animate-pulse" />
                             </div>
                           </div>
                         </div>
 
-                        <p className="text-[7.5px] font-sans text-stone-400 group-hover:text-rose-400 font-medium transition-colors uppercase tracking-tight">
+                        <p className="text-[7.5px] font-sans text-stone-500 group-hover:text-[#ea580c] font-bold transition-colors uppercase tracking-tight">
                           Truy lộc bạt sầu
                         </p>
                       </div>
@@ -2602,9 +2602,9 @@ export default function App() {
                 {/* Smoke rising visualization effect from slots */}
                 {isArcadeSmoke && (
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none flex items-center justify-center overflow-visible z-30">
-                    <div className="divination-smoke-particle w-6 h-6 rounded-full bg-cyan-300/30 blur-[4px] absolute" style={{ animationDelay: '0s', left: '25%' }} />
-                    <div className="divination-smoke-particle w-8 h-8 rounded-full bg-indigo-400/25 blur-[6px] absolute" style={{ animationDelay: '0.2s', left: '35%' }} />
-                    <div className="divination-smoke-particle w-7 h-7 rounded-full bg-blue-300/20 blur-[5px] absolute" style={{ animationDelay: '0.5s', left: '65%' }} />
+                    <div className="divination-smoke-particle w-6 h-6 rounded-full bg-[#1976D2]/30 blur-[4px] absolute" style={{ animationDelay: '0s', left: '25%' }} />
+                    <div className="divination-smoke-particle w-8 h-8 rounded-full bg-[#FFD600]/25 blur-[6px] absolute" style={{ animationDelay: '0.2s', left: '35%' }} />
+                    <div className="divination-smoke-particle w-7 h-7 rounded-full bg-[#1976D2]/20 blur-[5px] absolute" style={{ animationDelay: '0.5s', left: '65%' }} />
                   </div>
                 )}
               </motion.div>
@@ -2617,10 +2617,10 @@ export default function App() {
                     animate={{ scale: 1, opacity: 1, rotate: 0, y: 0 }}
                     exit={{ scale: 0.8, opacity: 0, y: 50, rotate: 5 }}
                     transition={{ type: "spring", damping: 18, stiffness: 150 }}
-                    className="absolute inset-x-4 top-24 bottom-6 z-40 bg-[#0c1328]/95 rounded-2xl border-2 border-dashed border-amber-500/50 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col justify-between overflow-y-auto no-scrollbar backdrop-blur-md"
+                    className="absolute inset-x-4 top-24 bottom-6 z-40 bg-[#ffffff]/95 rounded-2xl border-2 border-dashed border-[#1976D2]/50 p-5 shadow-[0_20px_50px_rgba(25,118,210,0.35)] flex flex-col justify-between overflow-y-auto no-scrollbar backdrop-blur-md"
                   >
                     {/* Ticket top border style */}
-                    <div className="flex justify-between text-[8px] font-mono text-amber-500/40 uppercase tracking-widest border-b border-dashed border-amber-500/20 pb-2 select-none">
+                    <div className="flex justify-between text-[8px] font-mono text-[#1976D2]/60 uppercase tracking-widest border-b border-dashed border-[#1976D2]/30 pb-2 select-none">
                       <span>Arcade Ticket Dispenser v1.0</span>
                       <span>Serial No: #{dispensedTicket === 'cam_nang' ? '9201-CN' : '7730-HT'}</span>
                     </div>
@@ -2630,38 +2630,38 @@ export default function App() {
                       <div className="flex-1 flex flex-col pt-3 text-left">
                         <div className="text-center mb-3 relative">
                           <span className="text-2xl">🎫</span>
-                          <h4 className="font-serif font-black text-cyan-300 text-lg uppercase drop-shadow-[0_2px_4px_rgba(34,211,238,0.5)]">
+                          <h4 className="font-serif font-black text-[#1976D2] text-lg uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.2)]">
                             VÉ CẨM NANG DU HÀNH
                           </h4>
-                          <p className="text-[9px] font-mono text-cyan-400/50 uppercase tracking-widest">
+                          <p className="text-[9px] font-mono text-[#1976D2]/60 uppercase tracking-widest">
                             Gia Đình Thần Kỳ Nhà Tun
                           </p>
                         </div>
 
-                        <div className="space-y-3 text-slate-200 overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
-                          <div className="p-2.5 bg-cyan-950/40 rounded-xl border border-cyan-500/20">
-                            <h5 className="font-serif font-bold text-xs text-cyan-200 flex items-center gap-1.5">
+                        <div className="space-y-3 text-[#1976D2] overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
                               ⭐ Vé Ưu Tiên (Priority Ticket)
                             </h5>
-                            <p className="text-[10px] text-slate-300/80 mt-1 leading-relaxed">
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
                               Dành tặng lượt bình chọn chí tôn từ rương báu để dâng lễ phong thần tại Altar, hỗ trợ gia tăng tu vi vinh hiển cho các mỹ nam mỹ nữ của vương quốc.
                             </p>
                           </div>
 
-                          <div className="p-2.5 bg-cyan-950/40 rounded-xl border border-cyan-500/20">
-                            <h5 className="font-serif font-bold text-xs text-cyan-200 flex items-center gap-1.5">
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
                               🔮 Giếng Ước Nguyện (Wishing Well)
                             </h5>
-                            <p className="text-[10px] text-slate-300/80 mt-1 leading-relaxed">
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
                               Nơi chôn giấu tâm tư, mộng tưởng thầm kín của du khách gửi tới thượng đế. Dâng hiến lễ vật vàng bạc thành tâm để nuôi dưỡng mầm cây quốc gia hưng thịnh.
                             </p>
                           </div>
 
-                          <div className="p-2.5 bg-cyan-950/40 rounded-xl border border-cyan-500/20">
-                            <h5 className="font-serif font-bold text-xs text-cyan-200 flex items-center gap-1.5">
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
                               📜 Lưu Bút Du Khách (Guestbook)
                             </h5>
-                            <p className="text-[10px] text-slate-300/80 mt-1 leading-relaxed">
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
                               Đặt dấu tay lên bức tường ký ức, khắc ghi lại những cảm xúc mộc mạc và chân thành nhất trong hành trình thám hiểm tiên giới linh thiêng.
                             </p>
                           </div>
@@ -2673,7 +2673,7 @@ export default function App() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => playClickSound(500, 0.1)}
-                          className="w-full mt-4 py-2.5 rounded-xl text-xs font-serif font-black text-center bg-cyan-500 text-slate-900 hover:bg-cyan-400 active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(6,182,212,0.4)]"
+                          className="w-full mt-4 py-2.5 rounded-xl text-xs font-serif font-black text-center bg-[#FFD600] text-[#1976D2] border-2 border-[#1976D2] hover:bg-[#ffeb3b] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.15)]"
                         >
                           <span>Đọc Toàn Bộ Bản Thư Cẩm Nang 📖</span>
                         </a>
@@ -2683,38 +2683,38 @@ export default function App() {
                       <div className="flex-1 flex flex-col pt-3 text-left">
                         <div className="text-center mb-3 relative">
                           <span className="text-2xl">🛡️</span>
-                          <h4 className="font-serif font-black text-rose-400 text-lg uppercase drop-shadow-[0_2px_4px_rgba(244,63,94,0.5)]">
+                          <h4 className="font-serif font-black text-[#1976D2] text-lg uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.2)]">
                             BÙA HỘ THÂN CHỐNG BONK
                           </h4>
-                          <p className="text-[9px] font-mono text-rose-500/50 uppercase tracking-widest">
+                          <p className="text-[9px] font-mono text-[#1976D2]/60 uppercase tracking-widest">
                             Supremacy Shield Spell
                           </p>
                         </div>
 
-                        <div className="space-y-3 text-slate-200 overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
-                          <div className="p-2.5 bg-rose-950/40 rounded-xl border border-rose-500/20">
-                            <h5 className="font-serif font-bold text-xs text-rose-300 flex items-center gap-1.5">
+                        <div className="space-y-3 text-[#1976D2] overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
                               ⚔️ Cấm Xâm Phạm Vương Lãnh
                             </h5>
-                            <p className="text-[10px] text-slate-300/80 mt-1 leading-relaxed">
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
                               Nghiêm cấm tuyệt đối mọi hành vi công kích phi lễ, spam, phá quấy hay quấy rối bừa bãi vương lãnh linh thiêng và thần dân đang tu hành pháp lực tại điện thờ Altar.
                             </p>
                           </div>
 
-                          <div className="p-2.5 bg-rose-950/40 rounded-xl border border-rose-500/20">
-                            <h5 className="font-serif font-bold text-xs text-rose-300 flex items-center gap-1.5">
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
                               ⚡ Phép Thuật Phản Chấn 100%
                             </h5>
-                            <p className="text-[10px] text-slate-300/80 mt-1 leading-relaxed">
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
                               Lá bùa hộ mệnh phong ấn lời nguyền tối thượng, lập tức hóa giải và phản hồi mọi sát thương hoặc hành vi bonk ác ý ngược lại kẻ thủ ác, phong tỏa hoàn toàn nội lực hắc ám.
                             </p>
                           </div>
 
-                          <div className="p-2.5 bg-rose-950/40 rounded-xl border border-rose-500/20">
-                            <h5 className="font-serif font-bold text-xs text-rose-300 flex items-center gap-1.5">
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
                               🏵️ Thiên Lệnh Bảo Hộ Gia Tộc
                             </h5>
-                            <p className="text-[10px] text-slate-300/80 mt-1 leading-relaxed">
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
                               Giúp chư vị hào kiệt an tâm gacha ngắm mộng đẹp, giao lưu đàm đạo bằng tấm lòng tri kỷ chân thuần mà không sợ bất kỳ thế lực cuồng phong nào quấy nhiễu.
                             </p>
                           </div>
@@ -2726,7 +2726,7 @@ export default function App() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => playClickSound(500, 0.1)}
-                          className="w-full mt-4 py-2.5 rounded-xl text-xs font-serif font-black text-center bg-rose-500 text-slate-950 hover:bg-rose-400 active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(244,63,94,0.4)]"
+                          className="w-full mt-4 py-2.5 rounded-xl text-xs font-serif font-black text-center bg-[#FFD600] text-[#1976D2] border-2 border-[#1976D2] hover:bg-[#ffeb3b] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.15)]"
                         >
                           <span>Xem Lệnh Chỉ Chống Bonk Đầy Đủ 🛡️</span>
                         </a>
@@ -2739,7 +2739,7 @@ export default function App() {
                         playClickSound(300, 0.08);
                         setDispensedTicket(null);
                       }}
-                      className="w-full mt-4 py-2 border-2 border-dashed border-amber-600/30 hover:border-amber-500/50 hover:bg-amber-500/5 rounded-xl text-[10px] text-amber-500 font-mono tracking-widest transition cursor-pointer"
+                      className="w-full mt-4 py-2 border-2 border-dashed border-[#FFD600]/50 hover:border-[#FFD600] text-[#FFD600] font-mono tracking-widest text-[10px] cursor-pointer"
                     >
                       ▲ HOÀN VÉ VÀO MÁY IN
                     </button>
@@ -2754,13 +2754,11 @@ export default function App() {
                   setIsCommandModalOpen(false);
                 }}
                 title="Đóng Hướng Dẫn"
-                className="absolute top-4 right-4 bg-gradient-to-b from-purple-950 via-[#2e1065] to-indigo-950 hover:brightness-110 border border-purple-500/30 rounded-full w-9 h-9 flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.6)] hover:scale-105 active:scale-95 transition-all cursor-pointer z-50 group hover:shadow-purple-500/10"
+                className="absolute top-4 right-4 bg-[#FFD600] hover:brightness-110 border-2 border-[#1976D2] rounded-full w-9 h-9 flex items-center justify-center shadow-[0_4px_12px_rgba(25,118,210,0.15)] hover:bg-[#ffeb3b] active:scale-95 transition-all cursor-pointer z-50 group"
               >
-                {/* SVG Astrological Eye shape */}
-                <svg className="w-5 h-5 text-amber-300/70 group-hover:text-amber-200 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0z" />
-                  <circle cx="12" cy="12" r="3" className="fill-purple-500/20 stroke-amber-400 stroke-1 group-hover:animate-pulse" />
-                  <path d="m12 12-2.5-2.5M12 12l2.5 2.5" strokeWidth="1" stroke="amber" opacity="0.5" />
+                {/* SVG Astrological Eye shape -> Changed to close icon */}
+                <svg className="w-5 h-5 text-[#1976D2] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               </button>
               
@@ -2789,7 +2787,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="relative w-full max-w-[380px] mx-auto z-10 flex flex-col items-center"
+              className="relative w-full max-w-[390px] mx-auto z-10 flex flex-col items-center"
             >
               {/* Hanging Ropes extending to top of screen */}
               {/* Left hanging rope */}
@@ -2797,94 +2795,59 @@ export default function App() {
               {/* Right hanging rope */}
               <div className="absolute top-[-200vh] right-[20%] w-1.5 h-[200vh] bg-gradient-to-r from-[#221208] via-[#8c6747] to-[#221208] shadow-[2px_0_5px_rgba(0,0,0,0.55)] border-r border-[#1a0a03] pointer-events-none z-[-1]" />
 
+              {/* Left hanging connection loops */}
+              <div className="absolute top-[-10px] left-[18%] flex flex-col items-center gap-1 z-20 pointer-events-none">
+                <div className="rope-knot-tight" />
+                <div className="wood-bracket-ring" />
+              </div>
+              {/* Right hanging connection loops */}
+              <div className="absolute top-[-10px] right-[18%] flex flex-col items-center gap-1 z-20 pointer-events-none">
+                <div className="rope-knot-tight" />
+                <div className="wood-bracket-ring" />
+              </div>
+
               {/* The Actual Wooden Plaque */}
               <div 
-                className="wizard-notice-board relative w-full rounded-2xl p-6 shadow-[0_25px_60px_rgba(0,0,0,0.85),inset_0_4px_8px_rgba(255,255,255,0.08)] border-[6px] border-[#5a381a] bg-gradient-to-br from-[#412511] via-[#2f180a] to-[#1c0e05] flex flex-col space-y-4 px-6 text-center select-none"
-                style={{
-                  backgroundImage: "url('https://www.transparenttextures.com/patterns/wood-pattern.png')",
-                  backgroundBlendMode: "overlay"
-                }}
+                className="rustic-wood-sign relative w-full rounded-2xl p-6 shadow-[0_20px_45px_rgba(0,0,0,0.8),inset_0_2px_5px_rgba(255,255,255,0.45)] mt-4 flex flex-col space-y-5 px-7 py-6 text-center select-none"
               >
-                {/* Glowing Violet-Magenta Crystal Pins at response corners */}
-                <div className="absolute -top-3 -left-3 z-20">
-                  <div className="w-[22px] h-[22px] bg-gradient-to-br from-[#d8b4fe] via-[#a855f7] to-[#581c87] rotate-45 rounded-[25%] shadow-[0_0_15px_rgba(168,85,247,0.85)] border border-[#ffd175] flex items-center justify-center animate-pulse" style={{ animationDuration: '3s' }}>
-                    <div className="w-2 h-2 bg-white rotate-45 rounded-[15%] opacity-90" />
-                  </div>
-                </div>
-                <div className="absolute -top-3 -right-3 z-20">
-                  <div className="w-[22px] h-[22px] bg-gradient-to-br from-[#d8b4fe] via-[#a855f7] to-[#581c87] rotate-45 rounded-[25%] shadow-[0_0_15px_rgba(168,85,247,0.85)] border border-[#ffd175] flex items-center justify-center animate-pulse" style={{ animationDuration: '3.6s' }}>
-                    <div className="w-2 h-2 bg-white rotate-45 rounded-[15%] opacity-90" />
-                  </div>
-                </div>
-                <div className="absolute -bottom-3 -left-3 z-20">
-                  <div className="w-[22px] h-[22px] bg-gradient-to-br from-[#d8b4fe] via-[#a855f7] to-[#581c87] rotate-45 rounded-[25%] shadow-[0_0_15px_rgba(168,85,247,0.85)] border border-[#ffd175] flex items-center justify-center animate-pulse" style={{ animationDuration: '4.2s' }}>
-                    <div className="w-2 h-2 bg-white rotate-45 rounded-[15%] opacity-90" />
-                  </div>
-                </div>
-                <div className="absolute -bottom-3 -right-3 z-20">
-                  <div className="w-[22px] h-[22px] bg-gradient-to-br from-[#d8b4fe] via-[#a855f7] to-[#581c87] rotate-45 rounded-[25%] shadow-[0_0_15px_rgba(168,85,247,0.85)] border border-[#ffd175] flex items-center justify-center animate-pulse" style={{ animationDuration: '4.8s' }}>
-                    <div className="w-2 h-2 bg-white rotate-45 rounded-[15%] opacity-90" />
-                  </div>
+                {/* Organic Green Leaf close button at the top corner */}
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.08);
+                    setIsAnnouncementModalOpen(false);
+                  }}
+                  className="absolute -top-3 -right-3 p-2 bg-[#15803d] hover:bg-[#166534] active:scale-95 transition-all rounded-full text-yellow-105 border-2 border-[#14532d] cursor-pointer z-30 shadow-md group flex items-center justify-center hover:rotate-12"
+                  title="Đóng Bảng Gỗ"
+                >
+                  <Leaf className="w-4 h-4 text-yellow-200 group-hover:animate-pulse" />
+                </button>
+
+                {/* Header Title on board: Wood-themed label */}
+                <div className="flex items-center justify-center pb-2 border-b border-[#5c3a21]/20">
+                  <span className="text-lg mr-1.5">🪵</span>
+                  <h3 className="text-xs font-serif font-black text-[#5c3a21] uppercase tracking-[0.2em] font-bold">
+                    BẢNG TIN KHU VUI CHƠI
+                  </h3>
                 </div>
 
-                {/* Header title */}
-                <div className="flex items-center justify-between pb-2 border-b border-[#ffd175]/15">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">📜</span>
-                    <h3 className="text-sm font-serif font-black text-[#fbcfe8] tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                      LỆNH CHỈ PHÁP SƯ
-                    </h3>
-                  </div>
+                {/* Notice text written directly over the wooden plaque with hand-painted paint style */}
+                <div className="py-2.5 text-center">
+                  <p className="wood-painted-handcrafted-text text-sm md:text-base selection:bg-yellow-800/20">
+                    Chào mừng đến trung tâm giải trí của Tun, Hãy đến quầy hướng dẫn để biết đi đâu chơi nhé 🌟
+                  </p>
+                </div>
+
+                {/* Bottom Wooden Branch Close handle / button */}
+                <div className="pt-2.5 flex justify-center">
                   <button
                     onClick={() => {
                       playClickSound(300, 0.08);
                       setIsAnnouncementModalOpen(false);
                     }}
-                    className="p-1.5 rounded-full hover:bg-black/40 text-amber-200/70 hover:text-[#ffd175] transition cursor-pointer"
+                    className="px-5 py-2 bg-[#5c3a21] hover:bg-[#4a2e1a] text-[#fffbeb] font-serif font-bold text-[10px] tracking-widest rounded-lg border border-[#3b2314] shadow-md hover:brightness-105 active:scale-95 transition-all duration-150 cursor-pointer flex items-center gap-1.5 uppercase"
                   >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-
-                {/* Notice text written on aged aged scroll parchment style */}
-                <div className="space-y-4 text-center py-2 relative">
-                  <div 
-                    className="wizard-notice-parchment p-4 border border-[#8a5d30]/40 bg-[#fff5da] hover:bg-[#fffaeb] rounded-xl text-left shadow-inner text-[#451a03] font-serif transition-colors"
-                    style={{
-                      borderStyle: 'double',
-                      borderWidth: '3px',
-                    }}
-                  >
-                    {/* Small inner seal details */}
-                    <div className="flex items-center gap-1.5 mb-2 pb-1.5 border-b border-[#451a03]/10">
-                      <span className="text-xs">✨</span>
-                      <span className="font-serif font-bold text-[10px] tracking-wider text-[#9a3412]">
-                        KHAI THỜI LINH DIỆU
-                      </span>
-                    </div>
-                    <p className="text-xs md:text-sm text-[#4a2406] font-semibold leading-relaxed pr-1 font-serif italic selection:bg-[#fef08a]">
-                      Chào mừng các nhỏ đến với góc của tun! Nếu có thắc mắc hãy vào góc hỗ trợ hoặc ib trực tiếp qua FB của Tun
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bottom Wood/Bùa chú closing trigger button */}
-                <div className="pt-2 flex justify-center">
-                  <button
-                    onClick={() => {
-                      playClickSound(300, 0.08);
-                      setIsAnnouncementModalOpen(false);
-                    }}
-                    className="px-5 py-2.5 bg-gradient-to-b from-[#ffd175] via-[#f59e0b] to-[#b45309] text-[#451a03] font-serif font-black text-xs tracking-widest rounded-md border-2 border-[#5a381a] shadow-lg hover:brightness-110 active:translate-y-20 active:opacity-0 active:scale-90 transition-all duration-300 relative group cursor-pointer flex flex-col items-center justify-center"
-                    style={{
-                      backgroundImage: "url('https://www.transparenttextures.com/patterns/parchment.png')",
-                    }}
-                  >
-                    {/* Brass thread button link */}
-                    <div className="absolute -top-3 w-3 h-3 border border-amber-950 rounded-full z-0 bg-transparent" />
-                    <span className="relative z-10 flex items-center gap-1">
-                      ✦ GIẢI BÙA CHÚ ✦
-                    </span>
+                    <Leaf className="w-3.5 h-3.5 text-green-300" />
+                    <span>Xác nhận</span>
                   </button>
                 </div>
               </div>

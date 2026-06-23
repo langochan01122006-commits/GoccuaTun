@@ -1872,15 +1872,69 @@
 
 /* Lucky Fountain stone/brick frame styles with mossy shadows */
 .fountain-brick-masonry {
-  border: 12px solid #5a6669 !important;
-  background: radial-gradient(circle at 50% 15%, #0c2d33 0%, #051419 65%, #02090d 100%) !important;
+  border: 12px solid #FFD600 !important; /* Sunny Yellow */
+  background: #E3F2FD !important; /* Baby Blue */
   box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.95),
-    inset 0 0 40px rgba(6, 182, 212, 0.15),
-    inset 0 0 60px rgba(0, 0, 0, 0.9) !important;
+    0 25px 60px rgba(0, 0, 0, 0.25),
+    inset 0 0 20px rgba(25, 118, 210, 0.15),
+    inset 0 0 60px rgba(255, 255, 255, 0.5) !important;
   border-radius: 28px !important;
   position: relative;
-  outline: 4px solid #1c2729 !important;
+  outline: 4px solid #1976D2 !important; /* Royal Blue */
+}
+
+/* Custom Overrides inside Sunshine & Sky gacha modal */
+.fountain-brick-masonry .text-sky-100 {
+  color: #1976D2 !important; /* Royal Blue */
+}
+
+.fountain-brick-masonry .text-cyan-300 {
+  color: #1976D2 !important; /* Royal Blue */
+  text-shadow: none !important;
+}
+
+.fountain-brick-masonry .text-cyan-400\/60 {
+  color: #1976D2 !important;
+}
+
+.fountain-brick-masonry .text-sky-200\/80 {
+  color: #1976D2 !important;
+}
+
+.fountain-brick-masonry .border-cyan-800\/40 {
+  border-color: rgba(25, 118, 210, 0.3) !important;
+}
+
+.fountain-brick-masonry .border-cyan-900\/50,
+.fountain-brick-masonry .border-cyan-950\/80 {
+  border-color: rgba(25, 118, 210, 0.4) !important;
+}
+
+.fountain-brick-masonry .bg-\[\#061920\]\/75,
+.fountain-brick-masonry .bg-slate-950\/40 {
+  background: #ffffff !important; /* White */
+  color: #1976D2 !important;
+}
+
+.fountain-brick-masonry .text-white {
+  color: #1976D2 !important;
+}
+
+.fountain-brick-masonry .text-cyan-400 {
+  color: #1976D2 !important;
+}
+
+.fountain-brick-masonry .bg-cyan-950\/40 {
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
+.fountain-brick-masonry .bg-cyan-950\/80 {
+  background: #FFD600 !important; /* Sunny Yellow */
+  color: #1976D2 !important;
+}
+
+.fountain-brick-masonry .drop-shadow-\[0_0_8px_rgba\(234\,179\,8\,0\.85\)\] {
+  filter: drop-shadow(0 0 4px rgba(25, 118, 210, 0.3)) !important;
 }
 
 @keyframes slow-swim {
@@ -2000,14 +2054,47 @@
 }
 
 .ticket-container-modal {
-  border: 2px solid #ffd700 !important;
-  background: linear-gradient(135deg, #110e0a 0%, #0c0805 50%, #050302 100%) !important;
-  box-shadow: 0 0 45px rgba(245, 158, 11, 0.25), inset 0 0 40px rgba(0, 0, 0, 0.98) !important;
+  border: 4px solid #1976D2 !important; /* Royal Blue */
+  background: #E3F2FD !important; /* Baby Blue */
+  box-shadow: 0 15px 45px rgba(25, 118, 210, 0.25), inset 0 0 25px rgba(255, 255, 255, 0.6) !important;
   border-radius: 20px !important;
   padding: 24px !important;
   animation: scrollOpen 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   position: relative;
   overflow: hidden;
+}
+
+/* Custom Overrides inside Sunshine & Sky modal */
+.ticket-container-modal .royal-gold-glow-text {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: #1976D2 !important; /* Royal Blue */
+  text-shadow: none !important;
+}
+
+.ticket-container-modal .text-amber-200\/90 {
+  color: #1976D2 !important;
+  opacity: 0.9;
+}
+
+.ticket-container-modal .text-amber-400\/75 {
+  color: #1976D2 !important;
+  opacity: 0.8;
+}
+
+.ticket-container-modal .text-amber-300 {
+  color: #1976D2 !important; 
+  text-shadow: none !important;
+  font-weight: 900;
+}
+
+.ticket-container-modal .text-neutral-400 {
+  color: #1976D2 !important; 
+  opacity: 0.85;
+}
+
+.ticket-container-modal .text-amber-100 {
+  color: #1976D2 !important;
 }
 
 @keyframes metallic-shimmer-pass {
@@ -2017,31 +2104,32 @@
 
 .golden-fastpass-ticket {
   position: relative;
-  border: 1.5px solid rgba(245, 158, 11, 0.35) !important;
-  background: linear-gradient(90deg, rgba(30, 22, 14, 0.9) 0%, rgba(18, 12, 6, 0.95) 100%) !important;
+  border: 2px solid #1976D2 !important; /* Royal Blue */
+  background: #ffffff !important; /* White */
   border-radius: 14px !important;
   padding: 14px 18px !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(245, 158, 11, 0.04) !important;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.1) !important;
 }
 
 .golden-fastpass-ticket::before {
   content: '';
   position: absolute;
   inset: 2.5px;
-  border: 1px dashed rgba(245, 158, 11, 0.15);
+  border: 1px dashed #1976D2; /* Royal Blue */
   border-radius: 11px;
   pointer-events: none;
   z-index: 5;
+  opacity: 0.35;
 }
 
 .golden-fastpass-ticket:hover {
-  border-color: rgba(245, 158, 11, 0.8) !important;
-  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.25), inset 0 0 12px rgba(245, 158, 11, 0.08) !important;
+  border-color: #1976D2 !important;
+  box-shadow: 0 8px 20px rgba(25, 118, 210, 0.25) !important;
 }
 
-/* Golden Fast-Pass Ticket Notch Left & Right cutouts */
+/* Golden Fast-Pass Ticket Notch Left & Right cutouts matched to Baby Blue popup */
 .ticket-notch-l {
   position: absolute;
   left: -8.5px;
@@ -2050,9 +2138,9 @@
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  background-color: #0c0805; /* Matches core modal container background */
-  border-right: 1.5px solid rgba(245, 158, 11, 0.5);
-  box-shadow: inset -3px 0 5px rgba(0, 0, 0, 0.8);
+  background-color: #E3F2FD !important; /* Blends inside Baby Blue */
+  border-right: 2px solid #1976D2 !important;
+  box-shadow: inset -2px 0 3px rgba(0, 0, 0, 0.05);
   z-index: 20;
 }
 
@@ -2064,10 +2152,38 @@
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  background-color: #0c0805;
-  border-left: 1.5px solid rgba(245, 158, 11, 0.5);
-  box-shadow: inset 3px 0 5px rgba(0, 0, 0, 0.8);
+  background-color: #E3F2FD !important; /* Blends inside Baby Blue */
+  border-left: 2px solid #1976D2 !important;
+  box-shadow: inset 2px 0 3px rgba(0, 0, 0, 0.05);
   z-index: 20;
+}
+
+/* Inner ticket arcade voting buttons customized in Sunshine container */
+.ticket-container-modal .ticket-slot-arcade-btn {
+  background: #FFD600 !important; /* Sunny Yellow */
+  border: 3px solid #1976D2 !important; /* Royal Blue */
+  box-shadow: 
+    0 3px 0 #1976D2, 
+    0 4px 6px rgba(0, 0, 0, 0.15) !important;
+  color: #1976D2 !important; /* Royal Blue */
+  text-shadow: none !important;
+}
+
+.ticket-container-modal .ticket-slot-arcade-btn:hover {
+  background: #ffeb3b !important;
+  border-color: #1976D2 !important;
+  box-shadow: 
+    0 4px 0 #1976D2, 
+    0 6px 12px rgba(25, 118, 210, 0.25) !important;
+}
+
+.ticket-container-modal .ticket-slot-arcade-btn.punched {
+  background: #E3F2FD !important;
+  border-color: #1976D2 !important;
+  box-shadow: 
+    0 2px 0 #1976D2, 
+    0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  color: #1976D2 !important;
 }
 
 /* Interactive Ticket Puncher Animations */
@@ -2629,6 +2745,92 @@
     0 2px 4px rgba(0, 0, 0, 0.35), 
     inset 0 3px 6px rgba(0,0,0,0.9) !important;
 }
+
+/* ==========================================================================
+   RUSTIC WOODEN SIGN & SWINGING ANIMATION - BẢNG GỖ TREO DÂY THỪNG
+   ========================================================================== */
+
+@keyframes rusticSwing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(-2.5deg); }
+  75% { transform: rotate(1.5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.rustic-wood-sign {
+  position: relative;
+  background-color: #d1a87b !important; /* light-warm natural wood panel */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2)),
+    url('https://www.transparenttextures.com/patterns/wood-pattern.png') !important; /* wood grain pattern overlay */
+  background-blend-mode: multiply !important;
+  border: 4.5px solid #5c3a21 !important; /* sturdy round dark bark border edge */
+  border-radius: 12px !important;
+  box-shadow: 
+    0 20px 45px rgba(0,0,0,0.8), 
+    inset 0 2px 5px rgba(255,255,255,0.45), 
+    inset 0 -5px 15px rgba(69, 26, 3, 0.25) !important;
+  transform-origin: top center;
+  animation: rusticSwing 4.5s ease-in-out infinite;
+}
+
+/* Wooden carved/painted text with cine serif flavor */
+.wood-painted-handcrafted-text {
+  font-family: Georgia, serif !important;
+  color: #fffbeb !important; /* light yellow painted shade */
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  text-shadow: 
+    -1px -1px 0 #3b2314,  
+     1px -1px 0 #3b2314,
+    -1px  1px 0 #3b2314,
+     1px  1px 0 #3b2314,
+     0px 3px 6px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Vintage rope knot ring attachment */
+.wood-bracket-ring {
+  width: 14px;
+  height: 14px;
+  border: 3px solid #3d2516;
+  border-radius: 50%;
+  background: transparent;
+  position: relative;
+  box-shadow: 0 1.5px 3px rgba(0,0,0,0.5);
+}
+
+.rope-knot-tight {
+  width: 10px;
+  height: 18px;
+  background: #a18262;
+  border-radius: 4px;
+  border: 1px solid #7c6246;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.45);
+  position: relative;
+}
+
+.rope-knot-tight::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #5d4630;
+}
+
+.rope-knot-tight::before {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #5d4630;
+}
+
 
 
 
