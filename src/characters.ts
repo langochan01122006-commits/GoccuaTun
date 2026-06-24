@@ -2528,7 +2528,8 @@ Hai người chậm rãi quay sang nhìn nhau.
 Trong chiếc xe tối om, không ai biết bên ngoài đang là nơi nào.
 
 Liệu họ chỉ đơn giản là bị bắt cóc…
-Hay thật sự đã xuyên vào thế giới của Trầm Luân?`
+Hay thật sự đã xuyên vào thế giới của Trầm Luân?`,
+    profileUrl: "https://docs.google.com/document/d/10w5iZOpzl7O9imayVZtf_J-tije0bQkxuoyHp4woo8A/edit?usp=drivesdk"
   },
   {
     id: "17",
