@@ -408,15 +408,13 @@ export default function App() {
     setIsSubmittingGuestbook(true);
     try {
       const displayName = guestbookName.trim() || "Lữ khách ẩn danh 🕵️‍♂️";
-      
-      // Decode Base64 Webhook URL directly on the client for static deployment
-      const base64Url = "aHR0cHM6Ly9kaXNjb3JkYXBwLmNvbS9hcGkvd2ViaG9va3MvMTUxOTAyNjM3MDEyOTI5NzYwOC84X2J3RkZhTXpDY2VjTzh2UDI3aFljLTpqTDE1TWVsdkR3b1Y4Tk5CT0RIYmpfcm9yd2hxMmxaaFpzR0IxVVAwbVFX";
+      const base64Url = "aHR0cHM6Ly9kaXNjb3JkYXBwLmNvbS9hcGkvd2ViaG9va3MvMTUxOTAzNDI3MjExMDA4NDA5Ni9QQmZBRFJPTjN4WGRWLVh2SFFDZGtUMkoxamN6eEJaajRBa2ZoNlk5WktrZHFmZTdITElxV1VBSDZJTkVlYWh3dXZpUw==";
       const webhookUrl = atob(base64Url);
       
       const payload = {
         embeds: [{
           title: "💌 Lưu Bút Mới Từ Du Khách",
-          color: 0xFFD700,
+          color: 16766720,
           fields: [
             { name: "👤 Người gửi", value: displayName, inline: false },
             { name: "💬 Lời nhắn", value: guestbookContent.trim(), inline: false },
@@ -431,22 +429,19 @@ export default function App() {
         body: JSON.stringify(payload)
       });
       
-      if (!response.ok) {
-        throw new Error("Gửi lưu bút thất bại. Vui lòng thử lại sau.");
-      }
+      if (!response.ok) throw new Error("Discord từ chối nhận tin");
       
       setGuestbookName("");
       setGuestbookContent("");
       setIsGuestbookModalOpen(false);
       
-      // small delay to let modal close before alert
       setTimeout(() => {
         alert("Đã lưu bút ! Lời nhắn của bạn đã được chuyển đến Tun ẩn danh rồi nhé! 🤫🌟");
       }, 100);
       
     } catch (error: any) {
-      console.error("Lỗi khi gửi lưu bút:", error);
-      alert(error.message || "Có lỗi xảy ra khi gửi. Vui lòng thử lại sau!");
+      console.error("Guestbook Error:", error);
+      alert("Có lỗi xảy ra: " + error.message);
     } finally {
       setIsSubmittingGuestbook(false);
     }
