@@ -408,40 +408,39 @@ export default function App() {
     setIsSubmittingGuestbook(true);
     try {
       const displayName = guestbookName.trim() || "Lữ khách ẩn danh 🕵️‍♂️";
-      const base64Url = "aHR0cHM6Ly9kaXNjb3JkYXBwLmNvbS9hcGkvd2ViaG9va3MvMTUxOTAzNDI3MjExMDA4NDA5Ni9QQmZBRFJPTjN4WGRWLVh2SFFDZGtUMkoxamN6eEJaajRBa2ZoNlk5WktrZHFmZTdITElxV1VBSDZJTkVlYWh3dXZpUw==";
-      const webhookUrl = atob(base64Url);
       
       const payload = {
-        embeds: [{
-          title: "💌 Lưu Bút Mới Từ Du Khách",
-          color: 16766720,
-          fields: [
-            { name: "👤 Người gửi", value: displayName, inline: false },
-            { name: "💬 Lời nhắn", value: guestbookContent.trim(), inline: false },
-            { name: "⏰ Thời gian", value: new Date().toLocaleString('vi-VN'), inline: false }
-          ]
-        }]
+        service_id: 'service_2ib7s3w',
+        template_id: 'template_4yhh2dl',
+        user_id: 'Q-IDQSVmrzV05HbU_',
+        template_params: {
+          from_name: displayName,
+          message: guestbookContent.trim(),
+          to_email: 'langochan.01122006@gmail.com'
+        }
       };
 
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
       
-      if (!response.ok) throw new Error("Discord từ chối nhận tin");
+      if (!response.ok) {
+        throw new Error("Hệ thống EmailJS từ chối gửi thư.");
+      }
       
       setGuestbookName("");
       setGuestbookContent("");
       setIsGuestbookModalOpen(false);
       
       setTimeout(() => {
-        alert("Đã lưu bút ! Lời nhắn của bạn đã được chuyển đến Tun ẩn danh rồi nhé! 🤫🌟");
+        alert("Đã lưu bút! Lời nhắn ẩn danh của bạn đã được chuyển thẳng vào Gmail của Tun rồi nhé! 💌✨");
       }, 100);
       
     } catch (error: any) {
       console.error("Guestbook Error:", error);
-      alert("Có lỗi xảy ra: " + error.message);
+      alert("Có lỗi xảy ra khi gửi mail: " + error.message);
     } finally {
       setIsSubmittingGuestbook(false);
     }
