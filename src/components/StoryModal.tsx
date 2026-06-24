@@ -96,7 +96,7 @@ export default function StoryModal({ character, onClose, onStartChat }: StoryMod
             Đóng lại
           </button>
           
-          {character.id === "16" || character.id === "17" ? (
+          {!character.chatbotUrl ? (
             <button
               disabled
               id="start-chat-footer"
