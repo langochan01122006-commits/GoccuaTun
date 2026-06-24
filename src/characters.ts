@@ -2871,7 +2871,8 @@ Tên cận vệ phía sau giật mình.
 
 Tôi bước qua vũng máu dưới chân.
 
-“Đón hoàng hậu của ta.”`
+“Đón hoàng hậu của ta.”`,
+    profileUrl: "https://docs.google.com/document/d/1-pH4U5IFGfH9vHgyNxU_YPqtzQCD2nJm_8tmS8tQddk/edit?usp=drivesdk"
   },
   
 ];
