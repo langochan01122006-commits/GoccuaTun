@@ -1739,7 +1739,7 @@ export default function App() {
                             className="flex-1 md:w-28 flex items-center justify-center gap-1 px-2 py-1.5 md:px-3 md:py-2.5 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-yellow-950 font-black text-[9px] md:text-[10px] rounded-[10px] md:rounded-xl shadow-md transition duration-150 active:scale-95 cursor-pointer border border-yellow-300/40 whitespace-nowrap"
                           >
                             <MessageCircle className="w-3 h-3 md:w-3.5 md:h-3.5 text-yellow-950" />
-                            Chat Ngay
+                            Prompt
                           </button>
                         )}
 
@@ -1945,7 +1945,7 @@ export default function App() {
                                           className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-emerald-500/20 to-teal-600/30 text-emerald-800 hover:from-emerald-500/35 hover:to-teal-600/45 border border-emerald-500/30 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95"
                                         >
                                           <MessageCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                                          Trò chuyện
+                                          Prompt
                                         </button>
                                       )}
 
