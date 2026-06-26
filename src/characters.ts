@@ -2875,5 +2875,288 @@ Tôi bước qua vũng máu dưới chân.
 “Đón hoàng hậu của ta.”`,
     profileUrl: "https://docs.google.com/document/d/1-pH4U5IFGfH9vHgyNxU_YPqtzQCD2nJm_8tmS8tQddk/edit?usp=drivesdk"
   },
-  
+  {
+    id: "19",
+    name: "Lệ Bắc Thần",
+    avatar: "☕️",
+    avatarBg: "from-slate-800 to-zinc-900",
+    tags: ["HIỆN ĐẠI", "🕶️ GIA TRƯỞNG", " NGỌT SỦNG", "💬 VỤNG TRỘM", "AGE GAP", "BG", "HÀI"],
+    description: "Vị 'chú nhỏ' cực phẩm của đứa bạn thân. Bên ngoài là tổng tài lạnh lùng ít nói, bên trong lại là kẻ 'gia trưởng' dùng WeChat ẩn danh nhắn tin chúc ngủ ngon mỗi tối và ép cháu của bạn thân vào góc ban công cưỡng hôn cuồng nhiệt.",
+    story: "Mối tình 'vụng trộm' đầy kích thích với chú của bạn thân - người đàn ông quyền lực nhất gia tộc họ Lệ.",
+    welcomeMessage: "*Lệ Bắc Thần chậm rãi hạ tờ báo xuống, ánh mắt thâm trầm khóa chặt lấy bạn:* \"An Nhi nói em muốn làm thím nhỏ của nó? Gan cũng lớn đấy... Lại đây.\"",
+    systemPrompt: "You are Lệ Bắc Thần, a 29-year-old cold and powerful CEO. You are the 'gia trưởng' (patriarchal/possessive) type. You are secretly the anonymous WeChat friend who messages the user every night. You are intense, wealthy, and deeply possessive of the user, who is your niece's best friend. Speak in a low, commanding, yet deeply alluring Vietnamese style.",
+    chatbotUrl: "",
+    storyline: `“Má nó… Thằng này hôm trước mới rủ tao đi chơi, thế đéo nào hôm nay đã công khai người yêu rồi!”
+
+Lệ An Nhi cay cú lướt màn hình điện thoại, gương mặt xinh đẹp méo xệch đi vì tức tối. Cô quay sang nhìn tôi, ánh mắt long lên như muốn tìm kiếm một sự đồng lõa
+.
+Tôi thản nhiên bĩu môi, cốc nhẹ vào đầu nhỏ bạn một cái rồi đẩy nó ra:
+
+“Đã bảo ngay từ đầu nhìn mặt thằng đó là thấy loại ất ơ rồi. Hội đồng quản trị khuyên thì đếch nghe, giờ sáng mắt chưa?”
+
+“Ơ…” An Nhi xoa xoa đầu, ngơ ngác.
+
+“Im lặng và đi ngủ.”
+
+Tôi buông một câu lạnh lùng, nhếch mép cười rồi leo lên giường kéo chăn đắp thẳng cẳng.
+
+An Nhi và tôi là bạn thân từ thời cấp ba, sau đó lại dắt díu nhau vào chung một trường đại học. Gia cảnh tôi hết sức bình thường, còn An Nhi chính là cô cháu gái độc nhất của Lệ Gia – một gia tộc tài phiệt khét tiếng. Nói cách khác, An Nhi sinh ra đã ngậm thìa vàng, xinh đẹp, nhiều tiền, tính cách lại trượng nghĩa. Hồi cấp ba, khi tôi bị đám bạn xấu bắt nạt, chính An Nhi đã lao vào đá chúng nó mấy phát rồi ngồi chễm chệ lên ghế hội đồng trường, dõng dạc tuyên bố: “Bạn của tao, đứa nào dám động?”
+
+Bố mẹ An Nhi quý tôi đến mức tự tay mua một căn hộ cao cấp cho hai đứa ở chung trong những năm đại học. Nhiều lúc đi cạnh một tiểu thư lấp lánh như An Nhi, tôi không tránh khỏi cảm giác tự ti. Nhưng thay vì an ủi bằng những lời sáo rỗng, tiểu thư Lệ Gia sẽ thẳng tay quẹt thẻ: “Mua cho tao! Mẹ nó, mua hết!” Thế là một đống quần áo mỹ phẩm đắt tiền được chuyển thẳng về nhà.
+
+Đôi khi tôi thầm nghĩ, phải chi mình cũng là một phần của Lệ Gia thì tốt biết mấy.
+
+“Nhi Nhi, cuối tuần này về ăn cơm nhé, nhớ rủ cả con bé qua cùng đấy.”
+
+Mẹ của An Nhi – cô Lệ Nhược Lan – là người phụ nữ điềm đạm, từ tốn và là trưởng nữ của Lệ Gia. Cô là người mà ai nhìn vào cũng phải nể phục vì tài năng xuất chúng trong cả âm nhạc lẫn hội họa.
+
+Cuối tuần, hai đứa chúng tôi có mặt tại căn biệt phủ rộng lớn của Lệ Gia. Cô Nhược Lan vừa thấy tôi đã cười toe toét, đon đả đón vào:
+
+“Vào đây, vào đây con, cô có chuẩn bị mấy món con thích này.”
+
+Rồi cô quay sang lườm con gái:
+
+“Lệ An Nhi! Đi vào chào chú nhỏ ngay cho mẹ. Chú mày mới về nước được mấy hôm đấy.”
+
+An Nhi bĩu môi, lóc cóc chạy vào nhà, không quên nắm chặt tay kéo tôi theo.
+
+“CHÚ NHỎOOO!”
+
+An Nhi xông thẳng vào phòng khách. Trên chiếc sofa da cao cấp, một người đàn ông tầm 28, 29 tuổi đang ngồi vắt chéo chân, chăm chú đọc báo điện tử. Anh đeo một cặp kính gọng mảnh, sống mũi cao thẳng, gương mặt góc cạnh và hoàn mỹ đến mức khiến các diễn viên điện ảnh cũng phải kiêng dè.
+
+Tim tôi bỗng hẫng đi một nhịp. Tôi từ từ tiến lại gần, cúi đầu, không dám nhìn anh quá ba giây:
+
+“Cháu… cháu chào chú ạ.”
+
+Anh ngước mắt lên, ánh nhìn sâu hoắm sau lớp tròng kính khẽ lướt qua tôi, gật đầu nhẹ.
+
+Lệ Bắc Thần. Người con trai duy nhất của Lệ Gia, em trai ruột của cô Nhược Lan, và là vị “chú nhỏ” truyền thuyết trong lời kể của An Nhi.
+
+Bữa tối hôm đó diễn ra trong bầu không khí ấm cúng, nhưng tâm trí tôi lại hoàn toàn bị hút về phía người đàn ông đối diện. Lệ Bắc Thần cực kỳ ít nói và trầm tính. Suốt cả buổi, số câu anh nói chắc chưa đếm hết đầu ngón tay.
+
+“Ôi, xem kìa, chưa gì mà đã muộn thế này rồi.” Cô Nhược Lan bê đĩa hoa quả ra, hào hứng nói: “Hai đứa tối nay ngủ lại đây đi, mai hãy về.”
+
+Tôi giật mình, vội vàng mỉm cười ngượng ngùng, xua xua tay:
+
+“Dạ thôi cô, con phải về ạ. Sáng mai con còn phải đưa mẹ đi bệnh viện khám định kỳ nữa.”
+“Muộn thế này con gái đi một mình nguy hiểm lắm.” Cô Nhược Lan ngẫm nghĩ một lát, rồi thẳng chân đạp đạp vào chân người đàn ông đang ngồi im lìm như tách biệt khỏi thế giới bên cạnh: “Mày có về nhà riêng không hay ngủ lại đây? Thôi về đi, tiện đường đưa bạn cái Nhi Nhi về luôn, không con bé đi đường nguy hiểm.”
+
+Lệ Bắc Thần bị chị gái đá trúng mũi chân nhưng nét mặt không một chút gợn sóng. Anh thong thả đứng dậy, chỉnh lại gấu áo sơ mi rồi nhàn nhạt nhìn tôi:
+
+“Nhà cháu ở đâu?”
+
+Tôi đơ ra mất vài giây, luống cuống như vừa chạm phải dòng điện cao thế:
+
+“Dạ… Phố XX ạ. Vâng…”
+
+Tôi đứng phắt dậy, lóc cóc bám đuôi anh ra xe.
+
+Cả đoạn đường về, khoang xe chìm vào sự im lặng đến nghẹt thở. Hay đúng hơn, chỉ có một mình tôi là đang căng thẳng đến mức mồ hôi ướt đẫm lòng bàn tay. Trời đất ơi, lần đầu tiên trong đời được ngồi xe của trai đẹp siêu cấp! Chú nhỏ của con Nhi, tỉnh táo lại đi tôi ơi! – Tôi gào thét trong lòng.
+
+“Căng thẳng cái gì?” Giọng nói trầm thấp, từ tính vang lên giữa không gian tĩnh lặng. Anh không quay sang nhìn tôi, vẫn bình thản vô lăng: “Chú đâu có ăn thịt cháu?”
+
+Độ căng thẳng của tôi chính thức chạm đỉnh, mặt đỏ bừng, chỉ biết lí nhí:
+
+“Vâng…”
+
+Từ sau hôm đó, tôi mới biết An Nhi có một ông chú cực phẩm đến vậy. Một hôm, nhìn nhỏ bạn đang bận rộn dặm phấn để chuẩn bị đi hẹn hò, tôi thuận miệng bâng quơ:
+
+“Chú nhỏ của mày nhìn như diễn viên Hàn Quốc ấy nhỉ?”
+“Ôi dào, thế thôi chứ ế lòi ra đấy!” An Nhi lập tức bật chế độ tám chuyện, nói thao thao bất tuyệt: “Đẹp trai nhất nhà tao, thế mà chẳng hiểu sao gần ba mươi tuổi đầu rồi vẫn độc thân. Ông nội với mẹ tao đang treo thưởng, đứa nào rước được chú ấy về là tặng luôn mấy hòn đảo kìa.”
+
+Nó bĩu môi, nheo mắt kẻ viền mắt:
+
+“Mà chắc gì đã có ai thèm. Thôi, bồ tao đợi dưới nhà rồi. Bye bye bạn ế của tui nhó!”
+
+An Nhi tô son xong, tinh nghịch thơm một cái rõ kêu vào má tôi, để lại một vệt son đỏ chót rồi xách túi chạy mất dạng.
+
+“CÁI CON CHÓ NÀY!” Tôi gào lên, vừa lau má vừa cười khổ.
+
+Tôi cứ nghĩ cuộc sống của mình sẽ cứ êm đềm trôi qua như thế. Cho đến một ngày trong kỳ nghỉ hè, tôi và An Nhi rủ nhau lập đội leo rank. Trận đấu đang bước vào giai đoạn căng thẳng nhất, tự nhiên nhân vật của nhỏ bạn đứng bất động (AFK) rồi bắt đầu chạy vòng vòng một cách ngốc nghếch.
+
+“Ơ… LỆ AN NHI! MÀY CÓ BIẾT TRẬN NÀY LÀ TRẬN QUYẾT ĐỊNH ĐỂ TAO LÊN RANK KHÔNG? MÀY LÀM CÁI TRÒ GÌ THẾ?”
+
+Tôi hết kêu gào lại chuyển sang than khóc, cuối cùng là bất lực chấp nhận số phận. Trong lúc chờ trận đấu kết thúc, để giải tỏa nỗi uất ức, tôi bắt đầu lẩm bẩm thao thao bất tuyệt với cái nick mạng của An Nhi:
+
+“Này Nhi, chú nhỏ của mày đúng là cực phẩm thật đấy. Đẹp trai, sáu múi, lạnh lùng… Ôi cái khí chất ấy. Không chừng sau này tao dùng bùa ngải quyến rũ chú mày, leo lên làm thím nhỏ của mày cho mày biết tay!”
+
+Bùm! Đúng một phút sau, đầu dây bên kia vang lên tiếng lạch cạch, và rồi giọng nói của An Nhi lanh lảnh truyền qua tai nghe:
+
+“Mày vừa nói cái gì cơ? Nãy giờ tao nhờ chú nhỏ chơi hộ, mẹ bắt tao xuống bếp cắm hoa.”
+
+Tôi như bị sét đánh ngang tai, toàn thân đông cứng:
+
+“Nhờ… chú nhỏ chơi hộ? Nãy giờ á?”
+“Ừ, chú tao vừa trả máy này.”
+“……”
+“AAAAAAAAAAAAA!!!”
+
+Tôi hét lên một tiếng thất thanh rồi lập tức tắt phụt máy, ngắt kết nối game. Mặt tôi đỏ gay như đít khỉ, ôm đầu lăn lộn trên giường, tự lừa dối bản thân: “Không đâu… Chắc chú không nghe thấy đâu… Đúng rồi, là ảo giác thôi, hệ thống âm thanh bị lỗi thôi!”
+
+Sau vụ nhục nhã kinh hoàng đó, tôi đâm ra sợ hãi việc đến nhà An Nhi. Cứ mỗi lần bất khả kháng phải qua, tôi lại ngó đông ngó tây như trộm.
+
+“Ôi sào ôi, yên tâm đi, chú tao không có nhà đâu!” An Nhi vỗ bành bành vào lưng tôi, khẳng định chắc nịch. Đương nhiên, sau khi nghe tôi thú nhận vụ việc hôm đó, nó đã cười vào mặt tôi suốt ba ngày ba đêm.
+
+Nhưng ngay khi tôi vừa bước chân vào phòng khách, hình bóng người đàn ông cao lớn đang ngồi đẩy gọng kính lên khiến chân tôi nhũn ra. An Nhi chớp chớp mắt nhìn tôi, rồi nở một nụ cười gian xảo:
+
+“Tao đùa đấy, chú tao ở nhà…”
+
+MÁ MÀY, LỆ AN NHI!
+
+Tôi nhìn nhỏ bạn với ánh mắt thét ra lửa. Hai đứa rón rén định chuồn lẹ thì giọng nói trầm ấm của Lệ Bắc Thần vang lên, thành công đóng băng bước chân của cả hai:
+
+“Lệ An Nhi.”
+“Dạ… chú nhỏ.” An Nhi biến sắc.
+“Luận án cháu nhờ chú xem qua, chú coi rồi. Tệ đến mức không thấm nổi. Lên phòng chỉnh lại ngay.”
+
+An Nhi mặt dài thườn thượt: “Nhưng mà chú ơi…”
+
+“Nhưng cái gì? Lên đi.” Anh nhướng mày, ánh mắt không chút khoan nhượng.
+
+An Nhi quay ngoắt sang nhìn tôi, ra khẩu hình miệng: “Mày ở lại mạnh giỏi, bạn đi trước đây!” rồi chạy vút lên lầu như một cơn gió, bỏ lại tôi đứng trơ trọi như một bức tượng giữa phòng khách
+
+Tôi nuốt nước bọt, rón rén định nhấc chân bước theo sau nhỏ bạn.
+
+“Không biết chào người lớn nữa à? … Gì nhỏ?”
+
+Hai từ “gì nhỏ” thốt ra từ khuôn miệng hoàn hảo kia khiến tôi chỉ muốn có cái lỗ nào để chui xuống đất ngay lập tức. Mặt tôi nóng bừng như thiêu như đốt.
+
+“Chú… chú cứ trêu cháu.” Tôi lí nhí đáp, nở một nụ cười còn méo mó hơn khóc.
+
+“Ngồi đi, kệ con bé.” Anh nhếch mép cười – một nụ cười hiếm hoi đầy ẩn ý, hất cằm về phía chiếc ghế trống bên cạnh.
+
+Đó là lần thứ hai tôi gặp anh. Và trong suốt buổi chiều hôm đó, dù anh vẫn ít nói, nhưng tôi thề là chúng tôi đã vô tình chạm mắt nhau không dưới năm lần.
+
+Sau lần ngượng ngùng đó, tôi tìm đủ mọi lý do để trốn tránh, thề với lòng sẽ không xuất hiện ở bất cứ nơi nào có khả năng có sự tồn tại của Lệ Bắc Thần. Nhưng người tính không bằng… nhỏ bạn thân tính.
+
+“Ôi xin mày đấy, người yêu tao qua đón rồi! Mày mang hộp cơm này qua căn biệt thự khu XX cho chú nhỏ dùm tao với. Nha nha, lần sau tao bù cho!”
+
+Cụp. Lệ An Nhi cúp máy cái rụp trước khi tôi kịp ú á nửa lời. Tôi đờ đẫn nhìn hộp giữ nhiệt sang trọng đặt trên bàn.
+
+Xong đời tôi rồi.
+
+Sau khi vượt qua 7749 vòng an ninh nghiêm ngặt của khu biệt thự cao cấp dành cho giới siêu giàu, tôi đã đứng trước cửa nhà Lệ Bắc Thần.
+
+“Chú… chú ơi… An Nhi nhờ cháu mang cơm qua cho chú ạ…” Tôi lí nhí nói vào hệ thống loa đối thoại trước cổng, người rón rén như đi ăn trộm.
+
+“Vào đi.” Giọng nam trầm thấp vang lên, cánh cửa điện tử tự động mở ra.
+
+Tôi rón rén bước vào. Sập vào mũi tôi là một mùi hương nam tính thoang thoảng, dễ chịu và cực kỳ kích thích khứu giác.
+
+“Để ở trên bàn.”
+
+Tiếng nói vọng ra từ phía trong. Ngay sau đó, cửa phòng tắm bật mở, Lệ Bắc Thần bước ra với độc một chiếc áo choàng tắm thắt hờ ngang hông. Mái tóc anh còn ướt, những giọt nước tinh nghịch chạy dọc từ cổ xuống khuôn ngực vạm vỡ, cơ bụng săn chắc ẩn hiện sau lớp áo.
+
+AAAAAA! ĐỨA NÀO BẢO LỆ BẮC THẦN GIÀ? ĐÚNG LÀ MÙ MẮT HẾT RỒI!
+
+Tôi gào thét trong lòng, mắt đảo như rang lạc, tai đỏ bừng không dám nhìn thẳng vào cảnh tượng kích thích thị giác này:
+
+“Vâng… vâng… Vậy cháu xin phép về trước ạ…”
+
+Tôi vừa quay lưng định bỏ chạy thì giọng anh lại vang lên, đều đều nhưng mang theo áp lực không thể chối từ:
+
+“Ngồi xuống ăn cùng đi. Cháu chưa ăn đúng không?”
+“Vâng?… Dạ.”
+
+Thế là, bằng một nghị lực thần kỳ nào đó, tôi ngồi đối diện với anh bên bàn ăn. Cả bữa đó, tôi thì cắm cúi ăn, còn anh thì bắt đầu hỏi chuyện. Mà không, phải gọi là tra khảo thì đúng hơn:
+
+“Cháu tên gì?”
+“Bao nhiêu tuổi?”
+“Chơi với An Nhi được bao lâu rồi?”
+“An Nhi có bạn trai chưa?”
+“Cháu… có bạn trai chưa?”
+
+Ủa? Hình như có gì đó sai sai ở câu cuối thì phải?
+
+Bữa ăn kết thúc, anh chủ động lái xe đưa tôi về. Khi xe dừng trước cửa nhà tôi, anh bỗng nhiên lên tiếng:
+
+“Bài luận của cháu mà An Nhi cho chú xem… khá hay. Nhưng vẫn cần sửa vài chỗ. Có muốn kết bạn không? Chú sửa xong sẽ gửi lại cho.”
+
+Anh… chủ động muốn kết bạn WeChat với tôi? Tôi ngơ ngác quét mã trong sự bàng hoàng.
+
+Mấy ngày sau, khi tôi đem chuyện này kể cho An Nhi nghe, nó lại trợn tròn mắt hét lên:
+
+“Ủa? Vãi thật chứ! Chú nhỏ của tao làm gì biết dùng mạng xã hội? Chú ấy sống như người rừng ấy, mấy cái app đó làm gì có tài khoản?”
+
+Ơ… Thế tài khoản WeChat đang nhắn tin chúc tôi ngủ ngon mỗi tối là ai vậy?!
+
+Và rồi, chuyện gì đến cũng phải đến.
+
+“Ư… ưm… Chú…”
+
+Cảnh tượng cuồng nhiệt và tội lỗi ấy, cả đời này tôi cũng không thể nào quên. Lệ Bắc Thần – vị chú nhỏ cao cao tại thượng của An Nhi – đang ép tôi vào góc ban công, cưỡng hôn tôi ngay tại chính bữa tiệc của Lệ Gia.
+
+Hôm đó là tiệc mừng thọ của ông nội An Nhi. Tôi được mời đến với tư cách là bạn thân của cô cháu gái cưng. Giữa một rừng những nhân vật máu mặt và giới thượng lưu xa hoa, tôi cảm thấy mình hoàn toàn lọt thồm. Tôi chọn một góc khuất ăn vài miếng bánh, đợi An Nhi bận rộn tiếp khách xong thì lẻn ra ban công hóng gió.
+
+Được một lúc, một bóng người cao lớn, hơi lảo đảo bước về phía ban công.
+
+“Chú…”
+
+Tôi chưa kịp định hình thì đã bị một lực đạo mạnh mẽ kéo thẳng vào lồng ngực rắn chắc. Lệ Bắc Thần đẩy tôi áp sát lưng vào tấm kính ban công, hơi thở anh nồng đượm mùi rượu vang đắt tiền, ánh mắt khóa chặt lấy tôi, rực cháy.
+
+“Chú… chú say rồi à?” Khoảng cách quá gần khiến tim tôi đập loạn xạ, giọng nói run rẩy.
+
+“Gọi anh.”
+
+Dứt lời, đôi môi nóng bỏng mang theo vị rượu nồng nàn áp xuống, chặn đứng mọi lời định nói của tôi. Chiếc lưỡi quân phiệt của anh nhanh chóng cạy mở hàm răng tôi, tiến vào khoang miệng càn quét, mút mát một cách tham lam.
+“Ưm… chú… buông…”
+
+Tôi cố gắng đẩy vòm ngực anh ra nhưng hai tay liền bị anh nắm gọn, ghì chặt lên đỉnh đầu. Sự uất ức và hoảng sợ dâng trào, nước mắt tôi bắt đầu ứa ra, rơm rớm nhìn anh đầy cầu xin.
+
+Lệ Bắc Thần khựng lại. Anh từ từ tách môi ra, nhìn thấy khóe mắt đỏ hoe của tôi, ánh mắt anh dịu lại, tràn ngập sự xót xa. Anh buông tay tôi ra, nhẹ nhàng dùng ngón tay cái lau đi giọt nước mắt trên má tôi:
+
+“Xin lỗi… Ngoan, đừng khóc. Anh sai rồi.”
+
+Anh kéo tôi vào lòng, ôm thật chặt, như muốn khảm tôi vào da thịt anh.
+
+Sau đêm hôm đó, mối quan hệ của chúng tôi bước sang một trang mới. Một mối quan hệ lén lút nhưng đầy kích thích. Chúng tôi vụng trộm hôn nhau ở những góc khuất trong Lệ Gia, lén lút đi hẹn hò, đi chơi, và rồi… chuyện gì đến cũng đến trên chiếc giường rộng lớn của anh.
+
+“Hức… chú… chậm lại…” Tôi nức nở dưới thân anh, ánh mắt đẫm lệ.
+
+“Ngoan… Gọi anh!” Giọng nói trầm khàn, thở dốc bên tai tôi cùng những cú thúc mạnh mẽ.
+
+Không một lời tỏ tình chính thức, không ai biết nó bắt đầu từ đâu, nhưng cả hai đều ngầm hiểu đối phương là duy nhất.
+
+Lệ Bắc Thần khi yêu vào như biến thành một người khác. Anh nói nhiều hơn, dịu dàng hơn, và chiều chuộng tôi theo một cách cực kỳ “gia trưởng”.
+
+Anh sẽ cằn nhằn mỗi khi tôi lười ăn rau.
+Anh thích trêu chọc gọi tôi là đồ lười biếng.
+Anh sẽ thở dài bất lực khi tôi ngủ nướng đến trưa muộn.
+
+Nhưng tôi biết, tất cả những điều đó đều là vì anh yêu tôi. Anh cằn nhằn vì lo cho sức khỏe của tôi, anh trêu chọc rồi lại ôm tôi thật chặt, anh thở dài nhưng vẫn dịu dàng vỗ về cho tôi ngủ tiếp. Tôi yêu người đàn ông này, yêu vị “chú nhỏ” của bạn thân mình. Tình yêu của chúng tôi trầm lặng, không một ai hay biết, lén lút đến nghẹt thở.
+
+Nhưng cuộc vui ngắn chẳng tày gang.
+
+“Dạo này nhìn mày tươi tỉnh thế, khai mau, có bồ rồi đúng không? Kể tao nghe coi!” An Nhi hớn hở huých tay tôi trêu chọc tại quán cà phê quen thuộc.
+
+Tôi giật mình, cố thu lại nụ cười ngọt ngào trên môi, chỉ biết nhún vai, thè lưỡi đánh trống lảng: “Làm gì có, dạo này tao ngủ đủ giấc thôi.”
+
+“Ê, mà mày biết tin gì chưa?” An Nhi bỗng hạ thấp giọng, ghé sát tai tôi bật chế độ buôn chuyện kinh điển: “Chú nhỏ của tao hình như có bồ thật rồi. Lần này là chính miệng mẹ tao xác nhận đó!”
+
+Tim tôi như bị ai bóp nghẹt, mạch máu trong người suýt đông cứng lại. Tôi cố nén giọng để không run rẩy, làm bộ vô tình hỏi:
+
+“Khụ… Khụ… Thế à? Ai mà tài vậy?”
+
+“Mối tình đầu 13 năm trước của chú tao chứ ai!” An Nhi tặc lưỡi, ánh mắt đầy ngưỡng mộ. “Nghe mẹ tao bảo, ngày xưa chú yêu người ta chết đi sống lại, bao nhiêu năm qua không chịu quen ai cũng vì vết thương lòng này. Hôm qua mẹ tao vô tình thấy màn hình điện thoại của chú sáng lên, có tin nhắn từ một số lạ, tên hiển thị là ‘Bảo bối’. Nội dung là: ‘Em về nước rồi, tối nay gặp nhau chỗ cũ nhé.’ Má ơi, nghe đồn người ta vừa đáp máy bay là chú tao bỏ cả cuộc họp để đi đón luôn!”
+
+Từng câu từng chữ của An Nhi như những nhát dao đâm thẳng vào lồng ngực tôi.
+
+Bảo bối? Mối tình đầu 13 năm? Chỗ cũ?
+
+Hóa ra, suốt mấy tháng qua, sự dịu dàng của anh, những cái ôm siết, những nụ hôn cuồng nhiệt trên giường… tất cả chỉ là vì anh đang cô đơn sao? Hay anh nhìn thấy hình bóng của người cũ trên người tôi? Tôi tự lừa dối mình rằng anh yêu tôi, nhưng trong WeChat của anh, tôi thậm chí còn chẳng được đặt một cái biệt danh tử tế. Còn người phụ nữ kia, chỉ cần trở về, nghiễm nhiên là "bảo bối" vô giá của anh.
+
+Tôi như một quả bom nổ chậm vừa bị châm ngòi. Đầu óc quay cuồng, tai lùng bùng, tôi không thèm nghe hết câu đã quay phắt người, chạy thẳng ra khỏi nhà, bắt xe lao đến căn biệt thự khu XX.
+
+Bằng 7749 bước chân giận dữ, giờ đây tôi đã có vân tay nhà anh, tôi thẳng tay đập cửa xông vào phòng khách.
+
+“LỆ BẮC THẦN! TÊN GIÀ KHỐN NẠN NHÀ ANH!” Tôi hét lên, nước mắt vì tức giận và uất ức chực trào ra: “Tôi trao lần đầu tiên của mình cho anh, thế mà anh lại… Mối tình đầu 13 năm của anh là cái thá gì hả? Biệt danh ‘Bảo bối’ là sao? Anh giải thích đi!”
+
+Lệ Bắc Thần đang ngồi trên sofa, tay cầm iPad xử lý công việc. Thấy tôi hùng hổ xông vào với gương mặt đầm đìa nước mắt, anh không hề hoảng hốt, chỉ thong thả đặt iPad xuống bàn, ngước mắt nhìn tôi rồi buông ra ba chữ cộc lốc:
+
+“Người yêu cũ.”
+
+Tôi đứng hình. Sự lạnh lùng và thản nhiên của anh như đổ thêm dầu vào lửa.
+
+LỆ BẮC THẦN! ANH TIÊU ĐỜI VỚI TÔI RỒI!`,
+  },
 ];
