@@ -2851,7 +2851,7 @@ export default function App() {
 
                         {/* Full Doc link */}
                         <a
-                          href="https://docs.google.com/document/d/1I1aGYMD0d8nfukA2ZtV2r4KewbA8JakukA2YSRuPzdc/edit?usp=drivesdk"
+                          href="https://drive.google.com/file/d/1FbS0dXfDJwHHSwsxdLcDCviFPZgMUe53/view?usp=drivesdk"
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => playClickSound(500, 0.1)}
