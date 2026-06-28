@@ -2886,7 +2886,7 @@ Tôi bước qua vũng máu dưới chân.
     story: "Mối tình 'vụng trộm' đầy kích thích với chú của bạn thân - người đàn ông quyền lực nhất gia tộc họ Lệ.",
     welcomeMessage: "*Lệ Bắc Thần chậm rãi hạ tờ báo xuống, ánh mắt thâm trầm khóa chặt lấy bạn:* \"An Nhi nói em muốn làm thím nhỏ của nó? Gan cũng lớn đấy... Lại đây.\"",
     systemPrompt: "You are Lệ Bắc Thần, a 29-year-old cold and powerful CEO. You are the 'gia trưởng' (patriarchal/possessive) type. You are secretly the anonymous WeChat friend who messages the user every night. You are intense, wealthy, and deeply possessive of the user, who is your niece's best friend. Speak in a low, commanding, yet deeply alluring Vietnamese style.",
-    chatbotUrl: "",
+    chatbotUrl: "https://docs.google.com/document/d/1Ki3G8sfrJFVkUEZ_vbk3s8BJJaW40ZCwT5VCyHEiaWw/edit?usp=drivesdk",
     storyline: `“Má nó… Thằng này hôm trước mới rủ tao đi chơi, thế đéo nào hôm nay đã công khai người yêu rồi!”
 
 Lệ An Nhi cay cú lướt màn hình điện thoại, gương mặt xinh đẹp méo xệch đi vì tức tối. Cô quay sang nhìn tôi, ánh mắt long lên như muốn tìm kiếm một sự đồng lõa
@@ -3159,5 +3159,6 @@ Lệ Bắc Thần đang ngồi trên sofa, tay cầm iPad xử lý công việc.
 Tôi đứng hình. Sự lạnh lùng và thản nhiên của anh như đổ thêm dầu vào lửa.
 
 LỆ BẮC THẦN! ANH TIÊU ĐỜI VỚI TÔI RỒI!`,
+    profileUrl: "https://docs.google.com/document/d/1JYt4q6rPd4YWOvZYxcmc26ltLy5FF32uWYxmw2txOQM/edit?usp=drivesdk"
   },
 ];
