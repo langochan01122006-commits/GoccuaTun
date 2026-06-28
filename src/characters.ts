@@ -2541,7 +2541,7 @@ Hay thật sự đã xuyên vào thế giới của Trầm Luân?`,
     story: "Câu chuyện buồn về Giai Lệ - Ánh mặt trời cuối cùng ở phố đèn đỏ Hà Nội năm 1940.",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://docs.google.com/document/d/1JU0eUuCb_iooL9Q1TDoZhHxv_1RF3hjhivv2aeZ1Vyc/edit?usp=drivesdk",
     storyline: `Hà Nội – Mùa thu năm 1940
 “Con mẹ mày, đây là lần thứ mấy rồi hả?”
 “Nợ không trả nổi thì tao bán mày vào tiệm hát!”
