@@ -1823,7 +1823,7 @@ export default function App() {
                               style={{ 
                                 transform: `rotate(${rotationAngle}deg)`,
                               }}
-                              className={`plushie-card-container select-none ${isFlipped ? "flipped" : ""}`}
+                              className={`plushie-card-container relative select-none ${isFlipped ? "flipped" : ""}`}
                               onClick={() => {
                                 playClickSound(350, 0.08);
                                 setFlippedCardIds(prev => ({
@@ -1838,13 +1838,26 @@ export default function App() {
                                   className={`plushie-card-front ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative`}
                                   style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}
                                 >
+                                  {!char.chatbotUrl && (
+                                    <div 
+                                      className="absolute font-black pointer-events-none tracking-widest uppercase font-sans animate-pulse"
+                                      style={{ 
+                                        top: '12px', 
+                                        right: '12px', 
+                                        zIndex: 10,
+                                        color: '#ff4b2b',
+                                        fontSize: '11px',
+                                        textShadow: '0 0 6px rgba(255, 75, 43, 0.5)',
+                                      }}
+                                    >
+                                      NEW 🔥
+                                    </div>
+                                  )}
                                   <div className="plushie-inner-border"></div>
                                   
                                   {/* Top header of the plushie gacha certification card */}
                                   <div className={`flex justify-between items-center text-[7px] sm:text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
                                     <span>🎈 № 0{char.id} 🎈</span>
-                                    <span className="font-bold opacity-90 hidden sm:inline">{plushTheme.badge}</span>
-                                    <span className="font-bold opacity-90 sm:hidden">CERT</span>
                                   </div>
                                   
                                   {/* Gacha Sphere translucent sphere containing the chibi plushie */}
