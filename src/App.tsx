@@ -184,7 +184,7 @@ export default function App() {
   const [hoverOrb2, setHoverOrb2] = useState(false);
   
   // Custom Arcade Dispenser states
-  const [dispensedTicket, setDispensedTicket] = useState<'cam_nang' | 'ho_than' | null>(null);
+  const [dispensedTicket, setDispensedTicket] = useState<'cam_nang' | 'ho_than' | 'chuyen_sinh_couple' | 'chuyen_sinh_world' | null>(null);
   const [isArcadeVibrating, setIsArcadeVibrating] = useState(false);
   const [isArcadeSmoke, setIsArcadeSmoke] = useState(false);
   
@@ -2653,10 +2653,10 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* 2 separate interactive action arrays (Left: Blue, Right: Red) */}
+                  {/* 4 separate interactive action arrays */}
                   <div className="w-full grid grid-cols-2 gap-4 mt-4">
                     
-                    {/* Left Dispensation Station (Vé Cẩm Nang) */}
+                    {/* First Dispensation Station (Vé Cẩm Nang) */}
                     <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
                       <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
                         CẨM NANG CHƠI
@@ -2772,6 +2772,96 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* Third Dispensation Station (Lệnh Chuyển Sinh 2 Couple) */}
+                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
+                      <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
+                        CHUYỂN SINH COUPLE
+                      </span>
+                      
+                      <button
+                        onClick={() => {
+                          if (dispensedTicket === 'chuyen_sinh_couple') {
+                            playClickSound(260, 0.05);
+                            return;
+                          }
+                          playClickSound(220, 0.1);
+                          setIsArcadeSmoke(true);
+                          setTimeout(() => playClickSound(380, 0.1), 100);
+                          setTimeout(() => playClickSound(580, 0.1), 220);
+                          setTimeout(() => {
+                            setDispensedTicket('chuyen_sinh_couple');
+                            setIsArcadeSmoke(false);
+                          }, 600);
+                        }}
+                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#FFD600] border-b-4 border-[#1976D2] text-[#1976D2] shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
+                        title="🎫 Lệnh Chuyển Sinh 2 Couple"
+                      >
+                        🟡
+                      </button>
+
+                      <div className="flex flex-col items-center space-y-1.5 w-full mt-1">
+                        <div className="w-full h-1 bg-[#1976D2]/80 rounded shadow-[inset_0_1px_2px_rgba(25,118,210,0.5)] opacity-80" />
+                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-white shadow-inner w-full max-w-[110px] border border-[#1976D2]">
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#FFD600,#ffeb3b,#FFD600)] animate-spin" style={{ animationDuration: '1.2s' }} />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-[#FFD600] blur-[3px] transition-opacity" />
+                          <div className="relative bg-[#1976D2]/80 rounded-md flex items-center justify-center h-4 border border-[#1976D2]/40 z-10 shadow-[inset_0_2px_5px_rgba(25,118,210,0.5)]">
+                            <div className="w-11/12 h-[2px] bg-[#FFD600]/80 rounded-full border-b border-[#ffeb3b]/30 relative overflow-hidden">
+                              <div className="absolute inset-x-0 bottom-0 h-[1px] bg-[#fef08a]/80 animate-pulse" />
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-[7.5px] font-sans text-[#1976D2]/60 group-hover:text-[#1976D2] font-bold transition-colors uppercase tracking-tight">
+                          Kết Duyên Mệnh Kiếp
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Fourth Dispensation Station (Lệnh Chuyển Sinh Open World) */}
+                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
+                      <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
+                        CHUYỂN SINH THẾ GIỚI
+                      </span>
+                      
+                      <button
+                        onClick={() => {
+                          if (dispensedTicket === 'chuyen_sinh_world') {
+                            playClickSound(260, 0.05);
+                            return;
+                          }
+                          playClickSound(180, 0.12);
+                          setIsArcadeVibrating(true);
+                          setTimeout(() => playClickSound(160, 0.12), 100);
+                          setTimeout(() => playClickSound(190, 0.12), 200);
+                          setTimeout(() => playClickSound(150, 0.12), 300);
+                          setTimeout(() => playClickSound(220, 0.1), 400);
+                          setTimeout(() => {
+                            setDispensedTicket('chuyen_sinh_world');
+                            setIsArcadeVibrating(false);
+                          }, 550);
+                        }}
+                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#FFD600] border-b-4 border-[#1976D2] text-[#1976D2] shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
+                        title="🌀 Lệnh Chuyển Sinh Open World"
+                      >
+                        🟡
+                      </button>
+
+                      <div className="flex flex-col items-center space-y-1.5 w-full mt-1">
+                        <div className="w-full h-1 bg-[#1976D2]/80 rounded shadow-[inset_0_1px_2px_rgba(25,118,210,0.5)] opacity-80" />
+                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-white shadow-inner w-full max-w-[110px] border border-[#1976D2]">
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#FFD600,#ffeb3b,#FFD600)] animate-spin" style={{ animationDuration: '1.2s' }} />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-[#FFD600] blur-[3px] transition-opacity" />
+                          <div className="relative bg-[#1976D2]/80 rounded-md flex items-center justify-center h-4 border border-[#1976D2]/40 z-10 shadow-[inset_0_2px_5px_rgba(25,118,210,0.5)]">
+                            <div className="w-11/12 h-[2px] bg-[#FFD600]/80 rounded-full border-b border-[#ffeb3b]/30 relative overflow-hidden">
+                              <div className="absolute inset-x-0 bottom-0 h-[1px] bg-[#fef08a]/80 animate-pulse" />
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-[7.5px] font-sans text-stone-500 group-hover:text-[#ea580c] font-bold transition-colors uppercase tracking-tight">
+                          Khai Phá Tân Vị Diện
+                        </p>
+                      </div>
+                    </div>
+
                   </div>
 
                 </div>
@@ -2799,7 +2889,7 @@ export default function App() {
                     {/* Ticket top border style */}
                     <div className="flex justify-between text-[8px] font-mono text-[#1976D2]/60 uppercase tracking-widest border-b border-dashed border-[#1976D2]/30 pb-2 select-none">
                       <span>Arcade Ticket Dispenser v1.0</span>
-                      <span>Serial No: #{dispensedTicket === 'cam_nang' ? '9201-CN' : '7730-HT'}</span>
+                      <span>Serial No: #{dispensedTicket === 'cam_nang' ? '9201-CN' : dispensedTicket === 'ho_than' ? '7730-HT' : dispensedTicket === 'chuyen_sinh_couple' ? '8899-CP' : '3344-OW'}</span>
                     </div>
 
                     {dispensedTicket === 'cam_nang' ? (
@@ -2862,7 +2952,7 @@ export default function App() {
                           <span>Đọc Toàn Bộ Bản Thư Cẩm Nang 📖</span>
                         </a>
                       </div>
-                    ) : (
+                    ) : dispensedTicket === 'ho_than' ? (
                       /* HO THAN TICKET CONTENT */
                       <div className="flex-1 flex flex-col pt-3 text-left">
                         <div className="text-center mb-3 relative">
@@ -2914,6 +3004,66 @@ export default function App() {
                         >
                           <span>Xem Lệnh Chỉ Chống Bonk Đầy Đủ 🛡️</span>
                         </a>
+                      </div>
+                    ) : dispensedTicket === 'chuyen_sinh_couple' ? (
+                      <div className="flex-1 flex flex-col pt-3 text-left">
+                        <div className="text-center mb-3 relative">
+                          <span className="text-2xl">🎫</span>
+                          <h4 className="font-serif font-black text-[#1976D2] text-lg uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.2)]">
+                            LỆNH CHUYỂN SINH 2 COUPLE
+                          </h4>
+                          <p className="text-[9px] font-mono text-[#1976D2]/60 uppercase tracking-widest">
+                            Kết Duyên Mệnh Kiếp
+                          </p>
+                        </div>
+                        <div className="space-y-3 text-[#1976D2] overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
+                              ❤️ Kết Duyên Tiền Định
+                            </h5>
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
+                              Khởi tạo nhân duyên, đưa hai số phận gắn kết trong một vòng xoáy không gian, cùng nhau viết nên câu chuyện tình lãng mạn.
+                            </p>
+                          </div>
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
+                              🕊️ Song Hành Vạn Dặm
+                            </h5>
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
+                              Đồng hành chia sẻ vui buồn, nắm tay nhau vượt qua những thử thách chông gai để tìm đến kết cục viên mãn.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex-1 flex flex-col pt-3 text-left">
+                        <div className="text-center mb-3 relative">
+                          <span className="text-2xl">🌀</span>
+                          <h4 className="font-serif font-black text-[#1976D2] text-lg uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.2)]">
+                            LỆNH CHUYỂN SINH OPEN WORLD
+                          </h4>
+                          <p className="text-[9px] font-mono text-[#1976D2]/60 uppercase tracking-widest">
+                            Khai Phá Tân Vị Diện
+                          </p>
+                        </div>
+                        <div className="space-y-3 text-[#1976D2] overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
+                              🌍 Vùng Đất Khai Nguyên
+                            </h5>
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
+                              Một thế giới mở hoàn toàn mới, nơi mọi luật lệ và biên giới đều bị xóa nhòa. Khai mở những bí mật chưa từng được kể.
+                            </p>
+                          </div>
+                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
+                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
+                              ✨ Sứ Mệnh Chinh Phục
+                            </h5>
+                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
+                              Dấn bước vào hành trình phiêu lưu vô tận, gặp gỡ những nhân vật huyền thoại và tự tay nhào nặn lên vận mệnh của chính mình.
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     )}
 
