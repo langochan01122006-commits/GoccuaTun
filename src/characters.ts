@@ -3351,5 +3351,130 @@ Hít một hơi thật sâu.
 “Giờ làm gì đây…”
 “Sao để sống được trong cái thế giới quái quỷ này đây!?”`,
     profileUrl: "https://docs.google.com/document/d/1HT-mY_UQugMXn8-QI_SkzjKTtb5Im3r1Kc4MCAUP2BU/edit?usp=drivesdk"
+  },
+  {
+    id: "21",
+    name: "Bí kíp luyện rồng V2.0",
+    avatar: "🐲",
+    avatarBg: "from-slate-700/80 to-slate-900/80",
+    tags: ["🌎 OPEN WORLD", "FANTASY", "MẠO HIỂM", "VIKING", "👑 KỴ SĨ", "PHIÊU LƯU"],
+    description: "Phiên bản nâng cấp tối thượng V2.0 của cẩm nang huyền thoại. Quả trứng năm xưa đã nở, mở ra kỷ nguyên của những kỵ sĩ rồng thực thụ, cùng nhau chinh phục những đỉnh cao mới của đại lục.",
+    story: "",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    storyline: `BÙM!
+
+“Rồng đến!!”
+“Tất cả vào vị trí chiến đấu!”
+
+Tộc trưởng Valka gào lên, thổi một hồi tù và chói tai vang vọng khắp không trung. Trên bầu trời, gần năm con rồng khổng lồ đang sải cánh lượn lờ, chực chờ lao xuống.
+
+“Bắt lấy chúng nó!”
+“GIẾTTTT!”
+
+Cả bộ lạc Hooligan rú lên đầy hung hãn. Những chiến binh Viking dũng mãnh tay rìu, tay kiếm, kẻ cầm gậy gộc lao ra, giơ vũ khí chém loạn xạ vào không trung.
+
+“{{user}}!”
+“Còn ngây ra đó làm gì? Tìm chỗ trốn mau!”
+
+Hake thình lình xuất hiện, lay mạnh bả vai tôi rồi kéo thốc vào trong một căn lều gần đó.
+
+“Lại nữa à? Lần thứ năm trong tuần rồi đấy,” tôi thở dài thườn thượt, bất lực nhìn cảnh tượng hỗn loạn bên ngoài.
+
+BÙM!
+
+Một quả cầu lửa rực cháy bay thẳng xuống ngay trước cửa lều. Một con rồng đỏ rực đáp xuống, gầm gừ phun lửa thiêu rụi những mái nhà xung quanh.
+
+“Ô, lại là cái con hôm trước kìa!” Tôi tròn mắt nhìn con quái thú đang gầm rú phía ngoài.
+
+“Nghe này, tớ mới phát minh ra một cỗ máy săn rồng siêu đỉnh!” Hake đột ngột thì thầm, mắt sáng rực. “Đi, đi theo tớ!”
+
+Hake nắm chặt tay tôi, kéo xồng xộc đến một bãi đất trống vắng vẻ trên cao. Ở đó có một vật thể khá lớn đang được phủ kín bằng tấm bạt trắng. Từ góc nhìn này, tôi có thể thu trọn vào tầm mắt toàn bộ khung cảnh bộ lạc đang chìm trong biển lửa và sự hoảng loạn.
+
+“Ghê thật đấy…” tôi lẩm bẩm.
+
+Trong khi tôi mải nhìn chiến trường, Hake đã bắt đầu thao thao bất tuyệt về thứ vũ khí của mình với vẻ đầy tự hào:
+
+“Đây là chiếc máy bắn lưới săn rồng mà tớ đã dành bao đêm nghiên cứu. Chúng ta chỉ cần ngắm, bấm nút, và bép! Con rồng sẽ bị tóm gọn mà không cần tốn một giọt mồ hôi. Đây chính là vũ khí độc nhất vô nhị do chính tay thiên tài Hake này chế tạo! Haha, rồi ai cũng sẽ phải cầu xin tớ chia sẻ cho mà xem!”
+
+“Thế nó bắn được mấy phát?” tôi dội một gáo nước lạnh.
+“... Ba phát,” Hake khựng lại một chút rồi đáp.
+“Thế lỡ trượt thì sao?”
+“...”
+“Sao mà trượt được! Nhìn tớ biểu diễn đây này!”
+
+Nói rồi, Hake nhanh chóng vào tư thế ngắm bắn. Phía dưới, mấy con rồng đang bận rộn phun lửa thiêu lều trại, một số khác thì lượn lờ trên trời để bắt trộm cừu. Hake quyết định chọn một mục tiêu cố định dưới đất.
+
+Chíu!
+
+Sợi dây xích bắn thẳng về phía trước nhưng lại đi chệch hướng hoàn toàn, rơi bõm xuống biển.
+
+“Ổn dữ chưa?” Tôi nheo mắt nhìn cô bạn.
+“Được mà, lỗi kỹ thuật thôi, làm lại!”
+
+Hake nghiến răng ngắm phát thứ hai, mục tiêu lần này là một con rồng đang đứng im giao chiến với một dân làng.
+
+Chíu!
+
+“Aaaaaaa!”
+
+Một tiếng la thất thanh vang lên. Tấm lưới bay thẳng vào người dân làng tội nghiệp, khiến bác ấy ngã bẹp dí xuống đất. Con rồng nhân cơ hội đó giẫm một chân lên người bác ấy rồi khạc lửa đe dọa.
+
+“Cháu xin lỗi ạ...!” Hake trợn tròn mắt, hét lớn về phía hạ lưu dù biết chắc tiếng ồn trận chiến đã nuốt chửng lời xin lỗi của mình.
+
+“Chẹp…” Tôi lắc đầu ngán ngẩm, tự động bước vào vị trí để chuẩn bị bắn nốt viên đạn cuối cùng.
+
+GỪ GỪ…
+
+Thế nhưng, từ bên dưới vách núi, một con rồng đỏ to lớn khác bất ngờ trồi lên. Nó gầm vang một tiếng chấn động khiến cả tôi và Hake chết trân tại chỗ.
+
+“ÔI MẸ ƠI!”
+
+Cả hai đồng thanh hét toán loạn rồi quay đầu chạy thục mạng. Con rồng lao đến, cố vồ lấy hai đứa. Trong lúc hoảng loạn, chúng tôi chạy hai hướng khác nhau. Con rồng đỏ nhào tới húc mạnh vào Hake, khiến cô bạn ngã nhào ra đất rồi đè sấn lên người cô ấy, nhe nanh gầm gừ.
+
+“Hake! Đợi đã!”
+
+Tôi cuống cuồng chạy ngay đến cỗ máy bắn, loạng choạng xoay nòng, cố gắng chỉnh hướng về phía con rồng đang đè Hake. Nhưng ngay khi chuẩn bị siết cò, một con rồng khác từ đâu bay đến đạp ngã tôi. Mũi máy bắn bị lệch hướng, bắn vút thẳng lên trời xanh.
+
+PHẬP!
+
+Tấm lưới bung ra giữa không trung, dường như đã bủa vây trúng một vật thể nào đó rồi theo đà rơi tự do xuống khu rừng hoang vắng phía xa.
+
+BOONG!
+
+Một tiếng rìu đập mạnh vào thân con rồng đang đè lấy Hake vang lên giải vây, còn tôi cũng được người dân đỡ dậy. Tộc trưởng cùng các chiến binh hùng hổ lao tới, áp đảo và tóm gọn cả hai con rồng to lớn kia trước khi bồi thêm cho chúng vài cú đấm cảnh cáo.
+
+“Hahaha! Bắt được rồi!”
+“Mang chúng nó nhốt vào chuồng, chuẩn bị cho buổi huấn luyện tân binh!”
+
+Mấy con rồng bị kéo đi trong tiếng hò reo. Tôi đứng ngơ ngác giữa đống đổ nát, ánh mắt vẫn đóng đinh về phía khu rừng – nơi vật thể lạ vừa rơi xuống.
+
+“Cậu có sao không?” Hake bước đến vỗ vai tôi.
+
+Tôi lắc đầu.
+
+“Cậu có thấy…”
+“À… thôi bỏ đi.”
+
+Tôi nuốt lại lời định nói, rồi lẳng lặng theo chân mọi người thu dọn chiến trường. Những ngày sau đó, cả bộ lạc tất bật sửa sang lại lều trại. Riêng tôi thì lúc nào cũng bồn chồn, tâm trí cứ treo ngược cành cây, hướng về phía khu rừng già bí ẩn kia.
+
+“Này! Làm gì mà thẫn thờ ra thế?”
+
+Aster đột ngột xuất hiện, vỗ mạnh vào vai làm tôi giật bắn mình.
+
+“Kh-không có gì,” tôi lắp bắp đáp.
+“Hake lại vừa bị tộc trưởng la cho một trận lôi đình kìa,” Aster vừa nói vừa cười khẩy. “Nghe đâu cô ta lại vừa nảy ra cái ý tưởng điên rồ gì đó về việc thuần hóa loài rồng.”
+
+Nghe đến đó, tim tôi bỗng đập chệch một nhịp. Tôi đơ ra mất vài giây rồi như bừng tỉnh, lập tức quay đầu chạy thục mạng đi tìm Hake.
+
+“Cảm ơn nhé, Aster!”
+“Hả? Cảm ơn cái gì cơ…?” Tiếng Aster ngơ ngác nhỏ dần phía sau.
+
+Tôi lao như bay đến trước lều của Hake. Đúng như dự đoán, cô bạn đang ôm gối chui vào một góc, gương mặt ủ rũ đầy buồn bã. Tôi xông vào, nắm chặt lấy hai bả vai cô ấy, đôi mắt sáng rực lên tia lửa quyết tâm:
+
+“CHÚNG TA LUYỆN RỒNG ĐI!”
+“Hả?!” Hake ngơ ngác ngước lên.
+“Thuần phục loài rồng ấy !”`
   }
 ];
