@@ -3041,9 +3041,9 @@ export default function App() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => playClickSound(500, 0.1)}
-                          className="w-full mt-4 py-2.5 rounded-xl text-xs font-serif font-black text-center bg-[#FFD600] text-[#1976D2] border-2 border-[#1976D2] hover:bg-[#ffeb3b] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.15)]"
+                          className="w-full mt-4 py-3 rounded-xl text-xs font-serif font-black text-center bg-[#1976D2] text-white border-2 border-[#FFD600] hover:bg-[#1565C0] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.3)]"
                         >
-                          <span>Khai Mở Lệnh Chuyển Sinh 2 Couple 🎫</span>
+                          <span>🎟️ BẤM VÀO ĐÂY ĐỂ LẤY VÉ</span>
                         </a>
                       </div>
                     ) : (
@@ -3082,9 +3082,9 @@ export default function App() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => playClickSound(500, 0.1)}
-                          className="w-full mt-4 py-2.5 rounded-xl text-xs font-serif font-black text-center bg-[#FFD600] text-[#1976D2] border-2 border-[#1976D2] hover:bg-[#ffeb3b] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.15)]"
+                          className="w-full mt-4 py-3 rounded-xl text-xs font-serif font-black text-center bg-[#1976D2] text-white border-2 border-[#FFD600] hover:bg-[#1565C0] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.3)]"
                         >
-                          <span>Khai Mở Lệnh Chuyển Sinh Open World 🌀</span>
+                          <span>🎟️ BẤM VÀO ĐÂY ĐỂ LẤY VÉ</span>
                         </a>
                       </div>
                     )}
