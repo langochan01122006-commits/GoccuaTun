@@ -3510,6 +3510,352 @@ Tôi lao như bay đến trước lều của Hake. Đúng như dự đoán, cô
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "",
-    storyline: `• Chạy trốn quá khứ: Nữ chính rời đi vào một buổi chiều hoàng hôn nhuộm đỏ bầu trời, mang theo bí mật động trời và nỗi đau xé lòng, cắt đứt hoàn toàn liên lạc với nam chính trong suốt nhiều năm.\n• Cuộc gặp gỡ ngược nắng: Gặp lại nhau giữa thành phố xa lạ, anh không còn là chàng trai ấm áp năm xưa mà trở thành một tổng tài lạnh lùng, tàn nhẫn nhưng ánh mắt nhìn cô vẫn vẹn nguyên sự chiếm hữu điên cuồng.\n• Chữa lành rạn nứt: Những màn dây dưa, đau lòng thấu xương để rồi nhận ra tình yêu chưa từng biến mất. Sau cơn mưa trời lại sáng, anh gom hết dịu dàng cả đời này để ôm cô vào lòng, bù đắp cho những tháng ngày ngược nắng cô đơn.`
+    storyline: `“Uầy, hôm nay có phim mới ra hay lắm luôn!”
+
+Mai An nằm dài trên ghế sofa, vừa lướt điện thoại vừa huơ huơ tấm poster vừa in ra trước mặt tôi.
+
+“Phim gì?”
+“Hoàng Hôn Ngược Nắng, của đạo diễn Victor Vũ Nam.”
+
+Tôi ngẩng đầu nhìn qua, nhíu mày.
+
+“Ông nào vậy?”
+“Ai mà biết. Thấy TikTok review khóc sập rạp.”
+
+Tôi bĩu môi, gật đầu.
+
+“Đi.”
+
+CGV – 20:00
+
+Tôi và Mai An ôm hai thùng bắp rang cùng hai ly Pepsi, vừa đi vừa cười nói rồi bước vào rạp.
+
+“Tao chỉ sợ đang xem mắc đái thôi.”
+“Ráng nhịn đi bà nội.”
+
+Tôi khịt mũi, tìm đúng hàng ghế của mình rồi ngồi xuống.
+
+“Dăm ba mấy phim tình cảm này mà cũng đòi làm tao khóc á?”
+
+Tôi nhếch môi đầy tự tin nhìn sang Mai An.
+
+…
+
+Ba tiếng sau.
+
+“A… mẹ ơi… sao khổ dữ vậy trời…”
+
+Mai An gần như phải dìu tôi ra khỏi rạp. Tôi khóc đến mức hai mắt đỏ hoe, nước mắt nước mũi tèm lem. Mai An nhìn tôi, cố nhịn cười.
+
+“Ủa? Hồi nãy ai bảo không khóc?”
+
+Tôi còn chưa kịp đáp thì nhìn lên.
+
+…
+
+Con nhỏ cũng chẳng khá hơn. Đôi mắt sưng húp như hai con ếch, mascara lem nhem khắp mặt.
+
+Hai đứa nhìn nhau.
+Rồi lại khóc tiếp.
+
+Hoàng Hôn Ngược Nắng
+Đạo diễn: Victor Vũ Nam
+
+Bộ phim lấy bối cảnh từ những năm 1960 đến đầu thập niên 1980 tại vùng Cù lao Ông Chưởng, huyện Chợ Mới, tỉnh An Giang.
+
+Đó là câu chuyện về ba đứa trẻ lớn lên bên nhau giữa miền sông nước hiền hòa.
+
+Lê Hoài Nghĩa — Cu Lội.
+Huỳnh Hoàng Trọng — Cậu Bủm.
+Nguyễn Bích Ngọc — Bé Hột É.
+
+“Ê tụi bây! Con É có cái kẹp tóc đẹp ghê!”
+“Đưa đây tao coi!”
+
+Bịch!
+
+Bích Ngọc mới sáu tuổi bị mấy đứa con gái trong xóm xô ngã ngay gốc đa đầu làng. Bộ quần áo nâu bạc màu lấm đầy bụi đất.
+
+“Hức… trả… trả kẹp tóc cho É…”
+
+Con bé ôm đầu gối, vừa khóc vừa nấc.
+
+Đúng lúc ấy—
+
+“TRẢ KẸP TÓC CHO É NGAY!”
+
+Một cậu bé da ngăm chạy như bay từ đầu làng lao tới. Phía sau là một cậu nhóc tròn trịa, vừa chạy vừa sụt sịt.
+
+“Lội! Chờ tao với!”
+
+Lội đứng chắn trước mặt đám con gái.
+
+“Muốn gì?”
+“Mấy đứa còn dám bắt nạt Bé É nữa, tao bắt đầy xác ve bỏ lên đầu hết!”
+
+Nghe vậy, đám nhóc kia sợ phát khóc rồi bỏ chạy tán loạn.
+
+Bủm lập tức đỡ Ngọc đứng dậy.
+
+“É… có đau không?”
+“Đã bảo đừng đi một mình rồi mà.”
+“Đợi Lội với Bủm chứ.”
+
+Ngọc sụt sịt, đưa tay lau nước mắt.
+Rồi lặng lẽ nắm lấy tay hai cậu bé.
+Ba đứa lại ríu rít chạy ra cánh đồng phía sau làng.
+
+Thời gian cứ thế trôi.
+
+Ba đứa trẻ lớn lên cùng nhau.
+Đi học cùng nhau.
+Đi bắt cá, trèo cây, thả diều, trốn ngủ trưa…
+Tuổi thơ của chúng gần như chỉ có hình bóng của nhau.
+
+“É! Ra đây ăn bánh bao nè!”
+
+Bủm ôm khư khư ba cái bánh bao nóng hổi đứng trước cửa lớp gọi.
+
+“Ủa… Lội đâu rồi?”
+
+Vừa dứt lời. Ở cuối hành lang. Một cậu bé đen nhẻm đang bị thầy giáo xách tai.
+
+“Tôi nói em bao nhiêu lần rồi?”
+“Ai cho đá bóng trước phòng giám hiệu hả?”
+“Đau… đau… em biết lỗi rồi thầy!”
+
+Bủm và É nhìn nhau. Rồi chỉ biết đồng loạt thở dài.
+
+“Lại nữa…”
+
+Ba người.
+Ba hoàn cảnh.
+Ba cuộc đời hoàn toàn khác nhau.
+
+Lê Hoài Nghĩa sống cùng cha và bà nội. Cha cậu nghiện rượu, nghèo đến mức cả làng ai cũng biết. Mẹ thì chẳng ai từng thấy. Người ta gọi cậu là Cu Lội, bởi cậu lúc nào cũng đen nhẻm như vừa lội dưới bùn lên.
+
+Huỳnh Hoàng Trọng lại sống với bà ngoại trong căn nhà khang trang nhất vùng. Cha mẹ đi đâu chẳng ai rõ. Có người bảo họ bỏ rơi cậu, có người nói họ làm ăn xa.Bủm vốn mít ướt.Mỗi lần khóc nước mũi chảy lòng thòng nên cả làng gọi luôn là… Cậu Bủm.
+
+Còn Nguyễn Bích Ngọc…
+Con gái duy nhất của một gia đình nông dân hiền lành.Làn da trắng, đôi mắt đen láy, gương mặt xinh xắn như búp bê.Ai gặp cũng trìu mến gọi cô là…Bé Hột É.
+
+Cứ ngỡ.Ba người sẽ mãi là bạn.
+
+Nhưng rồi…
+
+Tuổi dậy thì đến.Tình cảm cũng dần thay đổi.
+
+Lội thích Ngọc.
+Bủm cũng thích Ngọc.
+
+Nhưng chẳng ai dám nói.Đến năm cuối cấp ba.
+
+Người lấy hết can đảm lại là Bủm.
+
+“É… tao… tao thích mày…”
+
+Cậu lắp bắp đỏ bừng mặt.
+
+Nhưng…
+
+Ngọc chỉ mỉm cười.
+
+“Xin lỗi nha Bủm.”
+
+Lội biết chuyện.Hai cậu con trai lần đầu cãi nhau.
+
+Giận dỗi.
+Gan đua.
+
+Tìm mọi cách để gây ấn tượng với Ngọc. Cho đến khi chính Ngọc đứng ra hòa giải. Tình bạn trở lại như cũ.
+
+Nhưng tình yêu…
+Thì chưa từng biến mất.
+
+“Sau này É tính làm gì?”
+“Học đại học.”
+“Ở đâu?”
+“Sài Gòn.”
+
+Ngọc cười thật tươi.
+
+“Nghe nói trên đó rộng lắm.”
+
+Chỉ một câu nói ấy. Đã gieo vào lòng hai chàng trai biết bao hy vọng.
+
+Chỉ tiếc…
+
+Tương lai vốn chẳng bao giờ đi theo ý con người.
+
+Ngọc đỗ đại học. Một mình lên Sài Gòn. Lội và Bủm vì hoàn cảnh gia đình nên đành ở lại.
+
+Một năm sau. Ngọc trở về.
+
+Nhưng không còn là cô bé Hột É ngày nào.
+
+Cô chê làng quê nghèo nàn.
+Chê những con người chân chất.
+Muốn quay lại thành phố càng sớm càng tốt.
+
+Lội và Bủm nhìn thấy sự thay đổi ấy.
+Nhưng chẳng ai trách cô.
+
+Ít lâu sau. Trọng được cha mẹ đón lên Sài Gòn.Chỉ còn Nghĩa ở lại.
+
+Vẫn sống nơi cù lao.
+Vẫn đợi.
+
+Trên thành phố.
+
+Trọng cuối cùng cũng gặp lại Ngọc. Nhưng cô gái năm xưa đã thay đổi hoàn toàn. Ngọc lao vào những cuộc vui.
+
+Đua đòi.
+Yêu hết người này đến người khác.
+Mọi lời khuyên của Trọng đều bị bỏ ngoài tai.
+Rồi…
+
+Cô mang thai. Không ai biết cha đứa bé là ai. Trong tuyệt vọng Ngọc tìm đến Trọng. Và Trọng…
+
+Đã chọn ở lại.
+
+Hai người thuê một căn phòng trọ nhỏ. Trọng chăm sóc cô từng chút một. Cứ ngỡ đó sẽ là khởi đầu của hạnh phúc.
+
+Nhưng…
+
+Gia đình Trọng phát hiện. Họ ép anh cưới một người khác. Bỏ lại Ngọc với cái bụng ngày một lớn.
+
+Không còn nơi nào để đi. Ngọc ôm bụng trở về cù lao. Người đầu tiên đón cô…
+
+Là Nghĩa.
+
+Anh chẳng hỏi quá khứ. Cũng không hỏi cha đứa bé là ai. Chỉ lặng lẽ ở bên.
+
+Sau này.
+
+Ngọc sinh một bé gái đặt tên là Bích. Con bé rất quý chú Nghĩa. Còn Trọng…
+
+Mỗi lần nhìn thấy đứa trẻ.
+Lòng anh lại đau như cắt.
+
+Mười mấy năm. Nghĩa vẫn ở đó đợi hai người bạn cũ trở về.
+
+Đến một ngày.
+Anh quyết định nói ra tất cả.
+
+“Ngọc.”
+“Anh thích em.”
+“Em xin lỗi…”
+
+Chỉ một cái lắc đầu. Là câu trả lời.
+
+Hai người đàn ông cùng yêu một cô gái như ánh hoàng hôn mãi mãi chẳng thể chạm tới ánh nắng.
+
+Nghĩa quyết định rời khỏi cù lao. Con tàu chậm rãi rời bến.
+
+Đúng lúc ấy, một người trong làng kể cho Ngọc nghe tất cả.
+
+Về những năm tháng Nghĩa lặng lẽ chờ đợi.
+Về tình yêu chưa từng đổi thay.
+
+Ngọc chết lặng
+ Thì ra
+
+Hoàng hôn vẫn luôn đứng ngược nắng chỉ để chờ một người quay đầu.
+
+Nhưng…
+Đã quá muộn.
+
+“Nghĩa!”
+“Quay lại đi!”
+“Em sai rồi!”
+“Nghĩa…”
+
+Tiếng khóc xé lòng vang vọng khắp bến sông. Con tàu vẫn chầm chậm rời xa.
+
+Không một lần quay đầu.
+
+“Không được…”
+“Tao phải đi chữa lành”
+
+Mai An vừa lau nước mắt vừa sụt sịt.
+
+“Đi ăn thịt nướng”
+“Đi”
+
+Hai đứa vừa khóc vừa bắt taxi.
+
+Sau hôm đó.
+
+TikTok bỗng rộ lên tin đồn Hoàng Hôn Ngược Nắng có đến hai cái kết. Không cần biết thật hay giả tôi và Mai An lập tức mua vé xem lại.
+
+“Tao không chấp nhận cái kết đó!”
+
+Mai An vẫn còn hùng hổ lải nhải trên taxi. Tôi còn chưa kịp đáp.
+
+Một chiếc ô tô từ hướng đối diện lao tới.
+
+RẦM!!
+
+Tiếng va chạm chát chúa vang lên.
+Tiếng người hét thất thanh.
+
+Mọi thứ trước mắt tôi nhòe đi rồi chìm hẳn vào bóng tối.
+
+…
+
+Chớp
+Chớp
+
+Ánh nắng chói chang rọi thẳng vào mắt. Tôi cau mày mở mắt.
+
+“An…”
+“Mày còn sống không?”
+“…Không biết nữa.”
+
+Giọng Mai An run run vang lên ngay bên cạnh
+
+Tôi chống tay ngồi dậy. Trước mắt là một cây đa cổ thụ khổng lồ. Xa xa là những mái nhà tranh. Con sông lững lờ.
+
+Tiếng gà gáy.
+Tiếng trẻ con cười đùa.
+
+Khung cảnh y hệt…
+
+“Ê…”
+“Sao mày bắt nạt con bé vậy”
+
+Tôi nhìn cô bé đang ngồi khóc rồi nhìn con bạn mình đứng phía trước
+
+“Nhưng mà mày cầm kẹp tóc nhỏ mà…”
+Tôi trong tay mình là một chiếc kẹp tóc màu hồng vẫn còn vương vài sợi tóc đen.
+
+“…”
+“ôi mẹ ơi”
+
+Đúng lúc ấy, một tiếng hét quen thuộc vang lên từ đầu làng.
+
+“TRÁNH RAAAAAA!”
+
+Tôi và Mai An đồng loạt quay đầu thấy một cậu bé da ngăm đang hùng hổ chạy tới. Phía sau là một cậu bé vừa chạy vừa sụt sịt.
+
+…
+
+Tôi nhìn Mai An.
+Mai An nhìn tôi.
+
+Hai đứa im lặng đúng ba giây.
+Rồi đồng thanh gào lên.
+
+“ÔI BỎ MẸ RỒI!!”
+
+Đúng vậy
+Nếu mọi người đọc đến đây mà vẫn chưa đoán ra…
+Thì xin chúc mừng
+Hai đứa tôi…
+Xuyên không thật rồi.
+
+Mà còn xuyên vào xác… hai đứa con nít chuyên đi bắt nạt nữ chính nữa chứ!
+
+Đời đúng là không cho ai con đường sống !`
   }
 ];
