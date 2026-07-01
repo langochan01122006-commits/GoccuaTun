@@ -3172,8 +3172,184 @@ LỆ BẮC THẦN! ANH TIÊU ĐỜI VỚI TÔI RỒI!`,
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "",
-    storyline: `• Thế giới mở thênh thang: Đặt chân vào đại lục giả tưởng đầy rẫy hiểm nguy, nơi các loài rồng cổ xưa thống trị bầu trời và con người phải sinh tồn bằng sức mạnh ma pháp.
-• Bí kíp huyền thoại: Cuốn sách cổ v1.0 chứa đựng những cấm thuật, cách thức chế tạo thức ăn và kỹ năng giao tiếp, thuần hóa để biến một chú rồng con hung dữ thành người bạn đồng hành trung thành nhất.
-• Khế ước máu: Những trận chiến n nảy lửa để thu phục rồng thần, cùng nhau lập khế ước, thăng cấp kỹ năng và bay lượn qua những vùng đất chưa từng có dấu chân người.`,
+    storyline: `Thành phố XX – 22:00
+
+Mưa trút xuống như muốn nuốt chửng cả thành phố. Ánh đèn cao ốc hắt xuống mặt đường loang loáng nước. Gió lạnh mang theo mùi nhựa đường ướt và khói xe len qua từng con phố.
+
+Tôi vừa cất laptop vào balo thì giọng sếp vang lên phía sau.
+
+“Bản báo cáo này sai số liệu rồi.”
+
+“Em sửa giúp chị nhé.”
+“…”
+
+Tôi nhìn đồng hồ. 22 giờ đúng. Đây đã là ngày thứ năm liên tiếp tôi tăng ca.
+
+“…Vâng.”
+
+Tôi mỉm cười rất chuyên nghiệp. Trong đầu thì đã nguyền rủa cả công ty thêm mấy trăm lần.
+
+Đúng là lũ tư bản.
+
+00:07
+
+Về đến căn hộ thuê chật hẹp, tôi chẳng buồn thay quần áo. Cả người ngã phịch xuống chiếc giường nhỏ.
+
+“Kiếp sau…”
+“Tôi muốn làm con mèo .”
+“Không làm gì chỉ meo meo.”
+
+Tôi bật cười vì chính câu nói ngớ ngẩn của mình. Sau đó tiện tay mở điện thoại. Thông báo hiện lên.
+
+Chương mới của Bí Kíp Luyện Rồng đã cập nhật.
+
+Mắt tôi sáng rực.
+
+“Cuối cùng cũng ra!”
+
+Tôi cười như một đứa trẻ. Những con rồng khổng lồ sải cánh trên bầu trời, hiệp sĩ cưỡi rồng lao qua biển mây…
+
+“Đỉnh thật…”
+
+Đọc chưa hết chương. Tôi đã ngủ thiếp đi lúc nào không hay.
+
+Sáng hôm sau
+
+“…Chết!”
+
+Đồng hồ hiện 8:43. Tôi bật dậy.
+
+“Hôm nay họp!”
+
+Không kịp đánh răng tử tế, tôi ôm balo lao xuống đường.
+
+Tiếng còi xe inh ỏi.
+Đèn đỏ vừa chuyển xanh.
+Đúng lúc ấy…
+
+“Meo…”
+
+Một tiếng mèo non rất nhỏ. Tôi quay đầu. Một chú mèo trắng như tuyết đang đứng giữa lòng đường.
+
+Nó không chạy.
+Chỉ ngơ ngác nhìn chiếc xe tải đang lao tới.
+
+“Coi chừng!”
+
+Có người hét lên. Nhưng cơ thể tôi đã lao đi trước cả khi bộ não kịp suy nghĩ.
+
+Tôi ôm lấy con mèo.
+Đẩy nó về phía vỉa hè.
+
+RẦM!!
+
+Một lực va chạm khủng khiếp nghiền nát toàn thân.
+
+Thế giới quay cuồng.
+Tai tôi ù đi.
+Mắt dần tối sầm.
+Tiếng người la hét ngày một xa.
+
+“…”
+
+Khóe môi tôi khẽ nhếch lên.
+
+“Ít ra…”
+“…cứu được con mèo.”
+
+Ý thức chìm vào bóng tối.
+
+“…Này.”
+“…{{user}}.”
+“DẬY MAU!!”
+
+Một giọng nữ trong trẻo nhưng đầy khó chịu kéo tôi khỏi màn đêm.
+
+Tôi mở mắt. Trước mặt là một cô bé khoảng mười hai tuổi đang chống nạnh nhìn tôi.
+
+Trên vai cô bé.
+Một con mèo trắng đang…
+…bay.
+Không phải nhảy.
+Mà là lơ lửng giữa không trung.
+Nó còn ung dung lộn một vòng rồi ngáp dài.
+
+“…”
+
+Tôi nhắm mắt.
+Mở ra lần nữa.
+Con mèo vẫn bay.
+
+“…”
+“…Mình bị xe tải đâm xong vào thẳng bệnh viện tâm thần luôn à?”
+
+“ nói linh tinh cái gì thế.”
+
+Cô bé thở dài.
+
+“Em đã bảo thức khuya đọc sách thì sáng không dậy nổi mà.”
+
+Tôi ngồi bật dậy. Căn phòng hoàn toàn xa lạ.
+
+Không còn trần bê tông.
+Không còn cửa kính.
+Không còn tiếng xe cộ.
+
+Thay vào đó là căn phòng gỗ mộc mạc với mùi hương dịu nhẹ của gỗ thông và thảo dược.
+
+Tôi vội chạy đến cửa sổ.
+
+Rồi chết lặng.
+Bên ngoài…
+Không phải thành phố. Những mái nhà bằng đá nối tiếp nhau. Các tòa kiến trúc mang dáng dấp lâu đài cổ. Xe ngựa lăn trên đường lát đá. Xa xa là một cung điện trắng khổng lồ vươn lên giữa bầu trời.
+
+Điều kỳ lạ nhất…
+Là bên cạnh mỗi người đều có một sinh vật nhỏ.
+
+Có con như chim.
+Có con giống cáo.
+Có con như thằn lằn 
+
+Chúng bay lượn trên đầu chủ nhân.
+Thỉnh thoảng còn phun ra những đốm lửa xanh.
+Tôi nuốt khan.
+
+“…Không thể nào.”
+“…Mình…”
+“…chuyển sinh rồi?”
+
+Sau gần một giờ hỏi han trong trạng thái nửa tin nửa ngờ, tôi cuối cùng cũng hiểu được vài chuyện.
+
+Cô bé trước mặt tên Vivienne. Là em gái của tôi. Con mèo trắng biết bay tên Nyra. Nó không phải mèo bình thường. Mà là một Linh Thú.
+
+Còn nơi này…
+Là Đại lục Mystara.
+
+Mystara được chia thành mười vùng đất lớn gồm Bắc Cảnh, Đông Hải Quốc, Nam Hoang, Sa mạc Arkan, Tây Vực Eldor, Quần đảo Azure, Thánh Lâm Sylvara, Long Cốc Drakon, Vùng Đất Cấm Noctis và Lục Địa Hoang.
+
+Một thế giới nơi ma pháp tồn tại như hơi thở. Con người, yêu tinh, người lùn, thú nhân và vô số chủng tộc cùng sinh sống dưới bầu trời này. 
+
+Đến một độ tuổi nhất định, mỗi người đều sẽ thức tỉnh một Linh Thú đồng hành. Sức mạnh của họ sẽ gắn liền với sinh vật ấy suốt cả cuộc đời.
+
+Vivienne ôm Nyra, nghiêng đầu nhìn tôi.
+
+“Hôm nay cha dẫn chúng ta đi xem học viện.”
+
+Con bé đưa tay sờ trán tôi rồi nheo mắt.
+
+“…đừng nói là mất trí thật nhé?”
+
+Nói xong cô bé quay người chạy mất.
+
+“Nhanh lên!”
+“Cha đang đợi đấy!”
+
+Cánh cửa khép lại, Căn phòng trở nên yên tĩnh. Tôi nhìn đôi bàn tay xa lạ của mình. Nhìn thế giới hoàn toàn mới ngoài khung cửa sổ.
+
+Hít một hơi thật sâu.
+
+“Giờ làm gì đây…”
+“Sao để sống được trong cái thế giới quái quỷ này đây!?”`,
+    profileUrl: "https://docs.google.com/document/d/1HT-mY_UQugMXn8-QI_SkzjKTtb5Im3r1Kc4MCAUP2BU/edit?usp=drivesdk"
   }
 ];
