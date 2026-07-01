@@ -46,6 +46,7 @@ function getRuneSymbol(tag: string): string {
   if (t === "bl") return "♂";
   if (t === "gl") return "⚢";
   if (t.includes("việt nam")) return "🏮";
+  if (t.includes("open world")) return "";
   return "✦";
 }
 
@@ -56,7 +57,7 @@ function getTicketColorClass(tag: string): string {
   if (t === "fantasy" || t === "xuyên không" || t === "gl") return "ticket-blue";
   if (t === "ngọt sủng" || t === "bg" || t.includes("couple")) return "ticket-pink";
   if (t === "np" || t.includes("r18") || t.includes("dark")) return "ticket-pink";
-  if (t === "hài" || t === "nhân thú" || t === "côn trùng") return "ticket-mint";
+  if (t === "hài" || t === "nhân thú" || t === "côn trùng" || t.includes("open world")) return "ticket-mint";
   if (t === "ngược" || t === "ngoại tình" || t === "slowburn") return "ticket-blue";
   if (t === "cổ trang" || t.includes("xưa") || t.includes("gap")) return "ticket-peach";
   
@@ -535,7 +536,8 @@ export default function App() {
      "BG",
      "BL",
      "GL",
-     "Việt Nam xưa"
+     "Việt Nam xưa",
+     "🌎 OPEN WORLD"
   ];
 
   // Dynamic Featured Card: find character with highest vote count
