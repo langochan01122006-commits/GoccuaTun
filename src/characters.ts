@@ -3497,5 +3497,19 @@ Tôi lao như bay đến trước lều của Hake. Đúng như dự đoán, cô
 “CHÚNG TA LUYỆN RỒNG ĐI!”
 “Hả?!” Hake ngơ ngác ngước lên.
 “Thuần phục loài rồng ấy !”`
+  },
+  {
+    id: "21",
+    no: "021",
+    name: "Hoàng Hôn Ngược Nắng",
+    avatar: "🌇",
+    avatarBg: "from-orange-600 via-rose-600 to-purple-900",
+    tags: ["Xuyên Không", "2 Couple", "Việt Nam Xưa", "Chữa lành", "Hài", "BG"],
+    description: "Câu chuyện tình yêu đầy rẫy những hiểu lầm và nuối tiếc dưới bóng hoàng hôn. Khi hai trái tim từng rạn nứt quyết định bước ngược chiều nắng để tìm lại hơi ấm thuộc về nhau.",
+    story: "",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    storyline: `• Chạy trốn quá khứ: Nữ chính rời đi vào một buổi chiều hoàng hôn nhuộm đỏ bầu trời, mang theo bí mật động trời và nỗi đau xé lòng, cắt đứt hoàn toàn liên lạc với nam chính trong suốt nhiều năm.\n• Cuộc gặp gỡ ngược nắng: Gặp lại nhau giữa thành phố xa lạ, anh không còn là chàng trai ấm áp năm xưa mà trở thành một tổng tài lạnh lùng, tàn nhẫn nhưng ánh mắt nhìn cô vẫn vẹn nguyên sự chiếm hữu điên cuồng.\n• Chữa lành rạn nứt: Những màn dây dưa, đau lòng thấu xương để rồi nhận ra tình yêu chưa từng biến mất. Sau cơn mưa trời lại sáng, anh gom hết dịu dàng cả đời này để ôm cô vào lòng, bù đắp cho những tháng ngày ngược nắng cô đơn.`
   }
 ];
