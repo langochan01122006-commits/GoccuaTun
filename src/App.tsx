@@ -1835,8 +1835,13 @@ export default function App() {
                               <div className="plushie-card-inner">
                                 {/* Front Side */}
                                 <div 
-                                  className={`plushie-card-front ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative`}
-                                  style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}
+                                  className={`plushie-card-front ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative items-center`}
+                                  style={{ 
+                                    WebkitBackfaceVisibility: 'hidden', 
+                                    backfaceVisibility: 'hidden', 
+                                    transform: 'rotateY(0deg)',
+                                    padding: '15px 10px'
+                                  }}
                                 >
                                   {!char.chatbotUrl && (
                                     <div 
@@ -1863,13 +1868,14 @@ export default function App() {
                                   {/* Square 3D embossed picture frame */}
                                   <div className="flex flex-col items-center justify-center my-auto z-10 w-full">
                                     <div 
-                                      className="relative flex items-center justify-center my-auto z-10 bg-white"
+                                      className="relative flex items-center justify-center z-10 bg-white"
                                       style={{
-                                        width: '140px',
-                                        height: '140px',
-                                        borderRadius: '16px',
+                                        width: '120px',
+                                        height: '120px',
+                                        borderRadius: '14px',
                                         border: '3px solid #d1d5db',
-                                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), inset 0 -4px 6px rgba(0, 0, 0, 0.05)'
+                                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), inset 0 -4px 6px rgba(0, 0, 0, 0.05)',
+                                        margin: '15px auto'
                                       }}
                                     >
                                       {char.image || char.avatar.startsWith('http') ? (
@@ -1900,12 +1906,12 @@ export default function App() {
                                     </div>
                                     
                                     {/* Name & Title */}
-                                    <h4 className={`text-sm sm:text-lg md:text-xl font-black mt-2 sm:mt-4 ${plushTheme.textColor} text-center font-sans tracking-wide leading-tight`}>
+                                    <h4 className={`text-xs sm:text-base md:text-lg font-black mt-1 sm:mt-2 ${plushTheme.textColor} text-center font-sans tracking-wide leading-[1.2]`}>
                                       {char.name}
                                     </h4>
                                     
                                     {/* Tags */}
-                                    <div className="flex flex-wrap gap-0.5 sm:gap-1 justify-center mt-1.5 sm:mt-2.5 max-w-full">
+                                    <div className="plushie-tags-scroll flex flex-wrap gap-0.5 sm:gap-1 justify-center mt-1 sm:mt-2 max-w-full pb-1 sm:pb-2">
                                       {char.tags.map((t, idx) => {
                                         const symbol = getRuneSymbol(t);
                                         return (

@@ -2321,7 +2321,7 @@
 .plushie-card-container {
   perspective: 1200px;
   width: 155px;
-  height: 240px;
+  height: 275px;
   cursor: pointer;
   position: relative;
   transition: z-index 0.3s ease;
@@ -2330,7 +2330,27 @@
 @media (min-width: 640px) {
   .plushie-card-container {
     width: 275px;
-    height: 420px;
+    height: 450px;
+  }
+}
+
+.plushie-tags-scroll {
+  max-height: 42px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 6px;
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.plushie-tags-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+@media (min-width: 640px) {
+  .plushie-tags-scroll {
+    max-height: 75px;
+    margin-bottom: 12px;
   }
 }
 
