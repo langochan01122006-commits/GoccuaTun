@@ -1860,27 +1860,43 @@ export default function App() {
                                     <span>🎈 № 0{char.id} 🎈</span>
                                   </div>
                                   
-                                  {/* Gacha Sphere translucent sphere containing the chibi plushie */}
+                                  {/* Square 3D embossed picture frame */}
                                   <div className="flex flex-col items-center justify-center my-auto z-10 w-full">
-                                    <div className="relative w-20 h-20 sm:w-32 sm:h-32 flex items-center justify-center">
-                                      {/* Inner glowing core of the capsule */}
-                                      <div className="absolute inset-2 bg-gradient-to-tr from-white/40 via-[#FFF9DC] to-white/50 rounded-full blur-[3px] animate-pulse pointer-events-none" />
-                                      
-                                      {/* Avatar/Plushie itself inside */}
-                                      <div className="absolute z-10 scale-100 group-hover:scale-110 active:scale-95 transition-transform duration-300">
-                                        {/* Dynamic movement / floating look */}
-                                        <span className="text-5xl sm:text-7xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.18)] inline-block select-none animate-bounce-slow">
+                                    <div 
+                                      className="relative flex items-center justify-center my-auto z-10 bg-white"
+                                      style={{
+                                        width: '140px',
+                                        height: '140px',
+                                        borderRadius: '16px',
+                                        border: '3px solid #d1d5db',
+                                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), inset 0 -4px 6px rgba(0, 0, 0, 0.05)'
+                                      }}
+                                    >
+                                      {char.image || char.avatar.startsWith('http') ? (
+                                        <img 
+                                          src={char.image || char.avatar} 
+                                          alt={char.name}
+                                          style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover',
+                                            borderRadius: '12px'
+                                          }}
+                                        />
+                                      ) : (
+                                        <div style={{
+                                          width: '100%',
+                                          height: '100%',
+                                          borderRadius: '12px',
+                                          background: '#f3f4f6',
+                                          display: 'flex',
+                                          alignItems: 'center',
+                                          justifyContent: 'center',
+                                          fontSize: '3.5rem'
+                                        }}>
                                           {char.avatar}
-                                        </span>
-                                      </div>
-
-                                      {/* The glass capsule shiny front shell (semi-transparent plastic cover) */}
-                                      <div className="absolute inset-0 rounded-full border-2 border-white/60 bg-[radial-gradient(circle_at_35%_25%,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.25)_25%,rgba(0,0,0,0.18)_85%,rgba(255,255,255,0.35)_100%)] shadow-[inset_0_-8px_16px_rgba(0,0,0,0.32),inset_0_8px_16px_rgba(255,255,255,0.45),0_12px_24px_rgba(0,0,0,0.22)] pointer-events-none z-20">
-                                        {/* Light sheen crescent */}
-                                        <div className="absolute top-1 left-2.5 sm:top-1.5 sm:left-4.5 w-5 h-2 sm:w-9 sm:h-3.5 bg-gradient-to-b from-white/70 to-transparent rounded-full rotate-[-25deg]" />
-                                        {/* Bottom specular glow reflecting */}
-                                        <div className="absolute bottom-0.5 right-1.5 sm:bottom-1 sm:right-3.5 w-1.5 h-1 sm:w-3 sm:h-1.5 bg-white/40 rounded-full blur-[0.5px]" />
-                                      </div>
+                                        </div>
+                                      )}
                                     </div>
                                     
                                     {/* Name & Title */}
