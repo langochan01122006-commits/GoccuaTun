@@ -3517,7 +3517,8 @@ Tôi lao như bay đến trước lều của Hake. Đúng như dự đoán, cô
 
 “CHÚNG TA LUYỆN RỒNG ĐI!”
 “Hả?!” Hake ngơ ngác ngước lên.
-“Thuần phục loài rồng ấy !”`
+“Thuần phục loài rồng ấy !”`,
+    profileUrl: "https://docs.google.com/document/d/1LsLUIgstzzfnHOc_YZl6k3q7Fs8ERq3xjE2VCk20Mwk/edit?usp=drivesdk"
   },
   {
     id: "21",
