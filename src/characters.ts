@@ -3211,7 +3211,7 @@ LỆ BẮC THẦN! ANH TIÊU ĐỜI VỚI TÔI RỒI!`,
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://docs.google.com/document/d/1Kq7bHnTT_fYnyJ3bj5vA3a3CTRODl0Zjg4KQE0Fm4eQ/edit?usp=drivesdk",
     storyline: `Thành phố XX – 22:00
 
 Mưa trút xuống như muốn nuốt chửng cả thành phố. Ánh đèn cao ốc hắt xuống mặt đường loang loáng nước. Gió lạnh mang theo mùi nhựa đường ướt và khói xe len qua từng con phố.
@@ -3404,7 +3404,7 @@ Hít một hơi thật sâu.
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://docs.google.com/document/d/1LgQkcZ4Fc3TTxssiSXVs3VJ9mqI1COn5FRriwzBh3Yw/edit?usp=drivesdk",
     storyline: `BÙM!
 
 “Rồng đến!!”
