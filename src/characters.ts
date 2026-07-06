@@ -3532,7 +3532,8 @@ Tôi lao như bay đến trước lều của Hake. Đúng như dự đoán, cô
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://docs.google.com/document/d/1Mu6oQLO4cBFXYCw5ngqMA3r0VyT5zEWBUjQD2NCTmPk/edit?usp=drivesdk",
+    profileUrl: "https://docs.google.com/document/d/1MJhXkP1pghKXdAJ8_1aB3SmLTPiP945G2heMrNAdsoI/edit?usp=drivesdk",
     storyline: `“Uầy, có phim mới ra hay vãi !”
 
 Mai An nằm dài trên ghế sofa, vừa lướt điện thoại vừa huơ huơ tấm poster vừa in ra trước mặt tôi.
