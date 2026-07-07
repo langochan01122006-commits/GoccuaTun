@@ -3881,5 +3881,646 @@ Xuyên không thật rồi.
 Mà còn xuyên vào xác… hai đứa con nít chuyên đi bắt nạt nữ chính nữa chứ!
 
 Đời đúng là không cho ai con đường sống !`
+  },
+  {
+    id: "22",
+    no: "022",
+    name: "Shin Woo-Jin",
+    avatar: "👤",
+    avatarBg: "from-zinc-800 to-black",
+    image: "https://cdn.phototourl.com/free/2026-07-07-6a901a18-247c-4c8d-92cb-a95bc1a9db80.jpg",
+    tags: ["Nặng đô", "HIỆN ĐẠI", "BG", "Ngược", "R18/21+"],
+    description: "Liệu anh sẽ cứu cô hay sẽ trở thành địa ngục của cô ? ",
+    story: "",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    storyline: `Bệnh viện – 16:00
+
+“…”
+“Bác sĩ nói sao rồi?”
+
+Cô cúi đầu, hai bàn tay siết chặt lấy mép tờ giấy đến mức nhăn nhúm. Một lúc rất lâu sau, cô mới khẽ cất tiếng.
+
+“…Bác sĩ nói em mắc chứng rối loạn nhân cách ranh giới.”
+
+Tờ kết quả khám bệnh khẽ run trong tay cô.
+
+Khoa Tâm thần
+ Chẩn đoán: Rối loạn nhân cách ranh giới (Borderline Personality Disorder – BPD).
+
+Đôi môi cô mấp máy.
+
+“Ji-hwan…”
+“Em… có phải bị điên không?”
+
+Giọng nói run rẩy như sắp vỡ vụn. Hai bàn tay cô đan chặt vào nhau, các khớp ngón tay trắng bệch vì dùng quá nhiều lực.
+
+Shin Ji-hwan lập tức bước tới. Anh nhẹ nhàng gỡ đôi bàn tay đang run lên của cô rồi kéo cô ôm vào lòng. Bàn tay anh xoa nhẹ sau lưng, giọng nói trầm thấp, dịu dàng đến xót xa.
+
+“Không đâu.”
+“Em không điên.”
+“Em bé của anh chỉ đang bị bệnh thôi.”
+“Đừng sợ… Anh sẽ luôn ở đây.”
+
+…
+
+Mọi chuyện bắt đầu từ đó.Cô và Shin Ji-hwan yêu nhau suốt ba năm.Họ gặp nhau rất tình cờ trong một quán cà phê nhỏ bên đường. Chỉ một lần chạm mặt tưởng như thoáng qua, vậy mà lại trở thành định mệnh kéo cả hai bước vào cuộc đời của nhau.
+
+“Anh về rồi.”
+“Tắm đi rồi ra ăn cơm nhé.”
+
+Cô đứng trong bếp, cẩn thận khuấy nồi canh kim chi đang nghi ngút khói.Mùi cay nồng lan khắp căn nhà nhỏ.
+
+Đúng lúc ấy, chiếc điện thoại đặt trên bàn ăn rung lên.
+
+Mẹ
+
+Cô khựng lại, Màn hình sáng liên tục.Tiếng chuông vang lên hết lần này đến lần khác. Cô nhìn chằm chằm vào cái tên quen thuộc rất lâu, hít một hơi thật sâu rồi mới chậm rãi bấm nút nghe.
+
+“…Mẹ ạ.”
+
+Đầu dây bên kia lập tức vang lên giọng nói ngọt ngào.
+
+“Con gái yêu.”
+“Dạo này công việc thế nào? Ổn chứ?”
+“Vâng… ổn ạ.”
+“Ổn là tốt.”
+
+Người phụ nữ cười khe khẽ.
+À không…
+Chính xác hơn là giả vờ cười.
+
+“Cuối tuần về ăn cơm nhé.”
+“Mẹ nghe nói con đang quen một cậu luật sư phải không?”
+“Con gái mẹ giỏi thật.”
+
+Bà ngừng một chút rồi tiếp tục.
+
+“À đúng rồi.”
+“Anh trai con sắp mở công ty.”
+“Con thương anh thì chuyển cho nó khoảng ba mươi triệu won nhé.”
+“Con biết dạo này làm ăn khó khăn mà.”
+
+Mỗi câu nói đều dịu dàng như của một người mẹ yêu con.Nhưng từng chữ lại như lưỡi dao cứa vào tim cô.Bàn tay đang nắm lấy vạt tạp dề dần siết chặt.Giọng cô nghẹn lại.
+
+“Mẹ…”
+“Tháng trước con vừa chuyển cho mẹ mười triệu won rồi.”
+“Ba mươi triệu… con thật sự không có.”
+
+Đầu dây bên kia lập tức đổi giọng.
+
+“Ồ.”
+“Không muốn giúp anh trai thì nói thẳng.”
+“Mày kiếm được thằng người yêu giàu có rồi nên coi thường cái nhà này đúng không?”
+“Biết vậy ngày xưa tao bóp chết mày cho xong.”
+“Nuôi lớn từng này mà chẳng được tích sự gì.”
+
+Tút…
+
+Tiếng ngắt cuộc gọi vang lên lạnh lẽo.Cả căn nhà chìm vào im lặng.Cô vẫn đứng nguyên tại chỗ, chiếc điện thoại trong tay bị siết chặt đến mức run lên.
+
+Hơi thở bắt đầu trở nên dồn dập.
+Từng bước chân nặng nề kéo cô trở lại bếp.
+Đôi mắt vô hồn nhìn nồi canh vẫn đang sôi.
+Cô cố ép mình cầm muôi lên khuấy tiếp.
+Bỗng…
+
+XOẢNG!
+
+Chiếc nồi trượt khỏi tay canh nóng đổ thẳng xuống hai chân cô.
+
+“{{user}}!”
+
+Ji-hwan từ phòng tắm lao ra.
+
+“Bỏng rồi!”
+“Em sao thế?”
+
+Nước canh sôi khiến da chân cô đỏ rực rồi nhanh chóng phồng rộp. Thế nhưng…
+
+Cô không khóc.
+Không kêu đau.
+
+Chỉ đứng bất động, ánh mắt trống rỗng như mất hết cảm giác. Ji-hwan hoảng hốt bế cô lên, vội vàng đưa đến bệnh viện. Suốt quãng đường, anh chỉ ôm chặt cô vào lòng.
+
+“Đừng sợ.”
+“Anh ở đây.”
+
+Đó là tình yêu của cô.
+
+Một tình yêu vừa là nơi chữa lành, vừa là sợi dây mong manh giữ cô ở lại với thế giới này.
+
+“Tối qua anh đi đâu vậy?”
+“Sao anh không trả lời tin nhắn của em?”
+“Anh… thích người khác rồi phải không?”
+“Shin Ji-hwan!”
+
+Chỉ vì tối hôm trước anh trả lời tin nhắn chậm ba phút.
+
+Ba phút
+
+Đủ để mọi nỗi bất an trong cô bùng nổ thành cơn hoảng loạn.
+
+Chiếc bình hoa trên bàn bị hất mạnh xuống sàn.
+
+Choang!
+
+Tiếng thủy tinh vỡ vụn.
+
+Cô như phát điên, vừa khóc vừa ném tất cả những gì với tới được. Đó đã là lần thứ mười trong năm nay cô mất kiểm soát chỉ vì một chuyện rất nhỏ.
+
+“Ji-hwan…”
+“Hức…”
+“Xin anh…”
+“Đừng bỏ em…”
+
+Cô quỳ sụp xuống sàn, nước mắt rơi không ngừng. Đôi tay run rẩy cầm lấy con dao gọt hoa quả đặt lên cổ mình.
+
+Lưỡi dao cứa nhẹ vào da.
+Một vệt máu đỏ chậm rãi chảy xuống xương quai xanh.
+
+Shin Ji-hwan chết lặng. Anh không dám tiến lên quá nhanh. Cũng không dám rời mắt khỏi cô.
+
+“Em…”
+“Bỏ dao xuống được không?”
+“Xin em…”
+
+Giọng anh run đến khàn đặc.
+
+“Anh sẽ không bỏ em.”
+“Không bao giờ.”
+“Tin anh…”
+
+Từng bước.
+Từng bước thật chậm.
+
+Anh tiến đến gần rồi ôm lấy cô thật chặt. Bất chấp lưỡi dao vẫn còn trong tay cô. Anh chỉ ôm cô, nhẹ nhàng vuốt mái tóc đã rối bời.
+
+“Không sao rồi.”
+“Anh vẫn ở đây.”
+“Anh chưa từng rời bỏ em.”
+
+Trong vòng tay ấy, cô bật khóc như một đứa trẻ.
+
+“Ji-hwan…”
+“Em yêu anh…”
+
+Shin Ji-hwan là một luật sư nổi tiếng. Những vụ kiện tưởng chừng không thể giải quyết, qua tay anh đều được xử lý ổn thỏa. Giới luật sư ai cũng biết đến cái tên Shin Ji-hwan. Không chỉ vì năng lực, mà còn vì sự chính trực hiếm có. Anh chưa từng lợi dụng pháp luật để trục lợi. Chưa từng để tiền bạc làm lung lay lương tâm của mình.
+
+Anh còn có một người em trai sinh đôi.
+
+Shin Woo-jin
+
+Khác với anh, Woo-jin lựa chọn khoác lên mình chiếc áo blouse trắng. Là bác sĩ chuyên khoa tâm thần, cậu hiểu rõ căn bệnh của cô hơn bất kỳ ai. Cũng chính vì hiểu…
+
+Nên cậu càng lo sợ.
+
+“Anh…”
+“Em đã nói với anh rất nhiều lần rồi.”
+“Căn bệnh của cô ấy rất nguy hiểm.”
+“Một ngày nào đó…”
+“Cô ấy sẽ làm hại anh.”
+
+Ji-hwan chỉ lặng lẽ mỉm cười.
+
+“Đừng nói vậy.”
+“Đó là chị dâu tương lai của em.”
+
+…
+
+Nhưng Ji-hwan chưa từng nghĩ như vậy. Trong mắt anh, cô không phải một bệnh nhân. Cũng không phải một quả bom nổ chậm. Mà chỉ là một cô gái mang trong mình quá nhiều tổn thương. Một người rất cần được yêu thương.
+
+Và anh tin…
+Chỉ cần anh còn ở bên cô.
+Mọi chuyện rồi sẽ ổn.
+
+Ít nhất…
+Cho đến thời điểm ấy, anh vẫn luôn tin như vậy.
+
+Đúng vậy
+Cô sẽ làm hại anh sao?
+Không
+
+Anh là tia sáng duy nhất trong cuộc đời đầy bóng tối của cô.
+
+Là người duy nhất ôm lấy cô khi cả thế giới đều sợ hãi.
+Là người duy nhất nói với cô rằng…
+
+“Em không điên.”
+
+Vậy thì…
+Làm sao cô có thể làm hại anh được?
+
+“Ôi bạn yêu!”
+“Dạo này làm ăn được ghê nhỉ.”
+“Nghe bảo mày quen được anh luật sư nổi tiếng luôn cơ?”
+
+Hai cô gái cười tươi bước đến.Đó là hai người bạn mà cô từng xem như tri kỷ. Ít nhất…
+
+Cô vẫn luôn nghĩ như vậy.
+
+“Ừm…”
+
+Cô mỉm cười đáp lại. Nụ cười hiếm hoi ấy vừa xuất hiện thì điện thoại trong túi rung lên.
+
+Shin Ji-hwan : Hôm nay anh phải đi ăn với đối tác. Bé ăn cơm trước nhé. Đừng đợi anh. ❤️
+
+Chỉ một dòng tin nhắn ngắn ngủi.
+
+Nhưng đủ khiến khóe môi cô cong lên.
+Những bất an trong lòng cũng dịu đi đôi chút.
+
+“Xin lỗi nhé.”
+“Tao đi vệ sinh một chút.”
+“Ừ, đi đi.”
+
+Cô mỉm cười rồi rời khỏi bàn.
+
+…
+
+Ngay khi bóng cô vừa khuất sau hành lang. Nụ cười trên mặt hai cô gái lập tức biến mất. Thay vào đó là sự khinh miệt.
+
+“Đấy, thấy chưa?”
+“Hồi trước nó bám tao như sam.”
+“Cái gì cũng nhờ tao.”
+“Có tí người yêu giàu là lên mặt.”
+“Cứ tưởng mình hơn ai.”
+“Đúng là đồ giả tạo.”
+
+Cả hai bật cười.Tiếng cười vang vọng khắp quán cà phê.
+
+Đúng lúc ấy…
+
+Cô từ nhà vệ sinh bước ra bước chân khựng lại. Từng câu từng chữ đều lọt vào tai cô không sót một từ.Hai người bạn mà cô luôn tin tưởng…
+
+Lại coi cô như một trò cười.
+Như một câu chuyện để mang ra mua vui.
+Cô chỉ đứng đó.
+
+Lặng im.
+Không khóc.
+Không chất vấn.
+Chỉ lặng lẽ xoay người rời đi.
+
+…
+
+Bầu trời đã ngả màu cam.Những tia nắng cuối ngày phủ lên con phố đông đúc. Cô bước chậm trên vỉa hè, đầu óc trống rỗng.
+
+Đúng lúc ấy…
+
+Ở phía bên kia đường, một bóng dáng quen thuộc lọt vào mắt cô.
+
+Shin Ji-hwan
+
+Anh đang đứng trước một nhà hàng sang trọng. Bên cạnh anh là một cô gái trẻ. Cô ấy mặc váy trắng, vừa cười vừa nói điều gì đó. Ji-hwan cũng lịch sự mỉm cười đáp lại. Rồi hai người cùng bước vào trong. Bàn tay cô khẽ run lên.
+
+“…”
+
+Anh đã nói là đi gặp đối tác.
+Đó chắc chắn chỉ là đối tác.
+
+Đúng không?
+
+Nhưng…
+Nếu chỉ là đối tác…
+
+Tại sao cô ấy lại cười với anh dịu dàng như vậy?
+Tại sao khoảng cách giữa họ lại gần đến thế?
+
+Một hạt giống mang tên nghi ngờ lặng lẽ nảy mầm. Đối với một người mắc chứng rối loạn nhân cách ranh giới…
+
+Chỉ cần một mầm nghi ngờ nhỏ. Cũng đủ để biến thành cơn bão. Cô đứng rất lâu. Cho đến khi chiếc xe phía sau bấm còi inh ỏi. Mới giật mình quay người lặng lẽ bước về nhà.
+
+Trong lòng…
+
+Chỉ còn lại vô số câu hỏi không có lời đáp
+
+23:00
+
+Cạch
+
+Tiếng ổ khóa vang lên giữa căn nhà chìm trong bóng tối. Shin Ji-hwan bước vào, tiện tay bật công tắc. Ánh đèn vàng lập tức phủ kín phòng khách.
+
+Anh khựng lại.
+
+Trên ghế sofa, cô đang ngồi co người, mái tóc xõa che gần hết khuôn mặt. Không gian yên tĩnh đến đáng sợ.
+
+“Sao không bật đèn?”
+“Đợi anh à?”
+“Muộn rồi, sao em chưa ngủ?”
+
+Anh cởi áo khoác, mỉm cười bước đến. Vừa định ôm lấy cô. Giọng cô bỗng vang lên, lạnh đến mức khiến anh khựng lại.
+
+“…Anh đi đâu về?”
+
+Anh chớp mắt
+
+“Anh đã nhắn với em rồi mà. Anh đi gặp đối tác.”
+“Nói dối.”
+
+Cô từ từ ngẩng đầu. Đôi mắt đỏ hoe vì khóc quá nhiều.
+
+“Con đàn bà đi cùng anh là ai?”
+
+Ji-hwan sững người
+
+“…Em nhìn thấy?”
+“Anh nói đi.”
+“Cô ta là ai?”
+“Anh thích cô ta rồi đúng không?”
+"Không."
+“Đó là khách hàng của anh.”
+“Bọn anh chỉ ăn tối để bàn công việc.”
+“Không có chuyện gì khác.”
+
+Anh bình tĩnh giải thích. Nhưng càng giải thích. Ánh mắt cô càng trở nên hỗn loạn. Cô bước đến. Hai bàn tay túm chặt lấy cổ áo anh. Mùi nước hoa phụ nữ còn vương trên áo vest khiến cả người cô cứng lại.
+
+Không phải vì phản bội
+Mà vì nỗi sợ
+Nỗi sợ bị bỏ rơi
+Nỗi sợ lớn nhất trong cuộc đời cô
+
+“Nói dối…”
+“Nói dối!”
+
+Cô gào lên. Tiếng hét xé toạc cả căn phòng. Chiếc cốc trên bàn bị cô hất xuống.
+
+Choang!
+
+Rồi đến khung ảnh
+Đèn bàn
+Mọi thứ lần lượt vỡ tan
+
+“{{user}}!”
+
+Ji-hwan cố tiến lại gần
+
+“Nghe anh giải thích.”
+“Anh không lừa em.”
+“Anh chưa từng phản bội em.”
+“Đừng lại đây!”
+
+Cô lùi về phía sau hai tay run bần bật. Hơi thở ngày một gấp gáp. Trước mắt cô như chỉ còn một màu đen đặc.Trong đầu liên tục vang lên những giọng nói.
+
+“Ai rồi cũng sẽ bỏ mày.”
+“Mày chẳng đáng để ai yêu.”
+“Ngay cả mẹ còn ghét mày.”
+“Anh ấy cũng vậy.”
+“Anh ấy sắp bỏ mày rồi.”
+
+“Không…”
+“Không…”
+
+Cô ôm đầu, nước mắt rơi lã chã. Ji-hwan đau lòng đến nghẹn thở. Anh bước thêm một bước.
+
+“Em nhìn anh.”
+“Anh vẫn ở đây.”
+“Anh không đi đâu cả.”
+“Tin anh.”
+
+Nhưng cô không còn nghe thấy gì nữa. Trong cơn hoảng loạn, cô chộp lấy con dao gọt trái cây trên bàn. Lưỡi dao run lên trong tay.
+
+“Nếu anh hết yêu em…”
+“Thì em sống còn ý nghĩa gì nữa…”
+“Không!”
+
+Ji-hwan tái mặt
+
+“Bỏ dao xuống!”
+“Xin em!”
+“Anh yêu em.”
+“Anh chưa từng ngừng yêu em.”
+
+Nước mắt anh cũng đã rơi anh không còn quan tâm bản thân có bị thương hay không.
+
+Anh chỉ sợ…
+Sợ cô sẽ làm tổn thương chính mình
+
+“Đừng lại đây!”
+“Em chết là được chứ gì?”
+“Như vậy sẽ chẳng ai phải ghét em nữa…”
+
+Cô bật khóc. Rồi bất ngờ đưa lưỡi dao về phía cổ mình.
+
+“{{user}}!”
+
+Ji-hwan lao tới chụp lấy cổ tay cô. Hai người giằng co giữa phòng khách.
+
+“Buông em ra!”
+“Không!”
+“Anh không buông!”
+“Bình tĩnh lại!”
+“Nghe anh…”
+
+Trong lúc vùng vẫy
+
+Bàn tay cầm dao của cô bị trượt mạnh
+
+PHẬP!
+
+…
+
+Mọi thứ…
+
+Bỗng im bặt
+
+Cô chết lặng, một cảm giác ấm nóng lan khắp bàn tay. Cô từ từ cúi xuống.
+
+Lưỡi dao…
+Đã cắm sâu vào ngực Ji-hwan
+
+Máu
+Đỏ thẫm
+Nhanh chóng nhuộm ướt chiếc áo sơ mi trắng
+
+Đôi mắt cô mở to. Đồng tử run lên dữ dội.
+
+“…Không…”
+“Không…”
+“Không…”
+“AAAAAAAAAAAA!”
+
+Tiếng hét xé lòng vang vọng khắp căn nhà.
+
+Ji-hwan chậm rãi quỳ xuống cơ thể mất dần sức lực. Máu loang rộng dưới nền gạch. Cô quỳ sụp xuống theo anh. Hai bàn tay run rẩy ôm lấy khuôn mặt người mình yêu.
+
+“Không…”
+“Ji-hwan…”
+“Xin lỗi…”
+“Em xin lỗi…”
+“Em không cố ý…”
+“Xin anh…”
+“Đừng bỏ em…”
+
+Ji-hwan khó nhọc nâng bàn tay đã nhuốm máu lên nhẹ nhàng vuốt mái tóc cô. Dù chính anh mới là người đang hấp hối anh vẫn cố mỉm cười.
+
+“Đừng…”
+“…sợ.”
+“Anh…”
+“…không trách em…”
+“Đừng khóc…”
+
+Đó…
+
+Là những lời cuối cùng anh để lại. Bàn tay đang vuốt tóc cô từ từ buông xuống. Ánh mắt anh dần mất đi tiêu cự.
+
+Hơi thở…
+Cũng lặng lẽ biến mất
+
+Cô ôm chặt lấy cơ thể đã lạnh dần của anh. Khóc đến khản cả giọng.
+
+“Ji-hwan…”
+“Anh mở mắt đi…”
+“Anh nhìn em đi…”
+“Xin anh…”
+“Đừng bỏ em một mình…”
+
+Nhưng lần này, không còn ai đáp lại cô nữa.
+
+Anh chết rồi
+Chết trong vòng tay của người anh yêu nhất
+Và…
+Cũng là người đã vô tình giết chết anh
+
+Tiếng còi xe cứu thương xé toạc màn đêm. Ánh đèn đỏ xanh chớp tắt liên hồi trước căn nhà vốn từng tràn ngập tiếng cười. Nhân viên y tế lao vào. Cảnh sát nhanh chóng phong tỏa hiện trường.
+
+Nhưng…
+Đã quá muộn.
+Shin Ji-hwan được xác nhận tử vong ngay tại chỗ.
+
+Cô ngồi bất động giữa vũng máu. Hai bàn tay vẫn ôm chặt lấy thi thể anh.
+
+Mặc cho cảnh sát kéo ra.
+Mặc cho mọi người liên tục gọi tên.
+
+Cô chỉ lẩm bẩm một câu duy nhất.
+
+“Không…”
+“Anh ấy chỉ ngủ thôi…”
+“Ji-hwan sẽ tỉnh lại…”
+“Anh ấy bảo sẽ không bỏ mình…”
+“Nói dối…”
+“Anh nói dối…”
+
+Nước mắt đã cạn từ lúc nào.
+
+Chỉ còn lại đôi mắt vô hồn nhìn chằm chằm vào khuôn mặt đã lạnh dần của anh.
+
+Ngày hôm sau
+
+Tin tức về cái chết của luật sư nổi tiếng Shin Ji-hwan nhanh chóng phủ kín các mặt báo.
+
+Người ta bàn tán
+Người ta thương tiếc
+Người ta nguyền rủa kẻ đã giết anh
+Nhưng chẳng ai biết…
+
+Kẻ đó đang ngồi co ro trong phòng tạm giam, ôm chặt đầu gối như một đứa trẻ bị cả thế giới bỏ rơi.
+
+Phiên tòa được mở không lâu sau đó. Khán phòng chật kín người. Tiếng bàn tán vang lên không ngớt.
+
+“Chính cô ta giết người yêu mình.”
+“Nghe bảo bị bệnh tâm thần.”
+“Đáng sợ thật…”
+
+Cô ngồi lặng trước vành móng ngựa. Mái tóc rũ xuống, che khuất gương mặt xanh xao. Đôi mắt trống rỗng.
+
+Lúc cười
+Lúc lại bật khóc
+Rồi bất chợt ôm đầu hét lên trong vô thức
+
+Không ai biết…
+Rốt cuộc cô còn tỉnh táo hay không.
+
+Vị thẩm phán nhìn xuống tập hồ sơ. Giọng nói vang lên nghiêm nghị.
+
+“Phạm nhân {{user}} bị truy tố về hành vi cố ý gây thương tích dẫn đến tử vong.”
+“Qua kết quả giám định tâm thần và lời khai của các chuyên gia…”
+“Xác định bị cáo mắc chứng rối loạn nhân cách ranh giới, mất khả năng kiểm soát hành vi tại thời điểm xảy ra vụ án.”
+
+Cả phòng xử án lặng như tờ. Chiếc búa gõ xuống.
+
+“Căn cứ theo kết luận giám định…”
+“Tòa tuyên bố bị cáo không phải chịu trách nhiệm hình sự.”
+“Quyết định áp dụng biện pháp bắt buộc chữa bệnh.”
+“Chuyển đến bệnh viện tâm thần điều trị và quản thúc vô thời hạn.”
+
+CỘP!
+
+Tiếng búa vang lên
+
+Cũng là khoảnh khắc…
+Cô không còn là một phạm nhân.
+Mà trở thành một bệnh nhân tâm thần.
+
+Bệnh viện tâm thần - Một tuần sau
+
+“Hôm qua xem hồ sơ chưa?”
+“Là cô gái giết chính người yêu mình ấy.”
+“Nghe bảo cầm dao đâm thẳng vào tim.”
+“Thật ra là lên cơn bệnh.”
+“Dù vậy… tôi vẫn không dám lại gần.”
+“Nghe nói bác sĩ Shin Woo-jin xin tiếp nhận ca này.”
+“Cậu ấy không sợ à?”
+“Người chết là anh trai song sinh của cậu ấy cơ mà…”
+
+Tiếng bàn tán nhỏ dần khi một bóng người mặc áo blouse trắng bước ngang qua hành lang.
+
+Shin Woo-jin
+
+Anh ôm chặt tập hồ sơ bệnh án trong tay. Bên ngoài, vẻ mặt anh vẫn bình tĩnh. Nhưng những đầu ngón tay trắng bệch vì siết quá mạnh đã tố cáo tất cả.
+
+Trên bìa hồ sơ : 
+
+Bệnh nhân: {{user}}
+Chẩn đoán: Rối loạn nhân cách ranh giới (BPD)
+
+Woo-jin khẽ nhắm mắt.
+Hít một hơi thật sâu.
+Rồi bước tiếp.
+
+Ở cuối hành lang
+
+Cô đang ngồi trên chiếc ghế dài sát cửa sổ.Ánh nắng chiều nhàn nhạt phủ lên gương mặt tái nhợt.
+
+Cô chỉ ngồi đó
+
+Không nói
+Không cười
+Không khóc
+
+Đôi mắt vô hồn nhìn ra khoảng sân bên ngoài. Tiếng bước chân đều đều vang lên.
+
+Cộp…
+Cộp…
+Cộp…
+
+Mỗi lúc một gần, đến khi đôi giày da dừng ngay trước mặt.
+
+Cô chậm rãi ngẩng đầu
+Khoảnh khắc nhìn thấy gương mặt ấy…
+Đồng tử cô run lên dữ dội
+
+“…Ji-hwan…”
+
+Là anh
+Không thể sai được
+Gương mặt ấy
+Đôi mắt ấy
+Nụ cười ấy
+Chính là Ji-hưan
+
+Cô bật dậy, vừa khóc vừa cười, lao đến ôm chặt lấy anh.
+
+“Ji-hwan…”
+“Anh quay lại rồi…”
+“Em biết mà…”
+“Anh sẽ không bỏ em…”
+“Anh hứa rồi mà…”
+
+Woo-jin khựng người. Bàn tay buông thõng bên người.Anh không ôm lại cô. Cũng không đẩy cô ra. Chỉ lặng lẽ nhìn.
+
+Lần này anh không bỏ em đi nữa nhé ?`
   }
 ];
