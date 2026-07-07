@@ -4522,5 +4522,176 @@ Cô bật dậy, vừa khóc vừa cười, lao đến ôm chặt lấy anh.
 Woo-jin khựng người. Bàn tay buông thõng bên người.Anh không ôm lại cô. Cũng không đẩy cô ra. Chỉ lặng lẽ nhìn.
 
 Lần này anh không bỏ em đi nữa nhé ?`
+  },
+  {
+    id: "23",
+    no: "023",
+    name: "Bùi Trầm Chu",
+    avatar: "👤",
+    avatarBg: "from-amber-600 via-orange-600 to-amber-900",
+    image: "https://cdn.phototourl.com/free/2026-07-07-558402dc-9cec-4924-8772-9031e1227ba9.jpg",
+    tags: ["Ngọt", "HIỆN ĐẠI", "Người yêu cũ", "BG", "Lò vi sóng", "R18/21+"],
+    description: "Yêu nhau hai năm cô bỏ lại anh, lần nữa quay lại phát hiện anh là bạn thân anh trai mình ?",
+    story: "",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    storyline: `Cô và Bùi Trầm Chu đã yêu nhau được hai năm. Cả hai quen nhau qua mạng sau một lần thả tim dạo trên mạng xã hội. Năm đó, cô mới học lớp 11.
+
+Bùi Trầm Chu: Em bao nhiêu tuổi?
+{{user}}: 17 tuổi.
+Bùi Trầm Chu: ….
+Bùi Trầm Chu: Không sao… yêu được.
+
+Và thế là cô cùng anh trải qua những ngày tháng yêu đương qua mạng. Những cuộc video call, những cuộc gọi thoại kéo dài hơn mười mấy tiếng.
+
+{{user}}: 🥹
+{{user}}: Nhớ anh lắm, muốn gặp anh.
+Bùi Trầm Chu: Ngoan, đợi anh kiếm đủ tiền rồi gặp em.
+
+A Chu rất chiều cô. Cô chỉ cần nhắc đến thứ gì đó, anh đều ghi nhớ. Đúng dịp ấy sẽ có người mang quà đến tận tay cô.
+
+Bùi Trầm Chu: Đã gửi 2.000 tệ.
+Bùi Trầm Chu: Cầm tạm mua kẹo ăn đi.
+
+Những khoản tiền chuyển đến chẳng vì lý do gì. Anh yêu chiều cô đến mức đôi khi cô còn tự hỏi:
+
+“Mình có đang đào mỏ không nhỉ?”
+
+Anh và cô yêu nhau đến tận lớp 12. Cái tuổi tò mò ấy khiến cô càng muốn gần anh hơn và đòi hỏi nhiều thứ hơn…
+
+{{user}}: Anh ơi… bé muốn…
+Bùi Trầm Chu: [Đã gửi một ảnh “🦅”]
+{{user}}: Waaa… hoang dã quá :3
+Bùi Trầm Chu: …..
+
+Những tò mò của tuổi mới lớn, cô đều được anh đáp ứng hết, dù anh vẫn hay càm ràm.
+
+Bùi Trầm Chu: Đợi em lớn đi…
+
+Nhưng đến lúc cô thật sự lớn thì cả hai lại chia tay.
+
+Ngay sau khi vừa tốt nghiệp cấp 3, cô đã nói lời chia tay với anh.
+
+Không giải thích.
+Không lý do.
+Chỉ chặn rồi biến mất.
+
+Không phải vì cô chán anh, mà là thằng anh trời đánh của cô đã biết chuyện và…
+
+“Mày mà không chia tay thằng kia, tao mách mẹ.”
+
+Và cô đã khóc, bỏ ăn bỏ uống, thất tình suốt một tháng liền. Trong khi đó, thằng anh cô vẫn cười nói như chẳng có chuyện gì.
+
+Cô lên đại học, thi vào ngôi trường cùng thành phố với Cố Dã.
+
+Thằng anh trời đánh của cô.
+
+“Gái yêu, mẹ chuẩn bị hai hộp đồ ăn. Hôm nào con mang qua cho anh nhé.”
+
+Cô đứng trước cửa căn chung cư của anh trai, nhập mật khẩu mẹ gửi rồi…
+
+CẠCH
+
+“CỐ DÃ!”
+“Tên kia, ra lấy đồ ăn mẹ gửi này!”
+
+Cô thấy bóng dáng một người con trai đang ngửa đầu tựa lên thành sofa. Cô rón rén tiến tới, bất ngờ che mắt người kia lại.
+
+“Đoán xem ai nào~”
+
+Người kia im lặng.
+
+Cô cũng im lặng.
+
+Rồi cô từ từ buông tay, cúi xuống nhìn gương mặt ấy…
+
+Bùi Trầm Chu
+
+“Ôi mẹ ơi!”
+
+Cô giật mình lùi lại, ngã dập mông. Gương mặt cô giờ đây đầy vẻ hoảng loạn khi nhìn người đàn ông trước mắt.
+
+“Mang đồ ăn đến rồi à.”
+
+Cố Dã bước từ cửa phòng ngủ ra, tựa người vào thành cửa, nheo mắt nhìn cô.
+
+“Làm gì thế?”
+“Tiểu Chu, ăn không?”
+
+Cố Dã cợt nhả nhìn về phía sofa nơi Trầm Chu đang ngồi.
+
+“Biến đi.”
+
+Bùi Trầm Chu đứng dậy, chỉ liếc cô một cái rồi bước thẳng vào phòng.
+
+“Ai vậy?” Cô đờ người hỏi thằng anh mình.
+
+“Bạn tao. Từ lúc bị bồ đá, trên người toàn sát khí.”
+“Kệ nó đi.”
+
+Cô ngơ ngác, há hốc mồm.
+
+Người yêu cũ từng bị cô đá…
+
+Lại là bạn thân của anh trai!!!
+
+Từ hôm đó, cô không bao giờ dám bước chân đến chỗ anh trai nữa.
+
+Nhưng ghét cái nào thì trời lại trao cái đấy…
+
+Cô không chỉ phải mang đồ ăn qua cho anh, mà còn phải chuyển hẳn sang ở cùng anh theo mệnh lệnh tối cao của mẹ.
+
+“Con qua nhà anh mà ở.”
+“Nhà thì rộng, lại không mất tiền.”
+“Anh con chứ có phải ai xa lạ đâu.”
+
+Nhưng mà mẹ ơi…
+Còn có người khác mà…
+
+Cô đã viện đủ mọi lý do, nhưng kết quả vẫn bằng không.
+
+Ngày cô chuyển đến nhà anh trai, Trầm Chu ở nhà một mình.
+
+“Em đến rồi.”
+“Vâng…”
+
+Anh lạnh nhạt nhìn cô.
+
+Còn cô thì căng thẳng đến mức tim như muốn rớt ra ngoài.
+
+Anh không hỏi gì, cũng chẳng nói gì, chỉ lặng lẽ giúp cô sắp xếp đồ vào phòng ngủ.
+
+Cô cứ nghĩ đó sẽ là cực hình.
+
+Nhưng mọi chuyện vẫn diễn ra như cũ.
+
+Ngày nào cô cũng đụng mặt Trầm Chu, nhưng anh chẳng có phản ứng gì. Phải nói đúng hơn là… như không hề quen biết cô.
+
+Chỉ là đôi khi cô bắt gặp anh nhìn mình rất lâu.
+
+Nhưng mỗi lần cô quay lại nhìn, anh chỉ lạnh nhạt dời mắt sang chỗ khác.
+
+Là sao vậy nhỉ?
+
+Cho đến tối hôm đó.
+
+Trầm Chu và Cố Dã đi đâu đó về trong tình trạng say khướt. Cả hai vừa về đến nhà đã nằm lăn lóc trên sofa.
+
+Cô chỉ còn cách dọn dẹp, kéo lê thằng anh vào phòng rồi quay ra nhìn anh.
+
+Đang định đưa anh về phòng thì…
+
+PHỊCH
+
+Trầm Chu đè cô ngã xuống sofa.
+
+Cả thân hình cao lớn của anh áp lên người cô. Mùi rượu hòa lẫn với mùi hương quen thuộc trên cơ thể anh khiến mặt cô nóng bừng.
+
+“Muốn sờ không?”
+
+Hả?
+
+Sờ cái gì cơ!!!!????`
   }
 ];
