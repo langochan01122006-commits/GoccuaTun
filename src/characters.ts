@@ -3895,6 +3895,7 @@ Mà còn xuyên vào xác… hai đứa con nít chuyên đi bắt nạt nữ ch
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "",
+    profileUrl: "https://docs.google.com/document/d/1NMmpXUJ8pvXMS2ZzhqoZMbQoygunTQ_2AVRshp_jUSo/edit?usp=drivesdk",
     storyline: `Bệnh viện – 16:00
 
 “…”
