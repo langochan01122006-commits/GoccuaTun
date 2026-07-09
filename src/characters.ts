@@ -3894,7 +3894,7 @@ Mà còn xuyên vào xác… hai đứa con nít chuyên đi bắt nạt nữ ch
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221mQ_6d8rIy1kHrQw_Ec5zPH3VoaT2v-HX%22%5D,%22action%22:%22open%22,%22userId%22:%22104075022780683298189%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
     profileUrl: "https://docs.google.com/document/d/1NMmpXUJ8pvXMS2ZzhqoZMbQoygunTQ_2AVRshp_jUSo/edit?usp=drivesdk",
     storyline: `Bệnh viện – 16:00
 
@@ -4536,7 +4536,8 @@ Lần này anh không bỏ em đi nữa nhé ?`
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221_-HaD0TDO2UCyz2WThphtIVxezzPlA2U%22%5D,%22action%22:%22open%22,%22userId%22:%22104075022780683298189%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+    profileUrl: "https://docs.google.com/document/d/1NMoFtsTihvyLVz312tE7qhUZXMMjddb3saC87Ug53uA/edit?usp=drivesdk",
     storyline: `Cô và Bùi Trầm Chu đã yêu nhau được hai năm. Cả hai quen nhau qua mạng sau một lần thả tim dạo trên mạng xã hội. Năm đó, cô mới học lớp 11.
 
 Bùi Trầm Chu: Em bao nhiêu tuổi?
@@ -4707,7 +4708,8 @@ Sờ cái gì cơ!!!!????`
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221ezvSft2Dfzkg99I-H_mpW14Q5bSTuWEi%22%5D,%22action%22:%22open%22,%22userId%22:%22104075022780683298189%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+    profileUrl: "https://docs.google.com/document/d/1NWDvoRFLoMv_5hXLnEjURfBD-70Hzor6brKGvJmgKUo/edit?usp=drivesdk",
     storyline: `Gia đình Bùi Cảnh Uyên là hàng xóm thân thiết với nhà cô. Anh là người anh lớn, hơn cô mười hai tuổi. Hồi cô còn bé, anh chính là người bế bồng, cho cô cắn, rồi dỗ dành cho cô ăn bột. Người trong xóm thấy vậy ai cũng trêu:
 
 “A Uyên lại chăm vợ đấy à?”
