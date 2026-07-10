@@ -27,6 +27,12 @@ const musicPlaylists = {
     { id: 13, title: "Thành Phố Phía Đông", playlist: "Playlist #13", url: "https://files.catbox.moe/8peyzn.mp3" },
     { id: 14, title: "Tây Thi", playlist: "Playlist #14", url: "https://files.catbox.moe/pt49xb.mp3" },
     { id: 15, title: "Liệm", playlist: "Playlist #15", url: "https://files.catbox.moe/ypka6v.mp3" }
+  ],
+  "c-pop": [
+    { id: 16, title: "Điên Cuồng Vì Yêu", playlist: "Playlist #16", url: "https://files.catbox.moe/726hnl.mp3" },
+    { id: 17, title: "Biển, Đảo Và Em", playlist: "Playlist #17", url: "https://files.catbox.moe/kdwtw8.mp3" },
+    { id: 18, title: "Người Yêu Bỏ Lỡ", playlist: "Playlist #18", url: "https://files.catbox.moe/d27dfd.mp3" },
+    { id: 19, title: "Đường Màu Đỏ", playlist: "Playlist #19", url: "https://files.catbox.moe/nvs08s.mp3" }
   ]
 };
 
@@ -212,8 +218,8 @@ export default function App() {
   const [musicDuration, setMusicDuration] = useState(0);
   const [isPlaylistViewOpen, setIsPlaylistViewOpen] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [selectedPlaylist, setSelectedPlaylist] = useState<"us-uk" | "v-pop">("us-uk");
-  const [activePlaylist, setActivePlaylist] = useState<"us-uk" | "v-pop">("us-uk");
+  const [selectedPlaylist, setSelectedPlaylist] = useState<"us-uk" | "v-pop" | "c-pop">("us-uk");
+  const [activePlaylist, setActivePlaylist] = useState<"us-uk" | "v-pop" | "c-pop">("us-uk");
   const [gachaResult, setGachaResult] = useState<Character | null>(null);
   const [isSummoning, setIsSummoning] = useState(false);
   const [floatingNotes, setFloatingNotes] = useState<{ id: number; text: string; left: string; size: string; duration: string; color: string }[]>([]);
@@ -3663,12 +3669,13 @@ export default function App() {
                           value={selectedPlaylist}
                           onChange={(e) => {
                             playClickSound(300, 0.08);
-                            setSelectedPlaylist(e.target.value as "us-uk" | "v-pop");
+                            setSelectedPlaylist(e.target.value as "us-uk" | "v-pop" | "c-pop");
                           }}
                           className="w-full bg-[#291202] border border-amber-500/40 text-[#ffd175] text-xs font-serif rounded-xl p-2.5 outline-none focus:border-amber-400/80 transition cursor-pointer"
                         >
                           <option value="us-uk">US - UK</option>
                           <option value="v-pop">V-POP</option>
+                          <option value="c-pop">C-POP</option>
                         </select>
                       </div>
                       {/* Current Playlist */}
