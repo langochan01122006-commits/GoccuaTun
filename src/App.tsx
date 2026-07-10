@@ -18,8 +18,8 @@ const playlist = [
   { id: 7, title: "Bye", playlist: "Playlist #7", url: "https://files.catbox.moe/ap4m1x.mp3" }
 ];
 
-const welcomeBgUrl = "https://i.pinimg.com/736x/8a/fd/3d/8afd3dee4740c895aca5af0194db18d2.jpg";
-const mainBgUrl = "https://i.pinimg.com/736x/8a/fd/3d/8afd3dee4740c895aca5af0194db18d2.jpg";
+const welcomeBgUrl = "https://cdn.phototourl.com/free/2026-07-10-c8b00950-26a7-4266-895d-873e9fbb7c02.jpg";
+const mainBgUrl = "https://cdn.phototourl.com/free/2026-07-10-dfef12ca-e9a8-4d47-8b1e-7e5bc511bb85.jpg";
 
 function getRuneSymbol(tag: string): string {
   const t = tag.toLowerCase().trim();
