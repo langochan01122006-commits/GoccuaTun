@@ -8,15 +8,27 @@ import { getAllVotes, voteForCharacter, unvoteForCharacter } from "./firebase";
 
 const donateQrImg = "/src/assets/images/donate_qr_code_1781767011629.jpg";
 
-const playlist = [
-  { id: 1, title: "Young and Beautiful", playlist: "Playlist #1", url: "https://files.catbox.moe/xht7wt.mp3" },
-  { id: 2, title: "Summertime Sadness", playlist: "Playlist #2", url: "https://files.catbox.moe/fb4zok.mp3" },
-  { id: 3, title: "Say Yes To Heaven", playlist: "Playlist #3", url: "https://files.catbox.moe/3x9ccc.mp3" },
-  { id: 4, title: "Beauty and a beat", playlist: "Playlist #4", url: "https://files.catbox.moe/fdej6i.mp3" },
-  { id: 5, title: "Y Que Fue?", playlist: "Playlist #5", url: "https://files.catbox.moe/1rk4uy.mp3" },
-  { id: 6, title: "Beast", playlist: "Playlist #6", url: "https://files.catbox.moe/e23z1k.mp3" },
-  { id: 7, title: "Bye", playlist: "Playlist #7", url: "https://files.catbox.moe/ap4m1x.mp3" }
-];
+const musicPlaylists = {
+  "us-uk": [
+    { id: 1, title: "Young and Beautiful", playlist: "Playlist #1", url: "https://files.catbox.moe/xht7wt.mp3" },
+    { id: 2, title: "Summertime Sadness", playlist: "Playlist #2", url: "https://files.catbox.moe/fb4zok.mp3" },
+    { id: 3, title: "Say Yes To Heaven", playlist: "Playlist #3", url: "https://files.catbox.moe/3x9ccc.mp3" },
+    { id: 4, title: "Beauty and a beat", playlist: "Playlist #4", url: "https://files.catbox.moe/fdej6i.mp3" },
+    { id: 5, title: "Y Que Fue?", playlist: "Playlist #5", url: "https://files.catbox.moe/1rk4uy.mp3" },
+    { id: 6, title: "Beast", playlist: "Playlist #6", url: "https://files.catbox.moe/e23z1k.mp3" },
+    { id: 7, title: "Bye", playlist: "Playlist #7", url: "https://files.catbox.moe/ap4m1x.mp3" },
+    { id: 8, title: "Steady", playlist: "Playlist #8", url: "https://files.catbox.moe/nagda7.mp3" },
+    { id: 9, title: "Back It Up", playlist: "Playlist #9", url: "https://files.catbox.moe/9j8rg2.mp3" },
+    { id: 10, title: "BIRDS OF A FEATHER", playlist: "Playlist #10", url: "https://files.catbox.moe/dlse63.mp3" }
+  ],
+  "v-pop": [
+    { id: 11, title: "Từng Là Của Nhau", playlist: "Playlist #11", url: "https://files.catbox.moe/tsyilo.mp3" },
+    { id: 12, title: "Em Đau", playlist: "Playlist #12", url: "https://files.catbox.moe/u913wi.mp3" },
+    { id: 13, title: "Thành Phố Phía Đông", playlist: "Playlist #13", url: "https://files.catbox.moe/8peyzn.mp3" },
+    { id: 14, title: "Tây Thi", playlist: "Playlist #14", url: "https://files.catbox.moe/pt49xb.mp3" },
+    { id: 15, title: "Liệm", playlist: "Playlist #15", url: "https://files.catbox.moe/ypka6v.mp3" }
+  ]
+};
 
 const welcomeBgUrl = "https://cdn.phototourl.com/free/2026-07-10-c8b00950-26a7-4266-895d-873e9fbb7c02.jpg";
 const mainBgUrl = "https://cdn.phototourl.com/free/2026-07-10-dfef12ca-e9a8-4d47-8b1e-7e5bc511bb85.jpg";
@@ -200,6 +212,8 @@ export default function App() {
   const [musicDuration, setMusicDuration] = useState(0);
   const [isPlaylistViewOpen, setIsPlaylistViewOpen] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [selectedPlaylist, setSelectedPlaylist] = useState<"us-uk" | "v-pop">("us-uk");
+  const [activePlaylist, setActivePlaylist] = useState<"us-uk" | "v-pop">("us-uk");
   const [gachaResult, setGachaResult] = useState<Character | null>(null);
   const [isSummoning, setIsSummoning] = useState(false);
   const [floatingNotes, setFloatingNotes] = useState<{ id: number; text: string; left: string; size: string; duration: string; color: string }[]>([]);
@@ -356,13 +370,13 @@ export default function App() {
     } else {
       audio.pause();
     }
-  }, [isPlaying, currentTrackIndex]);
+  }, [isPlaying, currentTrackIndex, activePlaylist]);
 
   // Handle immediate track change, clearing previous state
   useEffect(() => {
     setMusicProgress(0);
     setMusicDuration(0);
-  }, [currentTrackIndex]);
+  }, [currentTrackIndex, activePlaylist]);
 
   const toggleMusicPlay = () => {
     playClickSound(300, 0.08);
@@ -371,13 +385,15 @@ export default function App() {
 
   const playNextTrack = () => {
     playClickSound(300, 0.08);
-    setCurrentTrackIndex((prev) => (prev + 1) % playlist.length);
+    const trackList = musicPlaylists[activePlaylist];
+    setCurrentTrackIndex((prev) => (prev + 1) % trackList.length);
     setIsPlaying(true);
   };
 
   const playPrevTrack = () => {
     playClickSound(300, 0.08);
-    setCurrentTrackIndex((prev) => (prev - 1 + playlist.length) % playlist.length);
+    const trackList = musicPlaylists[activePlaylist];
+    setCurrentTrackIndex((prev) => (prev - 1 + trackList.length) % trackList.length);
     setIsPlaying(true);
   };
 
@@ -606,7 +622,7 @@ export default function App() {
     return "text-[#FAF9F6]";
   };
 
-  const currentSong = playlist[currentTrackIndex];
+  const currentSong = musicPlaylists[activePlaylist][currentTrackIndex];
 
   return (
     <div 
@@ -3640,28 +3656,47 @@ export default function App() {
                       <h4 className="text-xs font-bold text-amber-300/75 uppercase tracking-widest mb-3 pl-1">
                         SÁCH BẢN CHÚ KHÚC
                       </h4>
+                      {/* Playlist Select Dropdown */}
+                      <div className="mb-3">
+                        <select
+                          id="playlist-select"
+                          value={selectedPlaylist}
+                          onChange={(e) => {
+                            playClickSound(300, 0.08);
+                            setSelectedPlaylist(e.target.value as "us-uk" | "v-pop");
+                          }}
+                          className="w-full bg-[#291202] border border-amber-500/40 text-[#ffd175] text-xs font-serif rounded-xl p-2.5 outline-none focus:border-amber-400/80 transition cursor-pointer"
+                        >
+                          <option value="us-uk">US - UK</option>
+                          <option value="v-pop">V-POP</option>
+                        </select>
+                      </div>
                       {/* Current Playlist */}
                       <div className="flex-1 overflow-y-auto mb-4 pr-1 space-y-2 no-scrollbar custom-scrollbar">
-                        {playlist.map((track, index) => (
-                          <button
-                            key={index}
-                            onClick={() => {
-                              playClickSound(300, 0.08);
-                              setCurrentTrackIndex(index);
-                              setIsPlaying(true);
-                            }}
-                            className={`w-full text-left p-2.5 rounded-xl transition flex justify-between items-center border ${
-                              index === currentTrackIndex 
-                                ? 'bg-[#5c3012]/80 text-[#ffd175] border-[#ffd175]/60 shadow-[0_0_10px_rgba(255,174,52,0.3)] font-bold' 
-                                : 'bg-[#291202]/55 border-[#8a5d30]/20 text-amber-100/85 hover:bg-[#522b10]/40 hover:text-amber-100'
-                            }`}
-                          >
-                            <span className="font-serif italic text-xs truncate mr-2">{track.title}</span>
-                            {index === currentTrackIndex && isPlaying && (
-                              <Music className="w-3.5 h-3.5 animate-pulse shrink-0 text-[#ffd175]" />
-                            )}
-                          </button>
-                        ))}
+                        {musicPlaylists[selectedPlaylist].map((track, index) => {
+                          const isCurrentPlaying = selectedPlaylist === activePlaylist && index === currentTrackIndex;
+                          return (
+                            <button
+                              key={index}
+                              onClick={() => {
+                                playClickSound(300, 0.08);
+                                setActivePlaylist(selectedPlaylist);
+                                setCurrentTrackIndex(index);
+                                setIsPlaying(true);
+                              }}
+                              className={`w-full text-left p-2.5 rounded-xl transition flex justify-between items-center border ${
+                                isCurrentPlaying 
+                                  ? 'bg-[#5c3012]/80 text-[#ffd175] border-[#ffd175]/60 shadow-[0_0_10px_rgba(255,174,52,0.3)] font-bold' 
+                                  : 'bg-[#291202]/55 border-[#8a5d30]/20 text-amber-100/85 hover:bg-[#522b10]/40 hover:text-amber-100'
+                              }`}
+                            >
+                              <span className="font-serif italic text-xs truncate mr-2">{track.title}</span>
+                              {isCurrentPlaying && isPlaying && (
+                                <Music className="w-3.5 h-3.5 animate-pulse shrink-0 text-[#ffd175]" />
+                              )}
+                            </button>
+                          );
+                        })}
                       </div>
                     </motion.div>
                   )}
