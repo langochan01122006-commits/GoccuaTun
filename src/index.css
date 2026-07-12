@@ -2892,44 +2892,85 @@
 }
 
 /* --- Idea 3: Blur & Fade Effects & Idea 2: Blur & Fade Back --- */
+.welcome-screen, .main-content {
+  will-change: opacity, filter;
+  transform: translate3d(0, 0, 0); /* Ép kích hoạt GPU */
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 .main-content {
   transition: opacity 0.8s ease, filter 0.8s ease;
   z-index: 1; /* Khi quay về, Main nằm dưới Welcome */
-}
-/* Class khi trang chính biến mất: Nhòe dần thành sương và mờ về 0 */
-.main-content.fade-out-back {
   opacity: 0;
-  filter: blur(15px);
-  pointer-events: none; /* Khóa click */
 }
+
 .welcome-screen {
   opacity: 0;
-  filter: blur(10px); /* Welcome mặc định nhòe nhẹ trước khi hiện */
-  transition: opacity 0.8s ease 0.1s, filter 0.8s ease 0.1s; /* Hiện trễ hơn một tí */
   z-index: 9999;
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  transition: opacity 0.8s ease 0.1s, filter 0.8s ease 0.1s; /* Hiện trễ hơn một tí */
 }
-/* Class khi Welcome hiện ra: Rõ nét hoàn toàn */
-.welcome-screen.fade-in-back {
-  opacity: 1;
-  filter: blur(0px);
-}
-/* Khi bấm nút, Welcome sẽ nhòe đi và mờ dần */
+
 .welcome-screen.fade-out {
-  opacity: 0;
-  filter: blur(15px); /* Hiệu ứng nhòe sương mù */
   pointer-events: none; /* Khóa click sau khi bấm */
 }
-/* Trang chính mặc định sẽ mờ và hơi nhòe nhẹ trước khi vào */
-.main-content {
-  opacity: 0;
-  filter: blur(5px);
-  transition: opacity 0.8s ease 0.1s, filter 0.8s ease 0.1s; /* Xuất hiện trễ hơn một tí */
+
+.main-content.fade-out-back {
+  pointer-events: none; /* Khóa click */
 }
-/* Khi hiện hình sẽ rõ nét hoàn toàn */
-.main-content.fade-in {
-  opacity: 1;
-  filter: blur(0px);
+
+/* Tách riêng hiệu ứng nhòe cho thiết bị mạnh (PC) */
+@media (min-width: 769px) {
+  .welcome-screen {
+    filter: blur(10px); /* Welcome mặc định nhòe nhẹ trước khi hiện */
+  }
+  .welcome-screen.fade-out {
+    opacity: 0;
+    filter: blur(15px);
+  }
+  .main-content {
+    filter: blur(5px);
+  }
+  .main-content.fade-in {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  .main-content.fade-out-back {
+    opacity: 0;
+    filter: blur(15px);
+  }
+  .welcome-screen.fade-in-back {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* Trên điện thoại (dưới 768px): Bỏ bớt blur nặng, chỉ dùng mờ dần (Fade) để mượt tuyệt đối */
+@media (max-width: 768px) {
+  .welcome-screen {
+    filter: none !important;
+  }
+  .welcome-screen.fade-out {
+    opacity: 0;
+  }
+  .main-content {
+    filter: none !important;
+  }
+  .main-content.fade-in {
+    opacity: 1;
+  }
+  .main-content.fade-out-back {
+    opacity: 0;
+  }
+  .welcome-screen.fade-in-back {
+    opacity: 1;
+    filter: none !important;
+  }
 }
 
 
