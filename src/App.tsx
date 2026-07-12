@@ -44,7 +44,7 @@ function getRuneSymbol(tag: string): string {
   if (t === "tất cả") return "❂";
   if (t.includes("hiện đại")) return "⚡";
   if (t.includes("fantasy")) return "✦";
-  if (t.includes("ngọt") || t.includes("sủng")) return "❤";
+  if (t.includes("ngọt")) return "❤";
   if (t === "np") return "♾";
   if (t.includes("xuyên không")) return "🌀";
   if (t.includes("hài") || t.includes("vui")) return "☼";
@@ -540,7 +540,7 @@ export default function App() {
     "Tất cả",
     "Hiện đại",
     "Fantasy",
-    "Ngọt sủng",
+    "Ngọt",
     "NP",
     "Xuyên không",
     "Hài",
