@@ -173,6 +173,7 @@ function getPlushieCardTheme(id: number, isTop: boolean): PlushieTheme {
 
 export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
+  const [hasEnteredOrTransitioning, setHasEnteredOrTransitioning] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTag, setActiveTag] = useState("Tất cả");
@@ -633,32 +634,23 @@ export default function App() {
   return (
     <div 
       className={`min-h-screen ${getBackgroundStyles()} transition-all duration-700 font-sans flex flex-col items-center select-none relative overflow-x-hidden ${hasEntered ? "p-4 md:p-6" : "justify-center p-6"}`}
-      style={hasEntered ? {} : {
-        backgroundImage: `url('${welcomeBgUrl}')`,
-        backgroundSize: '100% 100%',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
     >
-      {/* Fixed background div behind everything when entered for mobile compatibility */}
-      {hasEntered && (
-        <div 
-          id="main-fixed-bg"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundImage: `url('${mainBgUrl}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            zIndex: -1
-          }}
-        />
-      )}
+      {/* Fixed background div behind everything for visual continuity and mobile compatibility */}
+      <div 
+        id="main-fixed-bg"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          backgroundImage: `url('${mainBgUrl}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1
+        }}
+      />
       {/* Real-time DOM audio element properly integrated with React state and events */}
       <audio
         ref={audioRef}
@@ -673,12 +665,19 @@ export default function App() {
 
 
       {/* GIAO ĐOẠN 1: MÀN HÌNH WELCOME (KHI VỪA MỞ WEB) */}
-      <AnimatePresence>
-        {!hasEntered && (
-          <motion.div
-            key="welcome-screen"
-            initial={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.5, ease: "easeInOut" } }}
+      {!hasEntered && (
+        <div
+          id="welcome"
+          className="welcome-screen flex flex-col items-center justify-center p-6"
+          style={{
+            backgroundImage: `url('${welcomeBgUrl}')`,
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed'
+          }}
+        >
+          <div
             className="w-full max-w-xl flex flex-col items-center justify-center min-h-[85vh] px-4 py-8 z-10 text-center relative font-sans my-auto mt-16 md:mt-24"
           >
             {/* Elegant glowing board with glassmorphic backing - Royal Burgundy Gold theme */}
@@ -863,9 +862,31 @@ export default function App() {
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
                 onClick={() => {
                   playClickSound(600, 0.1);
-                  setHasEntered(true);
-                  setIsMapOpen(true);
-                  setIsPlaying(true);
+                  setHasEnteredOrTransitioning(true);
+                  
+                  setTimeout(() => {
+                    // Kích hoạt hiệu ứng nhòe và mờ dần cho Welcome
+                    const welcomeEl = document.getElementById('welcome');
+                    if (welcomeEl) {
+                      welcomeEl.classList.add('fade-out');
+                    }
+                    
+                    // Kích hoạt hiệu ứng rõ nét dần cho trang chính
+                    const mainEl = document.getElementById('main');
+                    if (mainEl) {
+                      mainEl.classList.add('fade-in');
+                    }
+                    
+                    // Đợi hiệu ứng chạy xong xuôi (0.8 giây), mới ẩn hẳn Welcome để giải phóng màn hình
+                    setTimeout(() => {
+                      if (welcomeEl) {
+                        welcomeEl.style.display = 'none';
+                      }
+                      setHasEntered(true);
+                      setIsMapOpen(true);
+                      setIsPlaying(true);
+                    }, 800);
+                  }, 50);
                 }}
                 className="relative w-full max-w-xs py-4 px-8 font-serif font-black text-[#6E2314] rounded-xl hover:brightness-110 active:scale-95 duration-150 cursor-pointer overflow-visible group tracking-[0.2em] text-xs uppercase"
                 style={{
@@ -1072,9 +1093,9 @@ export default function App() {
                 </motion.div>
               </motion.a>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
 
       {/* Ocean waves animation when had entered the portal */}
       {hasEntered && (
@@ -1411,13 +1432,10 @@ export default function App() {
       </AnimatePresence>
 
       {/* Main website content renders when entered */}
-      {hasEntered && (
-        <motion.div
-          key="main-portal"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="w-full max-w-4xl z-10 flex flex-col gap-5"
+      {(hasEntered || hasEnteredOrTransitioning) && (
+        <div
+          id="main"
+          className={`main-content w-full max-w-4xl z-10 flex flex-col gap-5 ${hasEntered ? "fade-in" : ""}`}
         >
             {/* Top Navigation Row */}
             <div className="flex justify-between items-center">
@@ -1425,7 +1443,28 @@ export default function App() {
               <button
                 onClick={() => {
                   playClickSound(500, 0.1);
+                  
+                  // Reset classes and set display of welcome back to flex before unmounting main
+                  const mainEl = document.getElementById('main');
+                  if (mainEl) {
+                    mainEl.classList.remove('fade-in');
+                  }
+                  
+                  // Set hasEntered to false, which immediately mounts the welcome screen
                   setHasEntered(false);
+                  
+                  // Wait for the next tick to ensure 'welcome' is mounted in the DOM, then remove fade-out
+                  setTimeout(() => {
+                    const welcomeElAfter = document.getElementById('welcome');
+                    if (welcomeElAfter) {
+                      welcomeElAfter.classList.remove('fade-out');
+                      welcomeElAfter.style.display = 'flex';
+                    }
+                    // Finally unmount main after its transition finishes (800ms)
+                    setTimeout(() => {
+                      setHasEnteredOrTransitioning(false);
+                    }, 800);
+                  }, 50);
                 }}
                 className="portal-back-btn group"
               >
@@ -2046,7 +2085,7 @@ export default function App() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
       )}
 
       {/* Character Voting Modal */}

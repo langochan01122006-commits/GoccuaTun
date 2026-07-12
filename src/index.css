@@ -2891,6 +2891,31 @@
   background: #5d4630;
 }
 
+/* --- Idea 3: Blur & Fade Effects --- */
+.welcome-screen {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 9999;
+  transition: opacity 0.8s ease, filter 0.8s ease; /* Thêm hiệu ứng cho cả độ nhòe */
+}
+/* Khi bấm nút, Welcome sẽ nhòe đi và mờ dần */
+.welcome-screen.fade-out {
+  opacity: 0;
+  filter: blur(15px); /* Hiệu ứng nhòe sương mù */
+  pointer-events: none; /* Khóa click sau khi bấm */
+}
+/* Trang chính mặc định sẽ mờ và hơi nhòe nhẹ trước khi vào */
+.main-content {
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 0.8s ease 0.1s, filter 0.8s ease 0.1s; /* Xuất hiện trễ hơn một tí */
+}
+/* Khi hiện hình sẽ rõ nét hoàn toàn */
+.main-content.fade-in {
+  opacity: 1;
+  filter: blur(0px);
+}
+
 
 
 
