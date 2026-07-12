@@ -668,7 +668,7 @@ export default function App() {
       {!hasEntered && (
         <div
           id="welcome"
-          className="welcome-screen flex flex-col items-center justify-center p-6"
+          className={`welcome-screen flex flex-col items-center justify-center p-6 ${!hasEnteredOrTransitioning ? "fade-in-back" : ""}`}
           style={{
             backgroundImage: `url('${welcomeBgUrl}')`,
             backgroundSize: '100% 100%',
@@ -868,12 +868,14 @@ export default function App() {
                     // Kích hoạt hiệu ứng nhòe và mờ dần cho Welcome
                     const welcomeEl = document.getElementById('welcome');
                     if (welcomeEl) {
+                      welcomeEl.classList.remove('fade-in-back');
                       welcomeEl.classList.add('fade-out');
                     }
                     
                     // Kích hoạt hiệu ứng rõ nét dần cho trang chính
                     const mainEl = document.getElementById('main');
                     if (mainEl) {
+                      mainEl.classList.remove('fade-out-back');
                       mainEl.classList.add('fade-in');
                     }
                     
@@ -1444,24 +1446,33 @@ export default function App() {
                 onClick={() => {
                   playClickSound(500, 0.1);
                   
-                  // Reset classes and set display of welcome back to flex before unmounting main
-                  const mainEl = document.getElementById('main');
-                  if (mainEl) {
-                    mainEl.classList.remove('fade-in');
-                  }
-                  
                   // Set hasEntered to false, which immediately mounts the welcome screen
                   setHasEntered(false);
                   
                   // Wait for the next tick to ensure 'welcome' is mounted in the DOM, then remove fade-out
                   setTimeout(() => {
-                    const welcomeElAfter = document.getElementById('welcome');
-                    if (welcomeElAfter) {
-                      welcomeElAfter.classList.remove('fade-out');
-                      welcomeElAfter.style.display = 'flex';
+                    // Bật lại Welcome lên màn hình
+                    const welcomeEl = document.getElementById('welcome');
+                    if (welcomeEl) {
+                      welcomeEl.style.display = 'flex';
+                      // Thêm hiệu ứng hiện hình rõ nét cho Welcome
+                      welcomeEl.classList.add('fade-in-back');
+                      welcomeEl.classList.remove('fade-out'); // Xóa class ẩn cũ của welcome
                     }
-                    // Finally unmount main after its transition finishes (800ms)
+                    
+                    // Thêm hiệu ứng nhòe sương tan biến cho trang chính
+                    const mainEl = document.getElementById('main');
+                    if (mainEl) {
+                      mainEl.classList.add('fade-out-back');
+                      mainEl.classList.remove('fade-in'); // Xóa class hiện cũ của main
+                    }
+                    
+                    // Đợi sương mù bao phủ xong (0.8 giây), mới ẩn hẳn Main đi
                     setTimeout(() => {
+                      const mainElAfter = document.getElementById('main');
+                      if (mainElAfter) {
+                        mainElAfter.style.display = 'none';
+                      }
                       setHasEnteredOrTransitioning(false);
                     }, 800);
                   }, 50);
