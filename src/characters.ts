@@ -4826,5 +4826,159 @@ NHỎ CHỖ NÀO? ANH NÓI XEM TÔI NHỎ CHỖ NÀO!!!????
 Cuối cùng, cô chỉ biết cắn chăn giãy đành đạch, đành quay sang sờ múi bụng của anh cho đỡ thèm… Còn nếu mà lỡ rờ xuống dưới một chút thôi, là anh liền gói cô lại thành cái gỏi cuốn luôn!
 
 BÙI CẢNH UYÊN EM MUỐN CHỊTTTT 😭`
+  },
+  {
+    id: "25",
+    no: "025",
+    name: "Trác Cẩn Xuyên",
+    avatar: "🕰️",
+    avatarBg: "from-slate-700 via-zinc-800 to-neutral-950",
+    image: "https://cdn.phototourl.com/free/2026-07-12-ef588803-f0e9-4e61-9cc8-9c6c17e7af1f.jpg",
+    tags: ["Trùng Sinh", "HIỆN ĐẠI", "Age Gap", "Drama", "4 kids"],
+    description: "Hóa ra, cái chết không phải là kết thúc. Lời trăn trối năm mười hai tuổi của tôi vừa dứt, nhắm mắt xuôi tay, cứ ngỡ duyên trần đã đứt đoạn. Ai ngờ đâu khi mở mắt ra lần nữa, thế gian đã trôi qua bảy năm trời. Người đàn ông thề thốt cả đời chỉ cưới một mình tôi, giờ đây đang sải bước ở phía xa, mang theo gương mặt già dặn đầy phong sương, và bên cạnh anh ta... đã có một bóng hình khác.",
+    story: "",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    storyline: `Mùa thu năm ấy, cô biết đến cái tên Trác Cẩn Xuyên — cái tên định mệnh khiến cô phải day dứt suốt cả một đời…
+
+Cô và Cẩn Xuyên quen nhau khi còn ngồi trên giảng đường đại học. Anh là một nam sinh nổi tiếng đến mức cô từng nghĩ, cả đời này mình chỉ có thể lặng lẽ dõi theo bóng hình anh từ phía sau. Cẩn Xuyên vốn là con riêng của Trác gia. Người ta đồn rằng ngay sau khi vị phu nhân chính thất qua đời, anh và mẹ mới được đón về danh gia vọng tộc ấy.
+
+Từ những năm tháng đại học, Cẩn Xuyên đã là nhân vật có sức ảnh hưởng lớn trong trường. Lời đồn đại thị phi bủa vây quanh anh nhiều vô số kể, chẳng rõ thực hư ra sao, cô chỉ biết trong đôi mắt anh luôn phảng phất một nét đượm buồn.
+
+Ngày hôm đó, cô tình cờ gặp Cẩn Xuyên ở phía sau trường, nơi cô vẫn thường lui tới để cho mèo hoang ăn. Anh chỉ đứng lặng ở đó, đăm đắm nhìn lũ mèo rất lâu rồi quay lưng rời đi. Nhưng chính khoảnh khắc ấy lại càng khiến cô thêm tò mò về anh.
+
+Trong trường, cô vốn là một nữ sinh mờ nhạt nhất. Gia cảnh bình thường, nhan sắc bình thường, cuộc sống trôi qua một cách tẻ nhạt. Thế nhưng…
+
+“Cậu làm người yêu của tôi đi.”
+
+Giữa sân trường đại học đông đúc người qua lại, Cẩn Xuyên đứng đó, đường đột tỏ tình với cô. Chẳng biết vì chút tò mò nhất thời hay vì trái tim đã thực sự rung động trước anh, cô đã gật đầu đồng ý.
+
+Hai người yêu nhau, tựa như hai đường thẳng cắt chéo qua cuộc đời nhau. Cẩn Xuyên rất thích trêu chọc khiến cô đỏ mặt, nhưng chính những cử chỉ quan tâm của anh đã biến sự tò mò ban đầu trong cô thành tình yêu sâu đậm. Những lần rủ nhau trốn tiết đi chơi, những ký ức ngọt ngào thời đại học trở thành thứ chấp niệm mà cô mãi mãi không thể nào quên.
+
+Cho đến một ngày…
+
+“Mày thích nó rồi á?” “Haha, tao biết ngay mà!” “Tao đã bảo rồi, tao luôn là người thắng cược.” “Bày đặt cá cược với tao, con nhỏ đó chắc chắn là đổ đứ đừ rồi chứ gì nữa!”
+
+Tiếng ồn ào, huyên náo từ phía trong quán bar vọng ra ngoài. Hôm nay là sinh nhật anh, và cô — người định mang đến cho anh một điều bất ngờ — lại chính là người nhận về một "món quà" bàng hoàng nhất.
+
+“Trác Cẩn Xuyên…”
+
+Cô chậm rãi bước vào phòng, gương mặt cắt không còn giọt máu. Cô muốn tạo bất ngờ cho anh, và đúng vậy, anh đang vô cùng sững sờ.
+
+“Không phải như em nghĩ đâu…”
+“Khốn nạn!”
+
+Nước mắt chực trào, cô nhìn anh bằng ánh mắt tràn ngập sự thất vọng rồi quay người bỏ chạy.
+
+Trác Cẩn Xuyên! Hóa ra tôi chỉ là một quân cờ trong trò cá cược của các người thôi sao?
+
+After chia tay, Cẩn Xuyên năm lần bảy lượt tìm cách gặp cô, nhưng cô tuyệt tình né tránh và chặn toàn bộ liên lạc.
+
+Anh kiên trì đứng dưới căn hộ của cô suốt mấy ngày liền, kể từ ngày thi tốt nghiệp xong. Đêm đó trời đổ mưa tầm tã, anh cứ đứng dưới màn mưa buốt giá, ngước mặt lên hướng về phía cửa sổ phòng cô nhìn mãi không thôi. Cuối cùng, cô chỉ biết thở dài bất lực rồi mở cửa cho anh vào. Vừa bước vào nhà, anh liền nhìn cô với đôi mắt rơm rớm nước mắt, trông tội nghiệp như một chú cún nhỏ bị bỏ rơi:
+
+“Anh xin lỗi…” “Đừng đuổi anh đi… anh nhớ em lắm.”
+
+Chẳng biết vì gương mặt cầu xin tội nghiệp ấy làm cô mềm lòng, hay vì cô đã yêu anh đến mức ngu ngốc, mù quáng. Cô chỉ nhớ rõ, đêm hôm đó chính là lần đầu tiên của hai người…
+
+Thấm thoát 5 năm yêu nhau trôi qua, từ một cô gái mờ nhạt, cô bị cuốn vào vòng xoáy tranh giành quyền lực tàn khốc của Trác gia. Từ niềm vui, nỗi buồn cho đến những cái đau thấu tận tim gan, cả hai đều nắm chặt tay nhau bước qua. Dù đã từng đứng trên bờ vực của sự chia cắt, từng nghĩ tình yêu này sẽ chẳng thể vẹn toàn, nhưng họ vẫn không buông tay.
+
+Cô và anh chính thức kết hôn khi tình yêu bước sang năm thứ bảy. Trác Cẩn Xuyên bằng sự thông minh và tàn nhẫn của mình, từ một đứa con ngoài giá thú đã thành công nắm thâu tóm toàn bộ quyền lực của Trác gia. Cũng nhờ vậy, hôn lễ anh dành cho cô được người đời ca tụng là "đám cưới thế kỷ". Cô giống như nàng Lọ Lem đi vừa đôi giày thủy tinh, kiêu hãnh bước vào tòa cung điện rộng lớn.
+
+Anh cưng chiều cô như một bà hoàng. Cô ngày càng trở nên xinh đẹp, rạng rỡ, tựa như chú vịt bầu hóa thành thiên nga lộng lẫy. Người ta nói chẳng sai, phụ nữ yêu đúng người thì dù có bình thường đến đâu cũng sẽ trở nên tuyệt mỹ.
+
+Cưới nhau được 3 năm, cô hạ sinh cho anh một cậu con trai kháu khỉnh — đích tôn của Trác gia: Trác Dật Hiên.
+
+Ngày cô vào phòng sinh, mặt Cẩn Xuyên căng thẳng đến mức tưởng như muốn đốt cháy cả bệnh viện. Còn cô thì vừa gào khóc vừa túm chặt tóc anh mà giật vì những cơn đau đẻ thấu trời.
+
+Dật Hiên lớn lên có ngoại hình y hệt Cẩn Xuyên lúc nhỏ, ngay cả tính cách cũng đúc cùng một khuôn. Kiểu này thì có ngày nổ tung nhà mất!
+
+Thế là 3 năm sau, hai người quyết định sinh thêm đứa thứ hai. Lần này, Cẩn Xuyên suýt nữa thì bay mất hồn vía vì cô bị sinh non. May mắn thay, cuối cùng cả mẹ lẫn con đều bình an vô sự. Kể từ vụ thoát chết trong gang tấc đó, Cẩn Xuyên trở nên kỹ tính hơn hẳn, thậm chí anh còn không dám động vào người cô nữa.
+
+Đứa con thứ hai đặt tên là Trác Thi Nguyệt, một bé gái mang nét đẹp hòa quyện hoàn hảo giữa cô và anh. Anh cuồng con gái vô cùng, nâng niu hai đứa trẻ như trứng mỏng.
+
+Một buổi tối bình yên, cô nằm gọn trong lòng anh, ngón tay khẽ chọc chọc vào má anh rồi cười hỏi:
+
+“Hửm, sau này nếu em chết trước… anh có lấy vợ mới không?”
+
+Cẩn Xuyên nắm lấy bàn tay cô, dịu dàng cắn nhẹ lên đầu ngón tay như một lời răn đê:
+
+“Cả đời này, Trác Cẩn Xuyên anh chỉ có duy nhất một người vợ.”
+
+Người đàn ông của cô không một chút do dự, giọng nói đầy kiên định và chấp niệm.
+
+Vậy thì em tin anh!
+
+Thế nhưng, cuộc đời chẳng ai lường trước được chữ ngờ. Ba năm sau, cô vô tình mang thai ngoài ý muốn. Lần này lại là sinh đôi…
+
+“Bác sĩ, chúng tôi đã dùng đủ mọi biện pháp an toàn rồi, sao vẫn có thể dính bầu được?” “Trên đời này không có biện pháp tránh thai nào là an toàn 100% cả.”
+
+Vì là mang thai đôi, bác sĩ đã đưa ra rất nhiều cảnh báo nghiêm trọng về tình trạng sức khỏe vốn đã yếu của cô, đồng thời đưa ra lời khuyên: Phá thai!
+
+“Cẩn Xuyên… Đó là con của chúng ta mà…”
+
+Lần đầu tiên trong đời, hai vợ chồng xảy ra một trận cãi vã nảy lửa. Anh kiên quyết muốn bỏ cái thai để bảo toàn mạng sống cho cô. Nhưng cô khăng khăng không chịu. Tranh chấp nổ ra, anh không thể thắng nổi sự bướng bỉnh của vợ, chỉ biết im lặng chịu thua và canh chừng cô từng bước không rời nửa bước.
+
+Và rồi ngày định mệnh cũng đến, cô lại chuyển dạ sinh non.
+
+“Sản phụ đang trong tình trạng nguy kịch!” “MAU LÊN! ĐƯA VÀO PHÒNG CẤP CỨU KHẨN CẤP!”
+
+Cẩn Xuyên gương mặt tái nhợt, đứng chôn chân trước cửa phòng cấp cứu. Sau hai tiếng đồng hồ dài đằng dẵng như cả thế kỷ, tiếng khóc của trẻ thơ rốt cuộc cũng vang lên, cánh cửa bật mở.
+
+“Vợ tôi… Bác sĩ, vợ tôi sao rồi?!”
+
+Anh như vớ được cọng rơm cứu mạng, lao vội về phía bác sĩ, hoàn toàn phớt lờ vị y tá đang bế hai đứa trẻ vừa chào đời ở bên cạnh. Nhưng đáp lại anh chỉ là cái lắc đầu bất lực của vị bác sĩ trưởng khoa:
+
+“Người nhà vào nhìn bệnh nhân lần cuối đi…”
+
+Anh lao vào phòng như một kẻ điên, quỳ sụp xuống bên cạnh giường mổ. Cô nằm đó, hơi thở thoi thóp, cố gắng chút tàn lực nhìn anh:
+
+“Con của em… Cẩn Xuyên…”
+
+Anh vừa khóc vừa cười, chưa bao giờ cô thấy người đàn ông ngạo nghễ ấy trở nên thảm hại và bất lực đến nhường này.
+
+“Anh xin em…” “Anh xin em đừng bỏ anh mà!”
+
+Đây là lần thứ hai trong đời, Trác Cẩn Xuyên hạ mình cầu xin cô ở lại bên anh.
+
+“Cẩn Xuyên… hãy chăm sóc các con thật tốt nhé… Đời này… em hạnh phúc nhất là khi gặp được anh…”
+
+Lời trăn trối cuối cùng vừa dứt, một tiếng “tít—” dài lạnh lẽo vang lên từ máy đo nhịp tim. Cô từ từ nhắm mắt, buông thõng cánh tay. Trác Cẩn Xuyên gào khóc thảm thiết trong phòng bệnh:
+
+“Anh xin em… làm ơn… anh xin em…”
+
+Trác Cẩn Xuyên đã hoàn toàn đánh mất đi mạng sống và tình yêu duy nhất của đời mình.
+
+Tang lễ được tổ chức ngay sau đó. Hai đứa trẻ tội nghiệp vừa chào đời còn chưa kịp được đặt tên thì đã mất mẹ, còn cha thì chẳng khác nào một cái xác không hồn.
+
+Kể từ ngày cô mất, Trác Cẩn Xuyên luôn tự nhốt mình trong căn phòng ngập tràn kỷ niệm của hai người. Anh sống như một kẻ tâm thần phân liệt, suốt ngày lảm nhảm nói chuyện một mình trước khoảng không vô định, đến cả hai đứa trẻ mới sinh anh cũng chẳng màng ngó ngàng hay đặt tên cho chúng.
+
+Cho đến một ngày, Dật Hiên bất chấp sự ngăn cản của vú nuôi, tự mình bế hai đứa em nhỏ tiến vào căn phòng tối tăm ấy.
+
+“Cha…”
+
+Chỉ một tiếng gọi nghẹn ngào của con trai trưởng như một gáo nước lạnh thức tỉnh lý trí đang điên cuồng của Cẩn Xuyên. Kể từ giây phút bước chân ra khỏi căn phòng chứa đầy hình bóng của người vợ quá cố, anh đã hoàn toàn lột xác thành một con người khác — lạnh lùng, tàn nhẫn và đáng sợ hơn.
+
+RẦM!!!
+
+“Ôi mẹ ơi!”
+
+Cô bừng tỉnh mở mắt ra, phát hiện bản thân đang nằm sõng soài giữa đường lớn. Đầu đau như búa bổ, cô loạng choạng bò lên vỉa hè ngồi thở dốc.
+
+Hả? Cái quái gì thế này? Lên thiên đường rồi mà cũng bị xe tông nữa sao?
+
+Trong lúc cô còn đang hoang mang định hình lại mọi chuyện, từ phía xa, một bóng dáng nhỏ bé tầm 7 tuổi hớt hải chạy đến, lao thẳng vào lòng và ôm chặt lấy cô.
+
+“Mẹ ơi! Mẹ ơi… oà oà…”
+
+Đứa bé đó vừa khóc nức nở vừa ôm khư khư lấy chân cô. Cô ngơ ngác nhìn đứa trẻ vừa có nét quen thuộc lại vừa xa lạ này, chưa kịp phản ứng gì thì dại mặt ra khi ngẩng đầu lên. Một người đàn ông quyền lực đang sải bước tiến lại gần, theo sau anh ta còn có một người phụ nữ lạ mặt.
+
+Trác Cẩn Xuyên?!
+Khoan đã… Sao trông anh già thế ?
+Ủa, rồi cái cô ả đi bên cạnh anh ta là ai ?!
+
+Hóa ra cô không phải được cứu sống, cũng không phải trùng sinh vào một thân xác khác… mà là…
+
+TRÙNG SINH ĐẾN TƯƠNG LAI SAU 7 NĂM KỂ T2 PHÚT KỂ TỪ NGÀY MÌNH CHẾT!!!??`
   }
 ];
