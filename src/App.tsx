@@ -36,8 +36,8 @@ const musicPlaylists = {
   ]
 };
 
-const welcomeBgUrl = "https://cdn.phototourl.com/free/2026-07-10-c8b00950-26a7-4266-895d-873e9fbb7c02.jpg";
-const mainBgUrl = "https://cdn.phototourl.com/free/2026-07-10-dfef12ca-e9a8-4d47-8b1e-7e5bc511bb85.jpg";
+const welcomeBgUrl = "https://cdn.phototourl.com/free/2026-07-14-2a8d3317-02fa-401c-b7fe-bc9fd8d03060.jpg";
+const mainBgUrl = "https://cdn.phototourl.com/free/2026-07-14-2a8d3317-02fa-401c-b7fe-bc9fd8d03060.jpg";
 
 function getRuneSymbol(tag: string): string {
   const t = tag.toLowerCase().trim();
@@ -64,7 +64,7 @@ function getRuneSymbol(tag: string): string {
   if (t === "bl") return "♂";
   if (t === "gl") return "⚢";
   if (t.includes("việt nam")) return "🏮";
-  if (t.includes("open world")) return "";
+  if (t.includes("open world")) return "🌎";
   return "✦";
 }
 
@@ -560,7 +560,7 @@ export default function App() {
      "BL",
      "GL",
      "Việt Nam xưa",
-     "🌎 OPEN WORLD"
+     "OPEN WORLD"
   ];
 
   // Dynamic Featured Card: find character with highest vote count
