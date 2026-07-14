@@ -36,8 +36,8 @@ const musicPlaylists = {
   ]
 };
 
-const welcomeBgUrl = "https://cdn.phototourl.com/free/2026-07-14-2a8d3317-02fa-401c-b7fe-bc9fd8d03060.jpg";
-const mainBgUrl = "https://cdn.phototourl.com/free/2026-07-14-2a8d3317-02fa-401c-b7fe-bc9fd8d03060.jpg";
+const welcomeBgUrl = "https://cdn.phototourl.com/free/2026-07-14-3e758a1d-f3bd-4717-afe2-d30d1c8a10cd.jpg";
+const mainBgUrl = "https://cdn.phototourl.com/free/2026-07-14-ffafd17a-5573-4d6b-b2bd-4af530540d39.jpg";
 
 function getRuneSymbol(tag: string): string {
   const t = tag.toLowerCase().trim();
