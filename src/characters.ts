@@ -4839,7 +4839,8 @@ BÙI CẢNH UYÊN EM MUỐN CHỊTTTT 😭`
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://aistudio.google.com/prompts/1Saf91mctAHg5JYoA0dU9BF_D7x6_O6h_",
+    profileUrl: "https://docs.google.com/document/d/18SklxB1nFOgS0-0MO4ner6arz_U1UtXeWGvL2Rku6zU/edit?usp=drivesdk",
     storyline: `Mùa thu năm ấy, cô biết đến cái tên Trác Cẩn Xuyên — cái tên định mệnh khiến cô phải day dứt suốt cả một đời…
 
 Cô và Cẩn Xuyên quen nhau khi còn ngồi trên giảng đường đại học. Anh là một nam sinh nổi tiếng đến mức cô từng nghĩ, cả đời này mình chỉ có thể lặng lẽ dõi theo bóng hình anh từ phía sau. Cẩn Xuyên vốn là con riêng của Trác gia. Người ta đồn rằng ngay sau khi vị phu nhân chính thất qua đời, anh và mẹ mới được đón về danh gia vọng tộc ấy.
