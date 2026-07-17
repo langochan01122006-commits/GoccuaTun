@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
@@ -1808,6 +1807,7 @@
 }
 
 /* Custom hand-written font loaded from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
 
 .font-handwritten {
   font-family: 'Charm', cursive, serif;
@@ -2972,125 +2972,6 @@
     filter: none !important;
   }
 }
-
-/* --- Blog Content & Blog Ticket Styles --- */
-.blog-content {
-  transition: opacity 0.8s ease, filter 0.8s ease;
-  z-index: 1;
-  opacity: 0;
-  will-change: opacity, filter;
-  transform: translate3d(0, 0, 0); /* Ép kích hoạt GPU */
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-@keyframes blog-pulse {
-  0% { filter: drop-shadow(0 0 5px rgba(211, 84, 0, 0.4)); }
-  50% { filter: drop-shadow(0 0 12px rgba(211, 84, 0, 0.7)); }
-  100% { filter: drop-shadow(0 0 5px rgba(211, 84, 0, 0.4)); }
-}
-
-@keyframes blog-pulse-hover {
-  0% { filter: drop-shadow(0 0 8px rgba(211, 84, 0, 0.6)); }
-  50% { filter: drop-shadow(0 0 18px rgba(211, 84, 0, 0.9)); }
-  100% { filter: drop-shadow(0 0 8px rgba(211, 84, 0, 0.6)); }
-}
-
-.blog-ticket-wrapper {
-  animation: blog-pulse 2s infinite ease-in-out;
-  transition: transform 0.3s ease;
-  will-change: transform, filter;
-  display: block;
-  width: 100%;
-  margin-top: 12px;
-}
-
-.blog-ticket-wrapper:hover {
-  transform: scale(1.02);
-  animation: blog-pulse-hover 1.5s infinite ease-in-out;
-}
-
-.blog-ticket {
-  background: linear-gradient(135deg, #D35400 0%, #5E2712 100%);
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  width: 100%;
-  color: #FFF2CC; /* Lychee white/gold creamy text */
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-  
-  /* Ticket Cutouts */
-  -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 12px, black 13px),
-                      radial-gradient(circle at 100% 50%, transparent 12px, black 13px);
-  -webkit-mask-size: 51% 100%;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: left, right;
-  mask-image: radial-gradient(circle at 0% 50%, transparent 12px, black 13px),
-              radial-gradient(circle at 100% 50%, transparent 12px, black 13px);
-  mask-size: 51% 100%;
-  mask-repeat: no-repeat;
-  mask-position: left, right;
-}
-
-.blog-ticket::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-  transform: skewX(-25deg);
-  animation: magic-shimmer 3s infinite ease-in-out;
-}
-
-.blog-ticket-inner {
-  border: 1.5px dashed rgba(255, 242, 204, 0.8);
-  margin: 6px 16px;
-  padding: 10px 16px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-/* Responsive Blur for Blog Content */
-@media (min-width: 769px) {
-  .blog-content {
-    filter: blur(5px);
-  }
-  .blog-content.fade-in {
-    opacity: 1;
-    filter: blur(0px);
-  }
-  .blog-content.fade-out-back {
-    opacity: 0;
-    filter: blur(15px);
-  }
-}
-
-@media (max-width: 768px) {
-  .blog-content {
-    filter: none !important;
-  }
-  .blog-content.fade-in {
-    opacity: 1;
-  }
-  .blog-content.fade-out-back {
-    opacity: 0;
-  }
-}
-
-body {
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  height: auto !important;
-  touch-action: pan-y !important;
-}
-
 
 
 

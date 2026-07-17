@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
 import { getAllVotes, voteForCharacter, unvoteForCharacter } from "./firebase";
-import BlogSection from "./components/BlogSection";
 
 const donateQrImg = "/src/assets/images/donate_qr_code_1781767011629.jpg";
 
@@ -175,7 +174,7 @@ function getPlushieCardTheme(id: number, isTop: boolean): PlushieTheme {
 export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
   const [hasEnteredOrTransitioning, setHasEnteredOrTransitioning] = useState(false);
-  const [isMapOpen, setIsMapOpen] = useState(false);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTag, setActiveTag] = useState("Tất cả");
   const [isSoundOn, setIsSoundOn] = useState(true);
@@ -226,71 +225,6 @@ export default function App() {
   const [isSummoning, setIsSummoning] = useState(false);
   const [floatingNotes, setFloatingNotes] = useState<{ id: number; text: string; left: string; size: string; duration: string; color: string }[]>([]);
 
-  // Blog / Diary / Tâm Sự states
-  const [isBlogOpen, setIsBlogOpen] = useState(false);
-  const [isBlogTransitioning, setIsBlogTransitioning] = useState(false);
-
-  const switchToBlog = () => {
-    playClickSound(600, 0.1);
-    setIsBlogTransitioning(true);
-    
-    setTimeout(() => {
-      // Show blog content
-      const blogEl = document.getElementById('blog');
-      if (blogEl) {
-        blogEl.style.display = 'flex';
-        blogEl.classList.add('fade-in-back');
-        blogEl.classList.remove('fade-out-back');
-      }
-      
-      // Fade out main content
-      const mainEl = document.getElementById('main');
-      if (mainEl) {
-        mainEl.classList.add('fade-out-back');
-        mainEl.classList.remove('fade-in');
-      }
-      
-      setTimeout(() => {
-        setIsBlogOpen(true);
-        if (mainEl) {
-          mainEl.style.display = 'none';
-        }
-        setIsBlogTransitioning(false);
-      }, 800);
-    }, 50);
-  };
-
-  const switchFromBlogToMain = () => {
-    playClickSound(500, 0.1);
-    setIsBlogTransitioning(true);
-    
-    setTimeout(() => {
-      // Show main content
-      const mainEl = document.getElementById('main');
-      if (mainEl) {
-        mainEl.style.display = 'flex';
-        mainEl.classList.add('fade-in');
-        mainEl.classList.remove('fade-out-back');
-      }
-      
-      // Fade out blog content
-      const blogEl = document.getElementById('blog');
-      if (blogEl) {
-        blogEl.classList.add('fade-out-back');
-        blogEl.classList.remove('fade-in-back');
-      }
-      
-      setTimeout(() => {
-        setIsBlogOpen(false);
-        if (blogEl) {
-          blogEl.style.display = 'none';
-        }
-        setIsBlogTransitioning(false);
-      }, 800);
-    }, 50);
-  };
-
-
   useEffect(() => {
     if (!isPlaying) {
       setFloatingNotes([]);
@@ -333,25 +267,6 @@ export default function App() {
     }
   }, [isCommandModalOpen]);
 
-  const startExploreJourney = () => {
-    setIsMapOpen(false);
-    setIsPlaying(true);
-    playClickSound(800, 0.15);
-
-    // Dynamic sequential sweeping shimmer over the 4 menu options
-    let delay = 350;
-    [0, 1, 2, 3].forEach((idx) => {
-      setTimeout(() => {
-        setHighlightedMenuIdx(idx);
-        playClickSound(340 + idx * 80, 0.08);
-      }, delay + idx * 600);
-    });
-
-    // Clear highlights after completion
-    setTimeout(() => {
-      setHighlightedMenuIdx(-1);
-    }, delay + 4 * 600);
-  };
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -700,7 +615,6 @@ export default function App() {
   return (
     <div 
       className={`min-h-screen ${getBackgroundStyles()} transition-all duration-700 font-sans flex flex-col items-center select-none relative overflow-x-hidden ${hasEntered ? "p-4 md:p-6" : "justify-center p-6"}`}
-      style={{ touchAction: 'pan-y', overflowY: 'auto' }}
     >
       {/* Fixed background div behind everything for visual continuity and mobile compatibility */}
       <div 
@@ -715,8 +629,7 @@ export default function App() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          pointerEvents: "none"
+          zIndex: -1
         }}
       />
       {/* Real-time DOM audio element properly integrated with React state and events */}
@@ -1179,18 +1092,14 @@ export default function App() {
       )}
 
 
+
+
       {/* Main website content renders when entered */}
       {(hasEntered || hasEnteredOrTransitioning) && (
-        <>
-          <div
-            id="main"
-            className={`main-content w-full max-w-4xl z-10 flex flex-col gap-5 ${
-              hasEntered && !isBlogOpen && !isBlogTransitioning 
-                ? "fade-in" 
-                : "fade-out-back"
-            }`}
-            style={{ display: isBlogOpen ? "none" : "flex" }}
-          >
+        <div
+          id="main"
+          className={`main-content w-full max-w-4xl z-10 flex flex-col gap-5 ${hasEntered ? "fade-in" : ""}`}
+        >
             {/* Top Navigation Row */}
             <div className="flex justify-between items-center">
               {/* Back button to Welcome Portal */}
@@ -1396,7 +1305,7 @@ export default function App() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Tìm một nửa... 🔍"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-2xl text-base magic-search-input shadow-sm"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-2xl text-sm magic-search-input shadow-sm"
                       />
                       {searchQuery && (
                         <button
@@ -1427,19 +1336,6 @@ export default function App() {
                       >
                         <div className="magic-ticket-inner">
                           Cốc Cốc Cốc ai gọi đó 🐰
-                        </div>
-                      </button>
-                    </div>
-
-                    {/* Blog Ticket Button */}
-                    <div className="magic-ticket-wrapper">
-                      <button
-                        onClick={switchToBlog}
-                        className="magic-ticket focus:outline-none"
-                        style={{ background: '#f4d1d1' }}
-                      >
-                        <div className="magic-ticket-inner">
-                          TRẠM CẢM XÚC 🕯️
                         </div>
                       </button>
                     </div>
@@ -1862,15 +1758,6 @@ export default function App() {
               )}
             </AnimatePresence>
           </div>
-
-          {/* --- SECTION: BLOG & DIARY & TÂM SỰ --- */}
-          <BlogSection
-            isBlogOpen={isBlogOpen}
-            onBack={switchFromBlogToMain}
-            playClickSound={playClickSound}
-            onStorySelect={setStoryCharacter}
-          />
-        </>
       )}
 
       {/* Character Voting Modal */}
@@ -2078,7 +1965,7 @@ export default function App() {
                   value={guestbookName}
                   onChange={(e) => setGuestbookName(e.target.value)}
                   placeholder="Tên của bạn (để trống nếu muốn ẩn danh)..."
-                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-base font-medium"
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-sm font-medium"
                 />
 
                 <textarea
@@ -2086,7 +1973,7 @@ export default function App() {
                   onChange={(e) => setGuestbookContent(e.target.value)}
                   placeholder="Viết lưu bút hoặc góp ý của bạn tại đây..."
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-base resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-sm resize-none"
                 />
 
                 <button
@@ -2433,7 +2320,7 @@ export default function App() {
                     }}
                     className="flex-1 py-1.5 md:py-2.5 bg-[#FFD600] hover:bg-[#ffeb3b] border-2 border-[#1976D2] text-[#1976D2] font-bold text-xs rounded-xl shadow-[0_4px_12px_rgba(25,118,210,0.15)] active:scale-95 transition cursor-pointer"
                   >
-                    Trở Lại Sảnh Chính 🏯
+                    Trở Lại Bản Đồ 🗺️
                   </button>
                 </div>
               </div>
@@ -3495,7 +3382,7 @@ export default function App() {
                             playClickSound(300, 0.08);
                             setSelectedPlaylist(e.target.value as "us-uk" | "v-pop" | "c-pop");
                           }}
-                          className="w-full bg-[#291202] border border-amber-500/40 text-[#ffd175] text-base font-serif rounded-xl p-2.5 outline-none focus:border-amber-400/80 transition cursor-pointer"
+                          className="w-full bg-[#291202] border border-amber-500/40 text-[#ffd175] text-xs font-serif rounded-xl p-2.5 outline-none focus:border-amber-400/80 transition cursor-pointer"
                         >
                           <option value="us-uk">US - UK</option>
                           <option value="v-pop">V-POP</option>

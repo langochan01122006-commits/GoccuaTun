@@ -1,0 +1,1016 @@
+import { useState, useEffect, CSSProperties } from "react";
+import { CHARACTERS, Character } from "./characters";
+import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import StoryModal from "./components/StoryModal";
+import ChatBox from "./components/ChatBox";
+import { getAllVotes, voteForCharacter } from "./firebase";
+
+const donateQrImg = "/src/assets/images/donate_qr_code_1781767011629.jpg";
+
+const SAKURA_PETALS = Array.from({ length: 30 }).map((_, i) => {
+  const left = (i * 3.3 + Math.random() * 4) % 100;
+  const delay = i * 0.35 + Math.random() * 1.5;
+  const duration = 8 + Math.random() * 10;
+  const size = 12 + Math.random() * 14;
+  const type = i % 2 === 0 ? "emoji" : "svg";
+  return {
+    id: i,
+    left: `${left}%`,
+    delay: `${delay}s`,
+    duration: `${duration}s`,
+    size: `${size}px`,
+    type,
+    colorClass: i % 3 === 0 ? "text-pink-300/85" : i % 3 === 1 ? "text-rose-300/85" : "text-pink-200/85"
+  };
+});
+
+export default function App() {
+  const [hasEntered, setHasEntered] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeTag, setActiveTag] = useState("Tất cả");
+  const [isSoundOn, setIsSoundOn] = useState(true);
+  const [backdropTheme, setBackdropTheme] = useState<"pastel" | "sunset" | "cosmic">("pastel");
+  
+  // Voting and Donate states
+  const [votes, setVotes] = useState<Record<string, number>>({});
+  const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
+  const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
+  const [donateCode, setDonateCode] = useState("");
+  const [donateStatus, setDonateStatus] = useState<"idle" | "success" | "error">("idle");
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
+  const handleCopy = (text: string, field: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    playClickSound(550, 0.05);
+    setTimeout(() => {
+      setCopiedField(null);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    async function loadVotes() {
+      try {
+        const votesData = await getAllVotes();
+        setVotes(votesData);
+      } catch (err) {
+        console.error("Failed to load votes:", err);
+      }
+    }
+    loadVotes();
+  }, []);
+
+  const handleVote = async (characterId: string) => {
+    playClickSound(620, 0.08);
+    // Optimistic update
+    setVotes((prev) => ({
+      ...prev,
+      [characterId]: (prev[characterId] || 0) + 1,
+    }));
+    try {
+      const updatedCount = await voteForCharacter(characterId);
+      setVotes((prev) => ({
+        ...prev,
+        [characterId]: updatedCount,
+      }));
+    } catch (err) {
+      console.error("Failed to submit vote:", err);
+    }
+  };
+
+  const handleVerifyDonate = () => {
+    playClickSound(580, 0.1);
+    if (donateCode.trim().toUpperCase() === "TIEMMEOLUOI") {
+      setDonateStatus("success");
+    } else {
+      setDonateStatus("error");
+    }
+  };
+
+  // Selected character triggers
+  const [chattingCharacter, setChattingCharacter] = useState<Character | null>(null);
+  const [storyCharacter, setStoryCharacter] = useState<Character | null>(null);
+
+  // List of tags for filter menu
+  const tags = [
+    "Tất cả",
+    "Hiện đại",
+    "Fantasy",
+    "Ngọt sủng",
+    "NP",
+    "Xuyên không",
+    "Hài",
+    "Ngược",
+    "TXVT",
+    "Cổ Trang",
+    "Dark Romance",
+    "Ngoại Tình",
+    "R18/21+",
+    "2 COUPLE",
+    "Age Gap",
+    "Size Gap",
+    "Slowburn",
+     "Nhân thú",
+     "Côn trùng"
+  ];
+
+  // Dynamic Featured Card: find character with highest vote count
+  const getFeaturedHubby = () => {
+    let bestChar = CHARACTERS[0];
+    let maxVotes = -1;
+    for (const char of CHARACTERS) {
+      const charVotes = votes[char.id] || 0;
+      if (charVotes > maxVotes) {
+        maxVotes = charVotes;
+        bestChar = char;
+      }
+    }
+    return bestChar;
+  };
+
+  const featuredHubby = getFeaturedHubby();
+
+  // Filtered listing based on query and selected category tag
+  const filteredCharacters = CHARACTERS.filter((char) => {
+    const matchesSearch = char.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesTag = activeTag === "Tất cả" || char.tags.some(t => t.toLowerCase() === activeTag.toLowerCase());
+    return matchesSearch && matchesTag;
+  });
+
+  // Simple synthesizer tool sound effect for click actions
+  const playClickSound = (freq = 400, duration = 0.05) => {
+    if (!isSoundOn) return;
+    try {
+      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + duration);
+    } catch (e) {
+      // Sound blocked or unsupported
+    }
+  };
+
+  // Triggers immediate chat in a new tab using the chatbotUrl
+  const handleStartChat = (character: Character, initialPrompt?: string) => {
+    playClickSound(550, 0.1);
+    setStoryCharacter(null); // Close story popup if open
+    
+    if (character.chatbotUrl) {
+      window.open(character.chatbotUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  // Change background theme cycle
+  const cycleBackdropTheme = () => {
+    playClickSound(480, 0.08);
+    if (backdropTheme === "pastel") setBackdropTheme("sunset");
+    else if (backdropTheme === "sunset") setBackdropTheme("cosmic");
+    else setBackdropTheme("pastel");
+  };
+
+  // Style helper based on selected theme
+  const getBackgroundStyles = () => {
+    if (!hasEntered) {
+      // Bỏ gradient mặc định để hiển thị ảnh nền
+      return "text-white";
+    }
+    switch (backdropTheme) {
+      case "sunset":
+        return "bg-gradient-to-tr from-amber-100 via-rose-100 to-indigo-200 text-slate-800";
+      case "cosmic":
+        return "bg-gradient-to-tr from-slate-950 via-slate-900 to-indigo-950 text-slate-100";
+      default: // pastel
+        return "bg-gradient-to-tr from-sky-200 via-sky-100 to-blue-200 text-slate-800";
+    }
+  };
+
+  return (
+    <div 
+      className={`min-h-screen ${getBackgroundStyles()} transition-all duration-700 font-sans flex flex-col items-center select-none relative overflow-x-hidden ${hasEntered ? "p-4 md:p-6" : "justify-center p-6"}`}
+      style={!hasEntered ? {
+        backgroundImage: "url('https://i.pinimg.com/1200x/f8/b3/9f/f8b39f1972f8c870b205dc95e3bb46e0.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      } : {}}
+    >
+      {/* Thêm overlay đen mờ cho màn hình chào để dễ đọc chữ */}
+      {!hasEntered && (
+        <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
+      )}
+      
+      {/* Decorative falling cherry blossom / Sakura petals animation */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Soft pastel gradients */}
+        <div className="absolute top-10 left-[10%] w-24 h-24 rounded-full bg-pink-200/20 blur-xl animate-float"></div>
+        <div className="absolute top-[40%] right-[12%] w-32 h-32 rounded-full bg-blue-200/20 blur-2xl animate-float" style={{ animationDelay: "1s" }}></div>
+        <div className="absolute bottom-[10%] left-[15%] w-20 h-20 rounded-full bg-rose-200/20 blur-xl animate-float" style={{ animationDelay: "2s" }}></div>
+        
+        {/* Generate multiple cascading flying/falling cherry petals */}
+        {SAKURA_PETALS.map((petal) => (
+          <div
+            key={petal.id}
+            className={`absolute animate-sakura pointer-events-none ${petal.colorClass}`}
+            style={{
+              "--sakura-left": petal.left,
+              "--sakura-delay": petal.delay,
+              "--sakura-duration": petal.duration,
+              fontSize: petal.size,
+              width: petal.size,
+              height: petal.size,
+            } as CSSProperties}
+          >
+            {petal.type === "emoji" ? (
+              "🌸"
+            ) : (
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full transform rotate-12">
+                <path d="M12 2C11.5 6 8 8.5 4.5 10c-3 1.2-4.5 4-2.5 6 2 2 5.5 1 8-1.5s5-6.5 5.5-9.5c.2-2-.5-3.5-3.5-3z" />
+              </svg>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Ocean waves animation when had entered the portal */}
+      {hasEntered && (
+        <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none overflow-hidden z-0 opacity-30">
+          <svg className="absolute bottom-0 w-[200%] h-32 text-sky-200/50 fill-current animate-wave-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 C1150,100 1350,20 1500,60 L1500,120 L0,120 Z"></path>
+          </svg>
+          <svg className="absolute bottom-0 w-[200%] h-32 text-blue-200/40 fill-current animate-wave-2" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ left: "-50%" }}>
+            <path d="M0,50 C180,10 320,90 500,50 C680,10 820,90 1000,50 C1180,10 1320,90 1500,50 L1500,120 L0,120 Z"></path>
+          </svg>
+        </div>
+      )}
+
+
+      <AnimatePresence mode="wait">
+        {!hasEntered ? (
+          <motion.div
+            key="welcome-panel"
+            initial={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95, y: -30, transition: { duration: 0.5 } }}
+            className="w-full max-w-lg z-10 flex flex-col items-center justify-center text-center space-y-8 relative py-12"
+          >
+            {/* Top controls panel for welcome screen */}
+            <div className="absolute -top-16 right-0 flex items-center gap-2">
+              {/* Light mode toggle */}
+              <button
+                onClick={cycleBackdropTheme}
+                id="welcome-toggle-theme"
+                className="p-2.5 transition duration-150 bg-white/40 hover:bg-white/50 backdrop-blur-md rounded-full shadow border border-white/30 text-slate-800 active:scale-95 flex items-center justify-center cursor-pointer"
+                title="Thay đổi màu nền chủ đề"
+              >
+                {backdropTheme === "cosmic" ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-indigo-500" />}
+              </button>
+              {/* Sound flag toggle */}
+              <button
+                onClick={() => {
+                  setIsSoundOn(!isSoundOn);
+                  if (!isSoundOn) playClickSound(600, 0.05);
+                }}
+                id="welcome-toggle-sound"
+                className="p-2.5 transition duration-150 bg-white/40 hover:bg-white/50 backdrop-blur-md rounded-full shadow border border-white/30 text-slate-800 active:scale-95 flex items-center justify-center cursor-pointer"
+                title={isSoundOn ? "Tắt âm thanh thông báo" : "Bật âm thanh thông báo"}
+              >
+                {isSoundOn ? <Volume2 className="w-4 h-4 text-pink-500 animate-pulse" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
+              </button>
+            </div>
+
+            {/* Typography center title block */}
+            <div className="space-y-4 drop-shadow-xl">
+              <motion.h2
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.8 }}
+                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none text-white drop-shadow-lg pb-3 pt-4 select-none"
+              >
+                WELCOME TO MY HOUSE
+              </motion.h2>
+
+              <motion.p
+                initial={{ y: 15, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="text-base md:text-lg font-bold tracking-wider text-white uppercase drop-shadow-md"
+              >
+                Góc Của Tun 🎀
+              </motion.p>
+            </div>
+
+            {/* Romantic description tag */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.8 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="text-xs text-rose-100 italic max-w-sm drop-shadow-md"
+            >
+              Ngôi nhà nhỏ của Tun nơi bạn sẽ tìm thấy một nửa của tình yêu, bạn sẽ yêu và được yêu
+            </motion.p>
+
+            {/* Cute bottom action trigger */}
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+              className="pt-4"
+            >
+              <button
+                onClick={() => {
+                  playClickSound(650, 0.15);
+                  setHasEntered(true);
+                }}
+                id="welcome-enter-btn"
+                className="px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 text-white text-base font-bold rounded-full shadow-lg hover:shadow-pink-400/20 transform hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center gap-2.5 mx-auto border-2 border-white/60 font-sans"
+              >
+                Ghé nhà của Tun 🎀
+              </button>
+            </motion.div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="main-portal"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full max-w-4xl z-10 flex flex-col gap-5"
+          >
+            {/* Top Minimalist Navigation / Action Panel */}
+            <header className="flex items-center justify-between p-4 rounded-2xl glass-effect shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-3xl">🎀</span>
+                <div>
+                  <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent font-sans tracking-tight">
+                    Góc Của Tun
+                  </h1>
+                  <p className="text-[10px] md:text-xs text-slate-400 font-medium font-sans">
+                    Roleplay Character
+                  </p>
+                </div>
+              </div>
+
+              {/* Minimalist round tool buttons at the top right */}
+              <div className="flex items-center gap-1.5 md:gap-2">
+                {/* Volume feedback indicator toggle */}
+                <button
+                  onClick={() => {
+                    setIsSoundOn(!isSoundOn);
+                    // immediate feedback
+                    if (!isSoundOn) playClickSound(600, 0.05);
+                  }}
+                  id="top-toggle-sound"
+                  className="p-2.5 transition duration-150 bg-white hover:bg-slate-50 border border-slate-100 rounded-full shadow-sm text-slate-600 active:scale-95 flex items-center justify-center cursor-pointer"
+                  title={isSoundOn ? "Tắt âm thanh hiệu ứng" : "Bật âm thanh hiệu ứng"}
+                >
+                  {isSoundOn ? <Volume2 className="w-4 h-4 text-blue-500" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
+                </button>
+
+                {/* Cycle backgrounds selector */}
+                <button
+                  onClick={cycleBackdropTheme}
+                  id="top-cycle-theme"
+                  className="p-2.5 transition duration-150 bg-white hover:bg-slate-50 border border-slate-100 rounded-full shadow-sm text-slate-600 active:scale-95 flex items-center justify-center cursor-pointer"
+                  title={`Giao diện hiện tại: ${
+                    backdropTheme === "pastel" ? "Pastel Nhật Bản" : backdropTheme === "sunset" ? "Hoàng Hôn Lãng Mạn" : "Thiên Hà Huyền Bí"
+                  }`}
+                >
+                  {backdropTheme === "cosmic" ? (
+                    <Sun className="w-4 h-4 text-amber-500" />
+                  ) : (
+                    <Moon className="w-4 h-4 text-indigo-500" />
+                  )}
+                </button>
+
+                {/* General Back/Reset system buttons if active */}
+                {(chattingCharacter || searchQuery || activeTag !== "Tất cả") && (
+                  <button
+                    onClick={() => {
+                      playClickSound(300, 0.1);
+                      setChattingCharacter(null);
+                      setSearchQuery("");
+                      setActiveTag("Tất cả");
+                    }}
+                    id="top-reset-general"
+                    className="p-2.5 transition duration-150 bg-blue-500 hover:bg-blue-600 rounded-full shadow-md text-white active:scale-95 flex items-center justify-center cursor-pointer"
+                    title="Quay lại ban đầu"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </header>
+
+            {/* Conditional Flow: Active chatbot screen vs Home list screen */}
+            <AnimatePresence mode="wait">
+              {chattingCharacter ? (
+                <motion.div
+                  key="chat-screen"
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                  className="w-full flex items-center justify-center"
+                >
+                  <ChatBox
+                    character={chattingCharacter}
+                    onBack={() => setChattingCharacter(null)}
+                    isSoundOn={isSoundOn}
+                    onToggleSound={() => setIsSoundOn(!isSoundOn)}
+                  />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="catalog-screen"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  className="space-y-6"
+                >
+                  {/* Interactive Option Buttons panel */}
+                  <div className="grid grid-cols-2 gap-4 w-full">
+                    {/* Pink sen button (Góc trái) */}
+                    <button
+                      onClick={() => {
+                        playClickSound(500, 0.1);
+                        setIsVoteModalOpen(true);
+                      }}
+                      id="welcome-vote-btn"
+                      className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl font-bold bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white shadow-md active:scale-95 transform hover:-translate-y-0.5 transition-all text-sm md:text-base border border-pink-400/20 cursor-pointer"
+                    >
+                      <BarChart3 className="w-5 h-5" />
+                      <span>Bình chọn</span>
+                    </button>
+
+                    {/* Orange button (Góc phải) - Updated to Blue Donate✨ */}
+                    <button
+                      onClick={() => {
+                        playClickSound(500, 0.1);
+                        setIsDonateModalOpen(true);
+                      }}
+                      id="welcome-donate-btn"
+                      className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white shadow-md active:scale-95 transform hover:-translate-y-0.5 transition-all text-sm md:text-base border border-blue-400/20 cursor-pointer"
+                    >
+                      <Gift className="w-5 h-5" />
+                      <span>Donate✨</span>
+                    </button>
+                  </div>
+
+                  {/* Search input ("Tìm mèo lạc... 🔍") and Filters */}
+                  <div className="space-y-4">
+                    <div className="relative w-full">
+                      <span className="absolute inset-y-0 left-4 flex items-center text-slate-400">
+                        <Search className="w-5 h-5 text-blue-400" />
+                      </span>
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Tìm một nửa... 🔍"
+                        className="w-full pl-12 pr-4 py-3.5 bg-white border border-blue-100 rounded-2xl shadow-sm text-slate-700 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                      />
+                      {searchQuery && (
+                        <button
+                          onClick={() => {
+                            playClickSound(300, 0.05);
+                            setSearchQuery("");
+                          }}
+                          className="absolute inset-y-0 right-4 flex items-center text-xs text-slate-400 hover:text-blue-500 font-semibold"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Tag Filters list matching theme colors (Primary: Blue "Tất cả", Secondary: Pink categories tags) */}
+                    <div className="flex flex-wrap items-center gap-1.5 md:gap-2 py-1 max-h-52 overflow-y-auto no-scrollbar">
+                      {tags.map((tag) => {
+                        const isSelected = activeTag === tag;
+                        return (
+                          <button
+                            key={tag}
+                            onClick={() => {
+                              playClickSound(450, 0.05);
+                              setActiveTag(tag);
+                            }}
+                            id={`tag-filter-${tag}`}
+                            className={`px-3 py-1.5 md:px-4 py-2 text-xs font-bold rounded-full border transition-all duration-200 active:scale-95 cursor-pointer shrink-0 ${
+                              isSelected
+                                ? "bg-blue-600 text-white border-blue-600 shadow-md transform -translate-y-0.5"
+                                : "bg-white text-pink-600 hover:text-pink-700 border-pink-100/80 hover:bg-pink-50"
+                            }`}
+                          >
+                            {tag === "Tất cả" ? "⭐ Tất cả" : tag}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Focus Spotlight section: "Chồng quốc dân tuần này" */}
+                  {!searchQuery && activeTag === "Tất cả" && (
+                    <div className="relative p-1 rounded-3xl bg-gradient-to-r from-blue-400 via-pink-400 to-amber-300 shadow-xl overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-100/10 rounded-full blur-2xl"></div>
+                      
+                      {/* Visual content container */}
+                      <div className="relative p-5 md:p-6 bg-white/90 backdrop-blur-md rounded-[22px] flex flex-col md:flex-row items-center gap-6 justify-between border border-white/55">
+                        
+                        {/* Crown badge badge */}
+                        <div className="absolute -top-3.5 -left-3 bg-yellow-400 text-slate-900 px-3.5 py-1 text-xs font-extrabold rounded-xl shadow-lg border-2 border-white flex items-center gap-1 rotate-[-8deg] uppercase tracking-wider animate-bounce">
+                          👑 Top 1 lòng vợ
+                        </div>
+
+                        <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+                          <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-tr ${featuredHubby.avatarBg} flex items-center justify-center text-5xl md:text-6xl shadow-inner shrink-0 relative animate-float`}>
+                            {featuredHubby.avatar}
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <div className="flex flex-wrap gap-1.5 justify-center md:justify-start">
+                              <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-[10px] font-bold border border-yellow-200 rounded">
+                                POPULAR #1
+                              </span>
+                              <span className="px-2 py-0.5 bg-pink-100 text-pink-600 text-[10px] font-bold border border-pink-200 rounded">
+                                {featuredHubby.tags[0]}
+                              </span>
+                            </div>
+                            <h4 className="text-xl md:text-2xl font-black text-slate-800 font-sans">{featuredHubby.name}</h4>
+                            <p className="text-xs md:text-sm text-slate-600 max-w-md leading-relaxed font-sans">
+                              {featuredHubby.description}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Triple Action Triggers */}
+                        <div className="flex flex-col md:flex-col gap-2 w-full md:w-36 shrink-0 mt-3 md:mt-0">
+                          {/* Chat (Blue) */}
+                          <button
+                            onClick={() => handleStartChat(featuredHubby)}
+                            id="chat-featured-hubby"
+                            className="flex-1 w-full flex items-center justify-center gap-1.5 px-3 py-2.5 transition duration-150 text-white bg-blue-600 hover:bg-blue-700 font-bold text-xs md:text-sm rounded-xl md:rounded-2xl shadow-md active:scale-95 cursor-pointer"
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                            Chat ngay
+                          </button>
+
+                          {/* Storyline (Pink) */}
+                          <button
+                            onClick={() => {
+                              playClickSound(480, 0.08);
+                              setStoryCharacter(featuredHubby);
+                            }}
+                            id="story-featured-hubby"
+                            className="flex-1 w-full flex items-center justify-center gap-1.5 px-3 py-2.5 transition duration-150 text-pink-600 bg-pink-50 hover:bg-pink-100 border border-pink-200/50 hover:border-pink-300 font-bold text-xs md:text-sm rounded-xl md:rounded-2xl active:scale-95 cursor-pointer"
+                          >
+                            <BookOpen className="w-4 h-4" />
+                            Cốt truyện
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Characters scrollable vertical listing: "Dàn Harem nhà Tun" */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between px-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">🌷</span>
+                        <h3 className="font-extrabold text-base md:text-lg bg-gradient-to-r from-blue-700 to-pink-600 bg-clip-text text-transparent">
+                          Dàn Harem nhà Tun ({filteredCharacters.length})
+                        </h3>
+                      </div>
+                      <span className="text-xs text-slate-400 font-mono">
+                        Updated Daily • Live
+                      </span>
+                    </div>
+
+                    {filteredCharacters.length === 0 ? (
+                      <div className="p-12 text-center rounded-3xl bg-white/55 border border-slate-200/60 shadow-sm flex flex-col items-center justify-center gap-2">
+                        <span className="text-4xl text-slate-400">🍂</span>
+                        <p className="text-sm text-slate-500 font-medium">Không tìm thấy nhân vật nào khớp với mô tả rồi!</p>
+                        <button
+                          onClick={() => {
+                            playClickSound(300, 0.1);
+                            setSearchQuery("");
+                            setActiveTag("Tất cả");
+                          }}
+                          className="mt-2 text-xs font-bold text-blue-600 flex items-center gap-1 hover:underline"
+                        >
+                          <RotateCcw className="w-3.5 h-3.5" /> Thử đặt lại bộ lọc
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 gap-3.5">
+                        {filteredCharacters.map((char, index) => (
+                          <motion.div
+                            key={char.id}
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.04 }}
+                            className="group overflow-hidden rounded-2xl bg-white hover:bg-slate-50/80 border border-slate-100 p-4 shadow-sm flex flex-col md:flex-row items-center gap-4 justify-between transition-all duration-200 hover:shadow-md hover:border-pink-100"
+                          >
+                            {/* Numerical index and profile avatar block */}
+                            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left w-full">
+                              
+                              {/* Left index placement digit badge */}
+                              <div className="flex items-center gap-3 shrink-0">
+                                <span className="text-sm font-bold text-slate-400 w-5 text-center font-mono">
+                                  #{index + 1}
+                                </span>
+                                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${char.avatarBg} flex items-center justify-center text-3xl shadow-sm relative group-hover:scale-105 transition`}>
+                                  {char.avatar}
+                                </div>
+                              </div>
+
+                              <div className="space-y-1 w-full">
+                                <div className="flex flex-wrap items-center gap-1.5 justify-center sm:justify-start">
+                                  <h4 className="text-lg font-bold text-slate-800 font-sans group-hover:text-blue-600 transition">
+                                    {char.name}
+                                  </h4>
+                                  
+                                  {/* Display specific tags style pink */}
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {char.tags.map((t, idx) => (
+                                      <span
+                                        key={idx}
+                                        className="px-2 py-0.5 text-[9px] font-bold text-pink-500 bg-pink-50 rounded border border-pink-100/50 uppercase"
+                                      >
+                                        {t}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                                <p className="text-xs text-slate-500 line-clamp-2 md:line-clamp-1 max-w-md font-sans">
+                                  {char.description}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Actions buttons panel: "Chat" (Blue), "Cốt truyện" (Pink) */}
+                            <div className="flex items-center gap-1.5 md:gap-2.5 w-full md:w-auto shrink-0 mt-3 md:mt-0 border-t md:border-t-0 border-slate-100/85 pt-3 md:pt-0">
+                              {/* Chat Button (Blue) */}
+                              <button
+                                onClick={() => handleStartChat(char)}
+                                id={`chat-btn-${char.id}`}
+                                className="flex-1 md:w-28 flex items-center justify-center gap-1 px-3 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-sm transition duration-150 active:scale-95 cursor-pointer"
+                              >
+                                <MessageCircle className="w-3.5 h-3.5" />
+                                Chat
+                              </button>
+
+                              {/* Storyline Button (Pink) */}
+                              <button
+                                onClick={() => {
+                                  playClickSound(480, 0.08);
+                                  setStoryCharacter(char);
+                                }}
+                                id={`story-btn-${char.id}`}
+                                className="flex-1 md:w-28 flex items-center justify-center gap-1 px-3 py-2.5 text-pink-600 bg-pink-50 hover:bg-pink-100 border border-pink-200/50 text-xs font-bold rounded-xl transition duration-150 active:scale-95 cursor-pointer"
+                              >
+                                <BookOpen className="w-3.5 h-3.5" />
+                                Cốt truyện
+                              </button>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Character Voting Modal */}
+      <AnimatePresence>
+        {isVoteModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => {
+                playClickSound(300, 0.08);
+                setIsVoteModalOpen(false);
+              }}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+            />
+            
+            {/* Modal Body */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-100 dark:border-slate-800 select-none z-10 flex flex-col max-h-[85vh]"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-sans">🗳️</span>
+                  <h3 className="text-lg md:text-xl font-black text-slate-800 dark:text-white uppercase tracking-tight">
+                    Bình chọn Nam Thần
+                  </h3>
+                </div>
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.08);
+                    setIsVoteModalOpen(false);
+                  }}
+                  className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="py-2">
+                <p className="text-xs text-slate-500 dark:text-slate-400 italic">
+                  *Hãy bỏ phiếu cho chàng trai chiếm trọn trái tim bạn! Số lượt bình chọn được lưu trữ trực tuyến vĩnh viễn.*
+                </p>
+              </div>
+
+              {/* Scrollable list of characters */}
+              <div className="flex-1 overflow-y-auto no-scrollbar py-2 space-y-3 pr-1">
+                {CHARACTERS.map((char) => {
+                  const currentVotes = votes[char.id] || 0;
+                  return (
+                    <div
+                      key={char.id}
+                      className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 hover:border-pink-200 dark:hover:border-pink-900 transition-all duration-200"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-11 h-11 rounded-xl bg-gradient-to-tr ${char.avatarBg} flex items-center justify-center text-2xl shadow-sm shrink-0`}>
+                          {char.avatar}
+                        </div>
+                        <div className="text-left">
+                          <h4 className="font-bold text-sm md:text-base text-slate-800 dark:text-slate-100">
+                            {char.name}
+                          </h4>
+                          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                            {char.tags[0]}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <div className="text-right">
+                          <div className="flex items-center gap-1 text-xs md:text-sm font-bold text-pink-600 dark:text-pink-400 bg-pink-50 dark:bg-pink-950/40 px-2.5 py-1 rounded-full border border-pink-100 dark:border-pink-950">
+                            <span>{currentVotes}</span>
+                            <span>🐾</span>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => handleVote(char.id)}
+                          className="px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold text-xs rounded-xl shadow-sm transition active:scale-95 cursor-pointer flex items-center justify-center"
+                        >
+                          Bình chọn
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.08);
+                    setIsVoteModalOpen(false);
+                  }}
+                  className="px-6 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-full transition-all cursor-pointer"
+                >
+                  Đóng bảng biểu
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Donate popup window */}
+      <AnimatePresence>
+        {isDonateModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => {
+                playClickSound(300, 0.08);
+                setIsDonateModalOpen(false);
+              }}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-100 dark:border-slate-800 select-none z-10 flex flex-col space-y-4"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-sans">🎁</span>
+                  <h3 className="text-lg md:text-xl font-black text-slate-800 dark:text-white uppercase tracking-tight">
+                    Ủng hộ chủ tiệm
+                  </h3>
+                </div>
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.08);
+                    setIsDonateModalOpen(false);
+                  }}
+                  className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="space-y-4 text-center">
+                {/* Visual Title */}
+                <h4 className="text-lg md:text-xl font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent font-sans tracking-tight">
+                  Gộp tiền mua bim bim cho Tun 🫶🏻
+                </h4>
+
+                {/* Adorable Description */}
+                <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+                  Nếu bạn yêu thích các chatbot của Tun, hãy donate một chút lòng thành để mình có thêm động lực ra mắt nhiều Character hơn nha!
+                </p>
+
+                {/* QR Code Container with subtle halo */}
+                <div className="relative py-2 flex justify-center">
+                  <div className="absolute inset-0 bg-blue-400/10 dark:bg-blue-400/5 rounded-full blur-2xl transform scale-75"></div>
+                  <div className="relative p-2.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800/80 shadow-md">
+                    <img
+                      src="https://img.vietqr.io/image/bidv-3510790840-compact2.jpg?accountName=LA%20NGOC%20HAN&addInfo=Donate%20Chatbot"
+                      alt="Donate QR Code"
+                      referrerPolicy="no-referrer"
+                      className="w-44 h-44 object-cover rounded-xl border border-white dark:border-slate-700 shadow-inner"
+                    />
+                    <div className="absolute -bottom-1.5 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-[9px] uppercase font-extrabold px-2.5 py-0.5 rounded-full shadow-sm">
+                      Scan QR Code 📸
+                    </div>
+                  </div>
+                </div>
+
+                {/* Detailed Bank Card copy info */}
+                <div className="space-y-2.5 pt-1 text-left">
+                  <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider pl-1">
+                    Thông tin chuyển khoản
+                  </p>
+
+                  <div className="bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-800/60 p-3.5 space-y-3 font-sans">
+                    {/* Bank Name */}
+                    <div className="flex items-center justify-between gap-2.5 text-xs">
+                      <div>
+                        <span className="text-slate-400 dark:text-slate-500 block text-[10px]">Ngân hàng</span>
+                        <span className="font-extrabold text-slate-755 dark:text-slate-200">
+                          BIDV
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => handleCopy("BIDV", "bank")}
+                        className="p-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-800 text-slate-500 hover:text-blue-600 transition shrink-0 cursor-pointer"
+                        title="Sao chép tên ngân hàng"
+                      >
+                        {copiedField === "bank" ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Account number */}
+                    <div className="flex items-center justify-between gap-2.5 text-xs pt-1.5 border-t border-slate-100 dark:border-slate-800/60">
+                      <div>
+                        <span className="text-slate-400 dark:text-slate-500 block text-[10px]">Số tài khoản</span>
+                        <span className="font-mono font-extrabold text-base text-blue-600 dark:text-blue-400 tracking-wider">
+                          3510790840
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => handleCopy("3510790840", "account")}
+                        className="p-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-800 text-slate-500 hover:text-blue-600 transition shrink-0 cursor-pointer"
+                        title="Sao chép số tài khoản"
+                      >
+                        {copiedField === "account" ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Account holder name */}
+                    <div className="flex items-center justify-between gap-2.5 text-xs pt-1.5 border-t border-slate-100 dark:border-slate-800/60">
+                      <div>
+                        <span className="text-slate-400 dark:text-slate-500 block text-[10px]">Tên chủ tài khoản</span>
+                        <span className="font-extrabold text-slate-700 dark:text-slate-200">
+                          LA NGOC HAN
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => handleCopy("LA NGOC HAN", "name")}
+                        className="p-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-800 text-slate-500 hover:text-blue-600 transition shrink-0 cursor-pointer"
+                        title="Sao chép tên người nhận"
+                      >
+                        {copiedField === "name" ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Syntax message */}
+                    <div className="flex items-center justify-between gap-2.5 text-xs pt-1.5 border-t border-slate-100 dark:border-slate-800/60">
+                      <div>
+                        <span className="text-slate-400 dark:text-slate-500 block text-[10px]">Cú pháp lời nhắn</span>
+                        <span className="font-bold text-slate-700 dark:text-slate-200 italic">
+                          "Donate cho Tun"
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => handleCopy("Donate cho Tun", "note")}
+                        className="p-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-800 text-slate-500 hover:text-blue-600 transition shrink-0 cursor-pointer"
+                        title="Sao chép cú pháp"
+                      >
+                        {copiedField === "note" ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Copy pill notifications indicator */}
+                <AnimatePresence>
+                  {copiedField && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="text-[10px] font-bold text-center text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-950 py-1.5 rounded-full"
+                    >
+                      ✓ Đã sao chép thành công vào bộ nhớ tạm!
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Close Bottom Button */}
+                <div className="pt-2 flex gap-2">
+                  <button
+                    onClick={() => {
+                      playClickSound(300, 0.08);
+                      setIsDonateModalOpen(false);
+                    }}
+                    className="w-full py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-sm rounded-2xl transition cursor-pointer"
+                  >
+                    Đóng
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Visual Novel Storyteller dialog popup */}
+      <AnimatePresence>
+        {storyCharacter && (
+          <StoryModal
+            character={storyCharacter}
+            onClose={() => {
+              playClickSound(300, 0.08);
+              setStoryCharacter(null);
+            }}
+            onStartChat={handleStartChat}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Footer system branding bar */}
+      <footer className="mt-12 text-center text-slate-400 font-sans text-[10px] md:text-xs py-4 flex flex-col items-center gap-1 z-10 w-full max-w-4xl border-t border-slate-200/50">
+        <p className="font-semibold text-pink-400/80">Character Simulator by Tun</p>
+      </footer>
+    </div>
+  );
+}
+
