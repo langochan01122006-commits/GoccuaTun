@@ -1343,11 +1343,12 @@ export default function App() {
                     {/* Trạm Cảm Xúc Link Button */}
                     <div className="magic-ticket-wrapper mt-3">
                       <a
-                        href="[DÁN ĐƯỜNG LINK CỦA MÁ VÀO ĐÂY]"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="#"
                         className="magic-ticket-pink focus:outline-none block"
-                        onClick={() => playClickSound(600, 0.1)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          playClickSound(600, 0.1);
+                        }}
                       >
                         <div className="magic-ticket-inner">
                           Trạm cảm xúc 🕯️
