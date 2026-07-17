@@ -1340,6 +1340,21 @@ export default function App() {
                       </button>
                     </div>
 
+                    {/* Trạm Cảm Xúc Link Button */}
+                    <div className="magic-ticket-wrapper mt-3">
+                      <a
+                        href="[DÁN ĐƯỜNG LINK CỦA MÁ VÀO ĐÂY]"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="magic-ticket-pink focus:outline-none block"
+                        onClick={() => playClickSound(600, 0.1)}
+                      >
+                        <div className="magic-ticket-inner">
+                          Trạm cảm xúc 🕯️
+                        </div>
+                      </a>
+                    </div>
+
                     {/* Tag Filters list matching theme colors (Primary: Blue "Tất cả", Secondary: Pink categories tags) */}
                     <div className="flex flex-wrap items-center gap-2 py-2.5 max-h-52 overflow-y-auto no-scrollbar">
                       {tags.map((tag) => {
