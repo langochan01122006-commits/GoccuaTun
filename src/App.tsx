@@ -700,6 +700,7 @@ export default function App() {
   return (
     <div 
       className={`min-h-screen ${getBackgroundStyles()} transition-all duration-700 font-sans flex flex-col items-center select-none relative overflow-x-hidden ${hasEntered ? "p-4 md:p-6" : "justify-center p-6"}`}
+      style={{ touchAction: 'pan-y', overflowY: 'auto' }}
     >
       {/* Fixed background div behind everything for visual continuity and mobile compatibility */}
       <div 
@@ -714,7 +715,8 @@ export default function App() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          zIndex: -1
+          zIndex: -1,
+          pointerEvents: "none"
         }}
       />
       {/* Real-time DOM audio element properly integrated with React state and events */}
