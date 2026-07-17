@@ -26,6 +26,36 @@ service cloud.firestore {
         && data.votes <= 10000000;
     }
 
+    function isValidBlogPost(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.author is string && data.author.size() <= 64
+        && data.title is string && data.title.size() <= 128
+        && data.content is string && data.content.size() <= 5000
+        && data.character is string && data.character.size() <= 64
+        && data.category is string && (data.category == 'BLOG' || data.category == 'DIARY' || data.category == 'TÂM SỰ')
+        && data.userId is string && data.userId.size() <= 128
+        && data.reactions is number
+        && (!('image_url' in data) || (data.image_url is string && data.image_url.size() <= 2048))
+        && (!('audio_url' in data) || (data.audio_url is string && data.audio_url.size() <= 2048));
+    }
+
+    function isValidGalleryPost(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.image_url is string && data.image_url.size() <= 2048
+        && data.title is string && data.title.size() <= 128
+        && data.created_at is string && data.created_at.size() <= 64
+        && data.user_id is string && data.user_id.size() <= 128
+        && data.author is string && data.author.size() <= 64;
+    }
+
+    function isValidComment(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.author is string && data.author.size() <= 64
+        && data.content is string && data.content.size() <= 1000
+        && data.userId is string && data.userId.size() <= 128
+        && data.createdAt is number;
+    }
+
     // 2. Votes collection
     match /votes/{characterId} {
       allow get, list: if true;
@@ -37,6 +67,45 @@ service cloud.firestore {
         && isValidVote(incoming())
         && (!('characterId' in incoming()) || incoming().characterId == characterId)
         && (incoming().votes == existing().votes + 1 || incoming().votes == existing().votes - 1 || incoming().votes == existing().votes);
+    }
+
+    // 3. Blog posts collection
+    match /blog_posts/{postId} {
+      allow get, list: if true;
+      allow create: if isValidId(postId)
+        && isValidBlogPost(incoming())
+        && (
+          (incoming().userId == 'system-seed' && (postId == 'post-1' || postId == 'post-2' || postId == 'post-3' || postId == 'post-4'))
+          || (request.auth != null && incoming().userId == request.auth.uid)
+        )
+        && incoming().reactions == 0;
+      allow update: if request.auth != null
+        && isValidBlogPost(incoming())
+        && (
+          // Action: React (toggling likes)
+          incoming().diff(existing()).affectedKeys().hasOnly(['reactions', 'reactedUsers'])
+        );
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+
+      match /comments/{commentId} {
+        allow get, list: if true;
+        allow create: if isValidId(commentId)
+          && request.auth != null
+          && incoming().userId == request.auth.uid
+          && isValidComment(incoming());
+        allow update: if false;
+        allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+      }
+    }
+
+    // 4. Gallery posts collection
+    match /gallery_posts/{postId} {
+      allow get, list: if true;
+      allow create: if isValidId(postId)
+        && isValidGalleryPost(incoming())
+        && request.auth != null
+        && incoming().user_id == request.auth.uid;
+      allow update, delete: if false;
     }
   }
 }

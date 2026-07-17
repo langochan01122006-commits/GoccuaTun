@@ -20,12 +20,142 @@
         }
       },
       "required": ["characterId", "votes"]
+    },
+    "BlogPost": {
+      "title": "BlogPost",
+      "description": "An individual blog post or diary entry written anonymously.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the blog post."
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of the blog post, usually 'Người ẩn danh' or 'Khách vãng lai'."
+        },
+        "content": {
+          "type": "string",
+          "description": "The main content of the post."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the post was created."
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the user who authored the post."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the post."
+        },
+        "character": {
+          "type": "string",
+          "description": "Character the post is sent to."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category: BLOG, DIARY, or TÂM SỰ."
+        },
+        "reactions": {
+          "type": "integer",
+          "description": "The number of heart reactions."
+        },
+        "reactedUsers": {
+          "type": "array",
+          "description": "List of user UIDs who reacted to this post."
+        },
+        "image_url": {
+          "type": "string",
+          "description": "Optional direct URL to an image for this post."
+        },
+        "audio_url": {
+          "type": "string",
+          "description": "Optional direct URL to an MP3 audio file for background music."
+        }
+      },
+      "required": ["id", "content", "userId", "title", "character", "category", "reactions", "author"]
+    },
+    "GalleryPost": {
+      "title": "GalleryPost",
+      "description": "An image or drawing posted by a user to the gallery.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the gallery post."
+        },
+        "image_url": {
+          "type": "string",
+          "description": "The direct URL of the shared drawing or image."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the drawing or artwork."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the post was created."
+        },
+        "user_id": {
+          "type": "string",
+          "description": "UID of the user who posted this artwork."
+        },
+        "author": {
+          "type": "string",
+          "description": "The display name or email of the author."
+        }
+      },
+      "required": ["id", "image_url", "title", "created_at", "user_id", "author"]
+    },
+    "BlogComment": {
+      "title": "BlogComment",
+      "description": "A comment left under an anonymous blog post.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the comment."
+        },
+        "author": {
+          "type": "string",
+          "description": "Nickname of the commentator or 'Người ẩn danh'."
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the comment."
+        },
+        "createdAt": {
+          "type": "integer",
+          "description": "Epoch timestamp of when the comment was created."
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the user who made the comment."
+        }
+      },
+      "required": ["id", "author", "content", "createdAt", "userId"]
     }
   },
   "firestore": {
     "votes/{characterId}": {
       "schema": "CharacterVotes",
       "description": "Collection where each document represents the voting stats for a single character."
+    },
+    "blog_posts/{postId}": {
+      "schema": "BlogPost",
+      "description": "Collection of all anonymous blog posts and diaries."
+    },
+    "blog_posts/{postId}/comments/{commentId}": {
+      "schema": "BlogComment",
+      "description": "Sub-collection of comments made under a specific blog post."
+    },
+    "gallery_posts/{postId}": {
+      "schema": "GalleryPost",
+      "description": "Collection of gallery images posted by users."
     }
   }
 }

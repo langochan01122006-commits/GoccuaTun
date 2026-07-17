@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
 import { getAllVotes, voteForCharacter, unvoteForCharacter } from "./firebase";
+import BlogSection from "./components/BlogSection";
 
 const donateQrImg = "/src/assets/images/donate_qr_code_1781767011629.jpg";
 
@@ -224,6 +225,71 @@ export default function App() {
   const [gachaResult, setGachaResult] = useState<Character | null>(null);
   const [isSummoning, setIsSummoning] = useState(false);
   const [floatingNotes, setFloatingNotes] = useState<{ id: number; text: string; left: string; size: string; duration: string; color: string }[]>([]);
+
+  // Blog / Diary / Tâm Sự states
+  const [isBlogOpen, setIsBlogOpen] = useState(false);
+  const [isBlogTransitioning, setIsBlogTransitioning] = useState(false);
+
+  const switchToBlog = () => {
+    playClickSound(600, 0.1);
+    setIsBlogTransitioning(true);
+    
+    setTimeout(() => {
+      // Show blog content
+      const blogEl = document.getElementById('blog');
+      if (blogEl) {
+        blogEl.style.display = 'flex';
+        blogEl.classList.add('fade-in-back');
+        blogEl.classList.remove('fade-out-back');
+      }
+      
+      // Fade out main content
+      const mainEl = document.getElementById('main');
+      if (mainEl) {
+        mainEl.classList.add('fade-out-back');
+        mainEl.classList.remove('fade-in');
+      }
+      
+      setTimeout(() => {
+        setIsBlogOpen(true);
+        if (mainEl) {
+          mainEl.style.display = 'none';
+        }
+        setIsBlogTransitioning(false);
+      }, 800);
+    }, 50);
+  };
+
+  const switchFromBlogToMain = () => {
+    playClickSound(500, 0.1);
+    setIsBlogTransitioning(true);
+    
+    setTimeout(() => {
+      // Show main content
+      const mainEl = document.getElementById('main');
+      if (mainEl) {
+        mainEl.style.display = 'flex';
+        mainEl.classList.add('fade-in');
+        mainEl.classList.remove('fade-out-back');
+      }
+      
+      // Fade out blog content
+      const blogEl = document.getElementById('blog');
+      if (blogEl) {
+        blogEl.classList.add('fade-out-back');
+        blogEl.classList.remove('fade-in-back');
+      }
+      
+      setTimeout(() => {
+        setIsBlogOpen(false);
+        if (blogEl) {
+          blogEl.style.display = 'none';
+        }
+        setIsBlogTransitioning(false);
+      }, 800);
+    }, 50);
+  };
+
 
   useEffect(() => {
     if (!isPlaying) {
@@ -885,7 +951,6 @@ export default function App() {
                         welcomeEl.style.display = 'none';
                       }
                       setHasEntered(true);
-                      setIsMapOpen(true);
                       setIsPlaying(true);
                     }, 800);
                   }, 50);
@@ -1112,333 +1177,18 @@ export default function App() {
       )}
 
 
-      {/* Traveler's Map Modal Overlay on top of the main portal website */}
-      <AnimatePresence>
-        {isMapOpen && (
-          <div className="fixed inset-0 flex items-center justify-center p-4 overflow-y-auto z-50">
-            {/* Backdrop behind the map providing beautiful glassmorphism backdrop blur */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={startExploreJourney}
-              className="absolute inset-0"
-              style={{
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                background: "rgba(0, 0, 0, 0.6)"
-              }}
-            />
-
-            {/* Quick floating theme & sound controls on the map screen */}
-            <div className="absolute top-6 right-6 flex items-center gap-2 z-30">
-              <button
-                onClick={cycleBackdropTheme}
-                className={`magic-candle-btn ${backdropTheme === "cosmic" ? "lit" : "unlit"}`}
-                title="Thay đổi màu nền chủ đề"
-              >
-                <Flame className="w-4 h-4 magic-candle-flame" />
-              </button>
-              <button
-                onClick={() => {
-                  setIsSoundOn(!isSoundOn);
-                  if (!isSoundOn) playClickSound(600, 0.05);
-                }}
-                className="p-2 transition duration-150 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full border border-white/20 text-white active:scale-95 flex items-center justify-center cursor-pointer"
-                title={isSoundOn ? "Tắt âm thanh thông báo" : "Bật âm thanh thông báo"}
-              >
-                {isSoundOn ? <Volume2 className="w-4 h-4 text-pink-400 animate-pulse" /> : <VolumeX className="w-4 h-4 text-[#eedebd]/60" />}
-              </button>
-            </div>
-
-            {/* Traveler's Map Parchment Container */}
-            <motion.div
-              key="parchment-map"
-              initial={{ scaleX: 0.02, scaleY: 0.85, opacity: 0 }}
-              animate={{ scaleX: 1, scaleY: 1, opacity: 1 }}
-              exit={{ scaleY: 0.05, opacity: 0, transition: { duration: 0.45, ease: "easeInOut" } }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-[580px] parchment-container p-6 md:p-8 flex flex-col items-center overflow-visible select-none border-amber-950/40 shadow-2xl my-auto"
-            >
-              {/* Wooden rollers layout on left and right for scroll unrolling feel */}
-              <div className="absolute left-[-4px] top-0 bottom-0 w-3.5 bg-gradient-to-r from-[#1c0c04] via-[#4d260c] to-[#1c0c04] rounded-l-md border-r border-amber-900/40 shadow-md pointer-events-none" />
-              <div className="absolute right-[-4px] top-0 bottom-0 w-3.5 bg-gradient-to-l from-[#1c0c04] via-[#4d260c] to-[#1c0c04] rounded-r-md border-l border-amber-900/40 shadow-md pointer-events-none" />
-
-              {/* Stylized Close Button 'X' */}
-              <button
-                onClick={startExploreJourney}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#5d4037] hover:bg-[#4e342e] border border-amber-900/40 text-[#eedebd] flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all text-sm font-bold z-30"
-                title="Đóng bản đồ"
-              >
-                ✕
-              </button>
-
-              {/* Magical map title */}
-              <div className="text-center space-y-1.5 md:space-y-2 mt-4 px-4 z-10">
-                <motion.h2 
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                  className="text-2xl md:text-3xl font-serif font-black tracking-[0.2em] text-[#4e342e] uppercase filter drop-shadow-[0_1.5px_1px_rgba(255,255,255,0.7)]"
-                >
-                  BẢN ĐỒ ĐỊNH MỆNH CHỈ ĐƯỜNG 🗺️
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.75 }}
-                  transition={{ delay: 0.6, duration: 0.8 }}
-                  className="text-[10px] md:text-xs font-handwritten text-[#795548] uppercase tracking-wide italic font-bold"
-                >
-                  【 Thăng hoa lộ trình, bảo điển thiên cơ dẫn bước 】
-                </motion.p>
-              </div>
-
-              {/* Interactive Map Illustration Stage */}
-              <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] bg-[#eedcbd]/35 border border-[#8d6e63]/30 rounded-2xl overflow-hidden shadow-inner flex items-center justify-center mt-6">
-                
-                {/* Vintage windrose decoration */}
-                <div className="absolute top-[35%] left-[45%] opacity-[0.06] select-none pointer-events-none">
-                  <svg className="w-56 h-56 animate-spin" style={{ animationDuration: '40s' }} viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="#5d4037" strokeWidth="1" />
-                    <circle cx="50" cy="50" r="38" fill="none" stroke="#5d4037" strokeWidth="0.5" strokeDasharray="2,2" />
-                    <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" stroke="#5d4037" strokeWidth="0.8" />
-                    <polygon points="50,50 50,20 53,35" fill="#5d4037" />
-                    <polygon points="50,50 50,20 47,35" fill="#5d4037" opacity="0.5" />
-                    <polygon points="50,50 50,80 47,65" fill="#5d4037" />
-                    <polygon points="50,50 50,80 53,65" fill="#5d4037" opacity="0.5" />
-                  </svg>
-                </div>
-
-                {/* Magic connected paths using relative coordinates */}
-                <svg className="absolute inset-x-0 inset-y-0 w-full h-full pointer-events-none z-0" viewBox="0 0 500 300" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="parchment-magic-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#d97706" />
-                      <stop offset="50%" stopColor="#7c3aed" />
-                      <stop offset="100%" stopColor="#be123c" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M 110 90 Q 250 40, 390 100 Q 250 180, 130 220 Q 250 270, 370 200"
-                    fill="none"
-                    stroke="url(#parchment-magic-grad)"
-                    strokeWidth="2.5"
-                    className="map-magic-path opacity-65"
-                  />
-                </svg>
-
-                {/* Landmarks list rendering mapping */}
-                <div className="absolute inset-0 z-10">
-                  {/* Point 1: Vé Ưu Tiên 🌟  Coordinates: left: 22%, top: 30% */}
-                  <div 
-                    style={{ left: "22%", top: "30%" }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
-                  >
-                    <div
-                      onMouseEnter={() => {
-                        setHoveredLandmark(1);
-                        playClickSound(480, 0.03);
-                      }}
-                      onMouseLeave={() => setHoveredLandmark(null)}
-                      onClick={() => {
-                        playClickSound(500, 0.1);
-                        setIsMapOpen(false);
-                        setIsVoteModalOpen(true);
-                        setIsDonateModalOpen(false);
-                        setIsCommandModalOpen(false);
-                      }}
-                      className="cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300"
-                    >
-                      {/* Stylized Golden Gate Ticket */}
-                      <div className="relative flex flex-col items-center">
-                        <div className="absolute -inset-2 bg-yellow-400/20 rounded-full blur-[8px] animate-pulse" />
-                        <div className="relative w-12 h-9 bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 rounded-sm border border-yellow-200/60 shadow-md flex items-center justify-center overflow-hidden">
-                          <div className="absolute left-[-4px] w-2.5 h-2.5 rounded-full bg-[#faedd6]" />
-                          <div className="absolute right-[-4px] w-2.5 h-2.5 rounded-full bg-[#faedd6]" />
-                          <Star className="w-5 h-5 text-white filter drop-shadow-[0_0_3px_#fff]" fill="currentColor" />
-                        </div>
-                      </div>
-                    </div>
-                    {/* Tiny visual text overlay with hand-written font */}
-                    <div className="mt-1 px-1.5 py-0.5 bg-[#fbf5e6]/95 border border-[#8d6e63]/40 rounded shadow-sm">
-                      <span className="font-serif font-black text-[9px] text-[#4e342e] whitespace-nowrap">
-                        Vé Ưu Tiên 🌟
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Point 2: Giếng Ước Nguyện 🔮 Coordinates: left: 78%, top: 33% */}
-                  <div 
-                    style={{ left: "78%", top: "33%" }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
-                  >
-                    <div
-                      onMouseEnter={() => {
-                        setHoveredLandmark(2);
-                        playClickSound(480, 0.03);
-                      }}
-                      onMouseLeave={() => setHoveredLandmark(null)}
-                      onClick={() => {
-                        playClickSound(500, 0.1);
-                        setIsMapOpen(false);
-                        setIsDonateModalOpen(true);
-                        setIsVoteModalOpen(false);
-                        setIsCommandModalOpen(false);
-                      }}
-                      className="cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300"
-                    >
-                      {/* Stylized stone well */}
-                      <div className="relative flex flex-col items-center">
-                        <div className="absolute -inset-3 bg-indigo-500/15 rounded-full blur-[10px]" />
-                        <div className="relative w-11 h-11 flex flex-col items-center">
-                          {/* Well base */}
-                          <div className="w-9 h-6 bg-gradient-to-b from-stone-500 to-stone-700 rounded-b-md border border-stone-400 shadow flex items-center justify-center mt-2.5">
-                            <span className="text-[8px] text-stone-300">🧱</span>
-                          </div>
-                          {/* Roof and posts */}
-                          <div className="absolute top-0.5 w-[38px] h-2 bg-red-800 rounded border-b border-red-950" />
-                          <div className="absolute top-1.5 w-[1px] h-3 bg-stone-600 left-[4px]" />
-                          <div className="absolute top-1.5 w-[1px] h-3 bg-stone-600 right-[4px]" />
-                          <div className="absolute top-1 rotate-[45deg] animate-pulse text-[8px] z-10 bg-purple-500/80 rounded-full w-3.5 h-3.5 flex items-center justify-center">
-                            🔮
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-1 px-1.5 py-0.5 bg-[#fbf5e6]/95 border border-[#8d6e63]/40 rounded shadow-sm">
-                      <span className="font-serif font-black text-[9px] text-[#4e342e] whitespace-nowrap">
-                        Giếng Ước Nguyện 🔮
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Point 3: Quầy Hướng Dẫn 🎪 Coordinates: left: 26%, top: 73% */}
-                  <div 
-                    style={{ left: "26%", top: "73%" }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
-                  >
-                    <div
-                      onMouseEnter={() => {
-                        setHoveredLandmark(3);
-                        playClickSound(480, 0.03);
-                      }}
-                      onMouseLeave={() => setHoveredLandmark(null)}
-                      onClick={() => {
-                        playClickSound(500, 0.1);
-                        setIsMapOpen(false);
-                        setIsCommandModalOpen(true);
-                      }}
-                      className="cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300"
-                    >
-                      {/* Elegant Velvet Merchant Tent */}
-                      <div className="relative flex flex-col items-center">
-                        <div className="absolute -inset-2 bg-rose-400/15 rounded-full blur-[8px]" />
-                        <div className="w-11 h-10 bg-gradient-to-b from-rose-600 to-indigo-900 border border-purple-300/40 rounded-t-xl shadow-md flex items-center justify-center relative">
-                          <div className="absolute top-[-5px] w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[6px] border-b-yellow-400" />
-                          <div className="w-3.5 h-3.5 rounded-full bg-cyan-300 border border-white/50 shadow-[0_0_6px_#22d3ee] animate-pulse absolute bottom-1" />
-                          <div className="absolute inset-y-0 left-0 w-2 bg-rose-850 rounded-tl-xl border-r border-[#ffe79a]/10" />
-                          <div className="absolute inset-y-0 right-0 w-2 bg-rose-850 rounded-tr-xl border-l border-[#ffe79a]/10" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-1 px-1.5 py-0.5 bg-[#fbf5e6]/95 border border-[#8d6e63]/40 rounded shadow-sm">
-                      <span className="font-serif font-black text-[9px] text-[#4e342e] whitespace-nowrap">
-                        Quầy Hướng Dẫn 🎪
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Point 4: Lưu Bút Du Khách 📜 Coordinates: left: 74%, top: 67% */}
-                  <div 
-                    style={{ left: "74%", top: "67%" }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
-                  >
-                    <button
-                      onMouseEnter={() => {
-                        setHoveredLandmark(4);
-                        playClickSound(480, 0.03);
-                      }}
-                      onMouseLeave={() => setHoveredLandmark(null)}
-                      onClick={() => {
-                        playClickSound(500, 0.1);
-                        setIsMapOpen(false);
-                        setIsGuestbookModalOpen(true);
-                      }}
-                      className="cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300 flex flex-col items-center border-none bg-transparent"
-                    >
-                      {/* Elegant handwriting feather & book scroll */}
-                      <div className="relative flex flex-col items-center">
-                        <div className="absolute -inset-2 bg-amber-400/10 rounded-full blur-[8px]" />
-                        <div className="w-11 h-9 bg-[#fefaca] border-2 border-amber-900/80 rounded shadow-md transform -rotate-3 relative flex items-center justify-center border-l-[3px] border-l-amber-950">
-                          <BookOpen className="w-4 h-4 text-amber-900/60" />
-                          <div className="absolute -top-3.5 -right-1 rotate-[30deg] origin-bottom animate-bounce text-[10px]">
-                            ✍️
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                    <div className="mt-1 px-1.5 py-0.5 bg-[#fbf5e6]/95 border border-[#8d6e63]/40 rounded shadow-sm">
-                      <span className="font-serif font-black text-[9px] text-[#4e342e] whitespace-nowrap">
-                        Lưu Bút Du Khách 📜
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* High-fidelity handwritten notes board explaining detail on mouse hover */}
-              <div className="w-full mt-4 px-4 py-2 bg-[#fdf8ed] border border-[#d7ccc8] rounded-xl relative shadow-md overflow-hidden flex flex-col items-center justify-center text-center">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#fbf5e6]/20 to-[#f3e5c8]/30 mix-blend-multiply opacity-80 pointer-events-none" />
-                
-                <h4 className="text-[10px] sm:text-xs font-serif font-black tracking-wider text-[#5d4037] uppercase flex items-center gap-1.5 z-10">
-                  {hoveredLandmark === 1 && <span>🎯 🌟 VÉ ƯU TIÊN</span>}
-                  {hoveredLandmark === 2 && <span>🎯 🔮 GIẾNG ƯỚC NGUYỆN</span>}
-                  {hoveredLandmark === 3 && <span>🎯 🎪 QUẦY HƯỚNG DẪN</span>}
-                  {hoveredLandmark === 4 && <span>🎯 📜 LƯU BÚT DU KHÁCH</span>}
-                  {hoveredLandmark === null && <span className="animate-pulse">🗺️ TÌNH TRẠNG CHỈ THỊ GIAO CƠ</span>}
-                </h4>
-                
-                <p className="text-[13px] md:text-base font-handwritten text-[#3e2723] italic h-8 flex items-center justify-center select-none z-10 transition-all duration-200">
-                  {hoveredLandmark === 1 && "“Nơi đón nhận những đặc quyền tối thượng.”"}
-                  {hoveredLandmark === 2 && "“Thả một đồng xu, định mệnh sẽ trả lời bạn.”"}
-                  {hoveredLandmark === 3 && "“Lều tiên tri giải đáp mọi thắc mắc của lữ khách.”"}
-                  {hoveredLandmark === 4 && "“Ghi lại dấu chân của bạn tại thánh điện này.”"}
-                  {hoveredLandmark === null && "* Di chuột hoặc chạm vào kỷ vật lấp lánh để triệu hồi gợi ý mật thư *"}
-                </p>
-              </div>
-
-              {/* Nút "Bước Vào Lâu Đài" at bottom of map */}
-              <motion.div 
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="w-full mt-6 z-20"
-              >
-                <button
-                  onClick={startExploreJourney}
-                  className="w-full py-4 text-base font-bold shadow-lg hover:brightness-105 active:scale-95 transition-all text-amber-100 hover:text-white rounded-md border-y border-[#ffd54f]/50 cursor-pointer flex items-center justify-center gap-2"
-                  style={{
-                    backgroundColor: "#6D4C41",
-                    backgroundImage: "linear-gradient(to bottom, #795548, #5d4037)",
-                    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)"
-                  }}
-                >
-                  🏰 BƯỚC VÀO LÂU ĐÀI ➜
-                </button>
-              </motion.div>
-
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
       {/* Main website content renders when entered */}
       {(hasEntered || hasEnteredOrTransitioning) && (
-        <div
-          id="main"
-          className={`main-content w-full max-w-4xl z-10 flex flex-col gap-5 ${hasEntered ? "fade-in" : ""}`}
-        >
+        <>
+          <div
+            id="main"
+            className={`main-content w-full max-w-4xl z-10 flex flex-col gap-5 ${
+              hasEntered && !isBlogOpen && !isBlogTransitioning 
+                ? "fade-in" 
+                : "fade-out-back"
+            }`}
+            style={{ display: isBlogOpen ? "none" : "flex" }}
+          >
             {/* Top Navigation Row */}
             <div className="flex justify-between items-center">
               {/* Back button to Welcome Portal */}
@@ -1644,7 +1394,7 @@ export default function App() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Tìm một nửa... 🔍"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-2xl text-sm magic-search-input shadow-sm"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-2xl text-base magic-search-input shadow-sm"
                       />
                       {searchQuery && (
                         <button
@@ -1675,6 +1425,19 @@ export default function App() {
                       >
                         <div className="magic-ticket-inner">
                           Cốc Cốc Cốc ai gọi đó 🐰
+                        </div>
+                      </button>
+                    </div>
+
+                    {/* Blog Ticket Button */}
+                    <div className="magic-ticket-wrapper">
+                      <button
+                        onClick={switchToBlog}
+                        className="magic-ticket focus:outline-none"
+                        style={{ background: '#f4d1d1' }}
+                      >
+                        <div className="magic-ticket-inner">
+                          TRẠM CẢM XÚC 🕯️
                         </div>
                       </button>
                     </div>
@@ -2097,6 +1860,15 @@ export default function App() {
               )}
             </AnimatePresence>
           </div>
+
+          {/* --- SECTION: BLOG & DIARY & TÂM SỰ --- */}
+          <BlogSection
+            isBlogOpen={isBlogOpen}
+            onBack={switchFromBlogToMain}
+            playClickSound={playClickSound}
+            onStorySelect={setStoryCharacter}
+          />
+        </>
       )}
 
       {/* Character Voting Modal */}
@@ -2304,7 +2076,7 @@ export default function App() {
                   value={guestbookName}
                   onChange={(e) => setGuestbookName(e.target.value)}
                   placeholder="Tên của bạn (để trống nếu muốn ẩn danh)..."
-                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-sm font-medium"
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-base font-medium"
                 />
 
                 <textarea
@@ -2312,7 +2084,7 @@ export default function App() {
                   onChange={(e) => setGuestbookContent(e.target.value)}
                   placeholder="Viết lưu bút hoặc góp ý của bạn tại đây..."
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-sm resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-base resize-none"
                 />
 
                 <button
@@ -2659,7 +2431,7 @@ export default function App() {
                     }}
                     className="flex-1 py-1.5 md:py-2.5 bg-[#FFD600] hover:bg-[#ffeb3b] border-2 border-[#1976D2] text-[#1976D2] font-bold text-xs rounded-xl shadow-[0_4px_12px_rgba(25,118,210,0.15)] active:scale-95 transition cursor-pointer"
                   >
-                    Trở Lại Bản Đồ 🗺️
+                    Trở Lại Sảnh Chính 🏯
                   </button>
                 </div>
               </div>
@@ -3721,7 +3493,7 @@ export default function App() {
                             playClickSound(300, 0.08);
                             setSelectedPlaylist(e.target.value as "us-uk" | "v-pop" | "c-pop");
                           }}
-                          className="w-full bg-[#291202] border border-amber-500/40 text-[#ffd175] text-xs font-serif rounded-xl p-2.5 outline-none focus:border-amber-400/80 transition cursor-pointer"
+                          className="w-full bg-[#291202] border border-amber-500/40 text-[#ffd175] text-base font-serif rounded-xl p-2.5 outline-none focus:border-amber-400/80 transition cursor-pointer"
                         >
                           <option value="us-uk">US - UK</option>
                           <option value="v-pop">V-POP</option>
