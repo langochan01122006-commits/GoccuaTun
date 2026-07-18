@@ -1343,10 +1343,11 @@ export default function App() {
                     {/* Trạm Cảm Xúc Link Button */}
                     <div className="magic-ticket-wrapper mt-3">
                       <a
-                        href="#"
+                        href="https://m-ng-x-h-i-mini.ai.studio/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="magic-ticket-pink focus:outline-none block"
-                        onClick={(e) => {
-                          e.preventDefault();
+                        onClick={() => {
                           playClickSound(600, 0.1);
                         }}
                       >
