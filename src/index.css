@@ -3112,10 +3112,120 @@
   box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
 }
 
+/* Rescue Ticket Pass Card Container */
+.rescue-ticket-pass-card {
+  position: relative;
+  background: linear-gradient(135deg, #e2e8f0 0%, #475569 25%, #94a3b8 50%, #475569 75%, #e2e8f0 100%) !important;
+  border: 3px solid #94a3b8 !important;
+  border-radius: 24px !important;
+  box-shadow: 0 0 25px rgba(148, 163, 184, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.35s ease;
+  overflow: visible !important;
+  z-index: 1;
+  
+  /* Retro ticket punch notch cutouts on sides */
+  -webkit-mask-image: radial-gradient(circle at 0px 50%, transparent 14px, black 15px),
+                      radial-gradient(circle at 100% 50%, transparent 14px, black 15px);
+  -webkit-mask-size: 51% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: left, right;
+  mask-image: radial-gradient(circle at 0px 50%, transparent 14px, black 15px),
+              radial-gradient(circle at 100% 50%, transparent 14px, black 15px);
+  mask-size: 51% 100%;
+  mask-repeat: no-repeat;
+  mask-position: left, right;
+}
 
+.rescue-ticket-pass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7) !important;
+  backdrop-filter: blur(1.5px);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 0;
+}
 
+.rescue-ticket-pass-card::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 20px;
+  border-right: 2px dashed rgba(148, 163, 184, 0.3);
+  pointer-events: none;
+  z-index: 10;
+}
 
+.rescue-ticket-pass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(148, 163, 184, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.4) !important;
+}
+/* ĐOẠN CSS ÉP CARD DƯỚI DÙNG CHUNG FORM NHƯNG ĐỔI MÀU U TỐI */
+.loser-ticket-dark-version {
+  /* Giữ nguyên kích thước và khoảng cách y hệt card trên */
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  
+  /* ÉP TOÀN BỘ CARD SANG TÔNG XÁM TRO, U TỐI, BÁM BỤI */
+  filter: grayscale(0.9) brightness(0.6) contrast(1.1) sepia(0.15) !important;
+  opacity: 0.85; /* Làm mờ nhẹ tạo cảm giác bị lu mờ */
+  transition: all 0.3s ease;
+}
 
+/* Hiệu ứng khi rê chuột vào thì sáng nhẹ lên một chút */
+.loser-ticket-dark-version:hover {
+  filter: grayscale(0.7) brightness(0.75) contrast(1.1) !important;
+  opacity: 1;
+}
 
+/* Đổi riêng cái nút "Chat" màu vàng của card trên thành màu đỏ tối ở card dưới cho đúng tính chất Giải Cứu */
+.loser-ticket-dark-version .btn-orange-style, 
+.loser-ticket-dark-version [class*="btn-chat"], 
+.loser-ticket-dark-version [class*="primary"] {
+  background: linear-gradient(135deg, #475569 0%, #1e293b 100%) !important;
+  border-color: #64748b !important;
+  color: #ffffff !important;
+}
+
+/* 1. THÊM HIỆU ỨNG CHO KHUNG SẢNH CHỜ / XÁC MINH TUỔI */
+.sanh-cho-container, 
+[class*="SanhCho"], 
+[class*="lobby-modal"],
+.age-verify-card {
+  /* Khởi tạo hiệu ứng: tên hiệu ứng | thời gian 0.6s | chạy mượt | giữ lại trạng thái cuối */
+  animation: smoothFadeInUp 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  will-change: transform, opacity; /* Tối ưu hóa mượt mà trên điện thoại */
+}
+
+/* 2. ĐỊNH NGHĨA CHUYỂN ĐỘNG MƯỢT MÀ NHƯ SƯƠNG KHÓI */
+@keyframes smoothFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98); /* Hơi thụt xuống dưới và thu nhỏ nhẹ */
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Trượt thẳng lên vị trí chuẩn */
+    backdrop-filter: blur(15px); /* Nền mờ từ từ loang ra */
+    -webkit-backdrop-filter: blur(15px);
+  }
+}
+
+/* 3. LÀM MƯỢT CẢ CÁC NỘI DUNG BÊN TRONG (HIỆU ỨNG ĐUỔI NHAU) */
+.sanh-cho-container > *,
+[class*="SanhCho"] > *,
+[class*="lobby-modal"] > *,
+.age-verify-card > * {
+  animation: smoothContentFade 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+}
+
+@keyframes smoothContentFade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 

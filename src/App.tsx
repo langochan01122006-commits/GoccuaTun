@@ -562,6 +562,26 @@ export default function App() {
 
   const featuredHubby = getFeaturedHubby();
 
+  // Hàm tìm nhân vật có vote thấp nhất nhưng phải lớn hơn 0
+  const getLowestVotedCharacter = () => {
+    // 1. Lọc ra những nhân vật đã có ít nhất 1 vote trở lên
+    const votedCharacters = CHARACTERS.filter(char => {
+      const charVotes = votes[char.id] || 0;
+      return charVotes >= 1;
+    });
+    
+    if (votedCharacters.length === 0) return null; // Nếu chưa ai được vote >= 1 thì không hiện
+
+    // 2. Tìm người có số vote thấp nhất trong danh sách trên
+    return votedCharacters.reduce((lowest, current) => {
+      const currentVotes = votes[current.id] || 0;
+      const lowestVotes = votes[lowest.id] || 0;
+      return currentVotes < lowestVotes ? current : lowest;
+    }, votedCharacters[0]);
+  };
+
+  const lowestChar = getLowestVotedCharacter();
+
   // Filtered listing based on query and selected category tag
   const filteredCharacters = CHARACTERS.filter((char) => {
     const matchesSearch = char.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -1526,6 +1546,134 @@ export default function App() {
                         </a>
                       </div>
                     </motion.div>
+                  )}
+
+                  {/* Lowest Voted Character Rescue Banner/Section */}
+                  {lowestChar && featuredHubby && lowestChar.id !== featuredHubby.id && (
+                    <div className="loser-ticket-dark-version">
+                      <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.35, delay: 0.15 }}
+                        id="lowest-hubby-banner"
+                        className="golden-ticket-pass-card pl-4 pr-3 py-3 md:pl-8 md:pr-6 md:py-4 flex flex-col md:flex-row items-center gap-3 md:gap-5 justify-between transition-all duration-300 group"
+                      >
+                        {/* Ambient background decoration */}
+                        <div className="absolute top-0 right-0 -mr-12 -mt-12 w-40 h-40 bg-slate-500/5 rounded-full blur-3xl pointer-events-none group-hover:bg-slate-500/10 transition-all duration-500" />
+                        
+                        <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-5 text-center sm:text-left w-full relative z-10 pl-2 lg:pl-4">
+                          {/* Avatar container with Silver/Slate Gacha Sphere */}
+                          <div className="relative shrink-0 flex items-center justify-center">
+                            <div className="relative w-20 h-20 md:w-24 md:h-24 flex items-center justify-center">
+                              {/* Glowing effect around royal capsule */}
+                              <div className="absolute inset-x-0 inset-y-0 bg-slate-400/20 rounded-full blur-[6px] opacity-80 animate-pulse pointer-events-none" />
+                              <div className="absolute -inset-1 bg-gradient-to-tr from-slate-500 via-slate-200 to-slate-400 rounded-full blur-[3px] opacity-70" />
+                              
+                              {/* Silver capsule border edge */}
+                              <div className="absolute inset-0 bg-gradient-to-b from-slate-300 via-slate-100 to-slate-500 rounded-full p-[2.5px] shadow-lg">
+                                <div className="w-full h-full rounded-full bg-stone-950 flex items-center justify-center overflow-hidden relative">
+                                  {/* Soft ambient light source behind plushie */}
+                                  <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-slate-400/15 to-slate-300/20 animate-pulse" />
+                                  
+                                  {/* The featured plushie */}
+                                  <span className="text-4xl md:text-5xl drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)] z-10 select-none">
+                                    {lowestChar.avatar}
+                                  </span>
+                                  
+                                  {/* 3D Glossy curved glare layer */}
+                                  <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_35%_25%,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.25)_25%,rgba(0,0,0,0.25)_85%,rgba(255,255,255,0.35)_100%)] z-20 pointer-events-none">
+                                    <div className="absolute top-0.5 left-2.5 w-6 h-2 md:w-8 md:h-3 bg-gradient-to-b from-white/70 to-transparent rounded-full rotate-[-25deg]" />
+                                    <div className="absolute bottom-1 right-2.5 w-2 h-1 md:w-3 md:h-1.5 bg-white/40 rounded-full blur-[0.5px]" />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            {/* Dust/Forgotten Ribbon */}
+                            <span className="absolute -bottom-2 bg-gradient-to-r from-slate-600 via-stone-500 to-slate-500 text-white font-black text-[7px] md:text-[8px] px-2 py-0.5 md:px-3 md:py-1 rounded-full shadow-[0_4px_10px_rgba(100,116,139,0.5)] border border-slate-400 flex items-center gap-0.5 uppercase tracking-widest select-none z-30 whitespace-nowrap" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.9)' }}>
+                              ⚠️ BÁM BỤI ⚠️
+                            </span>
+                          </div>
+
+                          {/* Name & descriptive details */}
+                          <div className="space-y-1 w-full">
+                            <div className="flex flex-wrap items-center gap-1.5 justify-center sm:justify-start">
+                              <span className="px-2 py-1 md:px-3 md:py-1.5 font-sans text-[8px] md:text-[9px] tracking-wider bg-gradient-to-r from-[#2a2b2f] to-[#4b4d52] border-2 border-slate-400 rounded-full shadow-[0_0_15px_rgba(100,116,139,0.4)] text-slate-300 font-black uppercase flex items-center gap-1 select-none whitespace-nowrap">
+                                🧸 GẤU BÔNG BỊ BỎ QUÊN 🧸
+                              </span>
+                              <h4 className="text-lg md:text-xl font-black text-[#FAF9F6] tracking-tight group-hover:text-slate-200 transition">
+                                {lowestChar.name}
+                              </h4>
+                            </div>
+
+                            {/* Rank categories list & dynamic values */}
+                            <div className="flex flex-wrap items-center gap-1 md:gap-1.5 justify-center sm:justify-start mt-0.5 lg:mt-1">
+                              <span className="px-1.5 py-0.5 md:px-2 md:py-1 text-[7px] md:text-[8px] font-black bg-gradient-to-r from-red-500 to-rose-600 text-white rounded border border-rose-300 uppercase tracking-wider select-none shadow-[0_0_8px_rgba(244,63,94,0.5)] whitespace-nowrap">
+                                📉 {votes[lowestChar.id] || 0} VOTE
+                              </span>
+                              {lowestChar.tags.map((t, idx) => {
+                                const symbol = getRuneSymbol(t);
+                                return (
+                                  <span
+                                    key={idx}
+                                    className={`mini-ticket-stub ticket-sm ${getTicketColorClass(t)} select-none scale-[0.85] md:scale-100 origin-left`}
+                                  >
+                                    <span className="rune-prefix-icon">{symbol}</span>
+                                    <span>{t}</span>
+                                  </span>
+                                );
+                              })}
+                              
+                              {/* Unique Gacha priority votes */}
+                              <span className="px-2 py-0.5 text-[8px] md:text-[9px] font-black text-slate-100 bg-gradient-to-r from-slate-700 to-slate-900 border border-slate-500/30 rounded-full flex items-center gap-0.5 shadow-sm uppercase tracking-wider select-none whitespace-nowrap">
+                                <span>🎟️ {(votes[lowestChar.id] || 0).toLocaleString()} <span className="hidden sm:inline">LỢT ƯU TIÊN THẤP NHẤT</span></span>
+                              </span>
+                            </div>
+
+                            <p className="text-[10px] md:text-[12px] text-slate-300 max-w-xl line-clamp-1 md:line-clamp-2 mt-0.5 md:mt-1 leading-snug lg:leading-relaxed">
+                              "Đang tạm thời bị bỏ lại trong góc tủ bám bụi... Mau gắp hoặc vote để giải cứu em ấy ra ngoài với Lệ Bắc Thần nào!"
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Clickable Actions block */}
+                        <div className="flex items-center gap-1.5 md:gap-2 w-full md:w-auto shrink-0 mt-2 md:mt-0 relative z-10 border-t md:border-t-0 border-white/10 pt-2.5 md:pt-0">
+                          {/* Rescue action button (instead of Chat) */}
+                          <button
+                            onClick={() => handleVote(lowestChar.id)}
+                            className="flex-1 md:w-28 flex items-center justify-center gap-1 px-2 py-1.5 md:px-3 md:py-2.5 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-yellow-950 font-black text-[9px] md:text-[10px] rounded-[10px] md:rounded-xl shadow-md transition duration-150 active:scale-95 cursor-pointer border border-yellow-300/40 btn-chat primary btn-orange-style whitespace-nowrap"
+                          >
+                            <span>🆘 {userVotedIds.includes(lowestChar.id) ? "Đã cứu" : "Giải Cứu"}</span>
+                          </button>
+
+                          {/* Interactive Story Trigger */}
+                          <button
+                            onClick={() => {
+                              playClickSound(480, 0.08);
+                              setStoryCharacter(lowestChar);
+                            }}
+                            className="flex-1 md:w-28 flex items-center justify-center gap-1 px-2 py-1.5 md:px-3 md:py-2.5 text-amber-200 bg-amber-950/50 hover:bg-amber-900/40 border border-amber-500/30 text-[9px] md:text-[10px] font-black rounded-[10px] md:rounded-xl transition duration-150 active:scale-95 cursor-pointer whitespace-nowrap"
+                          >
+                            <BookOpen className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                            <span className="hidden sm:inline">Cốt truyện</span>
+                            <span className="sm:hidden">Truyện</span>
+                          </button>
+
+                          {/* Profile Button */}
+                          <a
+                            href={lowestChar.profileUrl || "#"}
+                            target={lowestChar.profileUrl ? "_blank" : undefined}
+                            rel={lowestChar.profileUrl ? "noopener noreferrer" : undefined}
+                            onClick={() => playClickSound(480, 0.08)}
+                            className="flex-1 md:w-28 flex items-center justify-center gap-1 px-2 py-1.5 md:px-3 md:py-2.5 text-amber-200 bg-amber-950/50 hover:bg-amber-900/40 border border-amber-500/30 text-[9px] md:text-[10px] font-black rounded-[10px] md:rounded-xl transition duration-150 active:scale-95 cursor-pointer whitespace-nowrap"
+                          >
+                            <User className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                            <span className="hidden sm:inline">Profile</span>
+                            <span className="sm:hidden">Hồ sơ</span>
+                          </a>
+                        </div>
+                      </motion.div>
+                    </div>
                   )}
 
                   {/* Characters scrollable vertical listing: "Bộ sưu tập thú bông lưu niệm" */}
