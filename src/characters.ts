@@ -4981,5 +4981,270 @@ Khoan đã… Sao trông anh già thế ?
 Hóa ra cô không phải được cứu sống, cũng không phải trùng sinh vào một thân xác khác… mà là…
 
 TRÙNG SINH ĐẾN TƯƠNG LAI SAU 7 NĂM KỂ T2 PHÚT KỂ TỪ NGÀY MÌNH CHẾT!!!??`
+  },
+  {
+    id: "26",
+    no: "026",
+    name: "Một Đời Trăng Khuyết",
+    avatar: "🌙",
+    avatarBg: "from-fuchsia-600 to-indigo-900",
+    image: "https://cdn.phototourl.com/free/2026-07-19-f0b5304c-46f3-4768-8d5a-bff43f019d51.jpg",
+    tags: ["Cổ Trang", "2 Couple", "DRAMA", "Xuyên Không"],
+    description: "Giữa nhân gian cuồng quay, số kiếp luân hồi vạn nẻo. Liệu ánh trăng khuyết có thể tròn đầy khi hai trái tim tìm lại được nhau?",
+    story: "",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    storyline: `Thành phố XX – 16:00
+
+Mưa mỗi lúc một nặng hạt. Cô và Gia Ý đành chạy vội vào một hiệu sách nhỏ nằm nép mình nơi góc phố để trú mưa.
+
+“Thời tiết báo không mưa mà trời.”
+
+Tiệm sách vắng tanh, chỉ còn ánh đèn vàng hắt lên những kệ gỗ cũ kỹ cùng mùi giấy đã ngả màu theo năm tháng.
+
+“Ê, chỗ này hình như mới mở.”
+
+Gia Ý nói rồi hào hứng bước vào bên trong.
+
+Trong lúc bạn thân mải mê lướt qua từng kệ sách, cô chậm rãi đi sâu vào trong.
+
+BỘP
+
+Một cuốn sách từ trên kệ bất ngờ rơi xuống. Cô cúi người nhặt lên, đưa tay phủi nhẹ lớp bụi bám trên bìa.
+
+“Ui, nhìn này.”
+
+Cô vừa nói vừa lật qua lật lại quyển sách.
+
+“Hả?”
+“Một Đời Trăng Khuyết?”
+
+Gia Ý cũng ghé lại đọc tên cuốn sách. Không hiểu vì lý do gì, cả hai lại quyết định mua quyển sách ấy. Ông cụ chủ tiệm chỉ mỉm cười nhìn hai đứa.
+
+“Vui vẻ nhé.”
+
+Hai người chẳng hiểu ý nghĩa câu nói đó là gì, chỉ chớp chớp mắt nhìn nhau rồi rời khỏi hiệu sách.
+
+Một Đời Trăng Khuyết
+Tác giả: Không rõ
+
+Nước Thương Lan là cường quốc hùng mạnh nhất lúc bấy giờ. Hoàng đế Thương Lan, Thương Huyền Đế, là vị quân vương trị vì thiên hạ. Ông có năm người con, trong đó Đại Công chúa Thương Minh Châu là trưởng nữ do Hoàng hậu sinh ra.
+
+Minh Châu được mệnh danh là mỹ nhân khuynh quốc khuynh thành của Thương Lan. Thế nhưng, Đại Công chúa lại vô tình đem lòng thầm thương trộm nhớ Đại tướng quân Tiêu Dạ Đình.
+
+Năm ấy, Tiêu Dạ Đình đại thắng trở về, được Huyền Đế trọng thưởng và ban hôn với Tam Công chúa. Nghe tin, Minh Châu vô cùng đau lòng. Nàng ngỏ ý muốn thay em gái thành hôn cùng Dạ Đình.
+
+Vì yêu thương con gái, Huyền Đế quyết định đổi ý, ban hôn Minh Châu cho Tiêu Dạ Đình. Hôn kỳ nhanh chóng được ấn định, nàng ngày đêm mong chờ ngày thành thân.
+
+Thế nhưng, chỉ vài ngày trước đại hôn, Thương Lan bất ngờ rơi vào nạn hạn hán. Cùng lúc ấy, Tây Khuyết kéo đại quân sang xâm lược.
+
+Thiếu lương thực, binh lực suy yếu, Thương Lan nhanh chóng rơi vào cảnh mất nước.
+
+Quốc quân Tây Khuyết, Cố Huyền Dạ, nổi danh là vị bạo quân từng giết cha, giết mẹ để cướp ngôi. Với bản tính tàn nhẫn, hắn chinh phạt hết nước này đến nước khác.
+
+Để giữ lấy xã tắc, Huyền Đế buộc phải cầu hòa.
+Cố Huyền Dạ đưa ra điều kiện liên hôn giữa hai nước.
+
+Muốn bảo toàn Thương Lan, Huyền Đế chỉ còn cách gả Đại Công chúa sang Tây Khuyết.
+
+Minh Châu trở thành người mang trọng trách cầu hòa.
+
+Khi ấy, Tiêu Dạ Đình đang ở doanh trại ngoài biên cương. Đến lúc nhận được tin tức và vội vàng trở về, Minh Châu đã lên kiệu rời khỏi Thương Lan.
+
+Đến Tây Khuyết, Minh Châu chỉ mang theo hai hầu nữ cùng chút tư trang cá nhân. Nàng lạc lõng giữa vùng đất xa lạ.
+
+Không có hôn lễ nào được tổ chức.
+
+Thứ chờ đón nàng chỉ là ánh mắt căm ghét của bách tính Tây Khuyết. Từ Huyền Dạ cho đến bá quan văn võ đều mang thành kiến với vị công chúa mất nước. Nàng liên tục bị hãm hại, bị vu oan, sống trong những tháng ngày căng thẳng đến mức chỉ một sơ suất nhỏ cũng có thể đánh đổi bằng tính mạng.
+
+Trải qua vô số lần hãm hại trong hậu cung, Minh Châu đều dựa vào trí tuệ và bản lĩnh của mình để vượt qua. Chính sự khác biệt ấy khiến Huyền Dạ dần chú ý đến nàng.
+
+Từ chỗ lạnh nhạt, hắn nhiều lần phá lệ che chở, từng bước đem lòng yêu vị công chúa mất nước.
+
+Thế nhưng, trái tim Minh Châu chưa từng thuộc về hắn.
+Người nàng yêu từ đầu đến cuối chỉ có Tiêu Dạ Đình.
+…
+
+Đọc xong cuốn sách, cô và Gia Ý đều rơi vào trầm lặng. Không ai nói với ai một lời.
+Đêm đó, khi cả hai đã chìm vào giấc ngủ, cuốn sách đặt trên bàn đột nhiên lóe lên một luồng sáng.
+BỊCH!
+“Dậy nhanh lên! Muốn hôm nay không có cơm ăn à?”
+Tiếng quát oang oang của ai đó vang lên.
+Cô mơ màng tỉnh giấc, theo bản năng quơ tay ôm lấy bạn mình.
+“Không ăn đâu… đi mà ăn…”
+“Ăn cái gì… mới có mấy giờ sáng…”
+Hai đứa vẫn lảm nhảm trong cơn ngái ngủ.
+Đúng lúc ấy, giọng nói chói tai kia lại một lần nữa vang lên ngay trên đỉnh đầu.
+“Giỏi rồi! Không ăn chứ gì? Vậy hai cô nhịn hết cho tôi!”
+Cả hai giật mình tỉnh hẳn.
+Khung cảnh trước mắt hoàn toàn xa lạ.
+Cô dụi mắt liên tục rồi quay sang nhìn Gia Ý.
+“Mày ơi… tao với mày làm diễn viên từ bao giờ vậy?”
+Hai đứa bật dậy, vội vàng chạy ra mở cửa.
+…
+“Ôi bỏ mẹ rồi…”
+“…Xuyên không thật rồi!!!!”`
+  },
+  {
+    id: "27",
+    no: "027",
+    name: "Xuân Quy Tự",
+    avatar: "🎋",
+    avatarBg: "from-emerald-500 to-teal-800",
+    image: "https://cdn.phototourl.com/free/2026-07-19-bb6f05d9-7c3e-4f49-ac43-e8410b34e135.jpg",
+    tags: ["2 Couple", "Dân quốc", "xuyên không", "drama"],
+    description: "Mưa gió dân quốc xoay vần, bước qua cánh cổng thời gian trở về quá khứ đầy biến động. Liệu mùa xuân có thực sự trở lại nơi cố thổ?",
+    story: "",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    storyline: `“Tao để mày ra đường xin tí tiền mà mày cũng đéo cho à?” “Tao…”
+
+Tút… tút… tút…
+
+Thanh Nghi dứt khoát cúp máy. Tiếng bíp dài lạnh ngắt vang lên trong không gian, kéo theo một tiếng thở dài đặc quánh. Cô đưa tay day mạnh hai bên thái dương, cả cơ thể như mất hết sức sống mà sụp xuống chiếc ghế sofa.
+
+“Lại đòi tiền à?” Từ trong bếp, một bóng người bước ra, trên tay nâng đĩa hoa quả vừa gọt. Cô ấy đặt mạnh chiếc đĩa xuống bàn, giọng đầy gắt gỏng: “Tao nói rồi, chặn số tụi nó đi!”
+
+Thanh Nghi không nhìn bạn, chỉ ngửa đầu ra sau thành ghế, đôi mắt mệt mỏi nhìn chăm chằm trần nhà. Nụ cười vỡ ra trên môi cô mang theo vị chát đắng: “Dù sao cũng là gia đình mà… Trên đời này, tao chỉ còn mỗi họ thôi.”
+
+“Gia đình cái đéo gì?” Cô bạn tức giận chửi xa xả, thanh âm run lên vì bất bình. “Lúc nuôi nấng thì trốn tránh, lúc hoạn nạn lại lôi con cái ra làm bia đỡ đạn? Mà không chỉ nhà mày, cả thằng người yêu khốn nạn của mày nữa! Tao nói trước, tao nhìn thằng đấy đéo ổn chút nào đâu.”
+
+Nhìn cô bạn đang thở hồng hộc vì giận dữ, Thanh Nghi chỉ biết im lặng. Đâu ai biết rằng, cô bạn thân đang đứng trước mặt này đã từng bao lần liều mạng gạt phăng lưỡi hái tử thần để giành giật lại mạng sống cho cô.
+
+Cuộc đời của Bạch Thanh Nghi, nếu dùng hai chữ để gói gọn, thì chính là: Nát bấy.
+
+Thanh Nghi sinh ra trong một gia đình bình thường đến mức nhạt nhòa. Năm cô lên sáu, cuộc hôn nhân của cha mẹ rạn nứt rồi vỡ đôi. Ngày ra tòa, chẳng một ai mảy may đoái hoài đến sự tồn tại của cô con gái nhỏ. Giữa những thanh âm chửi bới, đập phá và giành giật tài sản của người lớn, đôi mắt trẻ thơ trong veo của cô gái nhỏ từ giây phút đó đã vĩnh viễn nhuộm một màu u tối.
+
+Cô được phán quyết ở với mẹ. Nhưng một năm sau, mẹ cô tái hôn. Người đàn ông đó ban đầu mang đến cho cô ảo tưởng về một mái ấm, cho đến khi đứa con chung của họ chào đời. Mọi sự sủng ái, yêu thương đều dồn sạch vào đứa trẻ ấy. Thanh Nghi chỉ biết ôm chặt chú gấu bông sờn cũ ở góc phòng, ngây thơ nhìn mình bị đẩy thẳng sang nhà cha đẻ như một món nợ hư hao.
+
+Trớ trêu thay, cha cô cũng đã tái hôn ngay sau khi ly dị. Ngày cô dọn đến, đứa con riêng của ông ta đã lên ba tuổi. Đứa trẻ ấy nghịch ngợm, ngỗ ngược, và kẻ phải hứng chịu mọi hậu quả cho sự hoang dại đó lại là Thanh Nghi.
+
+“Sao mày lại làm em khóc?” “Nó nghịch ngợm như thế mà mày không biết đường quản à?” “Thôi, em nó còn nhỏ, đã biết cái gì đâu!”
+
+Hàng loạt trận đòn roi vô cớ trút xuống. Những vệt lằn đỏ ứng rồi chuyển sang tím bầm găm chặt vào làn da trắng ngần của đứa trẻ mới lên bảy.
+
+“Hức… ư… hức…” Cô chỉ biết rúc đầu vào góc tối mà khóc nghẹn.
+
+“Thôi, con ngoan, về ở với bà ngoại đi.”
+
+Năm tám tuổi, cô lại bị ném đi một lần nữa, kèm theo lời hứa hẹn đầy giả dối của mẹ đẻ: “Em còn nhỏ, đợi khi nào em lớn hơn một chút, mẹ sẽ đón con về.”
+
+Đến tận bây giờ, Thanh Nghi vẫn tự hỏi: Thế nào mới là lớn?
+
+Khoảng thời gian ở với bà ngoại là những ngày tháng êm đềm duy nhất trong đời cô. Lần đầu tiên cô biết thế nào là một bữa cơm ngon, lần đầu tiên khóc có người dỗ dành, và làm sai có người ôn tồn chỉ bảo. Bà ngoại là thế giới, là gia đình duy nhất mà cô bám víu vào để sinh tồn. Thế nhưng, thế giới ấy cũng sụp đổ vào năm cô mười hai tuổi.
+
+“Con trai anh thì anh đi mà nuôi! Mẹ tôi chết rồi, từ giờ không ai gánh nợ cho anh nữa đâu!” “Cô vứt nó cho mẹ cô thì cô tự đi mà nuôi, mắc mớ gì đến tôi?”
+
+Giữa tiếng cãi vã kinh hoàng của hai kẻ sinh thành ngay trong tang lễ, Thanh Nghi quỳ rạp trước di ảnh của bà ngoại. Gương mặt cô đờ đẫn, trống rỗng, tuyệt nhiên không rơi nổi một giọt nước mắt nào. Nước mắt cô đã cạn sạch từ những năm tháng bị ruồng rẫy rồi.
+
+Đứa trẻ mười hai tuổi năm ấy, đã buộc phải trưởng thành ngay trong cái đêm định mệnh đó. Sau cái chết của bà, cô trở thành một quả bóng da bị đá cung quăng từ nhà người thân này sang người họ hàng khác.
+
+Mãi đến khi trưởng thành, cô gặp Hoài Dữ. Tình yêu ba năm tưởng chừng là chiếc phao cứu sinh, nhưng hóa ra cũng chỉ là một trò đùa của số phận.
+
+“Thôi thôi, biết rồi cô nương.” “Có phim mới rồi kìa, xem phim nha~”
+
+Thanh Nghi gạt bỏ ký ức đau buồn, sà vào lòng cô bạn thân mà làm nũng. Ngón tay cô bấm nút điều khiển để bật tivi.
+
+“Phim Xuân Quy Tự à?” “Đúng đúng, phim này đang hot lắm đó!”
+
+Cạch
+
+Màn hình tivi sáng lên, thanh âm nhạc phim du dương nhưng nhuốm màu quyền lực vang vọng khắp căn phòng.
+
+≪ XUÂN QUY TỰ ≫
+
+Bộ phim truyền hình dài tập đang làm mưa làm gió trên các bảng xếp hạng. Một bộ phim chính kịch đầy rẫy những mưu mô, xoay quanh gia tộc họ Hoắc danh tiếng.
+
+Ở Thượng Hải, cái tên Hoắc Mộ Bạch là một huyền thoại hung thần — một Gia chủ tàn nhẫn, máu lạnh và quyết đoán đến đáng sợ. Hắn có một đứa con trai độc nhất tên là Hoắc Dư Khanh, kết quả của cuộc hôn nhân với người vợ quá cố.
+
+Năm đó, Hoắc gia ép Bạch gia liên hôn. Cô tiểu thư Bạch Nhược Tịch đành phải ngậm đắng nuốt cay gả vào hào môn, làm vợ một người đàn ông đáng tuổi cha mình khi vừa tròn hai mươi hai tuổi. Một cuộc hôn nhân tráo đổi tróng vánh, không tình yêu, chỉ có lợi ích tối thượng.
+
+Bạch Nhược Tịch bước vào Hoắc gia, vừa làm vợ kế, vừa làm mẹ kế của Hoắc Dư Khanh — đứa con trai lầm lì, cô độc, sống như một bóng ma trong dinh thự rộng lớn vì thiếu vắng tình thương. Nhược Tịch xuất hiện như vệt nắng ban mai rực rỡ, sưởi ấm và cứu rỗi linh hồn hoang phế của Dư Khanh. Để rồi, thứ tình cảm sai trái ấy dần chệch hướng. Đứa con chồng không còn nhìn người mẹ kế bằng ánh mắt của một đứa con nữa.
+
+“Nhược Tịch… anh xin em… anh không phải con trai em…”
+
+Trong khi đó, Hoắc Mộ Bạch chỉ coi Nhược Tịch như một quân cờ thí trên bàn cờ danh vọng. Nhưng sự thông minh sắc sảo cùng diện mạo quá đỗi giống người vợ quá cố của cô đã vô tình nhen nhóm một ngọn lửa chiếm hữu điên cuồng trong lòng hắn.
+
+Màn hình tivi chuyển cảnh. Một góc tối trong hành lang biệt thự cổ.
+
+“Nhược Tịch, anh xin em. Chỉ lần này thôi…”
+
+Hoắc Dư Khanh điên cuồng ép chặt Nhược Tịch vào sát tường. Nụ hôn của họ nồng nhiệt, nghẹt thở và tội lỗi, tiếng môi lưỡi quấn quýt vang lên đầy ám muội.
+
+Cạch
+
+Cửa phòng bật mở. Hoắc Mộ Bạch sừng sững bước vào. Nhược Tịch hoảng hốt đẩy mạnh Dư Khanh ra, gương mặt tái mét. Ngược lại, Hoắc Dư Khanh chỉ khẽ nhếch mép cười, đưa ngón tay lau đi vệt nước óng ánh còn vương trên khóe môi, giọng khàn khàn:
+
+“Cha về sớm vậy…”
+
+Tít… tít… tít…
+
+Đúng lúc cao trào, tiếng chuông điện thoại của Thanh Nghi đột ngột vang lên cắt đứt bầu không khí.
+
+“Ôi từ từ, bấm tạm dừng giùm tao cái!” Cô lật đật cầm máy.
+
+Cuộc điện thoại kéo dài đằng dẵng mười lăm phút. Khi Thanh Nghi bước ra, gương mặt cô không còn một giọt máu. Cô đi đứng thẫn thờ như một cái xác không hồn.
+
+“Sao thế?” Bạn cô lo lắng hỏi.
+“Không sao… Tao… đi ngủ trước.”
+
+Sau cuộc gọi định mệnh ấy, Thanh Nghi gần như biến thành một con người khác. Để rồi ba tuần sau, cô đột ngột thả một quả bom:
+
+“Tao với Hoài Dữ… chia tay rồi. Nó làm đứa con gái khác có bầu.”
+“CÁI GÌ???”
+
+Cô bạn thân nghe xong liền nổi trận lôi đình, đập mạnh tay xuống bàn, lao thẳng vào bếp vác theo con dao phay bước ra, mắt đỏ ngầu: “Địt mẹ nó, để tao đi thiến thằng chó đó!”
+
+Thanh Nghi hoảng hốt ôm chặt lấy bạn để cản lại. Nhưng sự phẫn nộ của cô bạn cũng chẳng thể xua tan đi cái chết chóc đang bao trùm lấy Thanh Nghi. Cô chỉ khẽ thở dài, rồi lẳng lặng quay về phòng khóa chặt cửa.
+
+Bi kịch nối tiếp bi kịch, ông trời như muốn dồn cô vào đường cùng.
+
+“Alo… cái Nghi à? Cha con vỡ nợ rồi… Ông ấy đưa cả nhà… tự tử cùng rồi…”
+
+Cha cô làm ăn thua lỗ. Thay vì đứng ra gánh vác, người đàn ông hèn nhát ấy đã chọn cách cực đoan nhất: ép vợ mới và đứa con trai cùng tự sát. Sợi dây liên kết cuối cùng với thế giới này của Thanh Nghi chính thức đứt đoạn.
+
+“THANH NGHI! MÀY ĐIÊN RỒI! XUỐNG MAU CHO TAO!”
+
+Trên thành cầu lộng gió, bóng dáng gầy guộc của Bạch Thanh Nghi đứng chới với. Phía dưới chân cô, dòng nước đen ngòm, lạnh ngắt đang cuồn cuộn chảy xiết như một hố đen vũ trụ sẵn sàng nuốt chửng mọi thứ.
+
+“ Hai mươi tỷ… User… để tao đi đi. Tao mệt quá rồi.”
+“THANH NGHI!!!”
+
+Bộp!
+
+Một bàn tay dứt khoát chộp lấy cổ tay cô. Cô bạn thân rướn người qua thành cầu, giữ chặt lấy Thanh Nghi. Một người lơ lửng giữa ranh giới sinh tử, một người điên cuồng níu giữ chút hy vọng mong manh.
+
+“Mở mắt ra nhìn tao đi! Còn tao mà… Mày vẫn còn tao mà!”
+
+“Cứu tao… xin mày… cứu tao với…” Giọng Thanh Nghi nghẹn lại trong tiếng gió rít, đôi tay run rẩy bám víu lấy người bạn duy nhất.
+
+“Tao cứu mày…”
+
+BÙM!
+
+Do mất đà, cả hai cơ thể đổ rạp về phía trước, lao thẳng xuống dòng sông băng giá. Không gian lập tức chìm vào sự im lặng chết chóc. Làn nước buốt giá tràn xộc vào khoang mũi, ép chặt vào phổi, hút cạn dưỡng khí.
+
+“Khụ… khụ… khụ!”
+“Thanh Nghi!”
+
+Cô bật dậy, hoảng loạn hít một hơi thật sâu, dáo dác nhìn xung quanh để tìm kiếm bóng dáng bạn mình. Nhưng khung cảnh trước mắt khiến cô hoàn toàn chết lặng.
+
+Không có dòng sông đen ngòm, không có thành cầu lộng gió.
+
+“Gia chủ… tôi xin ngài! Tôi tình nguyện bán hai đứa con gái này để gán nợ! Xin ngài tha cho tôi mạng này!”
+
+Tiếng van xin lạy lục thảm thiết vang lên bên tai. Cô nhận ra mình đang quỳ trên nền đá hoa cương lạnh lẽo của một dinh thự nguy nga, tráng lệ đến ngộp thở. Bên cạnh cô là một người đàn ông trung niên xa lạ đang quỳ sụp, dập đầu lia lịa trước người đàn ông ngồi trên cao.
+
+Và ngay sát bên cạnh, Thanh Nghi cũng đang quỳ đó, ngơ ngác nhìn quanh.
+
+Người đàn ông quyền lực ngồi ở vị trí thượng tọa khẽ nâng chén trà, ánh mắt sắc lẹm tựa dao găm lướt qua hai người, thanh âm trầm thấp dửng dưng vang lên:
+
+“Tên gì?”
+
+Đầu óc cô nổ tung một tiếng Đùng. Gương mặt kia, khí chất kia…
+
+Hả? Hoắc Mộ Bạch!!!???`
   }
 ];

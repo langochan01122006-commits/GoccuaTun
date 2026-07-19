@@ -541,7 +541,8 @@ export default function App() {
      "BL",
      "GL",
      "Việt Nam xưa",
-     "OPEN WORLD"
+     "OPEN WORLD",
+     "Dân quốc"
   ];
 
   // Dynamic Featured Card: find character with highest vote count
