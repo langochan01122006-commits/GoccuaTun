@@ -3009,6 +3009,109 @@
   }
 }
 
+/* 2. CSS ĐẢM BẢO CHUẨN ĐẸP VÀ KHÔNG LÀM LỆCH WEB */
+.age-verify-overlay {
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  height: 100dvh;
+  background: rgba(4, 2, 6, 0.9) !important; /* Nền đen ánh tím đỏ cực sâu */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 99999 !important;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 2. KHUNG LỚN ĐỔI SANG ĐỎ RƯỢU PHỦ SƯƠNG MỜ */
+.age-verify-card {
+  /* Nền đỏ rượu chát pha chút slate tối mờ ảo */
+  background: rgba(45, 10, 18, 0.65) !important; 
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 380px;
+  border-radius: 28px !important;
+  
+  /* Viền mảnh phát sáng sắc đỏ nhung */
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+  padding: 30px 20px !important;
+  box-sizing: border-box;
+  text-align: center;
+  
+  /* Đổ bóng phát quang đỏ huyền bí */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 
+              0 0 30px rgba(185, 28, 28, 0.2) !important;
+}
+
+.age-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* Tiêu đề chính phát sáng trắng hồng nhẹ */
+.age-verify-card h2 {
+  font-family: 'Playfair Display', serif;
+  color: #ffffff !important;
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+  text-shadow: 0 0 15px rgba(239, 68, 68, 0.5) !important;
+}
+
+/* 3. CÁC HỘP NỘI DUNG BÊN TRONG */
+.rules-box {
+  /* Nền hộp tối hơn để nổi bật chữ */
+  background: rgba(28, 5, 10, 0.5) !important;
+  border: 1px solid rgba(239, 68, 68, 0.1) !important;
+  border-radius: 14px !important;
+  padding: 15px !important;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+/* Tên đề mục chuyển từ xanh ngọc sang màu Đỏ Hồng Rose hoặc Vàng Gold nhạt */
+.rules-box h3 {
+  font-size: 12px;
+  color: #f43f5e !important; /* Đỏ hồng nhung cực kỳ hợp tone */
+  letter-spacing: 2px;
+  margin: 0 0 6px 0;
+}
+
+.rules-box p {
+  font-size: 12px;
+  color: #e2e8f0 !important; /* Chữ trắng xám cho dịu mắt */
+  line-height: 1.5;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+
+/* 4. NÚT XÁC NHẬN ĐỎ RƯỢU ĐỒNG BỘ */
+.age-confirm-btn {
+  width: 100%;
+  background: rgba(159, 18, 57, 0.3) !important; /* Đỏ rượu mờ */
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
+  color: #ffffff !important;
+  padding: 14px 0;
+  border-radius: 30px !important;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Khi má nhấn chạm vào nút */
+.age-confirm-btn:active {
+  background: rgba(239, 68, 68, 0.3) !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+}
+
 
 
 

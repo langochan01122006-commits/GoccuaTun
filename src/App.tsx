@@ -174,6 +174,7 @@ function getPlushieCardTheme(id: number, isTop: boolean): PlushieTheme {
 export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
   const [hasEnteredOrTransitioning, setHasEnteredOrTransitioning] = useState(false);
+  const [showAgeVerify, setShowAgeVerify] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTag, setActiveTag] = useState("Tất cả");
@@ -867,6 +868,7 @@ export default function App() {
                         welcomeEl.style.display = 'none';
                       }
                       setHasEntered(true);
+                      setShowAgeVerify(true);
                       setIsPlaying(true);
                     }, 800);
                   }, 50);
@@ -3643,6 +3645,43 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {showAgeVerify && (
+        <div className="age-verify-overlay">
+          <div className="age-verify-card">
+            {/* Icon Đôi mắt bí ẩn hoặc Con bài/Vòng quay thay cho 18+ nếu muốn, ở đây giữ 🔞 cho an toàn pháp lý nhưng đổi text */}
+            <div className="age-icon">👁️‍🗨️ 🔞</div>
+            
+            <h2>SẢNH CHỜ VUI CHƠI</h2>
+            
+            {/* Khung Quy Định -> VÉ THÔNG HÀNH */}
+            <div className="rules-box">
+              <h3>TẤM VÉ THÔNG HÀNH</h3>
+              <p>Khu vực phía sau chứa những trò chơi và "vòng quay" mang nội dung nhạy cảm, chỉ dành riêng cho người lớn. Nghiêm cấm trẻ vị thành niên dưới 18 tuổi bước vào rìa ranh giới dưới mọi hình thức.</p>
+            </div>
+            
+            {/* Khung Điều Khoản -> LUẬT CHƠI ĐÊM */}
+            <div className="rules-box">
+              <h3>LUẬT CHƠI ĐÊM</h3>
+              <p>Yêu cầu "du khách" phải từ đủ 18 tuổi. Bằng việc nhấn nút bước qua cánh cửa này, bạn xác nhận mình đã đủ bản lĩnh nhận vé và tự chịu mọi trách nhiệm trước các "vòng quay định mệnh" phía sau.</p>
+            </div>
+            
+            {/* Khung Lưu Ý -> KHẾ ƯỚC PHÙ HOA */}
+            <div className="rules-box">
+              <h3>KHẾ ƯỚC PHÙ HOA</h3>
+              <p>Mọi câu chuyện, nhân vật và sòng bài tại đây hoàn toàn là sản phẩm hư cấu 100%. Không cổ xúy, không đả kích đời thực. Tất cả chỉ là một giấc mộng giải trí tiêu khiển trong trí tưởng tượng.</p>
+            </div>
+            
+            {/* Nút Xác Nhận -> Đổi chữ thành Nút Nhận Vé */}
+            <button className="age-confirm-btn" onClick={() => {
+              playClickSound(600, 0.1);
+              setShowAgeVerify(false);
+            }}>
+              Tôi đã đủ 18 tuổi — Nhận vé vào cửa
+            </button>
+          </div>
+        </div>
+      )}
 
     </div>
   );
