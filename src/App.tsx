@@ -658,6 +658,7 @@ export default function App() {
       <audio
         ref={audioRef}
         src={currentSong?.url}
+        preload="auto"
         crossOrigin="anonymous"
         onTimeUpdate={handleTimeUpdate}
         onDurationChange={handleDurationChange}
@@ -864,6 +865,15 @@ export default function App() {
                 animate={{ boxShadow: ["0 0 10px rgba(255,174,52,0.3)", "0 0 25px rgba(255,174,52,0.65)", "0 0 10px rgba(255,174,52,0.3)"] }}
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
                 onClick={() => {
+                  // Phát nhạc ngay lập tức đồng bộ khi nhấn nút để tránh trễ hoạc chặn trên điện thoại di động
+                  if (audioRef.current) {
+                    audioRef.current.play().then(() => {
+                      console.log("Music started smoothly on user click!");
+                    }).catch(err => {
+                      console.warn("Autoplay block or audio not ready:", err);
+                    });
+                  }
+                  setIsPlaying(true);
                   playClickSound(600, 0.1);
                   setHasEnteredOrTransitioning(true);
                   
@@ -889,11 +899,10 @@ export default function App() {
                       }
                       setHasEntered(true);
                       setShowAgeVerify(true);
-                      setIsPlaying(true);
                     }, 800);
                   }, 50);
                 }}
-                className="relative w-full max-w-xs py-4 px-8 font-serif font-black text-[#6E2314] rounded-xl hover:brightness-110 active:scale-95 duration-150 cursor-pointer overflow-visible group tracking-[0.2em] text-xs uppercase"
+                className="relative w-full max-w-xs py-4 px-8 font-serif font-black text-[#6E2314] rounded-xl hover:brightness-110 active:scale-95 duration-150 cursor-pointer overflow-visible group tracking-[0.2em] text-xs uppercase ticket-enter-btn"
                 style={{
                   background: "linear-gradient(135deg, #FFAE34, #FFE79A, #FFAE34)",
                 }}
@@ -3821,7 +3830,15 @@ export default function App() {
             </div>
             
             {/* Nút Xác Nhận -> Đổi chữ thành Nút Nhận Vé */}
-            <button className="age-confirm-btn" onClick={() => {
+            <button className="age-confirm-btn ticket-enter-btn" onClick={() => {
+              if (audioRef.current) {
+                audioRef.current.play().then(() => {
+                  console.log("Music continues/starts smoothly on age confirm!");
+                }).catch(err => {
+                  console.warn("Audio play failed on age confirm:", err);
+                });
+              }
+              setIsPlaying(true);
               playClickSound(600, 0.1);
               setShowAgeVerify(false);
             }}>

@@ -3228,4 +3228,38 @@
   100% { opacity: 1; }
 }
 
+/* 1. SỬA CHO KHUNG CHÍNH TỰ ĐỘNG CO GIẢN SANG BẰNG MỌI MÀN HÌNH */
+.sanh-cho-container, 
+[class*="SanhCho"], 
+[class*="lobby-modal"] {
+  width: 90vw !important; /* Luôn chiếm 90% chiều rộng màn hình bất kể thiết bị */
+  max-width: 380px !important; /* Không bao giờ vượt quá 380px trên màn hình to */
+  box-sizing: border-box !important; /* Ép padding nằm bên trong không làm phình khung */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 2. ÉP CÁC Ô NỘI DUNG BÊN TRONG CŨNG PHẢI CO LẠI THEO KHUNG */
+.sanh-cho-container *, 
+[class*="SanhCho"] * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important; /* Tự xuống dòng nếu chữ quá dài */
+}
+
+/* 3. KHÓA TRIỆT ĐỂ THANH CUỘN NGANG TOÀN TRANG (KHÔNG Cho TRÀN LỀ) */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+}
+
+/* Thêm hiệu ứng giảm độ trễ phản hồi khi bấm nút trên điện thoại */
+.ticket-enter-btn, 
+[class*="Enter"], 
+[class*="Nhận vé"] {
+  touch-action: manipulation !important; /* Bỏ độ trễ 300ms mặc định của màn hình cảm ứng */
+  cursor: pointer;
+}
+
+
 
