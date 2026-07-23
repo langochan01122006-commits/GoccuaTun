@@ -207,6 +207,30 @@ export default function App() {
   const [dispensedTicket, setDispensedTicket] = useState<'cam_nang' | 'ho_than' | 'chuyen_sinh_couple' | 'chuyen_sinh_world' | null>(null);
   const [isArcadeVibrating, setIsArcadeVibrating] = useState(false);
   const [isArcadeSmoke, setIsArcadeSmoke] = useState(false);
+
+  // Feedback states for command cards
+  const [commandFeedbacks, setCommandFeedbacks] = useState<Record<string, 'hong' | 'ngon' | 'henxui'>>(() => {
+    try {
+      const saved = localStorage.getItem("command_feedbacks");
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  const handleFeedback = (cardId: string, type: 'hong' | 'ngon' | 'henxui') => {
+    const next = { ...commandFeedbacks, [cardId]: type };
+    setCommandFeedbacks(next);
+    localStorage.setItem("command_feedbacks", JSON.stringify(next));
+    
+    if (type === 'ngon') {
+      playClickSound(800, 0.1);
+    } else if (type === 'hong') {
+      playClickSound(300, 0.15);
+    } else {
+      playClickSound(500, 0.1);
+    }
+  };
   
   // Custom Arcade Fountain states
   const [isCoinFalling, setIsCoinFalling] = useState(false);
@@ -2526,543 +2550,166 @@ export default function App() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.85, opacity: 0, y: 45 }}
               transition={{ type: "spring", damping: 25, stiffness: 120 }}
-              className="relative w-full max-w-[430px] mx-auto select-none z-10 flex flex-col items-center bg-[#E3F2FD] rounded-[32px] p-6 pb-12 shadow-[0_20px_50px_rgba(25,118,210,0.45)] border-4 border-[#1976D2] overflow-hidden"
+              className="relative w-full max-w-[500px] mx-auto select-none z-10 flex flex-col bg-[#F8FAFC] rounded-[32px] p-6 pb-8 shadow-[0_20px_50px_rgba(25,118,210,0.3)] border-4 border-[#1976D2] overflow-hidden"
             >
-              {/* Overlapping Velvet Hanging Drapes on Left and Right edges */}
-              <div 
-                className="absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-[#bbdefb] via-[#90caf9] to-[#64b5f6]/30 border-r border-[#1976D2]/30 z-20 rounded-l-[28px] pointer-events-none divination-curtain-l"
-              >
-                {/* Visual folds on drapes using border overlays */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent opacity-70" />
-                <div className="absolute top-0 bottom-0 right-1.5 w-[2px] bg-[#1976D2]/20 blur-[1px] opacity-40" />
-              </div>
-              <div 
-                className="absolute top-0 bottom-0 right-0 w-12 bg-gradient-to-l from-[#bbdefb] via-[#90caf9] to-[#64b5f6]/30 border-l border-[#1976D2]/30 z-20 rounded-r-[28px] pointer-events-none divination-curtain-r"
-              >
-                <div className="absolute inset-0 bg-gradient-to-l from-black/10 via-transparent to-transparent opacity-70" />
-                <div className="absolute top-0 bottom-0 left-1.5 w-[2px] bg-[#1976D2]/20 blur-[1px] opacity-40" />
-              </div>
-
-              {/* Astrological Cosmic Star Background in middle */}
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(25,118,210,0.1)_0%,transparent_70%)] pointer-events-none" />
-
-              {/* Booth Header/Title */}
-              <div className="text-center pt-3 relative z-30 px-6">
-                <h3 className="font-serif italic font-extrabold text-[#1976D2] text-lg md:text-xl tracking-wider uppercase drop-shadow-[0_1px_2px_rgba(25,118,210,0.1)]">
-                  QUẦY VÉ HƯỚNG DẪN 🎰
-                </h3>
-                <p className="text-[10px] font-sans text-[#1976D2]/80 font-bold uppercase tracking-widest mt-1">
-                  The Retro Magic Arcade Dispenser
-                </p>
-              </div>
-
-              {/* Main Stage: Retro Arcade Ticket Machine */}
-              <motion.div 
-                animate={isArcadeVibrating ? {
-                  x: [0, -4, 4, -4, 4, -2, 2, 0],
-                  y: [0, 2, -2, 2, -2, 1, -1, 0],
-                } : {}}
-                transition={{ duration: 0.5, ease: "linear" }}
-                className="w-full flex flex-col items-center justify-center space-y-6 pt-8 pb-2 relative z-30 px-4"
-              >
-                {/* Brass / Copper metallic retro vending device */}
-                <div className="w-full max-w-[340px] bg-[#ffffff] border-4 border-[#1976D2] rounded-2xl shadow-[0_10px_20px_rgba(25,118,210,0.15)] p-4 relative overflow-hidden flex flex-col items-center">
-                  
-                  {/* Metal Rivet indicators at corners with classic polished brass glow */}
-                  <div className="absolute top-2.5 left-2.5 w-2 h-2 rounded-full bg-[#FFD600] border border-[#1976D2] shadow-[0_0_5px_rgba(255,214,0,0.8)]" />
-                  <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#FFD600] border border-[#1976D2] shadow-[0_0_5px_rgba(255,214,0,0.8)]" />
-                  <div className="absolute bottom-2.5 left-2.5 w-2 h-2 rounded-full bg-[#FFD600] border border-[#1976D2] shadow-[0_0_5px_rgba(255,214,0,0.8)]" />
-                  <div className="absolute bottom-2.5 right-2.5 w-2 h-2 rounded-full bg-[#FFD600] border border-[#1976D2] shadow-[0_0_5px_rgba(255,214,0,0.8)]" />
-
-                  {/* Retro CRT Screen display */}
-                  <div className="w-full h-24 bg-[#E3F2FD] border-2 border-[#1976D2] rounded-xl p-3 overflow-hidden flex flex-col items-center justify-center relative shadow-[inset_0_0_15px_rgba(25,118,210,0.2),0_0_12px_rgba(25,118,210,0.15)]">
-                    
-                    {/* Retro Scanline effect dynamic overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/5 pointer-events-none z-10" />
-                    <div 
-                      className="absolute inset-0 opacity-[0.03] pointer-events-none z-20"
-                      style={{
-                        backgroundImage: 'linear-gradient(rgba(25,118,210,0.5) 50%, rgba(25,118,210,1) 50%)',
-                        backgroundSize: '100% 4px',
-                      }}
-                    />
-                    
-                    {/* Golden Yellow neon phosphor text info display */}
-                    <div className="text-center z-10 select-none flex flex-col items-center justify-center">
-                      <p className="text-xs md:text-sm font-sans font-black text-[#1976D2] tracking-wider flex items-center gap-1 drop-shadow-[0_0_8px_rgba(25,118,210,0.3)] animate-pulse">
-                        🎟️ TRẠM THÔNG TIN LỮ KHÁCH 🎟️
-                      </p>
-                      <p className="text-[9px] font-mono text-[#1976D2]/90 uppercase tracking-widest mt-2 font-bold">
-                        VUI LÒNG CHỌN LOẠI VÉ BẠN MUỐN IN
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* 4 separate interactive action arrays */}
-                  <div className="w-full grid grid-cols-2 gap-4 mt-4">
-                    
-                    {/* First Dispensation Station (Vé Cẩm Nang) */}
-                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
-                      <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
-                        CẨM NANG CHƠI
-                      </span>
-                      
-                      {/* Big blue arcade release button */}
-                      <button
-                        onClick={() => {
-                          if (dispensedTicket === 'cam_nang') {
-                            playClickSound(260, 0.05);
-                            return;
-                          }
-                          // 1. Smoke effect activation
-                          playClickSound(220, 0.1);
-                          setIsArcadeSmoke(true);
-                          
-                          // ASCENDING magical tones for ticket discharge
-                          setTimeout(() => playClickSound(380, 0.1), 100);
-                          setTimeout(() => playClickSound(580, 0.1), 220);
-                          setTimeout(() => {
-                            setDispensedTicket('cam_nang');
-                            setIsArcadeSmoke(false);
-                          }, 600);
-                        }}
-                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#FFD600] border-b-4 border-[#1976D2] text-[#1976D2] shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
-                        title="In Vé Cẩm Nang Hướng Dẫn"
-                      >
-                        🟡
-                      </button>
-
-                      {/* Ticket Slot - notch representation with marquee on hover */}
-                      <div className="flex flex-col items-center space-y-1.5 w-full mt-1">
-                        {/* Notch rãnh cắt ngang màu đen */}
-                        <div className="w-full h-1 bg-[#1976D2]/80 rounded shadow-[inset_0_1px_2px_rgba(25,118,210,0.5)] opacity-80" />
-                        
-                        {/* Elegant ticket slot LED flashing marquee */}
-                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-white shadow-inner w-full max-w-[110px] border border-[#1976D2]">
-                          {/* Glowing flowing LED Marquee gradient border */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#FFD600,#ffeb3b,#FFD600)] animate-spin" style={{ animationDuration: '1.2s' }} />
-                          {/* Glowing background fallback to ensure vibrant colors */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-[#FFD600] blur-[3px] transition-opacity" />
-                          
-                          {/* The actual slot slit */}
-                          <div className="relative bg-[#1976D2]/80 rounded-md flex items-center justify-center h-4 border border-[#1976D2]/40 z-10 shadow-[inset_0_2px_5px_rgba(25,118,210,0.5)]">
-                            <div className="w-11/12 h-[2px] bg-[#FFD600]/80 rounded-full border-b border-[#ffeb3b]/30 relative overflow-hidden">
-                              <div className="absolute inset-x-0 bottom-0 h-[1x] bg-[#fef08a]/80 animate-pulse" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <p className="text-[7.5px] font-sans text-[#1976D2]/60 group-hover:text-[#1976D2] font-bold transition-colors uppercase tracking-tight">
-                          Khử ấn nhận vé
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Right Dispensation Station (Vé Hộ Thân) */}
-                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
-                      <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
-                        BÙA HỘ THÂN
-                      </span>
-
-                      {/* Big yellow arcade release button */}
-                      <button
-                        onClick={() => {
-                          if (dispensedTicket === 'ho_than') {
-                            playClickSound(260, 0.05);
-                            return;
-                          }
-                          // 1. Shaking machine effect activation
-                          playClickSound(180, 0.12);
-                          setIsArcadeVibrating(true);
-                          
-                          // Heavy mechanical vibrational rumble audio sequence
-                          setTimeout(() => playClickSound(160, 0.12), 100);
-                          setTimeout(() => playClickSound(190, 0.12), 200);
-                          setTimeout(() => playClickSound(150, 0.12), 300);
-                          setTimeout(() => playClickSound(220, 0.1), 400);
-                          setTimeout(() => {
-                            setDispensedTicket('ho_than');
-                            setIsArcadeVibrating(false);
-                          }, 550);
-                        }}
-                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#FFD600] border-b-4 border-[#1976D2] text-[#1976D2] shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
-                        title="In Bùa Hộ Mệnh Lệnh Chỉ"
-                      >
-                        🟡
-                      </button>
-
-                      {/* Ticket Slot - notch representation with marquee on hover */}
-                      <div className="flex flex-col items-center space-y-1.5 w-full mt-1">
-                        {/* Notch rãnh cắt ngang màu xanh nhạt dập ghim */}
-                        <div className="w-full h-1 bg-[#1976D2]/80 rounded shadow-[inset_0_1px_2px_rgba(25,118,210,0.5)] opacity-80" />
-                        
-                        {/* Elegant ticket slot LED flashing marquee */}
-                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-white shadow-inner w-full max-w-[110px] border border-[#1976D2]">
-                          {/* Glowing flowing LED Marquee gradient border */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#FFD600,#ffeb3b,#FFD600)] animate-spin" style={{ animationDuration: '1.2s' }} />
-                          {/* Glowing background fallback to ensure vibrant colors */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-[#FFD600] blur-[3px] transition-opacity" />
-                          
-                          {/* The actual slot slit */}
-                          <div className="relative bg-[#1976D2]/80 rounded-md flex items-center justify-center h-4 border border-[#1976D2]/40 z-10 shadow-[inset_0_2px_5px_rgba(25,118,210,0.5)]">
-                            <div className="w-11/12 h-[2px] bg-[#FFD600]/80 rounded-full border-b border-[#ffeb3b]/30 relative overflow-hidden">
-                              <div className="absolute inset-x-0 bottom-0 h-[1px] bg-[#fef08a]/80 animate-pulse" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <p className="text-[7.5px] font-sans text-stone-500 group-hover:text-[#ea580c] font-bold transition-colors uppercase tracking-tight">
-                          Truy lộc bạt sầu
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Third Dispensation Station (Lệnh Chuyển Sinh 2 Couple) */}
-                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
-                      <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
-                        CHUYỂN SINH COUPLE
-                      </span>
-                      
-                      <button
-                        onClick={() => {
-                          if (dispensedTicket === 'chuyen_sinh_couple') {
-                            playClickSound(260, 0.05);
-                            return;
-                          }
-                          playClickSound(220, 0.1);
-                          setIsArcadeSmoke(true);
-                          setTimeout(() => playClickSound(380, 0.1), 100);
-                          setTimeout(() => playClickSound(580, 0.1), 220);
-                          setTimeout(() => {
-                            setDispensedTicket('chuyen_sinh_couple');
-                            setIsArcadeSmoke(false);
-                          }, 600);
-                        }}
-                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#FFD600] border-b-4 border-[#1976D2] text-[#1976D2] shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
-                        title="🎫 Lệnh Chuyển Sinh 2 Couple"
-                      >
-                        🟡
-                      </button>
-
-                      <div className="flex flex-col items-center space-y-1.5 w-full mt-1">
-                        <div className="w-full h-1 bg-[#1976D2]/80 rounded shadow-[inset_0_1px_2px_rgba(25,118,210,0.5)] opacity-80" />
-                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-white shadow-inner w-full max-w-[110px] border border-[#1976D2]">
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#FFD600,#ffeb3b,#FFD600)] animate-spin" style={{ animationDuration: '1.2s' }} />
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-[#FFD600] blur-[3px] transition-opacity" />
-                          <div className="relative bg-[#1976D2]/80 rounded-md flex items-center justify-center h-4 border border-[#1976D2]/40 z-10 shadow-[inset_0_2px_5px_rgba(25,118,210,0.5)]">
-                            <div className="w-11/12 h-[2px] bg-[#FFD600]/80 rounded-full border-b border-[#ffeb3b]/30 relative overflow-hidden">
-                              <div className="absolute inset-x-0 bottom-0 h-[1px] bg-[#fef08a]/80 animate-pulse" />
-                            </div>
-                          </div>
-                        </div>
-                        <p className="text-[7.5px] font-sans text-[#1976D2]/60 group-hover:text-[#1976D2] font-bold transition-colors uppercase tracking-tight">
-                          Kết Duyên Mệnh Kiếp
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Fourth Dispensation Station (Lệnh Chuyển Sinh Open World) */}
-                    <div className="group flex flex-col items-center text-center space-y-2.5 p-3.5 bg-[#ffffff] rounded-xl border-2 border-[#1976D2]/50 shadow-[0_2px_5px_rgba(25,118,210,0.05)] transition-all duration-300 hover:border-[#1976D2]">
-                      <span className="text-[10px] font-black font-serif text-[#1976D2] tracking-wider">
-                        CHUYỂN SINH THẾ GIỚI
-                      </span>
-                      
-                      <button
-                        onClick={() => {
-                          if (dispensedTicket === 'chuyen_sinh_world') {
-                            playClickSound(260, 0.05);
-                            return;
-                          }
-                          playClickSound(180, 0.12);
-                          setIsArcadeVibrating(true);
-                          setTimeout(() => playClickSound(160, 0.12), 100);
-                          setTimeout(() => playClickSound(190, 0.12), 200);
-                          setTimeout(() => playClickSound(150, 0.12), 300);
-                          setTimeout(() => playClickSound(220, 0.1), 400);
-                          setTimeout(() => {
-                            setDispensedTicket('chuyen_sinh_world');
-                            setIsArcadeVibrating(false);
-                          }, 550);
-                        }}
-                        className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#FFD600] border-b-4 border-[#1976D2] text-[#1976D2] shadow-md active:border-b-0 active:translate-y-[4px] hover:brightness-110 active:shadow-inner cursor-pointer flex items-center justify-center text-base md:text-lg transition-transform"
-                        title="🌀 Lệnh Chuyển Sinh Open World"
-                      >
-                        🟡
-                      </button>
-
-                      <div className="flex flex-col items-center space-y-1.5 w-full mt-1">
-                        <div className="w-full h-1 bg-[#1976D2]/80 rounded shadow-[inset_0_1px_2px_rgba(25,118,210,0.5)] opacity-80" />
-                        <div className="relative p-[2.5px] rounded-lg overflow-hidden bg-white shadow-inner w-full max-w-[110px] border border-[#1976D2]">
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[conic-gradient(from_0deg,#FFD600,#ffeb3b,#FFD600)] animate-spin" style={{ animationDuration: '1.2s' }} />
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-[#FFD600] blur-[3px] transition-opacity" />
-                          <div className="relative bg-[#1976D2]/80 rounded-md flex items-center justify-center h-4 border border-[#1976D2]/40 z-10 shadow-[inset_0_2px_5px_rgba(25,118,210,0.5)]">
-                            <div className="w-11/12 h-[2px] bg-[#FFD600]/80 rounded-full border-b border-[#ffeb3b]/30 relative overflow-hidden">
-                              <div className="absolute inset-x-0 bottom-0 h-[1px] bg-[#fef08a]/80 animate-pulse" />
-                            </div>
-                          </div>
-                        </div>
-                        <p className="text-[7.5px] font-sans text-stone-500 group-hover:text-[#ea580c] font-bold transition-colors uppercase tracking-tight">
-                          Khai Phá Tân Vị Diện
-                        </p>
-                      </div>
-                    </div>
-
-                  </div>
-
+              {/* Header/Title */}
+              <div className="text-center pb-4 relative border-b border-[#1976D2]/10 mb-4 flex flex-col items-center">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-xl">🎪</span>
+                  <h3 className="font-serif italic font-extrabold text-[#1976D2] text-lg md:text-xl tracking-wider uppercase">
+                    QUẦY VÉ HƯỚNG DẪN 🎰
+                  </h3>
                 </div>
+                <p className="text-[10px] font-sans text-slate-500 font-bold uppercase tracking-widest mt-1">
+                  Bản Đồ Chỉ Dẫn & Lệnh Bài Chuyển Sinh
+                </p>
 
-                {/* Smoke rising visualization effect from slots */}
-                {isArcadeSmoke && (
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none flex items-center justify-center overflow-visible z-30">
-                    <div className="divination-smoke-particle w-6 h-6 rounded-full bg-[#1976D2]/30 blur-[4px] absolute" style={{ animationDelay: '0s', left: '25%' }} />
-                    <div className="divination-smoke-particle w-8 h-8 rounded-full bg-[#FFD600]/25 blur-[6px] absolute" style={{ animationDelay: '0.2s', left: '35%' }} />
-                    <div className="divination-smoke-particle w-7 h-7 rounded-full bg-[#1976D2]/20 blur-[5px] absolute" style={{ animationDelay: '0.5s', left: '65%' }} />
-                  </div>
-                )}
-              </motion.div>
+                {/* Close Button */}
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.08);
+                    setIsCommandModalOpen(false);
+                  }}
+                  title="Đóng Hướng Dẫn"
+                  className="absolute top-0 right-0 bg-[#FFD600] hover:brightness-110 border-2 border-[#1976D2] rounded-full w-8 h-8 flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer group"
+                >
+                  <X className="w-4 h-4 text-[#1976D2]" />
+                </button>
+              </div>
 
-              {/* The Dispensed Ticket Overlay (gorgeous pop-up ticket inside the screen) */}
-              <AnimatePresence>
-                {dispensedTicket && (
-                  <motion.div
-                    initial={{ scale: 0, opacity: 0, rotate: -5, y: 100 }}
-                    animate={{ scale: 1, opacity: 1, rotate: 0, y: 0 }}
-                    exit={{ scale: 0.8, opacity: 0, y: 50, rotate: 5 }}
-                    transition={{ type: "spring", damping: 18, stiffness: 150 }}
-                    className="absolute inset-x-4 top-24 bottom-6 z-40 bg-[#ffffff]/95 rounded-2xl border-2 border-dashed border-[#1976D2]/50 p-5 shadow-[0_20px_50px_rgba(25,118,210,0.35)] flex flex-col justify-between overflow-y-auto no-scrollbar backdrop-blur-md"
-                  >
-                    {/* Ticket top border style */}
-                    <div className="flex justify-between text-[8px] font-mono text-[#1976D2]/60 uppercase tracking-widest border-b border-dashed border-[#1976D2]/30 pb-2 select-none">
-                      <span>Arcade Ticket Dispenser v1.0</span>
-                      <span>Serial No: #{dispensedTicket === 'cam_nang' ? '9201-CN' : dispensedTicket === 'ho_than' ? '7730-HT' : dispensedTicket === 'chuyen_sinh_couple' ? '8899-CP' : '3344-OW'}</span>
+              {/* Scrollable list of 4 elegant command cards */}
+              <div className="w-full max-h-[60vh] overflow-y-auto pr-1 space-y-4 no-scrollbar">
+                {[
+                  {
+                    id: "cam_nang",
+                    title: "Hướng dẫn chơi bằng Prompt",
+                    desc: "hướng dẫn chơi bằng cách share prompt cho người mới",
+                    author: "Tun",
+                    code: "https://drive.google.com/file/d/1FbS0dXfDJwHHSwsxdLcDCviFPZgMUe53/view?usp=drivesdk"
+                  },
+                  {
+                    id: "ho_than",
+                    title: "Cách vượt rào khi chat ⚡️",
+                    desc: "Tổng hợp các cách chống bị block khi chat ⚡️",
+                    author: "Tun",
+                    code: "https://docs.google.com/document/d/1BmyFxW6a22cV5mKHOGCFzRj3v-nmujSd0-J-qCOfEOQ/edit?usp=drivesdk"
+                  },
+                  {
+                    id: "chuyen_sinh_couple",
+                    title: "Lệnh Chuyển Sinh 2 Couple",
+                    desc: "Lệnh chuyển sinh cho thể loại 2 couple",
+                    author: "Tun",
+                    code: "https://docs.google.com/document/d/1GoYMiUppvg8-r5NXlNjP_Y9Ezx_pJ4TpVxshk0V_SlE/edit?usp=drivesdk"
+                  },
+                  {
+                    id: "chuyen_sinh_world",
+                    title: "Lệnh Chuyển Sinh Open World",
+                    desc: "Lệnh chuyển sinh dành cho thể loại open world",
+                    author: "Tun",
+                    code: "https://docs.google.com/document/d/1L7RTy8GNWXyPvKuuTp6Qd7Eenl9LyalPPNTNdozH_r8/edit?usp=drivesdk"
+                  }
+                ].map((card) => (
+                  <div key={card.id} className="bg-white rounded-2xl p-4 border-2 border-[#1976D2]/20 hover:border-[#1976D2]/50 shadow-sm transition-all flex flex-col space-y-3 relative text-left">
+                    {/* Header */}
+                    <div className="flex flex-col">
+                      <h4 className="font-serif font-black text-[#1976D2] text-sm md:text-base leading-tight">
+                        #{card.title}
+                      </h4>
+                      <div className="flex justify-between items-center mt-1">
+                        <p className="text-[10px] text-slate-500 font-medium">
+                          {card.desc}
+                        </p>
+                        <span className="text-[9px] bg-[#1976D2]/10 text-[#1976D2] px-1.5 py-0.5 rounded font-bold shrink-0 ml-2">
+                          Tác giả: {card.author}
+                        </span>
+                      </div>
                     </div>
 
-                    {dispensedTicket === 'cam_nang' ? (
-                      /* CAM NANG TICKET CONTENT */
-                      <div className="flex-1 flex flex-col pt-3 text-left">
-                        <div className="text-center mb-3 relative">
-                          <span className="text-2xl">🎫</span>
-                          <h4 className="font-serif font-black text-[#1976D2] text-lg uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.2)]">
-                            VÉ CẨM NANG DU HÀNH
-                          </h4>
-                          <p className="text-[9px] font-mono text-[#1976D2]/60 uppercase tracking-widest">
-                            Gia Đình Thần Kỳ Nhà Tun
-                          </p>
-                        </div>
-
-                        <div className="space-y-3 text-[#1976D2] overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              ⭐ Vé Ưu Tiên (Priority Ticket)
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Dành tặng lượt bình chọn chí tôn từ rương báu để dâng lễ phong thần tại Altar, hỗ trợ gia tăng tu vi vinh hiển cho các mỹ nam mỹ nữ của vương quốc.
-                            </p>
-                          </div>
-
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              🔮 Giếng Ước Nguyện (Wishing Well)
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Nơi chôn giấu tâm tư, mộng tưởng thầm kín của du khách gửi tới thượng đế. Dâng hiến lễ vật vàng bạc thành tâm để nuôi dưỡng mầm cây quốc gia hưng thịnh.
-                            </p>
-                          </div>
-
-                          <div 
-                            className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)] cursor-pointer hover:bg-blue-50 active:scale-95 transition-all"
-                            onClick={() => {
-                              playClickSound(300, 0.08);
-                              setIsAnnouncementModalOpen(false);
-                              setIsGuestbookModalOpen(true);
-                            }}
-                          >
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              📜 Lưu Bút Du Khách (Guestbook)
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Đặt dấu tay lên bức tường ký ức, khắc ghi lại những cảm xúc mộc mạc và chân thành nhất trong hành trình thám hiểm tiên giới linh thiêng.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Full Doc link */}
-                        <a
-                          href="https://drive.google.com/file/d/1FbS0dXfDJwHHSwsxdLcDCviFPZgMUe53/view?usp=drivesdk"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => playClickSound(500, 0.1)}
-                          className="w-full mt-4 py-2.5 rounded-xl text-xs font-serif font-black text-center bg-[#FFD600] text-[#1976D2] border-2 border-[#1976D2] hover:bg-[#ffeb3b] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.15)]"
-                        >
-                          <span>Đọc Toàn Bộ Bản Thư Cẩm Nang 📖</span>
-                        </a>
+                    {/* Core (Khung nền đen xám) */}
+                    <div className="bg-[#1e293b] rounded-xl p-3 relative flex flex-col min-h-[50px] justify-center border border-slate-700/50 shadow-inner group/code">
+                      {/* Copy Button */}
+                      <button
+                        onClick={() => {
+                          handleCopy(card.code, card.id);
+                          playClickSound(600, 0.08);
+                        }}
+                        className="absolute top-2 right-2 p-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition active:scale-90 border border-slate-700 cursor-pointer"
+                        title="Copy toàn bộ"
+                      >
+                        {copiedField === card.id ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+                      
+                      {/* Code area */}
+                      <div className="pr-10 overflow-x-auto whitespace-pre-wrap break-all font-mono text-[10px] md:text-xs text-slate-300 leading-relaxed font-semibold">
+                        {card.code}
                       </div>
-                    ) : dispensedTicket === 'ho_than' ? (
-                      /* HO THAN TICKET CONTENT */
-                      <div className="flex-1 flex flex-col pt-3 text-left">
-                        <div className="text-center mb-3 relative">
-                          <span className="text-2xl">🛡️</span>
-                          <h4 className="font-serif font-black text-[#1976D2] text-lg uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.2)]">
-                            BÙA HỘ THÂN CHỐNG BONK
-                          </h4>
-                          <p className="text-[9px] font-mono text-[#1976D2]/60 uppercase tracking-widest">
-                            Supremacy Shield Spell
-                          </p>
-                        </div>
+                    </div>
 
-                        <div className="space-y-3 text-[#1976D2] overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              ⚔️ Cấm Xâm Phạm Vương Lãnh
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Nghiêm cấm tuyệt đối mọi hành vi công kích phi lễ, spam, phá quấy hay quấy rối bừa bãi vương lãnh linh thiêng và thần dân đang tu hành pháp lực tại điện thờ Altar.
-                            </p>
-                          </div>
-
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              ⚡ Phép Thuật Phản Chấn 100%
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Lá bùa hộ mệnh phong ấn lời nguyền tối thượng, lập tức hóa giải và phản hồi mọi sát thương hoặc hành vi bonk ác ý ngược lại kẻ thủ ác, phong tỏa hoàn toàn nội lực hắc ám.
-                            </p>
-                          </div>
-
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              🏵️ Thiên Lệnh Bảo Hộ Gia Tộc
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Giúp chư vị hào kiệt an tâm gacha ngắm mộng đẹp, giao lưu đàm đạo bằng tấm lòng tri kỷ chân thuần mà không sợ bất kỳ thế lực cuồng phong nào quấy nhiễu.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Full Doc link */}
-                        <a
-                          href="https://docs.google.com/document/d/1BmyFxW6a22cV5mKHOGCFzRj3v-nmujSd0-J-qCOfEOQ/edit?usp=drivesdk"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => playClickSound(500, 0.1)}
-                          className="w-full mt-4 py-2.5 rounded-xl text-xs font-serif font-black text-center bg-[#FFD600] text-[#1976D2] border-2 border-[#1976D2] hover:bg-[#ffeb3b] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.15)]"
-                        >
-                          <span>Xem Lệnh Chỉ Chống Bonk Đầy Đủ 🛡️</span>
-                        </a>
+                    {/* Bottom Block (LỆNH NÀY CHẠY SAO RỒI?) */}
+                    <div className="border-t border-[#1976D2]/10 pt-3 flex flex-col space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-black text-[#1976D2] uppercase tracking-widest">
+                          LỆNH NÀY CHẠY SAO RỒI?
+                        </span>
+                        {commandFeedbacks[card.id] && (
+                          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider animate-pulse ${
+                            commandFeedbacks[card.id] === 'ngon' ? 'bg-emerald-100 text-emerald-700' :
+                            commandFeedbacks[card.id] === 'hong' ? 'bg-rose-100 text-rose-700' :
+                            'bg-amber-100 text-amber-700'
+                          }`}>
+                            {commandFeedbacks[card.id] === 'ngon' ? 'Ngon 👍' : commandFeedbacks[card.id] === 'hong' ? 'Hỏng 👎' : 'Hên xui ＝'}
+                          </span>
+                        )}
                       </div>
-                    ) : dispensedTicket === 'chuyen_sinh_couple' ? (
-                      <div className="flex-1 flex flex-col pt-3 text-left">
-                        <div className="text-center mb-3 relative">
-                          <span className="text-2xl">🎫</span>
-                          <h4 className="font-serif font-black text-[#1976D2] text-lg uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.2)]">
-                            LỆNH CHUYỂN SINH 2 COUPLE
-                          </h4>
-                          <p className="text-[9px] font-mono text-[#1976D2]/60 uppercase tracking-widest">
-                            Kết Duyên Mệnh Kiếp
-                          </p>
-                        </div>
-                        <div className="space-y-3 text-[#1976D2] overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              ❤️ Kết Duyên Tiền Định
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Khởi tạo nhân duyên, đưa hai số phận gắn kết trong một vòng xoáy không gian, cùng nhau viết nên câu chuyện tình lãng mạn.
-                            </p>
-                          </div>
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              🕊️ Song Hành Vạn Dặm
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Đồng hành chia sẻ vui buồn, nắm tay nhau vượt qua những thử thách chông gai để tìm đến kết cục viên mãn.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Couple Doc link */}
-                        <a
-                          href="https://docs.google.com/document/d/1GoYMiUppvg8-r5NXlNjP_Y9Ezx_pJ4TpVxshk0V_SlE/edit?usp=drivesdk"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => playClickSound(500, 0.1)}
-                          className="w-full mt-4 py-3 rounded-xl text-xs font-serif font-black text-center bg-[#1976D2] text-white border-2 border-[#FFD600] hover:bg-[#1565C0] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.3)]"
+                      
+                      <div className="grid grid-cols-3 gap-2">
+                        {/* HỎNG button */}
+                        <button
+                          onClick={() => handleFeedback(card.id, 'hong')}
+                          className={`flex items-center justify-center gap-1 py-2 px-3 rounded-xl font-bold text-[10px] md:text-xs tracking-wider transition-all duration-150 cursor-pointer border ${
+                            commandFeedbacks[card.id] === 'hong'
+                              ? 'bg-rose-600 text-white border-rose-600 shadow-[0_0_12px_rgba(225,29,72,0.4)] scale-95'
+                              : 'bg-rose-50 text-rose-600 border-rose-200 hover:bg-rose-100 active:scale-95'
+                          }`}
                         >
-                          <span>🎟️ BẤM VÀO ĐÂY ĐỂ LẤY VÉ</span>
-                        </a>
-                      </div>
-                    ) : (
-                      <div className="flex-1 flex flex-col pt-3 text-left">
-                        <div className="text-center mb-3 relative">
-                          <span className="text-2xl">🌀</span>
-                          <h4 className="font-serif font-black text-[#1976D2] text-lg uppercase drop-shadow-[0_2px_4px_rgba(25,118,210,0.2)]">
-                            LỆNH CHUYỂN SINH OPEN WORLD
-                          </h4>
-                          <p className="text-[9px] font-mono text-[#1976D2]/60 uppercase tracking-widest">
-                            Khai Phá Tân Vị Diện
-                          </p>
-                        </div>
-                        <div className="space-y-3 text-[#1976D2] overflow-y-auto max-h-[180px] pr-1 scrollbar-thin">
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              🌍 Vùng Đất Khai Nguyên
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Một thế giới mở hoàn toàn mới, nơi mọi luật lệ và biên giới đều bị xóa nhòa. Khai mở những bí mật chưa từng được kể.
-                            </p>
-                          </div>
-                          <div className="p-2.5 bg-[#ffffff] rounded-xl border border-[#1976D2]/20 shadow-[0_2px_8px_rgba(25,118,210,0.1)]">
-                            <h5 className="font-serif font-bold text-xs text-[#1976D2] flex items-center gap-1.5">
-                              ✨ Sứ Mệnh Chinh Phục
-                            </h5>
-                            <p className="text-[10px] text-[#1976D2]/80 mt-1 leading-relaxed">
-                              Dấn bước vào hành trình phiêu lưu vô tận, gặp gỡ những nhân vật huyền thoại và tự tay nhào nặn lên vận mệnh của chính mình.
-                            </p>
-                          </div>
-                        </div>
+                          <X className="w-3.5 h-3.5" />
+                          <span>HỎNG</span>
+                        </button>
 
-                        {/* Open World Doc link */}
-                        <a
-                          href="https://docs.google.com/document/d/1L7RTy8GNWXyPvKuuTp6Qd7Eenl9LyalPPNTNdozH_r8/edit?usp=drivesdk"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => playClickSound(500, 0.1)}
-                          className="w-full mt-4 py-3 rounded-xl text-xs font-serif font-black text-center bg-[#1976D2] text-white border-2 border-[#FFD600] hover:bg-[#1565C0] active:scale-95 transition flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(25,118,210,0.3)]"
+                        {/* NGON button */}
+                        <button
+                          onClick={() => handleFeedback(card.id, 'ngon')}
+                          className={`flex items-center justify-center gap-1 py-2 px-3 rounded-xl font-bold text-[10px] md:text-xs tracking-wider transition-all duration-150 cursor-pointer border ${
+                            commandFeedbacks[card.id] === 'ngon'
+                              ? 'bg-emerald-600 text-white border-emerald-600 shadow-[0_0_12px_rgba(5,150,105,0.4)] scale-95'
+                              : 'bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100 active:scale-95'
+                          }`}
                         >
-                          <span>🎟️ BẤM VÀO ĐÂY ĐỂ LẤY VÉ</span>
-                        </a>
+                          <Check className="w-3.5 h-3.5" />
+                          <span>NGON</span>
+                        </button>
+
+                        {/* HÊN XUI button */}
+                        <button
+                          onClick={() => handleFeedback(card.id, 'henxui')}
+                          className={`flex items-center justify-center gap-1 py-2 px-3 rounded-xl font-bold text-[10px] md:text-xs tracking-wider transition-all duration-150 cursor-pointer border ${
+                            commandFeedbacks[card.id] === 'henxui'
+                              ? 'bg-amber-500 text-white border-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.4)] scale-95'
+                              : 'bg-amber-50 text-amber-600 border-amber-200 hover:bg-amber-100 active:scale-95'
+                          }`}
+                        >
+                          <span className="font-bold text-sm leading-none -mt-0.5">＝</span>
+                          <span>HÊN XUI</span>
+                        </button>
                       </div>
-                    )}
-
-                    {/* Return Ticket Button at bottom */}
-                    <button
-                      onClick={() => {
-                        playClickSound(300, 0.08);
-                        setDispensedTicket(null);
-                      }}
-                      className="w-full mt-4 py-2 border-2 border-dashed border-[#FFD600]/50 hover:border-[#FFD600] text-[#FFD600] font-mono tracking-widest text-[10px] cursor-pointer"
-                    >
-                      ▲ HOÀN VÉ VÀO MÁY IN
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Close Button: Astrological Eye representation (Mắt Thần Chiêm Tinh) */}
-              <button
-                onClick={() => {
-                  playClickSound(300, 0.08);
-                  setIsCommandModalOpen(false);
-                }}
-                title="Đóng Hướng Dẫn"
-                className="absolute top-4 right-4 bg-[#FFD600] hover:brightness-110 border-2 border-[#1976D2] rounded-full w-9 h-9 flex items-center justify-center shadow-[0_4px_12px_rgba(25,118,210,0.15)] hover:bg-[#ffeb3b] active:scale-95 transition-all cursor-pointer z-50 group"
-              >
-                {/* SVG Astrological Eye shape -> Changed to close icon */}
-                <svg className="w-5 h-5 text-[#1976D2] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-              </button>
-              
+                    </div>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
         )}
