@@ -4994,7 +4994,8 @@ TRÙNG SINH ĐẾN TƯƠNG LAI SAU 7 NĂM KỂ T2 PHÚT KỂ TỪ NGÀY MÌNH CH
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
+    chatbotUrl: "https://aistudio.google.com/prompts/1dNDcIFHPfMPxj8SyT_jWygo9Xa1sWPRX",
+    profileUrl: "https://docs.google.com/document/d/1O4KVZ-ZymFzZHf7Tr-uKSJ-Jfw0iZLXmsJDOaUYlZDg/edit?usp=drivesdk",
     storyline: `Thành phố XX – 16:00
 
 Mưa mỗi lúc một nặng hạt. Cô và Gia Ý đành chạy vội vào một hiệu sách nhỏ nằm nép mình nơi góc phố để trú mưa.
