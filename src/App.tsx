@@ -2648,65 +2648,6 @@ export default function App() {
                         {card.code}
                       </div>
                     </div>
-
-                    {/* Bottom Block (LỆNH NÀY CHẠY SAO RỒI?) */}
-                    <div className="border-t border-[#1976D2]/10 pt-3 flex flex-col space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-black text-[#1976D2] uppercase tracking-widest">
-                          LỆNH NÀY CHẠY SAO RỒI?
-                        </span>
-                        {commandFeedbacks[card.id] && (
-                          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider animate-pulse ${
-                            commandFeedbacks[card.id] === 'ngon' ? 'bg-emerald-100 text-emerald-700' :
-                            commandFeedbacks[card.id] === 'hong' ? 'bg-rose-100 text-rose-700' :
-                            'bg-amber-100 text-amber-700'
-                          }`}>
-                            {commandFeedbacks[card.id] === 'ngon' ? 'Ngon 👍' : commandFeedbacks[card.id] === 'hong' ? 'Hỏng 👎' : 'Hên xui ＝'}
-                          </span>
-                        )}
-                      </div>
-                      
-                      <div className="grid grid-cols-3 gap-2">
-                        {/* HỎNG button */}
-                        <button
-                          onClick={() => handleFeedback(card.id, 'hong')}
-                          className={`flex items-center justify-center gap-1 py-2 px-3 rounded-xl font-bold text-[10px] md:text-xs tracking-wider transition-all duration-150 cursor-pointer border ${
-                            commandFeedbacks[card.id] === 'hong'
-                              ? 'bg-rose-600 text-white border-rose-600 shadow-[0_0_12px_rgba(225,29,72,0.4)] scale-95'
-                              : 'bg-rose-50 text-rose-600 border-rose-200 hover:bg-rose-100 active:scale-95'
-                          }`}
-                        >
-                          <X className="w-3.5 h-3.5" />
-                          <span>HỎNG</span>
-                        </button>
-
-                        {/* NGON button */}
-                        <button
-                          onClick={() => handleFeedback(card.id, 'ngon')}
-                          className={`flex items-center justify-center gap-1 py-2 px-3 rounded-xl font-bold text-[10px] md:text-xs tracking-wider transition-all duration-150 cursor-pointer border ${
-                            commandFeedbacks[card.id] === 'ngon'
-                              ? 'bg-emerald-600 text-white border-emerald-600 shadow-[0_0_12px_rgba(5,150,105,0.4)] scale-95'
-                              : 'bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100 active:scale-95'
-                          }`}
-                        >
-                          <Check className="w-3.5 h-3.5" />
-                          <span>NGON</span>
-                        </button>
-
-                        {/* HÊN XUI button */}
-                        <button
-                          onClick={() => handleFeedback(card.id, 'henxui')}
-                          className={`flex items-center justify-center gap-1 py-2 px-3 rounded-xl font-bold text-[10px] md:text-xs tracking-wider transition-all duration-150 cursor-pointer border ${
-                            commandFeedbacks[card.id] === 'henxui'
-                              ? 'bg-amber-500 text-white border-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.4)] scale-95'
-                              : 'bg-amber-50 text-amber-600 border-amber-200 hover:bg-amber-100 active:scale-95'
-                          }`}
-                        >
-                          <span className="font-bold text-sm leading-none -mt-0.5">＝</span>
-                          <span>HÊN XUI</span>
-                        </button>
-                      </div>
-                    </div>
                   </div>
                 ))}
               </div>
