@@ -39,6 +39,24 @@ const musicPlaylists = {
 const welcomeBgUrl = "https://cdn.phototourl.com/free/2026-07-14-3e758a1d-f3bd-4717-afe2-d30d1c8a10cd.jpg";
 const mainBgUrl = "https://cdn.phototourl.com/free/2026-07-14-ffafd17a-5573-4d6b-b2bd-4af530540d39.jpg";
 
+function isNewCharacter(char: Character): boolean {
+  const link = char.chatLink !== undefined ? char.chatLink : char.chatbotUrl;
+  if (!link || link.trim() === "") {
+    // TH1: Nếu char CHƯA CÓ chatLink (hoặc null/trống): -> Mặc định LUÔN HIỆN tag "NEW 🔥"
+    const isNewRelease = !!char.createdTime || !!char.linkUpdatedAt || char.id === "27" || char.id === "28";
+    return isNewRelease;
+  }
+
+  // TH2: Đã gắn chatLink -> Đếm ngược 48h kể từ linkUpdatedAt (hoặc createdTime làm fallback)
+  const updatedAt = char.linkUpdatedAt || char.createdTime;
+  if (!updatedAt) return false;
+
+  const now = new Date();
+  const releaseDate = new Date(updatedAt);
+  const diffHours = (now.getTime() - releaseDate.getTime()) / (1000 * 60 * 60);
+  return diffHours >= 0 && diffHours <= 48;
+}
+
 function getRuneSymbol(tag: string): string {
   const t = tag.toLowerCase().trim();
   if (t === "tất cả") return "❂";
@@ -175,6 +193,7 @@ export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
   const [hasEnteredOrTransitioning, setHasEnteredOrTransitioning] = useState(false);
   const [showAgeVerify, setShowAgeVerify] = useState(false);
+  const [showNewCharactersPopup, setShowNewCharactersPopup] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTag, setActiveTag] = useState("Tất cả");
@@ -1710,7 +1729,7 @@ export default function App() {
                   )}
 
                   {/* Characters scrollable vertical listing: "Bộ sưu tập thú bông lưu niệm" */}
-                  <div className="space-y-4">
+                  <div className="space-y-4" id="character-list-section">
                     <div className="flex items-center justify-between px-1">
                       <div className="flex items-center gap-2">
                         <span className="text-xl filter drop-shadow-[0_0_8px_rgba(236,72,153,0.6)] animate-pulse">🧸</span>
@@ -1777,7 +1796,7 @@ export default function App() {
                                     padding: '15px 10px'
                                   }}
                                 >
-                                  {!char.chatbotUrl && (
+                                  {isNewCharacter(char) && (
                                     <div 
                                       className="absolute font-black pointer-events-none tracking-widest uppercase font-sans animate-pulse"
                                       style={{ 
@@ -3336,7 +3355,7 @@ export default function App() {
                 </AnimatePresence>
               </div>
 
-              {/* Character Details in beautiful Serif, fading in */}
+              {/* Character Info reveal below the glass chamber */}
               <AnimatePresence mode="wait">
                 {!isSummoning && (
                   <motion.div
@@ -3354,7 +3373,6 @@ export default function App() {
                         Tôi là {gachaResult.name} đây !!!
                       </h2>
                     </div>
-
                     <div 
                       className="text-xs md:text-sm text-amber-100/90 leading-relaxed p-4 rounded-2xl border border-cyan-950/80 bg-slate-950/70 shadow-inner mb-6 max-h-40 overflow-y-auto custom-scrollbar font-serif italic text-left"
                       style={{
@@ -3429,8 +3447,159 @@ export default function App() {
               setIsPlaying(true);
               playClickSound(600, 0.1);
               setShowAgeVerify(false);
+              const hasNewChars = CHARACTERS.some(isNewCharacter);
+              if (hasNewChars) {
+                setShowNewCharactersPopup(true);
+              }
             }}>
               Tôi đã đủ 18 tuổi — Nhận vé vào cửa
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showNewCharactersPopup && (
+        <div className="age-verify-overlay" style={{ zIndex: 9999 }}>
+          <div 
+            className="new-char-popup" 
+            style={{
+              background: 'rgba(20, 10, 25, 0.9)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1.5px solid #ff2a6d',
+              borderRadius: '24px',
+              padding: '20px',
+              boxShadow: '0 0 25px rgba(255, 42, 109, 0.4)',
+              maxWidth: '400px',
+              width: '90%',
+              margin: '0 auto',
+              textAlign: 'center',
+              color: '#fff',
+            }}
+          >
+            {/* TIÊU ĐỀ POPUP */}
+            <div style={{ marginBottom: '15px' }}>
+              <span 
+                style={{
+                  background: 'linear-gradient(90deg, #ff2a6d, #9a4ece)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontSize: '18px',
+                  fontWeight: 800,
+                  letterSpacing: '1px',
+                  display: 'inline-block',
+                }}
+              >
+                🔥 Gấu Bông Mới 🔥
+              </span>
+              <p style={{ fontSize: '11px', color: '#a0a0b0', marginTop: '4px' }}>
+                🎁 Vote cho em bé mới nha
+              </p>
+            </div>
+
+            {/* DANH SÁCH CHAR MINI */}
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                marginBottom: '20px',
+                maxHeight: '280px',
+                overflowY: 'auto',
+                paddingRight: '4px',
+              }}
+              className="custom-scrollbar"
+            >
+              {CHARACTERS.filter(isNewCharacter).map((char) => {
+                const link = char.chatLink !== undefined ? char.chatLink : char.chatbotUrl;
+                const hasLink = link && link.trim() !== "";
+                const isChar28 = char.id === "28";
+                const isChar27 = char.id === "27";
+                
+                // Color customization per char style
+                const accentColor = isChar28 ? '#05d9e8' : '#ff2a6d';
+                const tagColor = isChar28 ? '#05d9e8' : '#ff7597';
+                const bgLight = isChar28 ? 'rgba(5, 217, 232, 0.15)' : 'rgba(255, 42, 109, 0.15)';
+                const emojiPrefix = isChar27 ? "🌸" : isChar28 ? "🎸" : (char.avatar || "✨");
+                
+                // Construct tag list text
+                const tagText = `${emojiPrefix} ${char.tags.slice(0, 3).join(' • ')}`;
+
+                return (
+                  <div 
+                    key={char.id}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '16px',
+                      padding: '10px',
+                    }}
+                  >
+                    <img 
+                      src={char.image || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"} 
+                      alt={char.name}
+                      style={{
+                        width: '50px',
+                        height: '50px',
+                        borderRadius: '12px',
+                        objectFit: 'cover',
+                        border: `1.5px solid ${accentColor}`,
+                      }}
+                      referrerPolicy="no-referrer"
+                    />
+                    <div style={{ textAlign: 'left', flex: 1 }}>
+                      <div style={{ fontWeight: 'bold', fontSize: '14px', color: '#fff' }}>
+                        No {char.no || char.id} - {char.name}
+                      </div>
+                      <div style={{ fontSize: '10px', color: tagColor, marginTop: '2px', textTransform: 'uppercase', fontWeight: 600 }}>
+                        {tagText}
+                      </div>
+                    </div>
+                    {/* Tag trạng thái động */}
+                    <span 
+                      style={{
+                        fontSize: '9px',
+                        fontWeight: 'bold',
+                        padding: '4px 8px',
+                        borderRadius: '8px',
+                        background: bgLight,
+                        color: accentColor,
+                        border: `1px solid ${accentColor}`,
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {hasLink ? '🔥 Đã mở' : '⏳ Chờ link'}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* NÚT BẤM CHUYỂN CẢNH */}
+            <button 
+              onClick={() => {
+                playClickSound(500, 0.1);
+                setShowNewCharactersPopup(false);
+              }}
+              style={{
+                width: '100%',
+                background: 'linear-gradient(90deg, #ff2a6d, #9a4ece)',
+                border: 'none',
+                padding: '12px',
+                borderRadius: '30px',
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: '13px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 15px rgba(255, 42, 109, 0.4)',
+                transition: 'all 0.15s ease',
+              }}
+              className="hover:brightness-110 active:scale-95 transform transition"
+            >
+              ✨ BƯỚC VÀO TRẢI NGHIỆM ✨
             </button>
           </div>
         </div>

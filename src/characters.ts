@@ -14,7 +14,9 @@ export interface Character {
   chatbotUrl: string;
   storyline: string;
   profileUrl?: string;
-  
+  createdTime?: string;
+  chatLink?: string;
+  linkUpdatedAt?: string;
 }
 
 export const CHARACTERS: Character[] = [
@@ -5089,6 +5091,7 @@ Hai đứa bật dậy, vội vàng chạy ra mở cửa.
   {
     id: "27",
     no: "027",
+    createdTime: "2026-07-24T06:00:00",
     name: "Xuân Quy Tự",
     avatar: "🎋",
     avatarBg: "from-emerald-500 to-teal-800",
@@ -5099,6 +5102,8 @@ Hai đứa bật dậy, vội vàng chạy ra mở cửa.
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "",
+    chatLink: "",
+    linkUpdatedAt: "",
     storyline: `“Tao để mày ra đường xin tí tiền mà mày cũng đéo cho à?” “Tao…”
 
 Tút… tút… tút…
@@ -5250,6 +5255,7 @@ Hả? Hoắc Mộ Bạch!!!???`
   {
     id: "28",
     no: "028",
+    createdTime: "2026-07-24T06:00:00",
     name: "Noah Wilson",
     avatar: "🎡",
     avatarBg: "from-indigo-950 via-purple-900 to-amber-500",
@@ -5375,6 +5381,8 @@ Noah đang nhai dở miếng cơm bỗng khựng lại. Cậu ngẩng mặt lên
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "",
+    chatLink: "",
+    linkUpdatedAt: "",
     storyline: ""
   }
 ];
