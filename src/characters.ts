@@ -1,5 +1,4 @@
 
-
 export interface Character {
   no?: string;
   id: string;
@@ -2570,12 +2569,13 @@ Hay thật sự đã xuyên vào thế giới của Trầm Luân?`,
     avatar: "🌸",
     avatarBg: "from-slate-700/80 to-slate-900/80",
     image: "https://i.pinimg.com/736x/42/3d/e7/423de7cb015da2d76bb2571bbffbf545.jpg",
-    tags: ["Việt Nam xưa", "HÀ NỘI 1940", "NGƯỢC", "GL", "BG",],
+    tags: ["Việt Nam xưa", "HÀ NỘI 1940", "NGƯỢC", "GL", "BG"],
     description: "Đầu thu năm 1940, giữa phố đèn đỏ Hà Nội xô bồ, nàng xuất hiện như một ánh mặt trời rực rỡ cứu rỗi cuộc đời mục nát của tôi...",
     story: "Câu chuyện buồn về Giai Lệ - Ánh mặt trời cuối cùng ở phố đèn đỏ Hà Nội năm 1940.",
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221WgXNN-z11lzwyff0Ybf99biMLPN9wnRU%22%5D,%22action%22:%22open%22,%22userId%22:%22104075022780683298189%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+    profileUrl: "https://docs.google.com/document/d/1IUvp4B_uq7EQ1irivedDOHC94EpKsaqU3di2R2J-slM/edit?usp=drivesdk",
     storyline: `Hà Nội – Mùa thu năm 1940
 “Con mẹ mày, đây là lần thứ mấy rồi hả?”
 “Nợ không trả nổi thì tao bán mày vào tiệm hát!”
@@ -2693,9 +2693,8 @@ Lúc ấy tôi mới hiểu.
 Giai Lệ là ánh sáng duy nhất trong cuộc đời tôi.
 Nhưng ánh sáng ấy…
 Chưa từng có cơ hội soi rọi chính cuộc đời mình.`,
-    profileUrl: "https://docs.google.com/document/d/1IUvp4B_uq7EQ1irivedDOHC94EpKsaqU3di2R2J-slM/edit?usp=drivesdk"
   },
-    {
+  {
     id: "17",
     no: "017",
     name: "Lucien Valmont",
@@ -2708,6 +2707,7 @@ Chưa từng có cơ hội soi rọi chính cuộc đời mình.`,
     welcomeMessage: "*Lucien Valmont khẽ kéo bạn vào lòng, ngón tay vuốt nhẹ bên tai bạn:* \"Nếu mệt rồi thì bám víu vào bản vương đây. Cả thiên hạ này làm sao bằng nụ cười của em?\"",
     systemPrompt: "You are Lucien Valmont, a powerful and devoted Prince of the ancient dynasty who is deeply in love with the user. You speak in a protective, poetic, yet commanding Vietnamese royal style.",
     chatbotUrl: "https://docs.google.com/document/d/19b9-bBOFnjJIz4cWZ23tz_hCv8kR0gY6QGE2dv-wSiA/edit?usp=drivesdk",
+    profileUrl: "https://docs.google.com/document/d/1-pH4U5IFGfH9vHgyNxU_YPqtzQCD2nJm_8tmS8tQddk/edit?usp=drivesdk",
     storyline: `Vương quốc Astoria
 
 Vương quốc Astoria nằm ở phía bắc lục địa, nơi bốn mùa luân chuyển rõ rệt và những cơn gió lạnh thổi quanh năm. Đất nước ấy được cai trị bởi Quốc vương Raphael Everhart.
@@ -2910,7 +2910,6 @@ Tên cận vệ phía sau giật mình.
 Tôi bước qua vũng máu dưới chân.
 
 “Đón hoàng hậu của ta.”`,
-    profileUrl: "https://docs.google.com/document/d/1-pH4U5IFGfH9vHgyNxU_YPqtzQCD2nJm_8tmS8tQddk/edit?usp=drivesdk"
   },
   {
     id: "19",
@@ -2925,6 +2924,7 @@ Tôi bước qua vũng máu dưới chân.
     welcomeMessage: "*Lệ Bắc Thần chậm rãi hạ tờ báo xuống, ánh mắt thâm trầm khóa chặt lấy bạn:* \"An Nhi nói em muốn làm thím nhỏ của nó? Gan cũng lớn đấy... Lại đây.\"",
     systemPrompt: "You are Lệ Bắc Thần, a 29-year-old cold and powerful CEO. You are the 'gia trưởng' (patriarchal/possessive) type. You are secretly the anonymous WeChat friend who messages the user every night. You are intense, wealthy, and deeply possessive of the user, who is your niece's best friend. Speak in a low, commanding, yet deeply alluring Vietnamese style.",
     chatbotUrl: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221ZD_WBoXIeomqVAJ-YMBf4Pk7qRywF5nd%22%5D,%22action%22:%22open%22,%22userId%22:%22104075022780683298189%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+    profileUrl: "https://docs.google.com/document/d/1JYt4q6rPd4YWOvZYxcmc26ltLy5FF32uWYxmw2txOQM/edit?usp=drivesdk",
     storyline: `“Má nó… Thằng này hôm trước mới rủ tao đi chơi, thế đéo nào hôm nay đã công khai người yêu rồi!”
 
 Lệ An Nhi cay cú lướt màn hình điện thoại, gương mặt xinh đẹp méo xệch đi vì tức tối. Cô quay sang nhìn tôi, ánh mắt long lên như muốn tìm kiếm một sự đồng lõa
@@ -3197,7 +3197,6 @@ Lệ Bắc Thần đang ngồi trên sofa, tay cầm iPad xử lý công việc.
 Tôi đứng hình. Sự lạnh lùng và thản nhiên của anh như đổ thêm dầu vào lửa.
 
 LỆ BẮC THẦN! ANH TIÊU ĐỜI VỚI TÔI RỒI!`,
-    profileUrl: "https://docs.google.com/document/d/1JYt4q6rPd4YWOvZYxcmc26ltLy5FF32uWYxmw2txOQM/edit?usp=drivesdk"
   },
   {
     id: "18",
@@ -3212,6 +3211,7 @@ LỆ BẮC THẦN! ANH TIÊU ĐỜI VỚI TÔI RỒI!`,
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221q_JJNkgrc9JPfiUdSo21qq8aclaf2DFs%22%5D,%22action%22:%22open%22,%22userId%22:%22104075022780683298189%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+    profileUrl: "https://docs.google.com/document/d/1HT-mY_UQugMXn8-QI_SkzjKTtb5Im3r1Kc4MCAUP2BU/edit?usp=drivesdk",
     storyline: `Thành phố XX – 22:00
 
 Mưa trút xuống như muốn nuốt chửng cả thành phố. Ánh đèn cao ốc hắt xuống mặt đường loang loáng nước. Gió lạnh mang theo mùi nhựa đường ướt và khói xe len qua từng con phố.
@@ -3390,7 +3390,6 @@ Hít một hơi thật sâu.
 
 “Giờ làm gì đây…”
 “Sao để sống được trong cái thế giới quái quỷ này đây!?”`,
-    profileUrl: "https://docs.google.com/document/d/1HT-mY_UQugMXn8-QI_SkzjKTtb5Im3r1Kc4MCAUP2BU/edit?usp=drivesdk"
   },
   {
     id: "20",
@@ -3405,6 +3404,7 @@ Hít một hơi thật sâu.
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221zt3j6T_Wob1E97imWCq_6xZx-f_13X0O%22%5D,%22action%22:%22open%22,%22userId%22:%22104075022780683298189%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+    profileUrl: "https://docs.google.com/document/d/1LsLUIgstzzfnHOc_YZl6k3q7Fs8ERq3xjE2VCk20Mwk/edit?usp=drivesdk",
     storyline: `BÙM!
 
 “Rồng đến!!”
@@ -3518,7 +3518,6 @@ Tôi lao như bay đến trước lều của Hake. Đúng như dự đoán, cô
 “CHÚNG TA LUYỆN RỒNG ĐI!”
 “Hả?!” Hake ngơ ngác ngước lên.
 “Thuần phục loài rồng ấy !”`,
-    profileUrl: "https://docs.google.com/document/d/1LsLUIgstzzfnHOc_YZl6k3q7Fs8ERq3xjE2VCk20Mwk/edit?usp=drivesdk"
   },
   {
     id: "21",
@@ -3880,7 +3879,7 @@ Xuyên không thật rồi.
 
 Mà còn xuyên vào xác… hai đứa con nít chuyên đi bắt nạt nữ chính nữa chứ!
 
-Đời đúng là không cho ai con đường sống !`
+Đời đúng là không cho ai con đường sống !`,
   },
   {
     id: "22",
@@ -4522,7 +4521,7 @@ Cô bật dậy, vừa khóc vừa cười, lao đến ôm chặt lấy anh.
 
 Woo-jin khựng người. Bàn tay buông thõng bên người.Anh không ôm lại cô. Cũng không đẩy cô ra. Chỉ lặng lẽ nhìn.
 
-Lần này anh không bỏ em đi nữa nhé ?`
+Lần này anh không bỏ em đi nữa nhé ?`,
   },
   {
     id: "23",
@@ -5247,5 +5246,135 @@ Người đàn ông quyền lực ngồi ở vị trí thượng tọa khẽ nâ
 Đầu óc cô nổ tung một tiếng Đùng. Gương mặt kia, khí chất kia…
 
 Hả? Hoắc Mộ Bạch!!!???`
+  },
+  {
+    id: "28",
+    no: "028",
+    name: "Noah Wilson",
+    avatar: "🎡",
+    avatarBg: "from-indigo-950 via-purple-900 to-amber-500",
+    image: "https://cdn.phototourl.com/free/2026-07-24-6ced6649-9367-4a6e-9b16-e983a4d53a57.jpg",
+    tags: ["HIỆN ĐẠI", "Ngọt", "Đời Thường", "Bái Che"],
+    description: "Lạng Sơn mùa thu, mây bay đỉnh núi, hoa nở đầy đèo... và một anh Tây 'ngơ ngơ' bỗng dưng rơi thẳng vào đời tôi",
+    story: `Chiều Lạng Sơn, đồng hồ điểm mười sáu giờ.
+
+Bầu trời trong vắt như một dải lụa lam ngọc, gió thu nhè nhẹ mơn man qua từng kẽ lá, mang theo cái vị thanh lương, thoáng đãng đặc trưng của miền biên ải. Cô đứng giữa khoảng sân ngập nắng, vươn vai một cái thật căng tràn, rồi hít hà trọn vẹn mấy ngụm không khí trong lành của tiết trời đầu thu.
+
+“Đéo mẹ ! Mày tính lên đến bao giờ hả con ?”
+
+Tiếng chửi với giọng điệu quen thuộc vang lên từ yên chiếc xe Vision. Phương Anh đang ngồi lườm cô cháy máy. Cô giật bắn mình, vội vàng ba chân bốn cẳng lao tót vào nhà vơ vội đống đồ đạc.
+
+Chẳng giấu gì, hôm nay hai đứa hẹn nhau lên Mẫu Sơn đổi gió, thế mà cái thói ngủ quên muôn thuở lại hại cô một vố đau điếng!
+
+Sách vở, balo, lều bạt cùng mấy đống đồ ăn vặt được chất gọn gàng lên xe. Mùa này Mẫu Sơn đẹp lắm, hoa dại bung nở khắp các sườn đồi, tiết trời lại se se lạnh, mơn man da thịt. Sau vài tiếng lượn lách qua những cung đường đèo uốn lượn, hai đứa cuối cùng cũng đặt chân lên đỉnh núi.
+
+Khung cảnh trước mắt hiện ra nên thơ tựa một bức tranh thủy mặc: hoa cỏ lất phất trong gió, mây vờn quanh sườn núi, không khí lãng đãng và tình tứ vô cùng. Phương Anh vừa dựng xe đã lôi ngay chiếc máy ảnh kỹ thuật số ra, hai đứa lật đật tạo dáng, bấm vèo một cái là có ngay vài trăm tấm ảnh sống ảo.
+
+“Ơ, khu này hôm nay đông tây balo ghê mày nhỉ?”
+
+Cô lững thững cùng Phương Anh đi dạo một vòng, tò mò ngắm nhìn những vị khách du lịch ngoại quốc đang hào hứng khám phá cảnh quan. Cả hai quyết định ngủ lại đây hai đêm, thong thả tận hưởng những ngày bình yên, hít thở khoảng trời rộng lớn của cái tuổi đôi mươi đang chớm qua thời bồng bột.
+
+Sáng hôm sau
+
+“Con kia! Mày bảo đi săn mây với tao cơ mà? Dậy mau!”
+
+Cô vừa cáu kỉnh vừa trùm đầu lôi thốc Phương Anh dậy, trong khi “nợ đời” của cô vẫn đang say giấc nồng, ngáy khò khò chẳng biết trời đất là gì.
+
+ “Mẹ mày…” - Phương Anh lầm bầm chửi với qua gối rồi tiếp tục chìm vào giấc ngủ.
+
+Bất lực, cô đành lườm một cái rõ dài rồi quay đầu tự đi săn mây một mình. Mẫu Sơn nổi tiếng nhất là cảnh tượng biển mây cuồn cuộn. Đứng trên đỉnh núi cao vời vợi, phóng tầm mắt ra xa, bạn sẽ thấy những làn mây trắng bồng bềnh tựa dải sóng lượn lờ ngay dưới chân mình. Mải mê ngắm cảnh cho đến tận sáu giờ sáng, khi ánh nắng đã bừng lên xua tan lớp sương mờ, cô mới lóc cóc chạy xe xuống khách sạn.
+
+Nhưng vừa rẽ vào đoạn đường dốc gần khu nghỉ dưỡng, một khung cảnh hỗn độn đập thẳng vào mắt cô.
+
+Xung quanh một anh chàng ngoại quốc cao lớn vạm vỡ đang có mấy bà cô, chú bác bu lại hỏi thăm.
+
+Trời ạ, anh Tây này cao phải suýt soát hai mét chứ chẳng đùa!
+
+Khổ nỗi, khuôn mặt điển trai ấy giờ đây đang méo xệch, buồn rười rượi, trên má còn vương vài vết xước xát đỏ au. Noah – tên cậu ta – vừa đến Việt Nam du lịch một mình thì xui xẻo bị trộm cắp hết tiền bạc, giấy tờ, lại thêm cú ngã xe lăn lóc. Giờ đây, đứng giữa một đám đông toàn người bản xứ chỉ biết cười trừ, Noah trợn tròn mắt bất lực vì rào cản ngôn ngữ.
+
+ “Zúp… Zúp… Vơi… Vơi…”
+
+Trông cậu ta lúc ấy chẳng khác nào một chú cún con bị bỏ rơi giữa phố đông, tuyệt vọng cầu cứu bất cứ ai đi ngang qua. Mấy bác lớn tuổi thấy lạ cứ liên mồm “How are you?” rồi cười hiền hậu, làm Noah càng thêm phần hoang mang tột độ.
+
+“Hey, are you okay?” (Này, cậu ổn chứ?)
+
+Cô chen chân vào giữa đám đông, vung ngay kỹ năng tiếng Anh thượng thừa tích lũy bao năm ra cứu nguy. Nghe thấy tiếng "đồng hương", mắt Noah sáng rực lên. Cậu ta tuôn ra một tràng tiếng Anh dài dặt dào xúc cảm như viết văn tả cảnh:
+
+ “Help me, I've lost everything! I don't know Vietnamese, please help!” (Giúp tôi với, tôi mất hết rồi! Tôi không biết tiếng Việt, làm ơn giúp tôi!)
+
+Cô đực mặt ra nghe, rồi luống cuống lôi điện thoại mở Google Dịch. Sau một hồi chật vật "ông nói gà, bà hiểu vịt" qua màn hình điện thoại, chẳng hiểu duyên số đưa đẩy thế nào mà cuối cùng, cô lại đồng ý dẫn luôn cái anh chàng rắc rối này về nhà mình.
+
+Noah ngốc nghếch nhìn cô cười hề hề, gương mặt vẫn còn vương nét lấm lem của bụi đường, giơ ngón tay cái lên rồi gật đầu lia lịa:
+
+“Cam on…” — “Xênh the…”
+
+Tính ra Noah còn ít tuổi hơn cô. Nhìn thằng nhóc cao kều ngơ ngác trước mắt, cô chỉ biết thở dài ngao ngán:
+
+Thế này mà thả ra đường khéo bị lừa bán sang Campuchia từ bao giờ không biết!
+
+Thế là từ ngày hôm đó, cô "ẵm" luôn Noah về nhà, tiện thể hỗ trợ liên hệ cơ quan công an tìm lại đồ đạc cho cậu, trong thời gian chờ đợi thì cứ để cậu ở tạm nhà mình.
+
+Kể từ hôm ấy, ngôi nhà nhỏ lúc nào cũng rộn rã tiếng cười.
+
+“Chi oi… zói… ói…”
+
+Noah bập bẹ gọi, cứ đói bụng là lại lon ton chạy lại xoa xoa cái bụng phẳng lỳ, bám dính lấy cô không rời nửa bước.
+
+ “Noah like Chi!”
+
+Cứ ăn xong là cậu ta lại ngồi nhìn cô ngây ngô cười toe toét.
+
+Tây ngơ ngẩn giống nhau cả lũ thế này cơ à? Thôi kệ… nhìn cũng đáng yêu phết…
+
+Cô bắt đầu dẫn anh đi la cà khắp các ngõ ngách Lạng Sơn, thưởng thức món ăn đậm đà hương vị Việt Nam và kiên nhẫn dạy cậu từng câu giao tiếp cơ bản. Noah chăm chỉ học lắm, ngày nào cũng bập bẹ dăm ba từ tiếng Việt, thỉnh thoảng cao hứng còn chêm vào vài câu nửa nạc nửa mỡ nghe đến buồn cười.
+
+“Noah đi chơi với bạn nha? Chi đưa Noah về!”
+
+Noah hí hửng vẫy tay chào cô rồi chạy tót đi mất. Dạo gần đây, "thằng nhóc ngoại quốc" này đã nhanh chóng kết giao được với mấy cậu thanh niên trong xóm, thấy suốt ngày rủ nhau đi đá bóng với cà phê.
+
+Tối hôm đó, vừa cất xong mâm cơm, cô ngồi chẻ táo thì Noah bước tới, kéo ghế ngồi sát bên, khóe miệng nhếch lên nụ cười đầy ẩn ý.
+
+ “Chi… Chi…” — “Chính là cái gì? Mà chính là cái gì cơ, mày nói rõ xem nào?” – Cô ngơ ngác quay sang nhìn cậu.
+
+Noah thấy cô chưa hiểu, liền hào hứng lôi chiếc điện thoại rẻ tiền mà cô mua tạm cho cậu dùng để tiện liên lạc ra. Cậu bấm lách cách vài nhịp rồi chìa màn hình về phía cô, nháy mắt tinh ranh.
+
+Cô nheo mắt đọc dòng chữ trên màn hình…
+
+ “NOAH! CẬU ĐÃ HỌC TỪ NÀY Ở ĐÂU THẾ HẢ?!”
+
+Noah giật thột, khuôn mặt đang hớn hở bỗng chốc xị xuống, chớp chớp đôi mắt to tròn đầy vẻ oan ức và tủi thân khi bị mắng vô cớ.
+
+ “Chi… em… em…”
+
+Ôi trời đất ơi! Trúng cái đứa nào dạy hư thằng nhỏ từ “chịch” này, để tao gặp tao bẻ cổ cho bằng sạch!
+
+Thế là buổi tối hôm ấy, cô nghiêm túc "mở lớp giáo dục đạo đức cấp tốc" cho Noah vì tội dám học đòi mấy từ ngữ bậy bạ từ bạn bè xấu. Noah thấy cô giận thật, cứ rụt cổ lại, lúp xúp đứng một góc như chú mèo con phạm lỗi.
+
+ “Chi… Chi… Noah… in ỗi… Chi…”
+
+Đến cuối cùng, chịu không thấu bầu không khí ngột ngạt, Noah rưng rưng, nước mắt ngắn nước mắt dài nhìn cô. Trông cái mặt lúc ấy đáng thương đến độ chỉ cần cô nhướng mày thêm cái nữa là cậu khóc thét lên mất.
+
+ “Đúng là cái đồ ngốc này…”
+
+Cô phì cười, giơ tay véo nhẹ cái má phúng phính của cậu rồi nhét ngay một miếng táo ngọt lịm vào miệng cho tịt cái mồm đang mếu máo lại.
+
+ “Noah? Nhốc? Nhốc á?” – Cậu ngẩn người nhai nhai miếng táo, đôi mắt vẫn còn ngấn nước ngước lên nhìn cô đầy vẻ ngây thơ.
+
+Thời gian trôi qua, trải qua bao nhiêu chuyện dở khóc dở cười, tình cảm giữa hai người ngày càng gắn bó khăng khít tự lúc nào.
+
+Rồi ngày ấy cũng đến. Cảnh sát gọi điện báo đã tìm lại được chiếc vali cùng toàn bộ giấy tờ tùy thân cho Noah. Cô cứ nghĩ lấy lại được đồ thì cậu ta phải nhảy cẳng lên vì sung sướng, thế nhưng chẳng hiểu sao, dạo này Noah cứ lầm lì, buồn rười rượi.
+
+ “Noah này… Thế bao giờ thì cậu bay về nước thế?”
+
+Trong bữa cơm tối, cô ngẩng đầu lên hỏi bâng quơ.
+Ngay khoảnh khắc ấy…
+
+Noah đang nhai dở miếng cơm bỗng khựng lại. Cậu ngẩng mặt lên, hai hàng nước mắt tự nhiên cứ thế tuôn trào, rơi lã chã xuống mâm cơm.
+
+Ủa alo? Bé ơi!? Sao lại khóc rồi thế này hả giời?!`,
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    storyline: ""
   }
 ];
