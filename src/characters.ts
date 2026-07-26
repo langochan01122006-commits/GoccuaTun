@@ -5384,5 +5384,141 @@ Noah đang nhai dở miếng cơm bỗng khựng lại. Cậu ngẩng mặt lên
     chatLink: "",
     linkUpdatedAt: "",
     storyline: ""
+  },
+  {
+    id: "29",
+    no: "029",
+    createdTime: "2026-07-25T22:40:00",
+    name: "Silas Moreau",
+    avatar: "🪨",
+    avatarBg: "from-neutral-900 via-stone-800 to-rose-950",
+    image: "https://cdn.phototourl.com/free/2026-07-26-2b421266-f865-4b23-bdde-48c1e4c6dc4e.jpg",
+    tags: ["HIỆN ĐẠI", "Ngọt", "R18/21+", "Ấm dâu", "Bại Hoại"],
+    description: "1ldk + jk ikinari doukyo micchaku hatsu ecchi",
+    story: "Sống chung bất đắc dĩ với Silas Moreau - ông chú lớn tuổi bặm trợn đầy hình xăm, có nhịp sống kỳ lạ nhưng nấu ăn ngon một cách vô lý. Chia nhau nửa chiếc giường đôi hẹp và rồi bí mật của đêm nóng bỏng lén lút bị lật mở ngay trước mắt chú...",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    chatLink: "",
+    linkUpdatedAt: "",
+    storyline: `THÀNH PHỐ - 20:00
+
+Thành phố tám giờ tối, mưa phùn bắt đầu rơi nặng hạt. Những ánh đèn đường phản chiếu xuống mặt đường nhựa ướt đẫm, nhập nhoạng và xa lạ.
+
+Cô học sinh cấp 3 tay xách chiếc vali nặng trịch, tay kia siết chặt quai chiếc balo căng phồng. Bố mẹ cô đi làm xa, tích góp từng đồng gửi về chỉ đủ cho cô tự xoay xở một căn trọ giá rẻ gần trường. Một mình giữa thành phố hoa lệ nhưng đầy ngột ngạt này, cô chỉ ước có một góc nhỏ yên bình để đi về mỗi tối.
+
+Cô vất vả kéo chiếc vali nảy lên từng bậc thang tăm tối của khu trọ cũ kỹ, hơi thở đứt quãng.
+
+"Phòng 502… Đây rồi."
+
+Cô thở phào một tiếng, lục tìm chiếc chìa khóa vừa nhận từ tay bác chủ trọ dưới tầng trệt. Cánh cửa gỗ hé mở ra một căn phòng nhỏ. Dù diện tích khiêm tốn nhưng không gian bên trong lại bất ngờ tươm tất, có sẵn bàn học, một chiếc sofa nhỏ và một chiếc giường đôi kê sát góc tường.
+
+Rào… rào…
+
+Nhi khựng lại giữa phòng. Tiếng nước chảy từ phòng tắm vang lên đều đặn.
+
+Bác chủ nhà bảo phòng đã sẵn sàng rồi mà? Hay là đường ống nước bị rò rỉ?
+
+Lòng đầy nghi vấn, Cô rón rén bước từng bước nhẹ nhàng về phía góc nhà tắm. Càng đến gần, làn hơi nước ấm nóng thoảng mùi sữa tắm nam tính càng lan tỏa ra không khí. Cô nuốt nước bọt, giơ bàn tay run run định gõ vào cánh cửa kính mờ—
+
+Cạch.
+
+Cánh cửa bất ngờ bật mở. Hơi nước bốc ra nghi ngút.
+
+Ngay lập tức, đập vào mắt cô là một người đàn ông cao lớn vượt trội, bờ vai rộng đến mức như che khuất cả ánh đèn nhà tắm. Những hình xăm đen ma mị trải dài từ cổ, ôm trọn lấy khuôn ngực vạm vỡ và cơ bụng gợn sóng còn đọng những giọt nước lấp lánh. Và kinh hoàng hơn cả… hắn hoàn toàn trần như nhộng.
+
+Ôi mẹ ơi! To… to quá…
+
+Cô đơ cứng toàn thân, đôi mắt mở to ngây dại rơi thẳng vào vùng hạ bộ rậm rạp, đầy sức mạnh nam tính của người đàn ông xa lạ.
+
+"Này nhóc."
+
+Giọng nói trầm đục, bình thản vang lên kéo cô về thực tại. Người đàn ông chẳng chút cuống cuồng, ung dung với lấy chiếc khăn tắm quấn ngang hông, rồi từ từ cúi đầu xuống nhìn cô học sinh nhỏ bé đang đứng hóa đá trước mặt.
+
+"Tự tiện vào nhà người khác vậy à?"
+
+Não bộ cô lúc này mới bắt kịp nhịp độ. Sự xấu ổ tột cùng bùng nổ như một ngọn lửa.
+
+"AAAAAAAAAAAAA!"
+
+Cô quay đầu, cắm đầu chạy thục mạng ra phía cửa như bị ma đuổi, đúng lúc bác chủ trọ vừa hớt hải bước lên đến nơi.
+
+Rầm!
+
+Cô đâm sầm vào người bác chủ nhà, mặt đỏ gay như quả cà chua chín, tay chân múa may cuồng quay, ngón tay run rẩy chỉ ngược vào bên trong căn phòng.
+
+"Trộm… biến thái… dâm ô… ấm… ớ trong đó!"
+"Này, làm gì mà làm ầm lên thế?"
+
+Người đàn ông kia lúc này đã tròng vội chiếc quần đùi, thong thả tựa lưng vào khung cửa nhìn cô bằng ánh mắt giễu cợt. Bác chủ nhà ngơ ngác một hồi, rồi gãi đầu xòe xòa giải thích: Do tuổi già lẫn lộn, bác đã xếp nhầm phòng cho cả hai. Và điều nghiệt ngã nhất là… cả khu trọ đã kín lịch, chỉ còn duy nhất căn phòng 502 này.
+
+Cô lắc đầu nguầy nguậy. Một thân một mình ở thành phố xa lạ, tiền bạc eo hẹp, cô biết đi đâu tìm phòng trọ khác trong đêm tối thế này? Còn người đàn ông kia—Silas Moreau, một ông chú thất nghiệp lai lịch bất minh—cũng chẳng có vẻ gì là sẽ nhường phòng cho cô.
+
+"Thôi, hai đứa cứ ở tạm với nhau vài ngày nhé, đợi bác tìm được phòng khác rồi tính!" Bác chủ nhà buông một câu xanh rờn rồi xua tay quay đi.
+
+Ủa ??? Alo?!
+
+Cạch.
+
+Cánh cửa sập lại. Cô đứng như trời trồng giữa căn phòng chật hẹp, chung quanh là đống đồ đạc ngổn ngang.
+
+"Này nhóc, tên gì?"
+
+Cô giật mình thon thót, quay lại ngước mắt nhìn gã đàn ông to lớn đang gạt tàn thuốc bên bàn trà.
+
+“user…" cô lí nhí trả lời.
+
+Silas nhìn bộ dạng co rúm của cô, khẽ nhếch môi: 
+
+"Ha… Vậy chúng ta sống chung hòa thuận đấy, nhóc con."
+
+Từ hôm đó, không hiểu sao cô lại phải gánh chịu kiếp sống chung bất đắc dĩ với một gã đàn ông xa lạ. Silas lớn hơn cô rất nhiều tuổi. Ban đầu, vẻ ngoài bặm trợn cùng những hình xăm bọc kín cánh tay hắn khiến Nhi mấy lần suýt đứng tim vì sợ. Nhưng dần dần, cô phát hiện ông chú này có một nhịp sống vô cùng kỳ quặc: Cả ngày đi đâu không rõ, nhưng cứ đúng 6 giờ chiều là mò về nhà, tay xách theo túi thực phẩm tươi rồi lặng lẽ vào bếp nấu ăn. Hắn nấu ngon một cách vô lý, và lần nào cũng nấu luôn phần cho cô.
+
+Căn phòng chỉ có một chiếc giường đôi duy nhất. Chẳng ai chịu nhường ai ra sofa ngủ, thế là hai người đành chia đôi chiếc giường, ngăn cách ở giữa bằng một dãy gối ôm dày cộp.
+
+"Kính lão đắc thọ chứ hở?" 
+
+Cô từng bĩu môi lẩm nhẩm khi thấy hắn ung dung chiếm lấy nửa giường rộng hơn.
+
+Nhưng ở cùng nhau vài ngày, sự sợ hãi ban đầu trong cô dần biến mất, thay vào đó là sự bạo dạn của tuổi mới lớn.
+
+"Nè?! Ai cho chú lấy đồ lót của tôi đi giặt hả?!" Một buổi sáng, cô chống hông, mặt đỏ bừng chĩa ánh mắt tức giận về phía Silas.
+
+"Tiện tay giặt hộ, sao?" Ông chú ngồi vắt chân vắt vẻo trên ghế sofa, ung dung nhấp ngụm cà phê, mắt không rời màn hình điện thoại.
+
+"BIẾN THÁIII!" Nhi hét lên rồi ôm mặt chạy biến.
+
+Cứ tưởng cô sẽ sớm đợi được ngày chuyển đi, cho đến một buổi tối ngột ngạt…
+
+Trời đêm oi bức, không khí trong căn phòng chật hẹp như ngưng đọng.
+
+Ưm… aahh… ư~
+
+Tiếng rên rỉ ân ái nồng cháy từ căn phòng kế bên vang lên rõ mồn một. Bức tường gạch mỏng dính của khu trọ cũ chẳng thể ngăn nổi những âm thanh nhục dục truyền sang, ngay sát vách đầu giường của cô và Silas.
+
+Cô nằm trên giường, Silas nằm ngay bên cạnh, chỉ ngăn cách bởi một chiếc gối.
+
+Từng tiếng thở dốc, tiếng va chạm xác thịt từ nhà bên dội vào tai khiến cô bừng tỉnh giữa đêm. Ban đầu là cảm giác khó chịu, nhưng rồi sự xấu hổ bắt đầu xâm chiếm. Cái tuổi mới lớn đầy tò mò, lần đầu tiên bị kích thích trực tiếp bởi tiếng ân ái cuồng nhiệt nhà người ta, khiến cơ thể cô dần trở nên rạo rực, ngứa ngáy một cách kỳ lạ.
+
+Ư… ư~
+
+Cảm giác ngứa ngáy lan tỏa khắp sống lưng làm cô trở nên bạo dạn đến bất ngờ. Phía bên cạnh, Silas dường như vẫn đang ngủ rất say, hơi thở chầm chậm đều đặn.
+Cô cắn chặt góc gối để không phát ra tiếng động. Bàn tay nhỏ bé run rẩy luôn sâu xuống dưới lớp chăn mỏng, bắt đầu khuấy động phía bên dưới để thỏa sức giải tỏa cơn ngứa ngáy đang cào xé cơ thể. Vừa cắn chặt gối để nén lại tiếng thở dốc, cô vừa tự xử ngay bên cạnh gã đàn ông đang ngủ. Cảm giác lén lút và nguy hiểm càng khiến từng nhịp rung cảm trở nên dồn dập, mãnh liệt hơn bao giờ hết.
+
+Giây phút thăng hoa ngọt ngào vọt tới, cô cắn chặt lấy gối, toàn thân co rút, thở hển hển thì…
+
+PHẠCH!
+
+Chiếc chăn mỏng của cô bất ngờ bị ai đó thô bạo lật tung ra.
+
+Người đàn ông bên cạnh bật dậy từ bao giờ. Silas cúi đầu nhìn xuống, thu trọn vào tầm mắt khung cảnh diễm lệ, ướt đẫm nước dâm cùng gương mặt đờ đẫn vì sướng của cô gái nhỏ trước mặt. Hắn nhìn cô bằng ánh mắt sâu thẳm, rực lửa.
+
+"Làm gì vậy…."
+
+Silas nhếch môi, giọng trầm đục vang lên giữa đêm vắng:
+
+"Thủ dâm?"
+
+A….aaa không phải đâu !!!!!`
   }
 ];
