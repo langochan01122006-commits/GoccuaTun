@@ -5101,9 +5101,10 @@ Hai đứa bật dậy, vội vàng chạy ra mở cửa.
     story: "",
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
-    chatLink: "",
-    linkUpdatedAt: "",
+    chatbotUrl: "https://aistudio.google.com/prompts/136HSEYve3X4DHm_CoNUO2ZflUEdFd5Ld",
+    chatLink: "https://aistudio.google.com/prompts/136HSEYve3X4DHm_CoNUO2ZflUEdFd5Ld",
+    linkUpdatedAt: "2026-07-26T01:49:41-07:00",
+    profileUrl: "https://docs.google.com/document/d/1OmPv8VoVOj4XC5BNCgCnnCZHr2Ie4l0S15ErbqTODnE/edit?usp=drivesdk",
     storyline: `“Tao để mày ra đường xin tí tiền mà mày cũng đéo cho à?” “Tao…”
 
 Tút… tút… tút…
