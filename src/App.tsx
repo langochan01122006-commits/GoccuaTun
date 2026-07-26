@@ -1427,7 +1427,7 @@ export default function App() {
                         }}
                       >
                         <div className="magic-ticket-inner">
-                          Trạm cảm xúc 🕯️
+                          Ideas & Feedback 🕯️
                         </div>
                       </a>
                     </div>
