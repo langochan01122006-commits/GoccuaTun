@@ -559,6 +559,28 @@ export default function App() {
   const [chattingCharacter, setChattingCharacter] = useState<Character | null>(null);
   const [storyCharacter, setStoryCharacter] = useState<Character | null>(null);
   const [flippedCardIds, setFlippedCardIds] = useState<Record<string, boolean>>({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const CHARACTERS_PER_PAGE = 10;
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 640;
+  const itemsPerRow = isMobile ? 2 : 4;
+
+  const chunkArray = <T,>(arr: T[], size: number): T[][] => {
+    return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+      arr.slice(i * size, i * size + size)
+    );
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, activeTag]);
 
   // List of tags for filter menu
   const tags = [
@@ -1757,222 +1779,305 @@ export default function App() {
                           <RotateCcw className="w-3.5 h-3.5" /> Thử đặt lại bộ lọc
                         </button>
                       </div>
-                    ) : (
-                      <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-8 justify-items-center justify-center px-2 py-4 sm:py-8">
-                        {filteredCharacters.map((char, index) => {
-                          const isTopCharacter = char.id === featuredHubby?.id;
-                          const isFlipped = !!flippedCardIds[char.id];
-                          const plushTheme = getPlushieCardTheme(Number(char.id) || 0, isTopCharacter);
-                          
-                          // Slight natural rotation angle for the fluffy look
-                          const rotationAngle = ((index % 3) - 1) * 1.5; 
-                          
-                          return (
-                            <motion.div
-                              key={char.id}
-                              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                              animate={{ opacity: 1, scale: 1, y: 0 }}
-                              transition={{ duration: 0.5, delay: index * 0.1 }}
-                              style={{ 
-                                transform: `rotate(${rotationAngle}deg)`,
-                              }}
-                              className={`plushie-card-container relative select-none ${isFlipped ? "flipped" : ""}`}
-                              onClick={() => {
-                                playClickSound(350, 0.08);
-                                setFlippedCardIds(prev => ({
-                                  ...prev,
-                                  [char.id]: !prev[char.id]
-                                }));
-                              }}
-                            >
-                              <div className="plushie-card-inner">
-                                {/* Front Side */}
-                                <div 
-                                  className={`plushie-card-front ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative items-center`}
-                                  style={{ 
-                                    WebkitBackfaceVisibility: 'hidden', 
-                                    backfaceVisibility: 'hidden', 
-                                    transform: 'rotateY(0deg)',
-                                    padding: '15px 10px'
-                                  }}
-                                >
-                                  {isNewCharacter(char) && (
-                                    <div 
-                                      className="absolute font-black pointer-events-none tracking-widest uppercase font-sans animate-pulse"
+                    ) : (() => {
+                      const totalPages = Math.ceil(filteredCharacters.length / CHARACTERS_PER_PAGE);
+                      const paginatedCharacters = filteredCharacters.slice(
+                        (currentPage - 1) * CHARACTERS_PER_PAGE,
+                        currentPage * CHARACTERS_PER_PAGE
+                      );
+                      return (
+                        <>
+                          <div id="character-grid" className="character-grid px-2 py-4 sm:py-8">
+                            {chunkArray(paginatedCharacters, itemsPerRow).map((rowCharacters, rowIndex) => (
+                              <div key={rowIndex} className="shelf-row justify-items-center justify-center">
+                                {rowCharacters.map((char, index) => {
+                                  const isTopCharacter = char.id === featuredHubby?.id;
+                                  const isFlipped = !!flippedCardIds[char.id];
+                                  const plushTheme = getPlushieCardTheme(Number(char.id) || 0, isTopCharacter);
+                                  
+                                  // Slight natural rotation angle for the fluffy look
+                                  const rotationAngle = ((index % 3) - 1) * 1.5; 
+                                  
+                                  return (
+                                    <motion.div
+                                      key={char.id}
+                                      initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                                      transition={{ duration: 0.5, delay: (index % CHARACTERS_PER_PAGE) * 0.05 }}
                                       style={{ 
-                                        top: '12px', 
-                                        right: '12px', 
-                                        zIndex: 10,
-                                        color: '#ff4b2b',
-                                        fontSize: '11px',
-                                        textShadow: '0 0 6px rgba(255, 75, 43, 0.5)',
+                                        transform: `rotate(${rotationAngle}deg)`,
+                                      }}
+                                      className={`plushie-card-container relative select-none ${isFlipped ? "flipped" : ""}`}
+                                      onClick={() => {
+                                        playClickSound(350, 0.08);
+                                        setFlippedCardIds(prev => ({
+                                          ...prev,
+                                          [char.id]: !prev[char.id]
+                                        }));
                                       }}
                                     >
-                                      NEW 🔥
-                                    </div>
-                                  )}
-                                  <div className="plushie-inner-border"></div>
-                                  
-                                  {/* Top header of the plushie gacha certification card */}
-                                  <div className={`flex justify-between items-center text-[7px] sm:text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
-                                    <span>🎈 № 0{char.id} 🎈</span>
-                                  </div>
-                                  
-                                  {/* Square 3D embossed picture frame */}
-                                  <div className="flex flex-col items-center justify-center my-auto z-10 w-full">
-                                    <div 
-                                      className="relative flex items-center justify-center z-10 bg-white"
-                                      style={{
-                                        width: '120px',
-                                        height: '120px',
-                                        borderRadius: '14px',
-                                        border: '3px solid #d1d5db',
-                                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), inset 0 -4px 6px rgba(0, 0, 0, 0.05)',
-                                        margin: '15px auto'
-                                      }}
-                                    >
-                                      {char.image || char.avatar.startsWith('http') ? (
-                                        <img 
-                                          src={char.image || char.avatar} 
-                                          alt={char.name}
-                                          style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover',
-                                            borderRadius: '12px'
+                                      <div className="plushie-card-inner">
+                                        {/* Front Side */}
+                                        <div 
+                                          className={`plushie-card-front ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative items-center`}
+                                          style={{ 
+                                            WebkitBackfaceVisibility: 'hidden', 
+                                            backfaceVisibility: 'hidden', 
+                                            transform: 'rotateY(0deg)',
+                                            padding: '15px 10px'
                                           }}
-                                        />
-                                      ) : (
-                                        <div style={{
-                                          width: '100%',
-                                          height: '100%',
-                                          borderRadius: '12px',
-                                          background: '#f3f4f6',
-                                          display: 'flex',
-                                          alignItems: 'center',
-                                          justifyContent: 'center',
-                                          fontSize: '3.5rem'
-                                        }}>
-                                          {char.avatar}
+                                        >
+                                          {isNewCharacter(char) && (
+                                            <div 
+                                              className="absolute font-black pointer-events-none tracking-widest uppercase font-sans animate-pulse"
+                                              style={{ 
+                                                top: '12px', 
+                                                right: '12px', 
+                                                zIndex: 10,
+                                                color: '#ff4b2b',
+                                                fontSize: '11px',
+                                                textShadow: '0 0 6px rgba(255, 75, 43, 0.5)',
+                                              }}
+                                            >
+                                              NEW 🔥
+                                            </div>
+                                          )}
+                                          <div className="plushie-inner-border"></div>
+                                          
+                                          {/* Top header of the plushie gacha certification card */}
+                                          <div className={`flex justify-between items-center text-[7px] sm:text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
+                                            <span>🎈 № 0{char.id} 🎈</span>
+                                          </div>
+                                          
+                                          {/* Square 3D embossed picture frame */}
+                                          <div className="flex flex-col items-center justify-center my-auto z-10 w-full">
+                                            <div 
+                                              className="relative flex items-center justify-center z-10 bg-white"
+                                              style={{
+                                                width: '120px',
+                                                height: '120px',
+                                                borderRadius: '14px',
+                                                border: '3px solid #d1d5db',
+                                                boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), inset 0 -4px 6px rgba(0, 0, 0, 0.05)',
+                                                margin: '15px auto'
+                                              }}
+                                            >
+                                              {char.image || char.avatar.startsWith('http') ? (
+                                                <img 
+                                                  src={char.image || char.avatar} 
+                                                  alt={char.name}
+                                                  style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'cover',
+                                                    borderRadius: '12px'
+                                                  }}
+                                                />
+                                              ) : (
+                                                <div style={{
+                                                  width: '100%',
+                                                  height: '100%',
+                                                  borderRadius: '12px',
+                                                  background: '#f3f4f6',
+                                                  display: 'flex',
+                                                  alignItems: 'center',
+                                                  justifyContent: 'center',
+                                                  fontSize: '3.5rem'
+                                                }}>
+                                                  {char.avatar}
+                                                </div>
+                                              )}
+                                            </div>
+                                            
+                                            {/* Name & Title */}
+                                            <h4 className={`text-xs sm:text-base md:text-lg font-black mt-1 sm:mt-2 ${plushTheme.textColor} text-center font-sans tracking-wide leading-[1.2]`}>
+                                              {char.name}
+                                            </h4>
+                                            
+                                            {/* Tags */}
+                                            <div className="plushie-tags-scroll flex flex-wrap gap-0.5 sm:gap-1 justify-center mt-1 sm:mt-2 max-w-full pb-1 sm:pb-2">
+                                              {char.tags.map((t, idx) => {
+                                                const symbol = getRuneSymbol(t);
+                                                return (
+                                                  <span
+                                                    key={idx}
+                                                    className={`inline-flex items-center gap-0.5 sm:gap-1 px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full border text-[6px] sm:text-[9px] font-black uppercase font-sans tracking-tight transition-transform active:scale-95 ${plushTheme.tagBg}`}
+                                                  >
+                                                    <span>{symbol}</span>
+                                                    <span>{t}</span>
+                                                  </span>
+                                                );
+                                              })}
+                                            </div>
+                                          </div>
+                                          
+                                          {/* Footer of the Card front */}
+                                          <div className={`text-center text-[7px] sm:text-[9px] ${plushTheme.noteText} font-sans font-bold tracking-wider pt-1 sm:pt-2 border-t border-black/5 z-10 flex items-center justify-center gap-1 sm:gap-1.5 w-full`}>
+                                            <span>✨ Nhấn lật xem ✨</span>
+                                          </div>
                                         </div>
-                                      )}
-                                    </div>
-                                    
-                                    {/* Name & Title */}
-                                    <h4 className={`text-xs sm:text-base md:text-lg font-black mt-1 sm:mt-2 ${plushTheme.textColor} text-center font-sans tracking-wide leading-[1.2]`}>
-                                      {char.name}
-                                    </h4>
-                                    
-                                    {/* Tags */}
-                                    <div className="plushie-tags-scroll flex flex-wrap gap-0.5 sm:gap-1 justify-center mt-1 sm:mt-2 max-w-full pb-1 sm:pb-2">
-                                      {char.tags.map((t, idx) => {
-                                        const symbol = getRuneSymbol(t);
-                                        return (
-                                          <span
-                                            key={idx}
-                                            className={`inline-flex items-center gap-0.5 sm:gap-1 px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full border text-[6px] sm:text-[9px] font-black uppercase font-sans tracking-tight transition-transform active:scale-95 ${plushTheme.tagBg}`}
-                                          >
-                                            <span>{symbol}</span>
-                                            <span>{t}</span>
-                                          </span>
-                                        );
-                                      })}
-                                    </div>
-                                  </div>
-                                  
-                                  {/* Footer of the Card front */}
-                                  <div className={`text-center text-[7px] sm:text-[9px] ${plushTheme.noteText} font-sans font-bold tracking-wider pt-1 sm:pt-2 border-t border-black/5 z-10 flex items-center justify-center gap-1 sm:gap-1.5 w-full`}>
-                                    <span>✨ Nhấn lật xem ✨</span>
-                                  </div>
-                                </div>
 
-                                {/* Back Side */}
-                                <div 
-                                  className={`plushie-card-back ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative`}
-                                  style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-                                >
-                                  <div className="plushie-inner-border"></div>
-                                  
-                                  {/* Back Header */}
-                                  <div className={`flex justify-between items-center text-[7px] sm:text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
-                                    <span className="hidden sm:inline">📜 CHỨNG NHẬN BẢO HÀNH 📜</span>
-                                    <span className="sm:hidden">📜 CHỨNG NHẬN 📜</span>
-                                    <span>#{char.id}</span>
-                                  </div>
-                                  
-                                  {/* Back Content scroll/description body */}
-                                  <div className="my-auto flex flex-col gap-1.5 sm:gap-2.5 z-10 px-0.5 sm:px-1 overflow-y-auto max-h-[110px] sm:max-h-[190px] custom-scrollbar scroll-smooth">
-                                    <h5 className={`text-xs sm:text-md font-bold ${plushTheme.textColor} text-center mt-1 font-sans`}>
-                                      {char.name}
-                                    </h5>
-                                    
-                                    <p className={`text-[8px] sm:text-[11.5px] leading-tight sm:leading-relaxed ${plushTheme.textColor} opacity-90 text-justify italic font-serif px-1.5 sm:px-2 bg-white/40 p-1.5 sm:p-2.5 rounded-[10px] sm:rounded-2xl border border-white/60 shadow-sm`}>
-                                      "{char.description}"
-                                    </p>
-                                  </div>
-                                  
-                                  {/* Back Action buttons themed beautifully */}
-                                  <div className="flex flex-col gap-1.5 sm:gap-2 z-10 mt-auto pt-1.5 sm:pt-3 border-t border-black/5 w-full">
-                                    {/* Row of buttons */}
-                                    <div className="flex gap-2">
-                                      {/* Chat Button */}
-                                      {!char.chatbotUrl ? (
-                                        <button
-                                          disabled
-                                          onClick={(e) => e.stopPropagation()}
-                                          className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-[#444]/10 text-slate-400 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl border border-slate-300 cursor-not-allowed opacity-50"
+                                        {/* Back Side */}
+                                        <div 
+                                          className={`plushie-card-back ${plushTheme.bg} ${plushTheme.border} ${plushTheme.shadow} flex flex-col justify-between h-full relative`}
+                                          style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                                         >
-                                          <MessageCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                                          <span className="hidden sm:inline">Sắp ra mắt</span>
-                                          <span className="sm:hidden">Sắp tới</span>
-                                        </button>
-                                      ) : (
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleStartChat(char);
-                                          }}
-                                          className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-emerald-500/20 to-teal-600/30 text-emerald-800 hover:from-emerald-500/35 hover:to-teal-600/45 border border-emerald-500/30 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95"
-                                        >
-                                          <MessageCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                                          Chat
-                                        </button>
-                                      )}
+                                          <div className="plushie-inner-border"></div>
+                                          
+                                          {/* Back Header */}
+                                          <div className={`flex justify-between items-center text-[7px] sm:text-[9px] font-sans font-black uppercase tracking-wider ${plushTheme.textColor} z-10 w-full`}>
+                                            <span className="hidden sm:inline">📜 CHỨNG NHẬN BẢO HÀNH 📜</span>
+                                            <span className="sm:hidden">📜 CHỨNG NHẬN 📜</span>
+                                            <span>#{char.id}</span>
+                                          </div>
+                                          
+                                          {/* Back Content scroll/description body */}
+                                          <div className="my-auto flex flex-col gap-1.5 sm:gap-2.5 z-10 px-0.5 sm:px-1 overflow-y-auto max-h-[110px] sm:max-h-[190px] custom-scrollbar scroll-smooth">
+                                            <h5 className={`text-xs sm:text-md font-bold ${plushTheme.textColor} text-center mt-1 font-sans`}>
+                                              {char.name}
+                                            </h5>
+                                            
+                                            <p className={`text-[8px] sm:text-[11.5px] leading-tight sm:leading-relaxed ${plushTheme.textColor} opacity-90 text-justify italic font-serif px-1.5 sm:px-2 bg-white/40 p-1.5 sm:p-2.5 rounded-[10px] sm:rounded-2xl border border-white/60 shadow-sm`}>
+                                              "{char.description}"
+                                            </p>
+                                          </div>
+                                          
+                                          {/* Back Action buttons themed beautifully */}
+                                          <div className="flex flex-col gap-1.5 sm:gap-2 z-10 mt-auto pt-1.5 sm:pt-3 border-t border-black/5 w-full">
+                                            {/* Row of buttons */}
+                                            <div className="flex gap-2">
+                                              {/* Chat Button */}
+                                              {!char.chatbotUrl ? (
+                                                <button
+                                                  disabled
+                                                  onClick={(e) => e.stopPropagation()}
+                                                  className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-[#444]/10 text-slate-400 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl border border-slate-300 cursor-not-allowed opacity-50"
+                                                >
+                                                  <MessageCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                                                  <span className="hidden sm:inline">Sắp ra mắt</span>
+                                                  <span className="sm:hidden">Sắp tới</span>
+                                                </button>
+                                              ) : (
+                                                <button
+                                                  onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleStartChat(char);
+                                                  }}
+                                                  className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-emerald-500/20 to-teal-600/30 text-emerald-800 hover:from-emerald-500/35 hover:to-teal-600/45 border border-emerald-500/30 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95"
+                                                >
+                                                  <MessageCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                                                  Chat
+                                                </button>
+                                              )}
 
-                                      {/* Plot Button */}
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          playClickSound(480, 0.08);
-                                          setStoryCharacter(char);
-                                        }}
-                                        className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-purple-500/10 to-violet-600/20 text-purple-800 hover:from-purple-500/20 hover:to-violet-600/30 border border-purple-500/20 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95"
-                                      >
-                                        <BookOpen className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                                        Tiểu sử
-                                      </button>
-                                    </div>
+                                              {/* Plot Button */}
+                                              <button
+                                                onClick={(e) => {
+                                                  e.stopPropagation();
+                                                  playClickSound(480, 0.08);
+                                                  setStoryCharacter(char);
+                                                }}
+                                                className="flex-1 select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-purple-500/10 to-violet-600/20 text-purple-800 hover:from-purple-500/20 hover:to-violet-600/30 border border-purple-500/20 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95"
+                                              >
+                                                <BookOpen className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                                                Tiểu sử
+                                              </button>
+                                            </div>
 
-                                    {/* Profile Anchor Button */}
-                                    <a
-                                      href={char.profileUrl || "#"}
-                                      target={char.profileUrl ? "_blank" : undefined}
-                                      rel={char.profileUrl ? "noopener noreferrer" : undefined}
-                                      onClick={(e) => e.stopPropagation()}
-                                      className="select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-blue-500/10 to-cyan-600/20 text-blue-800 hover:from-blue-500/20 hover:to-cyan-600/30 border border-blue-500/20 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95 text-center"
-                                    >
-                                      <User className="w-2.5 h-2.5 sm:w-3 sm:h-3 inline-block" />
-                                      <span className="hidden sm:inline">Xem Hồ sơ chi tiết</span>
-                                      <span className="sm:hidden">Hồ sơ</span>
-                                    </a>
-                                  </div>
-                                </div>
+                                            {/* Profile Anchor Button */}
+                                            <a
+                                              href={char.profileUrl || "#"}
+                                              target={char.profileUrl ? "_blank" : undefined}
+                                              rel={char.profileUrl ? "noopener noreferrer" : undefined}
+                                              onClick={(e) => e.stopPropagation()}
+                                              className="select-none flex items-center justify-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-blue-500/10 to-cyan-600/20 text-blue-800 hover:from-blue-500/20 hover:to-cyan-600/30 border border-blue-500/20 font-bold text-[8px] sm:text-[10px] rounded-[10px] sm:rounded-xl transition duration-150 active:scale-95 text-center"
+                                            >
+                                              <User className="w-2.5 h-2.5 sm:w-3 sm:h-3 inline-block" />
+                                              <span className="hidden sm:inline">Xem Hồ sơ chi tiết</span>
+                                              <span className="sm:hidden">Hồ sơ</span>
+                                            </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </motion.div>
+                                  );
+                                })}
                               </div>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    )}
+                            ))}
+                          </div>
+
+                          {/* THANH PHÂN TRANG (PAGINATION) */}
+                          {totalPages > 1 && (
+                            <div id="pagination" className="pagination-container flex items-center justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-6 py-4 flex-wrap">
+                              <button
+                                onClick={() => {
+                                  if (currentPage > 1) {
+                                    playClickSound(300, 0.08);
+                                    setCurrentPage(prev => prev - 1);
+                                    setTimeout(() => {
+                                      const target = document.getElementById('character-list-section');
+                                      if (target) {
+                                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                      }
+                                    }, 50);
+                                  }
+                                }}
+                                disabled={currentPage === 1}
+                                className="page-btn font-sans text-[10px] sm:text-xs flex items-center gap-1 select-none"
+                              >
+                                «
+                              </button>
+                              
+                              <div className="flex items-center gap-1 flex-wrap">
+                                {Array.from({ length: totalPages }, (_, idx) => {
+                                  const pageNum = idx + 1;
+                                  const isActive = pageNum === currentPage;
+                                  return (
+                                    <button
+                                      key={pageNum}
+                                      onClick={() => {
+                                        playClickSound(300 + pageNum * 20, 0.08);
+                                        setCurrentPage(pageNum);
+                                        setTimeout(() => {
+                                          const target = document.getElementById('character-list-section');
+                                          if (target) {
+                                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                          }
+                                        }, 50);
+                                      }}
+                                      className={`page-btn w-7 h-7 sm:w-8 sm:h-8 font-sans text-[10px] sm:text-xs flex items-center justify-center select-none ${
+                                        isActive ? "active" : ""
+                                      }`}
+                                    >
+                                      {pageNum}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+
+                              <button
+                                onClick={() => {
+                                  if (currentPage < totalPages) {
+                                    playClickSound(300, 0.08);
+                                    setCurrentPage(prev => prev + 1);
+                                    setTimeout(() => {
+                                      const target = document.getElementById('character-list-section');
+                                      if (target) {
+                                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                      }
+                                    }, 50);
+                                  }
+                                }}
+                                disabled={currentPage === totalPages}
+                                className="page-btn font-sans text-[10px] sm:text-xs flex items-center gap-1 select-none"
+                              >
+                                »
+                              </button>
+                            </div>
+                          )}
+                        </>
+                      );
+                    })()}
                   </div>
                 </motion.div>
               )}

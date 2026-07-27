@@ -3261,5 +3261,129 @@ html, body {
   cursor: pointer;
 }
 
+/* CONTAINER PHÂN TRANG PHONG CÁCH TICKET */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 35px 0 25px 0;
+}
+
+/* TẠO HÌNH CHIẾC VÉ TICKET */
+.page-btn {
+  position: relative;
+  background: linear-gradient(135deg, #2b1a1a 0%, #1a0f0f 100%);
+  color: #d4a373;
+  border: 1px dashed rgba(212, 163, 115, 0.4); /* Viền đứt nét tạo cảm giác cuống vé */
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  font-family: 'Georgia', serif; /* Font chữ mang vibe cổ điển */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* VẾT CẮT BÁN NGUYỆT 2 BÊN HÔNG MỖI CHIẾC VÉ */
+.page-btn::before,
+.page-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: #0b0707; /* Đổi thành màu background nền web */
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.page-btn::before { left: -5px; }
+.page-btn::after { right: -5px; }
+
+/* HOVER VÉ (KHI RÊ CHUỘT) */
+.page-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4a2828 0%, #2b1a1a 100%);
+  color: #fff;
+  border-color: #e74c3c;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* TRANG ĐANG CHỌN (ACTIVE TICKET) - DÁT VÀNG/ĐỎ SÁNG BỪNG */
+.page-btn.active {
+  background: linear-gradient(135deg, #d32f2f 0%, #851414 100%);
+  color: #fff8e7;
+  border: 1px solid #ff7878;
+  box-shadow: 0 0 15px rgba(211, 47, 47, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* NÚT DISALBED (TRANG ĐẦU/CUỐI) */
+.page-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
+
+
+/* CONTAINER CHỨA DÃY KỆ GỖ */
+.character-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Tạo khoảng cách giữa các tầng kệ */
+  width: 100%;
+}
+
+/* KHUNG TẦNG KỆ GỖ (2 CARD / HÀNG) */
+.shelf-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 12px 12px 25px 12px; /* Dành khoảng trống bên dưới cho thanh kệ gỗ */
+  position: relative;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
+@media (min-width: 640px) {
+  .shelf-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding: 16px 16px 36px 16px;
+  }
+}
+
+/* MẶT KỆ GỖ DÁT VÀNG NẰM DƯỚI CHÂN CARD */
+.shelf-row::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  /* Vân gỗ sẫm màu kết hợp dải mạ vàng ở mặt trên */
+  background: linear-gradient(to bottom, #d4a373 0%, #b38958 15%, #4a2e1b 40%, #2b180d 100%);
+  border-radius: 2px 2px 6px 6px;
+  /* Hiệu ứng bóng đổ 3D xuống nền gấm bên dưới */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* BÓNG ĐỔ CỦA MẶT KỆ */
+.shelf-row::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 2%;
+  right: 2%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.7);
+  filter: blur(4px);
+  border-radius: 50%;
+}
+
+
 
 
