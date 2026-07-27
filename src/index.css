@@ -2440,12 +2440,17 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 20px !important;
+  border-radius: 24px !important;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: 12px;
   box-sizing: border-box;
+  border: 4px solid #ffffff !important; /* Thick glossy ceramic white border */
+  box-shadow: 
+    inset 0 4px 6px rgba(255, 255, 255, 0.9),
+    inset 0 -4px 6px rgba(0, 0, 0, 0.03),
+    0 10px 20px rgba(180, 160, 200, 0.12) !important;
 }
 
 @media (min-width: 640px) {
@@ -2453,6 +2458,11 @@
   .plushie-card-back {
     border-radius: 32px !important;
     padding: 18px;
+    border: 6px solid #ffffff !important; /* Extra thick on desktop */
+    box-shadow: 
+      inset 0 6px 10px rgba(255, 255, 255, 0.95),
+      inset 0 -6px 10px rgba(0, 0, 0, 0.04),
+      0 15px 30px rgba(180, 160, 200, 0.18) !important;
   }
 }
 
@@ -3267,24 +3277,28 @@ html, body {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin: 35px 0 25px 0;
+  margin: 4px 0 0px 0 !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  min-height: fit-content;
 }
 
-/* TẠO HÌNH CHIẾC VÉ TICKET */
+/* TẠO HÌNH CHIẾC VÉ TICKET PASTEL */
 .page-btn {
   position: relative;
-  background: linear-gradient(135deg, #2b1a1a 0%, #1a0f0f 100%);
-  color: #d4a373;
-  border: 1px dashed rgba(212, 163, 115, 0.4); /* Viền đứt nét tạo cảm giác cuống vé */
-  padding: 8px 16px;
-  font-size: 0.95rem;
-  font-weight: bold;
-  font-family: 'Georgia', serif; /* Font chữ mang vibe cổ điển */
-  border-radius: 6px;
+  background: #FFFDF7; /* Soft cream ticket background */
+  color: #FF6B8B; /* Soft pink-red text */
+  border: 1.5px dashed #FFB6C1; /* Pink dashed line */
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-family: inherit;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
 /* VẾT CẮT BÁN NGUYỆT 2 BÊN HÔNG MỖI CHIẾC VÉ */
@@ -3295,7 +3309,7 @@ html, body {
   top: 50%;
   width: 8px;
   height: 8px;
-  background-color: #0b0707; /* Đổi thành màu background nền web */
+  background-color: #FFF0F3; /* Match the drawer background so it cuts in cleanly */
   border-radius: 50%;
   transform: translateY(-50%);
 }
@@ -3305,25 +3319,25 @@ html, body {
 
 /* HOVER VÉ (KHI RÊ CHUỘT) */
 .page-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4a2828 0%, #2b1a1a 100%);
-  color: #fff;
-  border-color: #e74c3c;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+  background: #FFF0F3;
+  color: #FF4D6D;
+  transform: translateY(-2px);
 }
 
-/* TRANG ĐANG CHỌN (ACTIVE TICKET) - DÁT VÀNG/ĐỎ SÁNG BỪNG */
+/* TRANG ĐANG CHỌN (ACTIVE TICKET) - DÁT HỒNG SÁNG BỪNG */
 .page-btn.active {
-  background: linear-gradient(135deg, #d32f2f 0%, #851414 100%);
-  color: #fff8e7;
-  border: 1px solid #ff7878;
-  box-shadow: 0 0 15px rgba(211, 47, 47, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.3);
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  background: #FFD1DC; /* Sweet pink active background */
+  color: #FFFFFF;
+  border: 1.5px solid #FF8EAC;
+  box-shadow: 
+    0 4px 10px rgba(255, 142, 172, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  text-shadow: none;
 }
 
-/* NÚT DISALBED (TRANG ĐẦU/CUỐI) */
+/* NÚT DISABLED (TRANG ĐẦU/CUỐI) */
 .page-btn:disabled {
-  opacity: 0.25;
+  opacity: 0.35;
   cursor: not-allowed;
   filter: grayscale(100%);
 }
@@ -3333,56 +3347,198 @@ html, body {
 .character-grid {
   display: flex;
   flex-direction: column;
-  gap: 30px; /* Tạo khoảng cách giữa các tầng kệ */
+  gap: 24px; /* Tạo khoảng cách giữa các tầng kệ */
   width: 100%;
 }
 
-/* KHUNG TẦNG KỆ GỖ (2 CARD / HÀNG) */
+/* Khung viền tủ ngoài cùng - Soft Muted Pastel Lavender/Lilac gradient */
+.arcade-outer-frame {
+  background: linear-gradient(180deg, #EADFFF 0%, #D6C5FF 100%) !important;
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  border-radius: 40px;
+  box-shadow: 
+    0 12px 32px rgba(90, 70, 130, 0.2),
+    inset 0 2px 6px rgba(255, 255, 255, 0.8);
+  padding: 12px;
+  max-width: 480px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* 1. TỦ GỖ TỔNG THỂ (BIG CABINET CONTAINER) */
+.big-cabinet {
+  position: relative;
+  border-radius: 32px;
+  background: #FFF9E6; /* Warm Cream Gold background */
+  padding: 24px 16px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.05),
+    inset 0 2px 10px rgba(255, 255, 255, 0.9);
+  width: 100%;
+  margin: 0;
+  border: none; /* No flat dark/wood borders! */
+  z-index: 10;
+}
+
+/* 2. ĐỈNH TỦ (MÁI VÒM + DECOR) */
+.cabinet-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px dashed rgba(255, 179, 186, 0.4);
+  margin-bottom: 15px;
+}
+
+.cabinet-title {
+  color: #FF6B8B; /* Soft pink-red */
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  font-family: 'Fredoka', 'Comfortaa', system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 
+    2px 2px 0px #FFFFFF, 
+    4px 4px 0px rgba(255, 182, 193, 0.6),
+    0px 4px 8px rgba(255, 107, 139, 0.25);
+}
+
+.ribbon-decor {
+  font-size: 1.5rem;
+  display: inline-block;
+  animation: sway 3s ease-in-out infinite alternate;
+  transform-origin: center bottom;
+}
+
+.ribbon-decor.left {
+  animation-delay: 0s;
+}
+
+.ribbon-decor.right {
+  animation-delay: 1.5s;
+}
+
+/* 3. TỪNG TẦNG KỆ GỖ NẰM TRONG TỦ */
 .shelf-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  padding: 12px 12px 25px 12px; /* Dành khoảng trống bên dưới cho thanh kệ gỗ */
+  gap: 12px;
+  padding-bottom: 22px; /* Dành chỗ cho mặt kệ gỗ phía dưới */
+  margin-bottom: 15px;
   position: relative;
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 12px;
 }
 
-@media (min-width: 640px) {
-  .shelf-row {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-    padding: 16px 16px 36px 16px;
-  }
-}
-
-/* MẶT KỆ GỖ DÁT VÀNG NẰM DƯỚI CHÂN CARD */
+/* Chunky 3D Caramel Milk Tea wooden shelf */
 .shelf-row::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 14px;
-  /* Vân gỗ sẫm màu kết hợp dải mạ vàng ở mặt trên */
-  background: linear-gradient(to bottom, #d4a373 0%, #b38958 15%, #4a2e1b 40%, #2b180d 100%);
-  border-radius: 2px 2px 6px 6px;
-  /* Hiệu ứng bóng đổ 3D xuống nền gấm bên dưới */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  left: -8px;
+  right: -8px;
+  height: 16px; /* Chunky! */
+  background: linear-gradient(180deg, #FAD7B0 0%, #E2A772 45%, #C2824C 100%);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 16px rgba(194, 130, 76, 0.25),      /* Bóng đổ dưới kệ */
+    inset 0 3px 3px rgba(255, 255, 255, 0.9),  /* Viền bóng phía trên */
+    inset 0 -3px 3px rgba(0, 0, 0, 0.15);      /* Bóng chìm phía dưới */
 }
 
-/* BÓNG ĐỔ CỦA MẶT KỆ */
+/* 4. DECOR ĐÁNG YÊU ĐẶT TRÊN MẶT KỆ (GẤU, CÂY, TÁCH TRÀ) */
 .shelf-row::before {
-  content: '';
+  content: '🧸'; /* Tự động thêm biểu tượng đáng yêu ở mép kệ */
   position: absolute;
-  bottom: -6px;
-  left: 2%;
-  right: 2%;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.7);
-  filter: blur(4px);
-  border-radius: 50%;
+  bottom: 14px;
+  right: 2px;
+  font-size: 0.95rem;
+  z-index: 3;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+  display: inline-block;
+  animation: sway 3s ease-in-out infinite alternate;
+  transform-origin: center bottom;
 }
+
+/* Cứ kệ số lẻ hiện Gấu 🧸, kệ số cặp hiện Chậu cây 🪴 */
+.shelf-row:nth-child(even)::before {
+  content: '🪴';
+  animation-delay: 1s;
+}
+
+/* 5. NGĂN KÉO ĐÁY TỦ CHỨA THANH PHÂN TRANG */
+.cabinet-drawer {
+  background: rgba(255, 240, 245, 0.85); /* Pastel pink/white drawer */
+  border: 1.5px solid rgba(255, 182, 193, 0.5);
+  border-radius: 20px;
+  padding: 10px 12px 8px 12px;
+  margin-top: 12px;
+  position: relative;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.02),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
+}
+
+/* Tay nắm ngăn kéo gỗ */
+.drawer-handle {
+  width: 50px;
+  height: 6px;
+  background: #FFB6C1; /* Soft Pink toy handle */
+  border-radius: 10px;
+  margin: 0 auto 6px auto;
+  box-shadow: 
+    0 2px 4px rgba(180, 150, 160, 0.2), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drawer-handle:hover {
+  background: #FFC0CB;
+  transform: scaleX(1.1);
+}
+
+/* Hiệu ứng nhún nhảy nhẹ cho decor đỉnh tủ */
+@keyframes floatDecor {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3px); }
+}
+
+/* Sway animation for jiggle items */
+@keyframes sway {
+  0% {
+    transform: rotate(-6deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-2px);
+  }
+  100% {
+    transform: rotate(-4deg) translateY(0px);
+  }
+}
+
+.jiggle-item {
+  display: inline-block;
+  animation: sway 3s ease-in-out infinite alternate;
+  transform-origin: center bottom;
+}
+
+.jiggle-item.delay-1 { animation-delay: 0.5s; }
+.jiggle-item.delay-2 { animation-delay: 1.2s; }
+
+/* 6. THÂN TỦ KỆ GA CHA PASTEL GRID BACKING */
+.cabinet-body {
+  background: #FFFDF7 !important; /* Soft Cream */
+  background-image: 
+    linear-gradient(rgba(255, 179, 186, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 179, 186, 0.12) 1px, transparent 1px) !important;
+  background-size: 20px 20px !important;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.02) !important;
+  min-height: 200px;
+}
+
 
 
 

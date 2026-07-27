@@ -1786,8 +1786,17 @@ export default function App() {
                         currentPage * CHARACTERS_PER_PAGE
                       );
                       return (
-                        <>
-                          <div id="character-grid" className="character-grid px-2 py-4 sm:py-8">
+                        <div className="arcade-outer-frame">
+                          <div className="big-cabinet">
+                          {/* MÁI VÒM & DECOR TRÊN ĐỈNH TỦ */}
+                          <div className="cabinet-header">
+                            <span className="ribbon-decor left">🎀</span>
+                            <h2 className="cabinet-title">✦ BỘ SƯU TẬP ✦</h2>
+                            <span className="ribbon-decor right">🎀</span>
+                          </div>
+
+                          {/* THÂN TỦ: CHỨA CÁC NGĂN KỆ VÀ THẺ BÀI */}
+                          <div id="character-grid" className="cabinet-body character-grid px-2 py-4 sm:py-8">
                             {chunkArray(paginatedCharacters, itemsPerRow).map((rowCharacters, rowIndex) => (
                               <div key={rowIndex} className="shelf-row justify-items-center justify-center">
                                 {rowCharacters.map((char, index) => {
@@ -2006,76 +2015,80 @@ export default function App() {
                             ))}
                           </div>
 
-                          {/* THANH PHÂN TRANG (PAGINATION) */}
-                          {totalPages > 1 && (
-                            <div id="pagination" className="pagination-container flex items-center justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-6 py-4 flex-wrap">
-                              <button
-                                onClick={() => {
-                                  if (currentPage > 1) {
-                                    playClickSound(300, 0.08);
-                                    setCurrentPage(prev => prev - 1);
-                                    setTimeout(() => {
-                                      const target = document.getElementById('character-list-section');
-                                      if (target) {
-                                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                      }
-                                    }, 50);
-                                  }
-                                }}
-                                disabled={currentPage === 1}
-                                className="page-btn font-sans text-[10px] sm:text-xs flex items-center gap-1 select-none"
-                              >
-                                «
-                              </button>
-                              
-                              <div className="flex items-center gap-1 flex-wrap">
-                                {Array.from({ length: totalPages }, (_, idx) => {
-                                  const pageNum = idx + 1;
-                                  const isActive = pageNum === currentPage;
-                                  return (
-                                    <button
-                                      key={pageNum}
-                                      onClick={() => {
-                                        playClickSound(300 + pageNum * 20, 0.08);
-                                        setCurrentPage(pageNum);
-                                        setTimeout(() => {
-                                          const target = document.getElementById('character-list-section');
-                                          if (target) {
-                                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                          }
-                                        }, 50);
-                                      }}
-                                      className={`page-btn w-7 h-7 sm:w-8 sm:h-8 font-sans text-[10px] sm:text-xs flex items-center justify-center select-none ${
-                                        isActive ? "active" : ""
-                                      }`}
-                                    >
-                                      {pageNum}
-                                    </button>
-                                  );
-                                })}
-                              </div>
+                          {/* ĐÁY TỦ (NGĂN KÉO CHỨA NÚT PHÂN TRANG) */}
+                          <div className="cabinet-drawer">
+                            <div className="drawer-handle"></div> {/* Tay nắm ngăn kéo */}
+                            {totalPages > 1 && (
+                              <div id="pagination" className="pagination-container flex items-center justify-center gap-1.5 sm:gap-2 mt-1 sm:mt-1 py-1 flex-wrap">
+                                <button
+                                  onClick={() => {
+                                    if (currentPage > 1) {
+                                      playClickSound(300, 0.08);
+                                      setCurrentPage(prev => prev - 1);
+                                      setTimeout(() => {
+                                        const target = document.getElementById('character-list-section');
+                                        if (target) {
+                                          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        }
+                                      }, 50);
+                                    }
+                                  }}
+                                  disabled={currentPage === 1}
+                                  className="page-btn font-sans text-[10px] sm:text-xs flex items-center gap-1 select-none"
+                                >
+                                  «
+                                </button>
+                                
+                                <div className="flex items-center gap-1 flex-wrap">
+                                  {Array.from({ length: totalPages }, (_, idx) => {
+                                    const pageNum = idx + 1;
+                                    const isActive = pageNum === currentPage;
+                                    return (
+                                      <button
+                                        key={pageNum}
+                                        onClick={() => {
+                                          playClickSound(300 + pageNum * 20, 0.08);
+                                          setCurrentPage(pageNum);
+                                          setTimeout(() => {
+                                            const target = document.getElementById('character-list-section');
+                                            if (target) {
+                                              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }
+                                          }, 50);
+                                        }}
+                                        className={`page-btn w-7 h-7 sm:w-8 sm:h-8 font-sans text-[10px] sm:text-xs flex items-center justify-center select-none ${
+                                          isActive ? "active" : ""
+                                        }`}
+                                      >
+                                        {pageNum}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
 
-                              <button
-                                onClick={() => {
-                                  if (currentPage < totalPages) {
-                                    playClickSound(300, 0.08);
-                                    setCurrentPage(prev => prev + 1);
-                                    setTimeout(() => {
-                                      const target = document.getElementById('character-list-section');
-                                      if (target) {
-                                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                      }
-                                    }, 50);
-                                  }
-                                }}
-                                disabled={currentPage === totalPages}
-                                className="page-btn font-sans text-[10px] sm:text-xs flex items-center gap-1 select-none"
-                              >
-                                »
-                              </button>
-                            </div>
-                          )}
-                        </>
+                                <button
+                                  onClick={() => {
+                                    if (currentPage < totalPages) {
+                                      playClickSound(300, 0.08);
+                                      setCurrentPage(prev => prev + 1);
+                                      setTimeout(() => {
+                                        const target = document.getElementById('character-list-section');
+                                        if (target) {
+                                          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        }
+                                      }, 50);
+                                    }
+                                  }}
+                                  disabled={currentPage === totalPages}
+                                  className="page-btn font-sans text-[10px] sm:text-xs flex items-center gap-1 select-none"
+                                >
+                                  »
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        </div>
                       );
                     })()}
                   </div>
