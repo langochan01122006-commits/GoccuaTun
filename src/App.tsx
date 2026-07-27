@@ -4,6 +4,7 @@ import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moo
 import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
+import { LetterNotice } from "./components/LetterNotice";
 import { getAllVotes, voteForCharacter, unvoteForCharacter } from "./firebase";
 
 const donateQrImg = "/src/assets/images/donate_qr_code_1781767011629.jpg";
@@ -1298,8 +1299,6 @@ export default function App() {
               </div>
             </div>
 
-
-
             {/* Conditional Flow: Active chatbot screen vs Home list screen */}
             <AnimatePresence mode="wait">
               {chattingCharacter ? (
@@ -1391,6 +1390,8 @@ export default function App() {
                       <span className="relative z-10">Lưu Bút Du Khách 📜</span>
                     </button>
                   </div>
+
+                  <LetterNotice playClickSound={playClickSound} />
 
                   <div className="space-y-4">
                     <div className="relative w-full">
