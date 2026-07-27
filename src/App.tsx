@@ -3513,14 +3513,13 @@ export default function App() {
               {CHARACTERS.filter(isNewCharacter).map((char) => {
                 const link = char.chatLink !== undefined ? char.chatLink : char.chatbotUrl;
                 const hasLink = link && link.trim() !== "";
-                const isChar28 = char.id === "28";
-                const isChar27 = char.id === "27";
+                const isSkyTheme = char.id === "28" || char.id === "30";
                 
                 // Color customization per char style
-                const accentColor = isChar28 ? '#05d9e8' : '#ff2a6d';
-                const tagColor = isChar28 ? '#05d9e8' : '#ff7597';
-                const bgLight = isChar28 ? 'rgba(5, 217, 232, 0.15)' : 'rgba(255, 42, 109, 0.15)';
-                const emojiPrefix = isChar27 ? "🌸" : isChar28 ? "🎸" : (char.avatar || "✨");
+                const accentColor = isSkyTheme ? '#05d9e8' : '#ff2a6d';
+                const tagColor = isSkyTheme ? '#05d9e8' : '#ff7597';
+                const bgLight = isSkyTheme ? 'rgba(5, 217, 232, 0.15)' : 'rgba(255, 42, 109, 0.15)';
+                const emojiPrefix = char.id === "27" ? "🌸" : char.id === "28" ? "🎸" : char.id === "29" ? "🪨" : char.id === "30" ? "💎" : (char.avatar || "✨");
                 
                 // Construct tag list text
                 const tagText = `${emojiPrefix} ${char.tags.slice(0, 3).join(' • ')}`;
