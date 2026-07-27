@@ -3578,145 +3578,61 @@ export default function App() {
 
       {showNewCharactersPopup && (
         <div className="age-verify-overlay" style={{ zIndex: 9999 }}>
-          <div 
-            className="new-char-popup" 
-            style={{
-              background: 'rgba(20, 10, 25, 0.9)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1.5px solid #ff2a6d',
-              borderRadius: '24px',
-              padding: '20px',
-              boxShadow: '0 0 25px rgba(255, 42, 109, 0.4)',
-              maxWidth: '400px',
-              width: '90%',
-              margin: '0 auto',
-              textAlign: 'center',
-              color: '#fff',
-            }}
-          >
-            {/* TIÊU ĐỀ POPUP */}
-            <div style={{ marginBottom: '15px' }}>
-              <span 
-                style={{
-                  background: 'linear-gradient(90deg, #ff2a6d, #9a4ece)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontSize: '18px',
-                  fontWeight: 800,
-                  letterSpacing: '1px',
-                  display: 'inline-block',
-                }}
-              >
-                🔥 Gấu Bông Mới 🔥
-              </span>
-              <p style={{ fontSize: '11px', color: '#a0a0b0', marginTop: '4px' }}>
-                🎁 Vote cho em bé mới nha
-              </p>
+          <div className="gachapon-machine">
+            {/* Header */}
+            <div className="header">
+              <div className="title">
+                <span className="flame-left">🔥</span> 
+                Gấu Bông Mới 
+                <span className="flame-right">🔥</span>
+              </div>
+              <div className="subtitle">🎁 Vote cho em bé mới nha 🎁</div>
             </div>
 
-            {/* DANH SÁCH CHAR MINI */}
-            <div 
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-                marginBottom: '20px',
-                maxHeight: '280px',
-                overflowY: 'auto',
-                paddingRight: '4px',
-              }}
-              className="custom-scrollbar"
-            >
+            {/* DANH SÁCH NHÂN VẬT - PHẦN NÀY LƯỚT ĐƯỢC */}
+            <div className="character-list">
               {CHARACTERS.filter(isNewCharacter).map((char) => {
                 const link = char.chatLink !== undefined ? char.chatLink : char.chatbotUrl;
                 const hasLink = link && link.trim() !== "";
-                const isSkyTheme = char.id === "28" || char.id === "30";
-                
-                // Color customization per char style
-                const accentColor = isSkyTheme ? '#05d9e8' : '#ff2a6d';
-                const tagColor = isSkyTheme ? '#05d9e8' : '#ff7597';
-                const bgLight = isSkyTheme ? 'rgba(5, 217, 232, 0.15)' : 'rgba(255, 42, 109, 0.15)';
                 const emojiPrefix = char.id === "27" ? "🌸" : char.id === "28" ? "🎸" : char.id === "29" ? "🪨" : char.id === "30" ? "💎" : (char.avatar || "✨");
-                
-                // Construct tag list text
                 const tagText = `${emojiPrefix} ${char.tags.slice(0, 3).join(' • ')}`;
 
                 return (
-                  <div 
-                    key={char.id}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '16px',
-                      padding: '10px',
-                    }}
-                  >
-                    <img 
-                      src={char.image || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"} 
-                      alt={char.name}
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        borderRadius: '12px',
-                        objectFit: 'cover',
-                        border: `1.5px solid ${accentColor}`,
-                      }}
-                      referrerPolicy="no-referrer"
-                    />
-                    <div style={{ textAlign: 'left', flex: 1 }}>
-                      <div style={{ fontWeight: 'bold', fontSize: '14px', color: '#fff' }}>
-                        No {char.no || char.id} - {char.name}
+                  <div key={char.id} className="char-card">
+                    <div className="char-left">
+                      <div className="avatar-wrapper">
+                        <img 
+                          src={char.image || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"} 
+                          alt={char.name}
+                          referrerPolicy="no-referrer"
+                        />
+                        <span className="badge-no">No {char.no || char.id}</span>
                       </div>
-                      <div style={{ fontSize: '10px', color: tagColor, marginTop: '2px', textTransform: 'uppercase', fontWeight: 600 }}>
-                        {tagText}
+                      <div className="char-info">
+                        <div className="char-name">{char.name}</div>
+                        <div className="char-tags">{tagText}</div>
                       </div>
                     </div>
-                    {/* Tag trạng thái động */}
-                    <span 
-                      style={{
-                        fontSize: '9px',
-                        fontWeight: 'bold',
-                        padding: '4px 8px',
-                        borderRadius: '8px',
-                        background: bgLight,
-                        color: accentColor,
-                        border: `1px solid ${accentColor}`,
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {hasLink ? '🔥 Đã mở' : '⏳ Chờ link'}
-                    </span>
+                    
+                    {hasLink ? (
+                      <div className="status-btn opened">🌸 ĐÃ MỞ</div>
+                    ) : (
+                      <div className="status-btn waiting">⏳ CHỜ LINK</div>
+                    )}
                   </div>
                 );
               })}
             </div>
 
-            {/* NÚT BẤM CHUYỂN CẢNH */}
+            {/* Nút Main Gắp Thú */}
             <button 
               onClick={() => {
                 playClickSound(500, 0.1);
                 setShowNewCharactersPopup(false);
               }}
-              style={{
-                width: '100%',
-                background: 'linear-gradient(90deg, #ff2a6d, #9a4ece)',
-                border: 'none',
-                padding: '12px',
-                borderRadius: '30px',
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '13px',
-                cursor: 'pointer',
-                boxShadow: '0 4px 15px rgba(255, 42, 109, 0.4)',
-                transition: 'all 0.15s ease',
-              }}
-              className="hover:brightness-110 active:scale-95 transform transition"
+              className="gacha-button"
             >
-              ✨ BƯỚC VÀO TRẢI NGHIỆM ✨
+              🕹️ ✨ ĐI GẮP THÚ ✨
             </button>
           </div>
         </div>

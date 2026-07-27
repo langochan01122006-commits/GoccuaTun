@@ -3351,15 +3351,30 @@ html, body {
   width: 100%;
 }
 
-/* Khung viền tủ ngoài cùng - Soft Muted Pastel Lavender/Lilac gradient */
+/* Khung viền tủ ngoài cùng - Kawaii Arcade Gacha Machine Cabinet Shape with Scalloped Roof */
 .arcade-outer-frame {
-  background: linear-gradient(180deg, #EADFFF 0%, #D6C5FF 100%) !important;
-  border: 3px solid rgba(255, 255, 255, 0.7);
-  border-radius: 40px;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  /* Pastel Lavender/Lilac gradient with soft transparency */
+  background: linear-gradient(180deg, rgba(234, 223, 255, 0.85) 0%, rgba(214, 197, 255, 0.85) 100%) !important;
+  
+  /* Mái lượn sóng lãng mạn phong cách máy Arcade Gacha cổ điển */
+  clip-path: polygon(
+    0% 40px, 
+    10% 20px, 20% 40px, 30% 20px, 40% 40px, 50% 20px, 
+    60% 40px, 70% 20px, 80% 40px, 90% 20px, 100% 40px, 
+    100% 100%, 0% 100%
+  );
+  
+  border-radius: 32px;
+  
+  /* Tạo chiều sâu 3D sang xịn mịn */
   box-shadow: 
-    0 12px 32px rgba(90, 70, 130, 0.2),
-    inset 0 2px 6px rgba(255, 255, 255, 0.8);
-  padding: 12px;
+    inset 0 10px 20px rgba(255, 255, 255, 0.9),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.05);
+  
+  /* Viền 2 bên cực thon gọn, phần top chừa khoảng cách 44px để lộ mái lượn sóng */
+  padding: 44px 8px 12px 8px !important;
   max-width: 480px;
   margin: 20px auto;
   position: relative;
@@ -3538,6 +3553,304 @@ html, body {
   box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.02) !important;
   min-height: 200px;
 }
+
+/* ==========================================================
+   7. MÁY GẮP THÚ BÔNG (CLAW MACHINE POPUP / MODAL)
+   ========================================================== */
+
+/* KHUNG MÁY GẮP THÚ - CHÍNH */
+.gachapon-machine {
+  width: 100% !important;
+  max-width: 380px !important;
+  background: linear-gradient(180deg, #FFF0F5 0%, #FFDEE9 100%) !important;
+  border-radius: 32px !important;
+  padding: 24px 20px !important;
+  box-shadow: 
+    0 15px 35px rgba(255, 105, 180, 0.3), /* Bóng đổ mềm */
+    inset 0 4px 6px rgba(255, 255, 255, 0.9), /* Hiệu ứng kính */
+    inset 0 -4px 6px rgba(255, 182, 193, 0.5) !important;
+  border: 6px solid #FFFFFF !important; /* Viền trắng dày */
+  position: relative !important;
+  overflow: hidden !important; /* Giữ mọi thứ bên trong bo tròn */
+  font-family: 'Quicksand', sans-serif !important;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* TIÊU ĐỀ & DOTS */
+.dots { 
+  display: flex !important; 
+  justify-content: center !important; 
+  gap: 6px !important; 
+  margin-bottom: 12px !important; 
+  z-index: 11 !important; 
+  position: relative !important; 
+}
+.dot { 
+  width: 8px !important; 
+  height: 8px !important; 
+  border-radius: 50% !important; 
+  background: #FFB6C1 !important; 
+}
+.dot.active { 
+  width: 20px !important; 
+  border-radius: 10px !important; 
+  background: #FF5E8E !important; 
+}
+
+.header { 
+  text-align: center !important; 
+  margin-bottom: 16px !important; 
+  z-index: 11 !important; 
+  position: relative !important; 
+}
+.title { 
+  font-size: 22px !important; 
+  font-weight: 700 !important; 
+  color: #FF477E !important; 
+  display: flex !important; 
+  align-items: center !important; 
+  justify-content: center !important; 
+  gap: 6px !important; 
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+  font-family: 'Quicksand', sans-serif !important;
+}
+.subtitle { 
+  font-size: 13px !important; 
+  color: #885A6A !important; 
+  font-weight: 600 !important; 
+  margin-top: 2px !important; 
+  font-family: 'Quicksand', sans-serif !important;
+}
+
+/* DANH SÁCH NHÂN VẬT - CÓ THỂ CUỘN LÊN XUỐNG */
+.character-list {
+  background: rgba(255, 255, 255, 0.5) !important; /* Nền kính mờ */
+  border-radius: 20px !important;
+  padding: 12px 8px !important; /* Thêm padding để list item lọt lòng */
+  height: 320px !important; /* CHIỀU CAO CỐ ĐỊNH */
+  overflow-y: auto !important; /* BẬT CUỘN LÊN XUỐNG */
+  margin-bottom: 20px !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  
+  /* Tùy chỉnh thanh cuộn cho đẹp */
+  scrollbar-width: thin !important;
+  scrollbar-color: #FFB6C1 rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Thanh cuộn cho Chrome/Safari */
+.character-list::-webkit-scrollbar { 
+  width: 6px !important; 
+}
+.character-list::-webkit-scrollbar-track { 
+  background: rgba(255, 255, 255, 0.5) !important; 
+  border-radius: 10px !important; 
+}
+.character-list::-webkit-scrollbar-thumb { 
+  background: #FFB6C1 !important; 
+  border-radius: 10px !important; 
+}
+
+/* ITEM THẺ NHÂN VẬT */
+.char-card {
+  background: #FFFFFF !important;
+  border-radius: 16px !important;
+  padding: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  border: 2px solid transparent !important;
+  margin-bottom: 10px !important; /* Khoảng cách giữa các thẻ */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.15) !important;
+}
+
+/* Hiệu ứng lướt chuột mượt (Máy Gắp) */
+.char-card:hover {
+  transform: translateY(-3px) scale(1.01) !important;
+  box-shadow: 0 8px 18px rgba(255, 105, 180, 0.25) !important;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F7 100%) !important;
+  border-color: #FFA6C9 !important;
+}
+
+.char-card:last-child { 
+  margin-bottom: 0 !important; 
+}
+
+.char-left { 
+  display: flex !important; 
+  align-items: center !important; 
+  gap: 12px !important; 
+}
+
+/* AVATAR + BADGE SỐ */
+.avatar-wrapper { 
+  position: relative !important; 
+  width: 56px !important; 
+  height: 56px !important; 
+  flex-shrink: 0 !important; 
+}
+.avatar-wrapper img { 
+  width: 100% !important; 
+  height: 100% !important; 
+  border-radius: 14px !important; 
+  object-fit: cover !important; 
+  border: 2px solid #FFF0F5 !important; 
+}
+.badge-no {
+  position: absolute !important;
+  bottom: -6px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: #FF477E !important;
+  color: #FFFFFF !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 2px 8px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #FFFFFF !important;
+  white-space: nowrap !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  font-family: 'Quicksand', sans-serif !important;
+}
+
+/* THÔNG TIN NHÂN VẬT */
+.char-info { 
+  display: flex !important; 
+  flex-direction: column !important; 
+  gap: 3px !important; 
+  text-align: left !important;
+}
+.char-name { 
+  font-size: 16px !important; 
+  font-weight: 700 !important; 
+  color: #333333 !important; 
+  font-family: 'Quicksand', sans-serif !important;
+}
+.char-tags { 
+  font-size: 11px !important; 
+  color: #FF69B4 !important; 
+  font-weight: 600 !important; 
+  line-height: 1.3 !important; 
+  font-family: 'Quicksand', sans-serif !important;
+}
+
+/* NÚT TRẠNG THÁI */
+.status-btn {
+  padding: 6px 12px !important;
+  border-radius: 20px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  border: 1.5px dashed !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  font-family: 'Quicksand', sans-serif !important;
+}
+.status-btn.opened { 
+  background: #FFF0F5 !important; 
+  color: #FF477E !important; 
+  border-color: #FFA6C9 !important; 
+}
+.status-btn.waiting { 
+  background: #F0F8FF !important; 
+  color: #4A90E2 !important; 
+  border-color: #A0C8F0 !important; 
+}
+
+/* NÚT MAIN CTA - HIỆU ỨNG MẠNH */
+.gacha-button {
+  width: 100% !important;
+  padding: 16px !important;
+  border: none !important;
+  border-radius: 28px !important;
+  background: linear-gradient(135deg, #FF5E8E 0%, #FF2A6D 100%) !important;
+  color: #FFFFFF !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 25px rgba(255, 42, 109, 0.45) !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  font-family: 'Quicksand', sans-serif !important;
+  animation: buttonPulse 2.5s infinite alternate ease-in-out !important;
+}
+
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 6px 20px rgba(255, 42, 109, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
+  }
+  100% {
+    box-shadow: 0 12px 30px rgba(255, 42, 109, 0.65), 0 0 12px rgba(255, 94, 142, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
+  }
+}
+
+.gacha-button:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 12px 30px rgba(255, 42, 109, 0.6), 0 0 15px rgba(255, 94, 142, 0.5) !important;
+  background: linear-gradient(135deg, #FF709B 0%, #FF3B7B 100%) !important;
+}
+
+.gacha-button:active {
+  transform: translateY(1px) !important; 
+  background: linear-gradient(135deg, #FF2A6D 0%, #D81B53 100%) !important;
+  box-shadow: 0 4px 15px rgba(255, 42, 109, 0.3) !important;
+  animation: buttonPulseActive 0.3s ease-out !important;
+}
+
+@keyframes buttonPulseActive {
+  0% { box-shadow: 0 0 0 0px rgba(255, 105, 180, 0.7); }
+  100% { box-shadow: 0 0 0 15px rgba(255, 105, 180, 0); }
+}
+
+/* --- 1. HIỆU ỨNG LƠ LỬNG CHO 2 ĐỐM LỬA (🔥) --- */
+.flame-left {
+  display: inline-block !important; /* Bắt buộc để animation chạy */
+  animation: flameFloatLeft 2s ease-in-out infinite !important; /* Lặp vô tận, mượt mà */
+  filter: drop-shadow(0 0 5px rgba(255, 110, 150, 0.65)) !important; /* Hào quang hồng cam rực rỡ */
+  transform-origin: bottom center !important;
+}
+
+.flame-right {
+  display: inline-block !important; /* Bắt buộc để animation chạy */
+  animation: flameFloatRight 2.3s ease-in-out infinite !important; /* Lặp vô tận với tần số khác để lệch nhịp tự nhiên */
+  filter: drop-shadow(0 0 5px rgba(255, 110, 150, 0.65)) !important; /* Hào quang hồng cam rực rỡ */
+  transform-origin: bottom center !important;
+  animation-delay: 0.3s !important; /* Độ trễ lệch pha tuyệt đối mượt mà */
+}
+
+/* Chuyển động lơ lửng của đốm lửa bên trái: nhẹ nhàng bay lên và nghiêng trái */
+@keyframes flameFloatLeft {
+  0%, 100% {
+    transform: translateY(0) rotate(-5deg) scale(0.95) !important;
+  }
+  50% {
+    transform: translateY(-6px) rotate(3deg) scale(1.08) !important;
+  }
+}
+
+/* Chuyển động lơ lửng của đốm lửa bên phải: nhịp nhàng bay lên ngược hướng */
+@keyframes flameFloatRight {
+  0%, 100% {
+    transform: translateY(0) rotate(5deg) scale(1.08) !important;
+  }
+  50% {
+    transform: translateY(-6px) rotate(-3deg) scale(0.95) !important;
+  }
+}
+
 
 
 
