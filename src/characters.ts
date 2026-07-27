@@ -5381,9 +5381,10 @@ Noah đang nhai dở miếng cơm bỗng khựng lại. Cậu ngẩng mặt lên
 Ủa alo? Bé ơi!? Sao lại khóc rồi thế này hả giời?!`,
     welcomeMessage: "",
     systemPrompt: "",
-    chatbotUrl: "",
-    chatLink: "",
-    linkUpdatedAt: "",
+    chatbotUrl: "https://aistudio.google.com/prompts/1PVhqJo4o3tHy3RWCLqFv8G202w9d3YVx",
+    chatLink: "https://aistudio.google.com/prompts/1PVhqJo4o3tHy3RWCLqFv8G202w9d3YVx",
+    profileUrl: "https://docs.google.com/document/d/1OnWsUA9StWWogpA9-fsvCH5uGbfK6MygfeGquMI_RSU/edit?usp=drivesdk",
+    linkUpdatedAt: "2026-07-27T11:23:15-07:00",
     storyline: ""
   },
   {
