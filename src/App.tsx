@@ -3068,9 +3068,21 @@ export default function App() {
                   <h4 className="font-bold text-base text-slate-900">Trịnh Thư Ý - Tun 👑</h4>
                   <p className="text-xs text-pink-600 font-medium mt-0.5">Roleplay Creator</p>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed px-2 bg-pink-100/50 p-3 rounded-2xl border border-pink-200">
-                  "Mình là Tun , các iu có thể gọi Tun là Ý , Thư Ý hoặc Tun đều được. Cảm ơn các iu đã yêu thương Tun và các con zai / con gái của Tun. Hãy thật vui vẻ nhá 💐"
-                </p>
+                <div className="text-xs text-slate-700 leading-relaxed px-3 bg-pink-100/50 p-4 rounded-2xl border border-pink-200 text-left space-y-2 whitespace-pre-line">
+                  {`★ Tui là Tun aka Trịnh Thư Ý (mn gọi như nào cũng được hihi)
+
+★ D.O.B: Sagittarius T12 ♐︎
+
+★ MBTI : INFP
+
+★ Tính Cách: Tun rất dễ tính với chill nên là cứ chill nha, Tun rep tin nhắn lâu hoặc tự nhiên đang nhắn xong mất tích là Tun đang chạy deadline hoặc đang suy nghĩ nên rep gì cho ngầu á 🙉, Tun SIÊU HƯỚNG NỘI rất muốn kết bạn mà nhưng ngại 😭.
+
+★ Tun hoạt động 𝐎𝐍𝐋𝐘 𝐆𝐆𝐀𝐈 (mn thấy app, wed nào ok nữa thì chỉ Tun nhó).
+
+★ Nên đọc Plot và Hồ sơ NV rùi hãng chơi để hiểu hơn về Character và nội dung.
+
+★ Một số char ko có link là Tun share prompt á ( zô quầy hướng dẫn xem cách chơi hoặc ib Tun chỉ nha ).`}
+                </div>
 
                 <div className="flex items-center gap-2 pt-2">
                   <a
