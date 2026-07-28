@@ -102,3 +102,66 @@ export async function unvoteForCharacter(characterId: string): Promise<number> {
     return 0;
   }
 }
+
+// Get all art likes
+export async function getAllArtLikes(): Promise<Record<string, number>> {
+  const collectionName = "art_likes";
+  try {
+    const snapshot = await getDocs(collection(db, collectionName));
+    const likesMap: Record<string, number> = {};
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      if (data && typeof data.likes === "number") {
+        likesMap[docSnap.id] = data.likes;
+      }
+    });
+    return likesMap;
+  } catch (error) {
+    handleFirestoreError(error, OperationType.LIST, collectionName);
+    return {};
+  }
+}
+
+// Increment like count for an artwork
+export async function likeArtwork(artworkId: string): Promise<number> {
+  const collectionName = "art_likes";
+  const docRef = doc(db, collectionName, artworkId);
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const currentLikes = docSnap.data().likes || 0;
+      const newLikes = currentLikes + 1;
+      await updateDoc(docRef, { likes: newLikes });
+      return newLikes;
+    } else {
+      const initialLikes = 1;
+      await setDoc(docRef, {
+        artworkId,
+        likes: initialLikes
+      });
+      return initialLikes;
+    }
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, `${collectionName}/${artworkId}`);
+    return 0;
+  }
+}
+
+// Decrement like count for an artwork
+export async function unlikeArtwork(artworkId: string): Promise<number> {
+  const collectionName = "art_likes";
+  const docRef = doc(db, collectionName, artworkId);
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const currentLikes = docSnap.data().likes || 0;
+      const newLikes = Math.max(0, currentLikes - 1);
+      await updateDoc(docRef, { likes: newLikes });
+      return newLikes;
+    }
+    return 0;
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, `${collectionName}/${artworkId}`);
+    return 0;
+  }
+}

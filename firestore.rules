@@ -26,6 +26,13 @@ service cloud.firestore {
         && data.votes <= 10000000;
     }
 
+    function isValidArtLike(data) {
+      return (!('artworkId' in data) || (data.artworkId is string && data.artworkId.size() <= 64))
+        && data.likes is number
+        && data.likes >= 0
+        && data.likes <= 10000000;
+    }
+
     // 2. Votes collection
     match /votes/{characterId} {
       allow get, list: if true;
@@ -37,6 +44,19 @@ service cloud.firestore {
         && isValidVote(incoming())
         && (!('characterId' in incoming()) || incoming().characterId == characterId)
         && (incoming().votes == existing().votes + 1 || incoming().votes == existing().votes - 1 || incoming().votes == existing().votes);
+    }
+
+    // 3. Art Likes collection
+    match /art_likes/{artworkId} {
+      allow get, list: if true;
+      allow create: if isValidId(artworkId)
+        && isValidArtLike(incoming())
+        && (!('artworkId' in incoming()) || incoming().artworkId == artworkId)
+        && (incoming().likes == 1 || incoming().likes == 0);
+      allow update: if isValidId(artworkId)
+        && isValidArtLike(incoming())
+        && (!('artworkId' in incoming()) || incoming().artworkId == artworkId)
+        && (incoming().likes == existing().likes + 1 || incoming().likes == existing().likes - 1 || incoming().likes == existing().likes);
     }
   }
 }

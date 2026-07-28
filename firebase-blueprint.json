@@ -20,12 +20,37 @@
         }
       },
       "required": ["characterId", "votes"]
+    },
+    "ArtGalleryLikes": {
+      "title": "ArtGalleryLikes",
+      "description": "Stores the accumulated likes count for a specific artwork.",
+      "type": "object",
+      "properties": {
+        "artworkId": {
+          "type": "string",
+          "description": "Unique identifier matching the artwork ID."
+        },
+        "likes": {
+          "type": "integer",
+          "description": "Total number of likes accumulated for this artwork."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this like record was last updated."
+        }
+      },
+      "required": ["artworkId", "likes"]
     }
   },
   "firestore": {
     "votes/{characterId}": {
       "schema": "CharacterVotes",
       "description": "Collection where each document represents the voting stats for a single character."
+    },
+    "art_likes/{artworkId}": {
+      "schema": "ArtGalleryLikes",
+      "description": "Collection where each document represents the like stats for a single artwork."
     }
   }
 }

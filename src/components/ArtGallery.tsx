@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Heart, MessageSquare, Send, Sparkles, Image as ImageIcon, Paintbrush, HeartHandshake, Eye } from "lucide-react";
+import { getAllArtLikes, likeArtwork, unlikeArtwork } from "../firebase";
 
 interface ArtGalleryProps {
   playClickSound: (freq?: number, duration?: number) => void;
@@ -62,6 +63,21 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
     1: 0, 2: 0
   });
 
+  // Fetch initial likes
+  useEffect(() => {
+    async function fetchLikes() {
+      const likes = await getAllArtLikes();
+      setArtLikes(prev => ({
+        ...prev,
+        ...Object.keys(likes).reduce((acc, key) => {
+          acc[Number(key)] = likes[key];
+          return acc;
+        }, {} as Record<number, number>)
+      }));
+    }
+    fetchLikes();
+  }, []);
+
   // Commission Form states
   const [commName, setCommName] = useState("");
   const [commStyle, setCommStyle] = useState("Portrait (Chân dung)");
@@ -74,14 +90,23 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
   const [confMessage, setConfMessage] = useState("");
   const [isSubmittingConf, setIsSubmittingConf] = useState(false);
 
-  const toggleLike = (artId: number) => {
+  const toggleLike = async (artId: number) => {
     playClickSound(880, 0.05);
     const isLiked = !!likedArts[artId];
+    
+    // Optimistic update
     setLikedArts(prev => ({ ...prev, [artId]: !isLiked }));
     setArtLikes(prev => ({
       ...prev,
       [artId]: isLiked ? prev[artId] - 1 : prev[artId] + 1
     }));
+
+    // Update in Firestore
+    if (isLiked) {
+      await unlikeArtwork(artId.toString());
+    } else {
+      await likeArtwork(artId.toString());
+    }
   };
 
   // Submit Commission via EmailJS API
