@@ -384,7 +384,7 @@ export default function ChatBox({ character, onBack, isSoundOn, onToggleSound }:
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder={`Hãy gửi thông điệp ngọt ngào đến ${character.name}...`}
-          className="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white transition"
+          className="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 placeholder-slate-400 text-[16px] md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white transition"
           disabled={isLoading}
         />
         <button

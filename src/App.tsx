@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
 import { LetterNotice } from "./components/LetterNotice";
+import { ArtGallery } from "./components/ArtGallery";
 import { getAllVotes, voteForCharacter, unvoteForCharacter } from "./firebase";
 
 const donateQrImg = "/src/assets/images/donate_qr_code_1781767011629.jpg";
@@ -1403,7 +1404,7 @@ export default function App() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Tìm một nửa... 🔍"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-2xl text-sm magic-search-input shadow-sm"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-2xl text-[16px] md:text-sm magic-search-input shadow-sm"
                       />
                       {searchQuery && (
                         <button
@@ -1750,6 +1751,9 @@ export default function App() {
                       </motion.div>
                     </div>
                   )}
+
+                  {/* Art Gallery & Commission Station */}
+                  <ArtGallery playClickSound={playClickSound} />
 
                   {/* Characters scrollable vertical listing: "Bộ sưu tập thú bông lưu niệm" */}
                   <div className="space-y-4" id="character-list-section">
@@ -2304,7 +2308,7 @@ export default function App() {
                   value={guestbookName}
                   onChange={(e) => setGuestbookName(e.target.value)}
                   placeholder="Tên của bạn (để trống nếu muốn ẩn danh)..."
-                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-sm font-medium"
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-[16px] md:text-sm font-medium"
                 />
 
                 <textarea
@@ -2312,7 +2316,7 @@ export default function App() {
                   onChange={(e) => setGuestbookContent(e.target.value)}
                   placeholder="Viết lưu bút hoặc góp ý của bạn tại đây..."
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-sm resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border-2 border-sky-100 focus:border-yellow-400 focus:outline-none text-sky-900 placeholder-sky-700/50 shadow-sm transition-colors text-[16px] md:text-sm resize-none"
                 />
 
                 <button
