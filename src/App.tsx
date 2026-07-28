@@ -209,6 +209,9 @@ export default function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [punchedTicketId, setPunchedTicketId] = useState<string | null>(null);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
   const [isGuestbookModalOpen, setIsGuestbookModalOpen] = useState(false);
@@ -1246,17 +1249,69 @@ export default function App() {
 
               {/* Minimalist round tool buttons at the top right */}
               <div className="flex items-center gap-1.5 md:gap-2">
-                {/* Cycle backgrounds selector */}
-                <button
-                  onClick={cycleBackdropTheme}
-                  id="top-cycle-theme"
-                  className={`magic-candle-btn ${backdropTheme === "cosmic" ? "lit" : "unlit"}`}
-                  title={`Giao diện hiện tại: ${
-                    backdropTheme === "pastel" ? "Pastel Nhật Bản" : backdropTheme === "sunset" ? "Hoàng Hôn Lãng Mạn" : "Thiên Hà Huyền Bí"
-                  }`}
-                >
-                  <Flame className="w-4 h-4 magic-candle-flame" />
-                </button>
+                {/* Multi-task Menu Button (formerly flame) */}
+                <div className="relative">
+                  <button
+                    onClick={() => {
+                      playClickSound(400, 0.08);
+                      setIsOpenMenu(!isOpenMenu);
+                    }}
+                    id="top-multitask-menu"
+                    className={`magic-candle-btn ${isOpenMenu ? "lit" : "unlit"} flex items-center justify-center gap-1.5 px-2.5`}
+                    title="Menu Đa Nhiệm (Bảng Giá, Profile Tun)"
+                  >
+                    <span className="text-base text-amber-300">⚜️</span>
+                    <span className="text-[11px] font-bold hidden sm:inline text-amber-200">Menu</span>
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  <AnimatePresence>
+                    {isOpenMenu && (
+                      <>
+                        <div 
+                          className="fixed inset-0 z-40" 
+                          onClick={() => setIsOpenMenu(false)} 
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute right-0 mt-2 w-56 bg-[#2a1010]/95 backdrop-blur-xl border border-[#e2a85c]/40 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] py-2 z-50 text-white select-none"
+                        >
+                          <div className="px-3 py-1.5 border-b border-[#e2a85c]/20 mb-1 flex items-center justify-between">
+                            <span className="text-[10px] uppercase tracking-wider font-bold text-amber-300">✨ Menu Đa Nhiệm</span>
+                            <span className="text-[9px] text-amber-200/60">Tun Hub</span>
+                          </div>
+
+                          <button
+                            onClick={() => {
+                              playClickSound(500, 0.08);
+                              setIsOpenMenu(false);
+                              setIsPricingModalOpen(true);
+                            }}
+                            className="w-full px-3.5 py-2.5 text-left text-xs font-medium hover:bg-white/10 flex items-center gap-2.5 transition text-amber-200 cursor-pointer rounded-lg"
+                          >
+                            <span className="text-sm">💸</span>
+                            <span>Bảng Giá</span>
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              playClickSound(500, 0.08);
+                              setIsOpenMenu(false);
+                              setIsProfileModalOpen(true);
+                            }}
+                            className="w-full px-3.5 py-2.5 text-left text-xs font-medium hover:bg-white/10 flex items-center gap-2.5 transition text-pink-200 cursor-pointer rounded-lg"
+                          >
+                            <span className="text-sm">👤</span>
+                            <span>Profile của Tun</span>
+                          </button>
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 {/* General Back/Reset system buttons if active */}
                 {(chattingCharacter || searchQuery || activeTag !== "Tất cả") && (
@@ -2881,6 +2936,159 @@ export default function App() {
                     <Leaf className="w-3.5 h-3.5 text-green-300" />
                     <span>Xác nhận</span>
                   </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Bảng Giá / Pricing Modal */}
+      <AnimatePresence>
+        {isPricingModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => {
+                playClickSound(300, 0.08);
+                setIsPricingModalOpen(false);
+              }}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0, y: 45 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 45 }}
+              transition={{ type: "spring", damping: 20, stiffness: 140 }}
+              className="relative w-full max-w-md mx-auto bg-gradient-to-b from-amber-50 via-white to-amber-100 border-4 border-amber-400 rounded-3xl p-6 shadow-2xl z-10 text-slate-800"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-amber-200 mb-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">💸</span>
+                  <h3 className="font-sans font-black text-base text-amber-900 uppercase tracking-wider">
+                    Bảng Giá 🎨
+                  </h3>
+                </div>
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.08);
+                    setIsPricingModalOpen(false);
+                  }}
+                  className="p-1.5 rounded-lg hover:bg-amber-200/50 text-amber-900 transition cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="space-y-3 text-xs md:text-sm font-sans text-slate-700 max-h-[65vh] overflow-y-auto pr-1">
+                <div className="rounded-2xl overflow-hidden border-2 border-amber-300 shadow-md bg-white">
+                  <img
+                    src="https://cdn.phototourl.com/free/2026-07-28-4cc70a7c-d443-44db-b715-d4ff84fc43d3.jpg"
+                    alt="Bảng Giá"
+                    className="w-full h-auto object-cover max-h-[450px]"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                
+                <div className="p-3 bg-pink-50 rounded-xl border border-pink-200">
+                  <p className="text-xs text-pink-900 font-medium text-center leading-relaxed">
+                    ⭐️ Nếu có nhu cầu book character hãy liên hệ qua page hoặc acc Discord chính của Tun nhé ! 🍰
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 pt-3 border-t border-amber-200 flex justify-end">
+                <button
+                  onClick={() => {
+                    playClickSound(400, 0.08);
+                    setIsPricingModalOpen(false);
+                    setIsDonateModalOpen(true);
+                  }}
+                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl shadow-md transition cursor-pointer flex items-center gap-2"
+                >
+                  <span>🛎️Ting Ting</span>
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Profile của Tun Modal */}
+      <AnimatePresence>
+        {isProfileModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => {
+                playClickSound(300, 0.08);
+                setIsProfileModalOpen(false);
+              }}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0, y: 45 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 45 }}
+              transition={{ type: "spring", damping: 20, stiffness: 140 }}
+              className="relative w-full max-w-md mx-auto bg-gradient-to-b from-pink-50 via-white to-purple-50 border-4 border-pink-300 rounded-3xl p-6 shadow-2xl z-10 text-slate-800"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-pink-200 mb-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">👤</span>
+                  <h3 className="font-sans font-black text-base text-pink-900 uppercase tracking-wider">
+                    Profile của Tun 🌸
+                  </h3>
+                </div>
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.08);
+                    setIsProfileModalOpen(false);
+                  }}
+                  className="p-1.5 rounded-lg hover:bg-pink-200/50 text-pink-900 transition cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="flex flex-col items-center text-center space-y-3">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-pink-400 to-purple-400 p-1 shadow-lg overflow-hidden">
+                  <img
+                    src="https://cdn.phototourl.com/free/2026-07-28-0b9cc63f-05d4-4e0b-8ede-6c8af89f9085.jpg"
+                    alt="Profile Avatar"
+                    className="w-full h-full rounded-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-bold text-base text-slate-900">Trịnh Thư Ý - Tun 👑</h4>
+                  <p className="text-xs text-pink-600 font-medium mt-0.5">Roleplay Creator</p>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed px-2 bg-pink-100/50 p-3 rounded-2xl border border-pink-200">
+                  "Mình là Tun , các iu có thể gọi Tun là Ý , Thư Ý hoặc Tun đều được. Cảm ơn các iu đã yêu thương Tun và các con zai / con gái của Tun. Hãy thật vui vẻ nhá 💐"
+                </p>
+
+                <div className="flex items-center gap-2 pt-2">
+                  <a
+                    href="https://www.facebook.com/share/18yG86eq1t/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow transition"
+                  >
+                    Facebook 🌐
+                  </a>
+                  <a
+                    href="https://discord.gg/UXYJmxXBY"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow transition"
+                  >
+                    Discord 💬
+                  </a>
                 </div>
               </div>
             </motion.div>
