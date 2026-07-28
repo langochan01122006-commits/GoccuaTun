@@ -6,7 +6,7 @@ import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
 import { LetterNotice } from "./components/LetterNotice";
 import { ArtGallery } from "./components/ArtGallery";
-import { getAllVotes, voteForCharacter, unvoteForCharacter } from "./firebase";
+import { getAllVotes, voteForCharacter, unvoteForCharacter, subscribeToVotes } from "./firebase";
 
 const donateQrImg = "/src/assets/images/donate_qr_code_1781767011629.jpg";
 
@@ -358,15 +358,12 @@ export default function App() {
   };
 
   useEffect(() => {
-    async function loadVotes() {
-      try {
-        const votesData = await getAllVotes();
-        setVotes(votesData);
-      } catch (err) {
-        console.error("Failed to load votes:", err);
-      }
-    }
-    loadVotes();
+    const unsubscribe = subscribeToVotes((votesData) => {
+      setVotes(votesData);
+    });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   // Music Player logic
@@ -629,22 +626,26 @@ export default function App() {
 
   const featuredHubby = getFeaturedHubby();
 
-  // Hàm tìm nhân vật có vote thấp nhất nhưng phải lớn hơn 0
+  // Hàm tìm nhân vật có vote thấp nhất (kể cả 0) để đưa vào khu "bám bụi"
   const getLowestVotedCharacter = () => {
-    // 1. Lọc ra những nhân vật đã có ít nhất 1 vote trở lên
-    const votedCharacters = CHARACTERS.filter(char => {
+    let minVotes = Infinity;
+    CHARACTERS.forEach(char => {
       const charVotes = votes[char.id] || 0;
-      return charVotes >= 1;
+      if (charVotes < minVotes) {
+        minVotes = charVotes;
+      }
     });
-    
-    if (votedCharacters.length === 0) return null; // Nếu chưa ai được vote >= 1 thì không hiện
 
-    // 2. Tìm người có số vote thấp nhất trong danh sách trên
-    return votedCharacters.reduce((lowest, current) => {
-      const currentVotes = votes[current.id] || 0;
-      const lowestVotes = votes[lowest.id] || 0;
-      return currentVotes < lowestVotes ? current : lowest;
-    }, votedCharacters[0]);
+    // Lọc ra các nhân vật có số vote thấp nhất, và khác với nhân vật đang top 1
+    const candidates = CHARACTERS.filter(char => {
+      const charVotes = votes[char.id] || 0;
+      return charVotes === minVotes && char.id !== featuredHubby?.id;
+    });
+
+    if (candidates.length === 0) return null;
+
+    // Trả về nhân vật cuối cùng trong danh sách (để ổn định UI)
+    return candidates[candidates.length - 1];
   };
 
   const lowestChar = getLowestVotedCharacter();
@@ -1561,7 +1562,7 @@ export default function App() {
                             
                             {/* Unique Gacha gold priority votes */}
                             <span className="px-2 py-0.5 text-[8px] md:text-[9px] font-black text-yellow-100 bg-gradient-to-r from-[#7c2d12] to-[#b45309] border border-yellow-500/30 rounded-full flex items-center gap-0.5 shadow-sm uppercase tracking-wider select-none whitespace-nowrap">
-                              <span>🎟️ {(votes[featuredHubby.id] || 0).toLocaleString()} <span className="hidden sm:inline">LỢT ƯU TIÊN VÀNG</span></span>
+                              <span>🎟️ {(votes[featuredHubby.id] || 0).toLocaleString()} LƯỢT ƯU TIÊN VÀNG</span>
                             </span>
                           </div>
 
@@ -1700,10 +1701,10 @@ export default function App() {
                                 );
                               })}
                               
-                              {/* Unique Gacha priority votes */}
-                              <span className="px-2 py-0.5 text-[8px] md:text-[9px] font-black text-slate-100 bg-gradient-to-r from-slate-700 to-slate-900 border border-slate-500/30 rounded-full flex items-center gap-0.5 shadow-sm uppercase tracking-wider select-none whitespace-nowrap">
-                                <span>🎟️ {(votes[lowestChar.id] || 0).toLocaleString()} <span className="hidden sm:inline">LỢT ƯU TIÊN THẤP NHẤT</span></span>
-                              </span>
+                            {/* Unique Gacha priority votes */}
+                            <span className="px-2 py-0.5 text-[8px] md:text-[9px] font-black text-slate-100 bg-gradient-to-r from-slate-700 to-slate-900 border border-slate-500/30 rounded-full flex items-center gap-0.5 shadow-sm uppercase tracking-wider select-none whitespace-nowrap">
+                              <span>🎟️ {(votes[lowestChar.id] || 0).toLocaleString()} LƯỢT ƯU TIÊN THẤP NHẤT</span>
+                            </span>
                             </div>
 
                             <p className="text-[10px] md:text-[12px] text-slate-300 max-w-xl line-clamp-1 md:line-clamp-2 mt-0.5 md:mt-1 leading-snug lg:leading-relaxed">
@@ -3637,7 +3638,7 @@ export default function App() {
               }}
               className="gacha-button"
             >
-              🕹️ ✨ ĐI GẮP THÚ ✨
+              🕹️ ✨ 𝓖𝓪̆́𝓹 𝓣𝓱𝓾́ ✨
             </button>
           </div>
         </div>

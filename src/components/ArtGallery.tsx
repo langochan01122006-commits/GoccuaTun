@@ -255,7 +255,7 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
             className="text-2xl md:text-3xl font-serif font-bold tracking-[0.25em] text-[#F5E6BE] filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-all duration-300 group-hover:tracking-[0.3em]"
             style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
           >
-            BẢO TÀNG TRANH
+            TRIỂN LÃM TRANH
           </h2>
 
           {/* Premium Glass Button */}
@@ -268,7 +268,7 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
             className="mt-5 px-5 py-2 rounded-full border-2 border-amber-100 bg-black/40 text-amber-100 font-sans text-[11px] md:text-xs font-black uppercase tracking-widest hover:bg-amber-100 hover:text-black hover:border-amber-100 transition-all duration-300 transform active:scale-95 shadow-md cursor-pointer hover:shadow-amber-500/20"
             id="art-gallery-enter-btn"
           >
-            Tham Quan 🖼️
+            𝒯𝒽𝒶𝓂 𝒬𝓊𝒶𝓃 🖼️
           </button>
         </div>
       </div>

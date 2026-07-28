@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection } from "firebase/firestore";
+import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection, onSnapshot } from "firebase/firestore";
 import firebaseConfig from "../firebase-applet-config.json";
 
 const app = initializeApp(firebaseConfig);
@@ -165,3 +165,46 @@ export async function unlikeArtwork(artworkId: string): Promise<number> {
     return 0;
   }
 }
+
+// Real-time listener for votes
+export function subscribeToVotes(callback: (votesMap: Record<string, number>) => void) {
+  const collectionName = "votes";
+  return onSnapshot(
+    collection(db, collectionName),
+    (snapshot) => {
+      const votesMap: Record<string, number> = {};
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        if (data && typeof data.votes === "number") {
+          votesMap[docSnap.id] = data.votes;
+        }
+      });
+      callback(votesMap);
+    },
+    (error) => {
+      handleFirestoreError(error, OperationType.GET, collectionName);
+    }
+  );
+}
+
+// Real-time listener for art likes
+export function subscribeToArtLikes(callback: (likesMap: Record<string, number>) => void) {
+  const collectionName = "art_likes";
+  return onSnapshot(
+    collection(db, collectionName),
+    (snapshot) => {
+      const likesMap: Record<string, number> = {};
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        if (data && typeof data.likes === "number") {
+          likesMap[docSnap.id] = data.likes;
+        }
+      });
+      callback(likesMap);
+    },
+    (error) => {
+      handleFirestoreError(error, OperationType.GET, collectionName);
+    }
+  );
+}
+
