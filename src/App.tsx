@@ -3128,7 +3128,7 @@ export default function App() {
               {/* Cover Banner */}
               <div className="relative h-28 w-full overflow-hidden border-b border-[#e2a85c]/30">
                 <img
-                  src="https://cdn.phototourl.com/free/2026-07-29-05b508e3-9d5b-41d9-bed8-4c92bb757d0b.gif"
+                  src="https://cdn.phototourl.com/free/2026-07-29-1d3d62e2-3422-4aae-b7d9-7317244d7d27.jpg"
                   alt="Gothic Banner"
                   className="w-full h-full object-cover opacity-75 filter saturate-125"
                   referrerPolicy="no-referrer"
@@ -3141,7 +3141,7 @@ export default function App() {
                 {/* Floating Avatar */}
                 <div className="-mt-12 w-20 h-20 rounded-full border-2 border-[#e2a85c] shadow-[0_0_20px_rgba(226,168,92,0.6)] bg-[#2a1010] p-0.5 relative z-10 overflow-hidden">
                   <img
-                    src="https://cdn.phototourl.com/free/2026-07-28-0b9cc63f-05d4-4e0b-8ede-6c8af89f9085.jpg"
+                    src="https://cdn.phototourl.com/free/2026-07-29-6d3afbfd-9d1d-4eba-83f6-79c0a1cbb77b.jpg"
                     alt="Profile Avatar"
                     className="w-full h-full rounded-full object-cover"
                     referrerPolicy="no-referrer"
