@@ -3163,7 +3163,7 @@ export default function App() {
                   >
                     <span className={`w-2 h-2 rounded-full animate-pulse ${tunStatus === "Online" ? "bg-emerald-400 shadow-[0_0_8px_#34d399]" : tunStatus === "Coding" ? "bg-amber-400 shadow-[0_0_8px_#fbbf24]" : "bg-purple-400 shadow-[0_0_8px_#c084fc]"}`} />
                     <span className="font-medium">
-                      {tunStatus === "Online" ? "🟢 Đang hoạt động (Online)" : tunStatus === "Coding" ? "💻 Đang cày Deadline / Coding" : "💤 Đang chill / Idle"}
+                      {tunStatus === "Online" ? "🟢 Đang hoạt động (Online)" : tunStatus === "Coding" ? "💻 Đang cày Deadline" : "💤 Đang chill / Idle"}
                     </span>
                   </button>
                 </div>
