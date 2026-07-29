@@ -1257,11 +1257,14 @@ export default function App() {
                       setIsOpenMenu(!isOpenMenu);
                     }}
                     id="top-multitask-menu"
-                    className={`magic-candle-btn ${isOpenMenu ? "lit" : "unlit"} flex items-center justify-center gap-1.5 px-2.5`}
+                    className="royal-menu-btn"
                     title="Menu Đa Nhiệm (Bảng Giá, Profile Tun)"
                   >
+                    <span>Menu</span>
+                    <span className="text-xs text-amber-300">▾</span>
                     <span className="text-base text-amber-300">⚜️</span>
-                    <span className="text-[11px] font-bold hidden sm:inline text-amber-200">Menu</span>
+                    <span className="royal-sparkle" style={{ top: '-4px', left: '20%' }} />
+                    <span className="royal-sparkle" style={{ bottom: '-4px', right: '25%', animationDelay: '1s' }} />
                   </button>
 
                   {/* Dropdown Menu */}

@@ -2,10 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 
 const letterNotices = [
   "1. Cập nhật link chat Noah Wilson 🌟",
-  "2. Ra mắt con tướng Han Seo-jun (khách book nha) 🌟",
-  "3. Character new “Xuân Quy Tự” 🔥",
-  "4. Cập nhật giao diện mới cho wed 🎁",
-  "5. Mở triển lãm tranh cả nhà vào tym cho Artist nhá 🌸🖼️"
+  "2. Cập nhật giao diện mới cho wed 🎁",
+  "3. Mở triển lãm tranh cả nhà vào tym cho Artist nhá 🌸🖼️"
 ];
 
 interface LetterNoticeProps {

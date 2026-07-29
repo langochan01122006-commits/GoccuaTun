@@ -723,6 +723,66 @@
   transform: scale(0.95);
 }
 
+@keyframes royalGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(226, 168, 92, 0.4), inset 0 0 5px rgba(226, 168, 92, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7), inset 0 0 8px rgba(255, 215, 0, 0.4);
+  }
+}
+
+.royal-menu-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #3a1515 0%, #2a1010 100%) !important;
+  border: 1.5px solid #e2a85c !important;
+  color: #fde047 !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: visible;
+  outline: none;
+  user-select: none;
+  animation: royalGlow 3s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.2);
+}
+
+.royal-menu-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  border-color: #ffd700 !important;
+  box-shadow: 0 6px 20px rgba(226, 168, 92, 0.6), inset 0 1px 2px rgba(255,255,255,0.3);
+}
+
+.royal-menu-btn:active {
+  transform: translateY(0px) scale(0.97);
+}
+
+.royal-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffd700;
+  animation: sparkleFloat 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkleFloat {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  50% { opacity: 1; transform: translateY(-8px) scale(1.2); }
+  100% { transform: translateY(-16px) scale(0.4); opacity: 0; }
+}
+
+
 
 /* ==========================================================================
    TAROT CARD COLLECTION - BỘ SƯU TẬP THẺ BÀI TAROT
