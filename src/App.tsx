@@ -373,23 +373,31 @@ export default function App() {
   const handleTimeUpdate = () => {
     if (audioRef.current) {
       setMusicProgress(audioRef.current.currentTime);
+      console.log("Audio time update:", audioRef.current.currentTime, "duration:", audioRef.current.duration);
     }
   };
 
   const handleDurationChange = () => {
     if (audioRef.current) {
       setMusicDuration(audioRef.current.duration || 0);
+      console.log("Audio duration change:", audioRef.current.duration);
     }
   };
 
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
       setMusicDuration(audioRef.current.duration || 0);
+      console.log("Audio loaded metadata, duration:", audioRef.current.duration);
     }
   };
 
   const handleEnded = () => {
+    console.log("Audio track ended, playing next...");
     playNextTrack();
+  };
+
+  const handleAudioError = (e: any) => {
+    console.error("Audio error encountered:", e, audioRef.current?.error);
   };
 
   // Sync play/pause state of the DOM audio node
@@ -397,12 +405,17 @@ export default function App() {
     const audio = audioRef.current;
     if (!audio) return;
 
+    console.log("Audio state sync effect: isPlaying =", isPlaying, "src =", audio.src, "readyState =", audio.readyState);
     if (isPlaying) {
-      audio.play().catch((err) => {
+      audio.load();
+      audio.play().then(() => {
+        console.log("Audio play succeeded for:", audio.src);
+      }).catch((err) => {
         console.warn("Audio play failed/prevented:", err);
       });
     } else {
       audio.pause();
+      console.log("Audio paused.");
     }
   }, [isPlaying, currentTrackIndex, activePlaylist]);
 
@@ -730,11 +743,11 @@ export default function App() {
         ref={audioRef}
         src={currentSong?.url}
         preload="auto"
-        crossOrigin="anonymous"
         onTimeUpdate={handleTimeUpdate}
         onDurationChange={handleDurationChange}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleEnded}
+        onError={handleAudioError}
       />
 
 
@@ -3220,7 +3233,7 @@ export default function App() {
             <div 
               className="w-full h-full rounded-full flex items-center justify-center relative overflow-hidden"
               style={{
-                animation: 'gramophone-rotate 8s linear infinite',
+                animation: 'gramophone-rotate 6s linear infinite',
                 animationPlayState: isPlaying ? 'running' : 'paused'
               }}
             >
