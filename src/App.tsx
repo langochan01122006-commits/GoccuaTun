@@ -211,7 +211,9 @@ export default function App() {
   const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [tunStatus, setTunStatus] = useState<"Online" | "Idle" | "Coding">("Coding");
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const [isPricingZoomed, setIsPricingZoomed] = useState(false);
   const [punchedTicketId, setPunchedTicketId] = useState<string | null>(null);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
   const [isGuestbookModalOpen, setIsGuestbookModalOpen] = useState(false);
@@ -1289,16 +1291,14 @@ export default function App() {
                           onClick={() => setIsOpenMenu(false)} 
                         />
                         <motion.div
-                          initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                          initial={{ opacity: 0, scale: 0.95, y: -15 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.9, y: 10 }}
-                          transition={{ duration: 0.15 }}
-                          className="absolute right-0 mt-2 w-56 bg-[#2a1010]/95 backdrop-blur-xl border border-[#e2a85c]/40 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] py-2 z-50 text-white select-none"
+                          exit={{ opacity: 0, scale: 0.95, y: -15 }}
+                          transition={{ type: "spring", damping: 22, stiffness: 150 }}
+                          className="absolute right-0 mt-3 w-64 bg-[#1a0808] border-2 border-[#e2a85c] rounded-xl shadow-[0_15px_40px_rgba(0,0,0,0.9)] p-2.5 z-50 text-white select-none"
                         >
-                          <div className="px-3 py-1.5 border-b border-[#e2a85c]/20 mb-1 flex items-center justify-between">
-                            <span className="text-[10px] uppercase tracking-wider font-bold text-amber-300">✨ Menu Đa Nhiệm</span>
-                            <span className="text-[9px] text-amber-200/60">Tun Hub</span>
-                          </div>
+                          {/* Top Pointer */}
+                          <div className="absolute -top-[7px] right-[30px] w-3 h-3 bg-[#1a0808] border-t-2 border-l-2 border-[#e2a85c] rotate-45" />
 
                           <button
                             onClick={() => {
@@ -1306,11 +1306,13 @@ export default function App() {
                               setIsOpenMenu(false);
                               setIsPricingModalOpen(true);
                             }}
-                            className="w-full px-3.5 py-2.5 text-left text-xs font-medium hover:bg-white/10 flex items-center gap-2.5 transition text-amber-200 cursor-pointer rounded-lg"
+                            className="w-full text-left bg-[#2a1010]/80 border border-[#e2a85c]/40 p-3 flex items-center gap-2.5 transition-all duration-300 hover:bg-[#3a1515] hover:border-[#e2a85c] hover:translate-x-1 cursor-pointer rounded-t-lg rounded-b-sm"
                           >
-                            <span className="text-sm">💸</span>
-                            <span>Bảng Giá</span>
+                            <span className="text-base drop-shadow-md">🏷️</span>
+                            <span className="text-[11px] font-bold text-[#e2a85c] tracking-wide uppercase">Bảng Giá Book Character</span>
                           </button>
+
+                          <div className="border-b border-[#e2a85c]/20 mx-1 my-1.5" />
 
                           <button
                             onClick={() => {
@@ -1318,10 +1320,10 @@ export default function App() {
                               setIsOpenMenu(false);
                               setIsProfileModalOpen(true);
                             }}
-                            className="w-full px-3.5 py-2.5 text-left text-xs font-medium hover:bg-white/10 flex items-center gap-2.5 transition text-pink-200 cursor-pointer rounded-lg"
+                            className="w-full text-left bg-[#2a1010]/80 border border-[#e2a85c]/40 p-3 flex items-center gap-2.5 transition-all duration-300 hover:shadow-[0_0_15px_rgba(226,168,92,0.4)] hover:bg-[#3a1515] hover:border-[#e2a85c]/60 cursor-pointer rounded-b-lg rounded-t-sm"
                           >
-                            <span className="text-sm">👤</span>
-                            <span>Profile của Tun</span>
+                            <span className="text-base drop-shadow-md">👤</span>
+                            <span className="text-[11px] font-bold text-[#e2a85c] tracking-wide uppercase">Profile Của Tun</span>
                           </button>
                         </motion.div>
                       </>
@@ -2970,63 +2972,114 @@ export default function App() {
               onClick={() => {
                 playClickSound(300, 0.08);
                 setIsPricingModalOpen(false);
+                setIsPricingZoomed(false);
               }}
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+              className="absolute inset-0 bg-slate-950/85 backdrop-blur-md"
             />
             <motion.div
-              initial={{ scale: 0.85, opacity: 0, y: 45 }}
+              initial={{ scale: 0.85, opacity: 0, y: 35 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.85, opacity: 0, y: 45 }}
-              transition={{ type: "spring", damping: 20, stiffness: 140 }}
-              className="relative w-full max-w-md mx-auto bg-gradient-to-b from-amber-50 via-white to-amber-100 border-4 border-amber-400 rounded-3xl p-6 shadow-2xl z-10 text-slate-800"
+              exit={{ scale: 0.85, opacity: 0, y: 35 }}
+              transition={{ type: "spring", damping: 22, stiffness: 150 }}
+              className="relative w-full max-w-md mx-auto bg-gradient-to-b from-[#2a1010] via-[#1a0808] to-[#2a1010] border-2 border-[#e2a85c] rounded-2xl shadow-[0_0_35px_rgba(226,168,92,0.35)] z-10 text-slate-200 overflow-hidden"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-amber-200 mb-4">
+              {/* Header Title Bar */}
+              <div className="flex items-center justify-between px-5 py-3.5 bg-[#1a0808]/90 border-b border-[#e2a85c]/40">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">💸</span>
-                  <h3 className="font-sans font-black text-base text-amber-900 uppercase tracking-wider">
-                    Bảng Giá 🎨
+                  <span className="text-xl">⚜️</span>
+                  <h3 className="font-sans font-black text-sm text-[#e2a85c] uppercase tracking-wider">
+                    BẢNG GIÁ BOOK CHARACTER
                   </h3>
                 </div>
                 <button
                   onClick={() => {
                     playClickSound(300, 0.08);
                     setIsPricingModalOpen(false);
+                    setIsPricingZoomed(false);
                   }}
-                  className="p-1.5 rounded-lg hover:bg-amber-200/50 text-amber-900 transition cursor-pointer"
+                  className="p-1.5 rounded-lg hover:bg-[#e2a85c]/20 text-[#e2a85c] transition cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="space-y-3 text-xs md:text-sm font-sans text-slate-700 max-h-[65vh] overflow-y-auto pr-1">
-                <div className="rounded-2xl overflow-hidden border-2 border-amber-300 shadow-md bg-white">
+              {/* Modal Body Content */}
+              <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
+                {/* Royal Frame for Pricing Image */}
+                <div 
+                  onClick={() => {
+                    playClickSound(400, 0.08);
+                    setIsPricingZoomed(true);
+                  }}
+                  className="relative rounded-xl overflow-hidden border-2 border-[#e2a85c] shadow-[0_0_25px_rgba(226,168,92,0.3)] bg-[#1a0808] cursor-pointer group transition-transform duration-200 hover:scale-[1.01]"
+                >
                   <img
                     src="https://cdn.phototourl.com/free/2026-07-28-4cc70a7c-d443-44db-b715-d4ff84fc43d3.jpg"
                     alt="Bảng Giá"
-                    className="w-full h-auto object-cover max-h-[450px]"
+                    className="w-full h-auto object-cover max-h-[420px] transition duration-300 group-hover:brightness-105"
                     referrerPolicy="no-referrer"
                   />
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span className="bg-[#1a0808]/95 text-[#fde047] border border-[#e2a85c] px-3.5 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                      🔍 Bấm để phóng to ảnh
+                    </span>
+                  </div>
                 </div>
-                
-                <div className="p-3 bg-pink-50 rounded-xl border border-pink-200">
-                  <p className="text-xs text-pink-900 font-medium text-center leading-relaxed">
-                    ⭐️ Nếu có nhu cầu book character hãy liên hệ qua page hoặc acc Discord chính của Tun nhé ! 🍰
+
+                {/* Quote Box for Contact Note */}
+                <div className="bg-[#1f0b0b]/90 border border-dashed border-[#e2a85c]/60 rounded-xl p-3.5 text-left shadow-inner relative">
+                  <p className="text-xs text-slate-300 font-medium leading-relaxed flex items-start gap-2">
+                    <span className="text-[#e2a85c] text-sm shrink-0">⚜️</span>
+                    <span>Nếu có nhu cầu book character hãy liên hệ qua page hoặc acc Discord chính của Tun nhé ! 🍰</span>
                   </p>
                 </div>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-amber-200 flex justify-end">
+              {/* Footer Button */}
+              <div className="px-5 py-3.5 bg-[#1a0808]/90 border-t border-[#e2a85c]/40 flex justify-end">
                 <button
                   onClick={() => {
                     playClickSound(400, 0.08);
                     setIsPricingModalOpen(false);
+                    setIsPricingZoomed(false);
                     setIsDonateModalOpen(true);
                   }}
-                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl shadow-md transition cursor-pointer flex items-center gap-2"
+                  className="px-5 py-2.5 bg-gradient-to-r from-[#5c1c1c] to-[#3a0f0f] hover:from-[#7a2525] hover:to-[#4a1414] border border-[#e2a85c] text-[#fde047] font-bold text-xs rounded-xl shadow-[0_0_15px_rgba(226,168,92,0.25)] transition-all duration-200 cursor-pointer flex items-center gap-2 hover:shadow-[0_0_20px_rgba(226,168,92,0.5)] active:scale-95"
                 >
-                  <span>🛎️Ting Ting</span>
+                  <span>🛎️ Ting Ting</span>
                 </button>
               </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Lightbox Zoom Modal for Pricing */}
+      <AnimatePresence>
+        {isPricingZoomed && (
+          <div 
+            onClick={() => setIsPricingZoomed(false)}
+            className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-lg flex items-center justify-center p-4 cursor-zoom-out"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-4xl w-full max-h-[90vh] flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src="https://cdn.phototourl.com/free/2026-07-28-4cc70a7c-d443-44db-b715-d4ff84fc43d3.jpg"
+                alt="Bảng Giá Phóng To"
+                className="max-w-full max-h-[85vh] object-contain rounded-xl border-2 border-[#e2a85c] shadow-[0_0_50px_rgba(226,168,92,0.5)] bg-[#1a0808]"
+                referrerPolicy="no-referrer"
+              />
+              <button 
+                onClick={() => setIsPricingZoomed(false)}
+                className="absolute top-4 right-4 bg-[#1a0808] border border-[#e2a85c] text-[#e2a85c] p-2 rounded-full hover:bg-[#e2a85c]/20 transition cursor-pointer shadow-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </motion.div>
           </div>
         )}
@@ -3044,20 +3097,21 @@ export default function App() {
                 playClickSound(300, 0.08);
                 setIsProfileModalOpen(false);
               }}
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+              className="absolute inset-0 bg-slate-950/85 backdrop-blur-md"
             />
             <motion.div
-              initial={{ scale: 0.85, opacity: 0, y: 45 }}
+              initial={{ scale: 0.85, opacity: 0, y: 35 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.85, opacity: 0, y: 45 }}
-              transition={{ type: "spring", damping: 20, stiffness: 140 }}
-              className="relative w-full max-w-md mx-auto bg-gradient-to-b from-pink-50 via-white to-purple-50 border-4 border-pink-300 rounded-3xl p-6 shadow-2xl z-10 text-slate-800"
+              exit={{ scale: 0.85, opacity: 0, y: 35 }}
+              transition={{ type: "spring", damping: 22, stiffness: 150 }}
+              className="relative w-full max-w-md mx-auto bg-gradient-to-b from-[#2a1010] via-[#1a0808] to-[#2a1010] border-2 border-[#e2a85c] rounded-2xl shadow-[0_0_35px_rgba(226,168,92,0.35)] z-10 text-slate-200 overflow-hidden"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-pink-200 mb-4">
+              {/* Header Title Bar */}
+              <div className="flex items-center justify-between px-5 py-3.5 bg-[#1a0808]/90 border-b border-[#e2a85c]/40">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">👤</span>
-                  <h3 className="font-sans font-black text-base text-pink-900 uppercase tracking-wider">
-                    Profile của Tun 🌸
+                  <span className="text-xl">✨</span>
+                  <h3 className="font-sans font-black text-sm text-[#e2a85c] uppercase tracking-wider">
+                    Profile của Tun 👑
                   </h3>
                 </div>
                 <button
@@ -3065,14 +3119,27 @@ export default function App() {
                     playClickSound(300, 0.08);
                     setIsProfileModalOpen(false);
                   }}
-                  className="p-1.5 rounded-lg hover:bg-pink-200/50 text-pink-900 transition cursor-pointer"
+                  className="p-1.5 rounded-lg hover:bg-[#e2a85c]/20 text-[#e2a85c] transition cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="flex flex-col items-center text-center space-y-3">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-pink-400 to-purple-400 p-1 shadow-lg overflow-hidden">
+              {/* Cover Banner */}
+              <div className="relative h-28 w-full overflow-hidden border-b border-[#e2a85c]/30">
+                <img
+                  src="https://cdn.phototourl.com/free/2026-07-29-05b508e3-9d5b-41d9-bed8-4c92bb757d0b.gif"
+                  alt="Gothic Banner"
+                  className="w-full h-full object-cover opacity-75 filter saturate-125"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a0808] via-transparent to-black/30" />
+              </div>
+
+              {/* Modal Body Content */}
+              <div className="px-6 pb-6 pt-0 flex flex-col items-center text-center relative">
+                {/* Floating Avatar */}
+                <div className="-mt-12 w-20 h-20 rounded-full border-2 border-[#e2a85c] shadow-[0_0_20px_rgba(226,168,92,0.6)] bg-[#2a1010] p-0.5 relative z-10 overflow-hidden">
                   <img
                     src="https://cdn.phototourl.com/free/2026-07-28-0b9cc63f-05d4-4e0b-8ede-6c8af89f9085.jpg"
                     alt="Profile Avatar"
@@ -3080,42 +3147,79 @@ export default function App() {
                     referrerPolicy="no-referrer"
                   />
                 </div>
-                <div>
-                  <h4 className="font-bold text-base text-slate-900">Trịnh Thư Ý - Tun 👑</h4>
-                  <p className="text-xs text-pink-600 font-medium mt-0.5">Roleplay Creator</p>
+
+                <div className="mt-2.5 flex flex-col items-center">
+                  <h4 className="font-bold text-base text-[#fef08a] tracking-wide">Trịnh Thư Ý - Tun 👑</h4>
+                  <div className="mt-1 inline-block bg-[#e2a85c]/20 border border-[#e2a85c]/80 text-[#e2a85c] px-3 py-0.5 rounded-full text-[11px] font-semibold tracking-wider shadow">
+                    ✨ Roleplay Creator ✨
+                  </div>
+                  <button
+                    onClick={() => {
+                      playClickSound(500, 0.08);
+                      setTunStatus(prev => prev === "Coding" ? "Online" : prev === "Online" ? "Idle" : "Coding");
+                    }}
+                    className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-[#1f0b0b] border border-[#e2a85c]/60 rounded-full text-[11px] text-[#fde047] hover:bg-[#e2a85c]/20 transition cursor-pointer shadow-sm"
+                    title="Click để đổi trạng thái"
+                  >
+                    <span className={`w-2 h-2 rounded-full animate-pulse ${tunStatus === "Online" ? "bg-emerald-400 shadow-[0_0_8px_#34d399]" : tunStatus === "Coding" ? "bg-amber-400 shadow-[0_0_8px_#fbbf24]" : "bg-purple-400 shadow-[0_0_8px_#c084fc]"}`} />
+                    <span className="font-medium">
+                      {tunStatus === "Online" ? "🟢 Đang hoạt động (Online)" : tunStatus === "Coding" ? "💻 Đang cày Deadline / Coding" : "💤 Đang chill / Idle"}
+                    </span>
+                  </button>
                 </div>
-                <div className="text-xs text-slate-700 leading-relaxed px-3 bg-pink-100/50 p-4 rounded-2xl border border-pink-200 text-left space-y-2 whitespace-pre-line">
-                  {`★ Tui là Tun aka Trịnh Thư Ý (mn gọi như nào cũng được hihi)
 
-★ D.O.B: Sagittarius T12 ♐︎
-
-★ MBTI : INFP
-
-★ Tính Cách: Tun rất dễ tính với chill nên là cứ chill nha, Tun rep tin nhắn lâu hoặc tự nhiên đang nhắn xong mất tích là Tun đang chạy deadline hoặc đang suy nghĩ nên rep gì cho ngầu á 🙉, Tun SIÊU HƯỚNG NỘI rất muốn kết bạn mà nhưng ngại 😭.
-
-★ Tun hoạt động 𝐎𝐍𝐋𝐘 𝐆𝐆𝐀𝐈 (mn thấy app, wed nào ok nữa thì chỉ Tun nhó).
-
-★ Nên đọc Plot và Hồ sơ NV rùi hãng chơi để hiểu hơn về Character và nội dung.
-
-★ Một số char ko có link là Tun share prompt á ( zô quầy hướng dẫn xem cách chơi hoặc ib Tun chỉ nha ).`}
+                {/* Quick Info Badges (Row 1) */}
+                <div className="grid grid-cols-3 gap-2 w-full mt-4">
+                  <div className="bg-[#1f0b0b] border border-[#e2a85c]/40 rounded-xl p-2 text-center shadow-sm">
+                    <span className="block text-[10px] text-[#e2a85c]/80 uppercase tracking-wider font-bold">Cung Hoàng Đạo</span>
+                    <span className="text-xs font-bold text-[#fde047] mt-0.5 block">Sagittarius ♐︎</span>
+                  </div>
+                  <div className="bg-[#1f0b0b] border border-[#e2a85c]/40 rounded-xl p-2 text-center shadow-sm">
+                    <span className="block text-[10px] text-[#e2a85c]/80 uppercase tracking-wider font-bold">MBTI</span>
+                    <span className="text-xs font-bold text-[#fde047] mt-0.5 block">INFP 🧠</span>
+                  </div>
+                  <div className="bg-[#1f0b0b] border border-[#e2a85c]/40 rounded-xl p-2 text-center shadow-sm">
+                    <span className="block text-[10px] text-[#e2a85c]/80 uppercase tracking-wider font-bold">Platform</span>
+                    <span className="text-xs font-bold text-[#fde047] mt-0.5 block">ONLY GGAI 📍</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2 pt-2">
+                {/* Quote Box (Row 2) */}
+                <div className="w-full mt-3 bg-[#1f0b0b]/90 border border-[#e2a85c]/50 rounded-xl p-3 text-left shadow-inner relative">
+                  <p className="text-xs text-slate-300 italic leading-relaxed">
+                    "★ Tui là Tun aka Trịnh Thư Ý (mn gọi như nào cũng được hihi). Tun rất dễ tính với chill nên là cứ chill nha, Tun rep tin nhắn lâu hoặc tự nhiên đang nhắn xong mất tích là Tun đang chạy deadline hoặc đang suy nghĩ nên rep gì cho ngầu á 🙉, Tun SIÊU HƯỚNG NỘI rất muốn kết bạn mà nhưng ngại 😭."
+                  </p>
+                </div>
+
+                {/* Additional Notes with Star Icons */}
+                <div className="w-full mt-3 text-xs text-slate-300 text-left space-y-2 bg-[#1f0b0b]/60 border border-[#e2a85c]/20 p-3 rounded-xl">
+                  <div className="flex items-start gap-2">
+                    <span className="text-[#e2a85c] text-sm shrink-0">🌟</span>
+                    <span>Nên đọc Plot và Hồ sơ NV rùi hãng chơi để hiểu hơn về Character và nội dung.</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-[#e2a85c] text-sm shrink-0">🌟</span>
+                    <span>Một số char ko có link là Tun share prompt á (zô quầy hướng dẫn xem cách chơi hoặc ib Tun chỉ nha).</span>
+                  </div>
+                </div>
+
+                {/* Social Links */}
+                <div className="flex items-center justify-center gap-3 w-full mt-4 pt-3 border-t border-[#e2a85c]/30">
                   <a
                     href="https://www.facebook.com/share/18yG86eq1t/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow transition"
+                    className="flex-1 px-4 py-2 bg-[#e2a85c]/15 hover:bg-[#e2a85c]/30 border border-[#e2a85c]/60 text-[#fde047] text-xs font-bold rounded-xl shadow transition text-center flex items-center justify-center gap-1.5"
                   >
-                    Facebook 🌐
+                    <span>Facebook</span> 🌐
                   </a>
                   <a
                     href="https://discord.gg/UXYJmxXBY"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow transition"
+                    className="flex-1 px-4 py-2 bg-[#e2a85c]/15 hover:bg-[#e2a85c]/30 border border-[#e2a85c]/60 text-[#fde047] text-xs font-bold rounded-xl shadow transition text-center flex items-center justify-center gap-1.5"
                   >
-                    Discord 💬
+                    <span>Discord</span> 💬
                   </a>
                 </div>
               </div>
@@ -3783,7 +3887,7 @@ export default function App() {
 
       {showAgeVerify && (
         <div className="age-verify-overlay">
-          <div className="age-verify-card">
+                    <div className="age-verify-card">
             {/* Icon Đôi mắt bí ẩn hoặc Con bài/Vòng quay thay cho 18+ nếu muốn, ở đây giữ 🔞 cho an toàn pháp lý nhưng đổi text */}
             <div className="age-icon">👁️‍🗨️ 🔞</div>
             
@@ -3830,68 +3934,91 @@ export default function App() {
         </div>
       )}
 
-      {showNewCharactersPopup && (
-        <div className="age-verify-overlay" style={{ zIndex: 9999 }}>
-          <div className="gachapon-machine">
-            {/* Header */}
-            <div className="header">
-              <div className="title">
-                <span className="flame-left">🔥</span> 
-                Gấu Bông Mới 
-                <span className="flame-right">🔥</span>
+      <AnimatePresence>
+        {showNewCharactersPopup && (
+          <div className="fixed inset-0 z-[9999] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="relative w-full max-w-md bg-gradient-to-b from-[#2a1010] via-[#1a0808] to-[#2a1010] border-2 border-[#e2a85c] rounded-3xl p-5 md:p-6 shadow-[0_0_40px_rgba(226,168,92,0.3)] flex flex-col overflow-hidden"
+            >
+              {/* Header */}
+              <div className="text-center mb-5 border-b border-[#e2a85c]/30 pb-4 relative z-10">
+                <h2 className="text-xl md:text-2xl font-black text-[#e2a85c] tracking-widest uppercase flex items-center justify-center gap-2 drop-shadow-md">
+                  <span>🔥</span> 
+                  GẤU BÔNG MỚI 
+                  <span>🔥</span>
+                </h2>
+                <div className="text-[#fde047] text-xs font-semibold tracking-wider mt-1 opacity-90">
+                  🎁 Vote cho em bé mới nha 🎁
+                </div>
               </div>
-              <div className="subtitle">🎁 Vote cho em bé mới nha 🎁</div>
-            </div>
 
-            {/* DANH SÁCH NHÂN VẬT - PHẦN NÀY LƯỚT ĐƯỢC */}
-            <div className="character-list">
-              {CHARACTERS.filter(isNewCharacter).map((char) => {
-                const link = char.chatLink !== undefined ? char.chatLink : char.chatbotUrl;
-                const hasLink = link && link.trim() !== "";
-                const emojiPrefix = char.id === "27" ? "🌸" : char.id === "28" ? "🎸" : char.id === "29" ? "🪨" : char.id === "30" ? "💎" : (char.avatar || "✨");
-                const tagText = `${emojiPrefix} ${char.tags.slice(0, 3).join(' • ')}`;
-
-                return (
-                  <div key={char.id} className="char-card">
-                    <div className="char-left">
-                      <div className="avatar-wrapper">
-                        <img 
-                          src={char.image || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"} 
-                          alt={char.name}
-                          referrerPolicy="no-referrer"
-                        />
-                        <span className="badge-no">No {char.no || char.id}</span>
+              {/* DANH SÁCH NHÂN VẬT - PHẦN NÀY LƯỚT ĐƯỢC */}
+              <div className="flex flex-col gap-3 overflow-y-auto max-h-[50vh] pr-1 scrollbar-hide relative z-10">
+                {CHARACTERS.filter(isNewCharacter).map((char) => {
+                  const link = char.chatLink !== undefined ? char.chatLink : char.chatbotUrl;
+                  const hasLink = link && link.trim() !== "";
+                  
+                  return (
+                    <div key={char.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#1a0808]/80 border border-[#e2a85c]/50 rounded-2xl p-3 shadow-inner">
+                      <div className="flex items-center gap-3.5">
+                        <div className="relative shrink-0">
+                          <img 
+                            src={char.image || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"} 
+                            alt={char.name}
+                            className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-[#e2a85c] object-cover shadow-[0_0_15px_rgba(226,168,92,0.4)]"
+                            referrerPolicy="no-referrer"
+                          />
+                          <span className="absolute -bottom-2 -right-2 bg-gradient-to-r from-red-800 to-rose-900 border border-[#e2a85c] text-[#fde047] text-[9px] md:text-[10px] font-black px-2 py-0.5 rounded shadow-[0_2px_5px_rgba(0,0,0,0.5)] rotate-[-8deg] uppercase tracking-wider">
+                            No {char.no || char.id}
+                          </span>
+                        </div>
+                        <div className="flex flex-col gap-1.5">
+                          <div className="font-bold text-[#fef08a] text-sm md:text-base">{char.name}</div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {char.tags.slice(0, 3).map((tag, i) => (
+                              <span key={i} className="text-[9px] bg-[#e2a85c]/10 text-[#fde047]/90 border border-[#e2a85c]/40 px-1.5 py-0.5 rounded uppercase tracking-wider font-semibold">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                      <div className="char-info">
-                        <div className="char-name">{char.name}</div>
-                        <div className="char-tags">{tagText}</div>
+                      
+                      <div className="shrink-0 self-end sm:self-auto w-full sm:w-auto flex justify-end mt-2 sm:mt-0">
+                        {hasLink ? (
+                          <div className="bg-gradient-to-r from-[#e2a85c] to-[#b8860b] border-2 border-[#fffacd] text-red-950 font-black text-[10px] md:text-xs px-3 py-1.5 rounded-xl shadow-[0_0_15px_rgba(226,168,92,0.6)] flex items-center justify-center gap-1.5 min-w-[100px]">
+                            <span className="text-pink-100 animate-pulse drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">🌸</span> ĐÃ MỞ
+                          </div>
+                        ) : (
+                          <div className="bg-stone-800/80 border border-dashed border-[#e2a85c]/60 text-[#e2a85c]/80 font-bold text-[10px] md:text-xs px-3 py-1.5 rounded-xl shadow-inner flex items-center justify-center gap-1.5 min-w-[100px]">
+                            <span>⏳</span> CHỜ LINK
+                          </div>
+                        )}
                       </div>
                     </div>
-                    
-                    {hasLink ? (
-                      <div className="status-btn opened">🌸 ĐÃ MỞ</div>
-                    ) : (
-                      <div className="status-btn waiting">⏳ CHỜ LINK</div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
 
-            {/* Nút Main Gắp Thú */}
-            <button 
-              onClick={() => {
-                playClickSound(500, 0.1);
-                setShowNewCharactersPopup(false);
-              }}
-              className="gacha-button"
-            >
-              🕹️ ✨ 𝓖𝓪̆́𝓹 𝓣𝓱𝓾́ ✨
-            </button>
+              {/* Nút Main Gắp Thú */}
+              <button 
+                onClick={() => {
+                  playClickSound(500, 0.1);
+                  setShowNewCharactersPopup(false);
+                }}
+                className="mt-6 w-full bg-gradient-to-b from-[#7a2525] to-[#4a1414] hover:from-[#8c2a2a] hover:to-[#5c1c1c] border-2 border-[#e2a85c] text-[#fde047] font-black text-sm md:text-base uppercase py-4 rounded-xl shadow-[0_0_25px_rgba(226,168,92,0.5)] hover:shadow-[0_0_35px_rgba(226,168,92,0.8)] transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 group relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out skew-x-12" />
+                <span className="group-hover:animate-bounce">🕹️</span> ✨ 𝓖𝓪̆́𝓹 𝓣𝓱𝓾́ ✨
+              </button>
+            </motion.div>
           </div>
-        </div>
-      )}
-
+        )}
+      </AnimatePresence>
     </div>
   );
 }
