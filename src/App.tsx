@@ -3208,20 +3208,32 @@ export default function App() {
               playClickSound(300, 0.08);
               setIsMusicModalOpen(true);
             }}
-            className={`music-ticket-btn hover:shadow-[0_0_15px_rgba(255,174,52,0.6)] active:scale-95 transition-all group ${isPlaying ? 'animate-sway' : ''}`}
+            className="relative w-14 h-14 rounded-full bg-gradient-to-tr from-[#2a1010] via-[#3a1515] to-[#1a0808] border-2 border-[#7f1d1d] shadow-[0_4px_20px_rgba(0,0,0,0.6),inset_0_0_8px_rgba(127,29,29,0.4)] flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(127,29,29,0.8)] active:scale-95 transition-all group cursor-pointer overflow-hidden"
+            title="Trình Phát Nhạc Đĩa Than"
           >
-            <div className="music-ticket-inner-border"></div>
-            {isPlaying ? (
-              <div className="flex items-end justify-center gap-1 h-6 relative z-10 px-1">
-                <span className="w-1 bg-[#FFAE34] rounded-full animate-eq-1 shadow-[0_0_8px_#FFAE34]" />
-                <span className="w-1 bg-[#FFAE34] rounded-full animate-eq-2 shadow-[0_0_8px_#FFAE34]" style={{ animationDelay: '0.1s' }} />
-                <span className="w-1 bg-[#FFAE34] rounded-full animate-eq-3 shadow-[0_0_8px_#FFAE34]" style={{ animationDelay: '0.2s' }} />
-                <span className="w-1 bg-[#FFAE34] rounded-full animate-eq-4 shadow-[0_0_8px_#FFAE34]" style={{ animationDelay: '0.15s' }} />
-                <span className="w-1 bg-[#FFAE34] rounded-full animate-eq-2 shadow-[0_0_8px_#FFAE34]" style={{ animationDelay: '0.3s' }} />
-              </div>
-            ) : (
-              <Music className="w-6 h-6 text-[#FFAE34] relative z-10" style={{ filter: 'drop-shadow(0 0 4px rgba(255,174,52,0.4))' }} />
-            )}
+            {/* Vinyl grooves rings */}
+            <div className="absolute inset-1 rounded-full border border-red-950/40 pointer-events-none" />
+            <div className="absolute inset-2.5 rounded-full border border-red-950/30 pointer-events-none" />
+            <div className="absolute inset-4 rounded-full border border-red-950/20 pointer-events-none" />
+
+            {/* Rotating vinyl disk container */}
+            <div 
+              className="w-full h-full rounded-full flex items-center justify-center relative overflow-hidden"
+              style={{
+                animation: 'gramophone-rotate 8s linear infinite',
+                animationPlayState: isPlaying ? 'running' : 'paused'
+              }}
+            >
+              <img
+                src="https://cdn.phototourl.com/free/2026-07-29-524d8e1c-d308-44f8-905e-f874e5c666f0.jpg"
+                alt="Vinyl Cover"
+                className="w-full h-full object-cover rounded-full"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+
+            {/* Shine highlight */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none rounded-full" />
           </button>
         </div>
       )}
