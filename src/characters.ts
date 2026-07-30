@@ -5412,7 +5412,7 @@ Noah đang nhai dở miếng cơm bỗng khựng lại. Cậu ngẩng mặt lên
     passwordRequired: true,
     password: "USERDUOI18TUOI",
     passwordQuestion: "Trong bài post của Silas Moreau câu nào được nhắc lại nhiều nhất ?",
-    passwordHint: "Có trong tất cả bài post",
+    passwordHint: "Chỉ có trong bài post của Silas 🌟",
     passwordNote: "⚠️ Pass viết bằng chữ in hoa, không dấu, không cách.\n⚠️ Nếu giải được pass vui lòng không công khai pass. Nếu Tun phát hiện sẽ đổi lại pass !!!",
     storyline: `THÀNH PHỐ - 20:00
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const letterNotices = [
-  "1. Cập nhật link chat Noah Wilson 🌟",
+  "1. Ra char Silas có gắn pass, pass rất dễ nên mn chill chill thôi đừng bully tun 😭",
   "2. Cập nhật giao diện mới cho wed 🎁",
   "3. Mở triển lãm tranh cả nhà vào tym cho Artist nhá 🌸🖼️"
 ];
