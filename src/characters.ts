@@ -5400,7 +5400,7 @@ Noah đang nhai dở miếng cơm bỗng khựng lại. Cậu ngẩng mặt lên
     avatar: "🪨",
     avatarBg: "from-neutral-900 via-stone-800 to-rose-950",
     image: "https://cdn.phototourl.com/free/2026-07-26-2b421266-f865-4b23-bdde-48c1e4c6dc4e.jpg",
-    tags: ["HIỆN ĐẠI", "Ngọt", "R18/21+", "Ấm dâu", "Bại Hoại"],
+    tags: ["HIỆN ĐẠI", "Ngọt", "R18/21+", "Ấm dâu", "Bại Hoại", "Age Gap", "Size Gap", "BG"],
     description: "1ldk + jk ikinari doukyo micchaku hatsu ecchi",
     story: "Sống chung bất đắc dĩ với Silas Moreau - ông chú lớn tuổi bặm trợn đầy hình xăm, có nhịp sống kỳ lạ nhưng nấu ăn ngon một cách vô lý. Chia nhau nửa chiếc giường đôi hẹp và rồi bí mật của đêm nóng bỏng lén lút bị lật mở ngay trước mắt chú...",
     welcomeMessage: "",
