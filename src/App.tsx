@@ -716,24 +716,39 @@ export default function App() {
     
     const link = character.chatLink !== undefined ? character.chatLink : character.chatbotUrl;
     if (link) {
-      window.open(link, "_blank", "noopener,noreferrer");
+      const newWindow = window.open(link, "_blank", "noopener,noreferrer");
+      if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+        // Fallback for strict popup blockers on mobile devices
+        window.location.href = link;
+      }
     }
   };
 
   const handlePasswordSubmit = () => {
     if (!passwordModalChar) return;
     
-    if (passwordInput === passwordModalChar.password) {
+    // So sánh không phân biệt hoa thường và bỏ khoảng trắng để chắc chắn
+    const input = passwordInput.toUpperCase().replace(/\s/g, "");
+    const correctPass = passwordModalChar.password?.toUpperCase().replace(/\s/g, "");
+
+    if (input === correctPass) {
       playClickSound(600, 0.1);
       setIsUnlocked(true);
+      
+      const link = passwordModalChar.chatLink !== undefined ? passwordModalChar.chatLink : passwordModalChar.chatbotUrl;
+      if (link) {
+        // Mở tab mới, có fallback cho mobile
+        const newWindow = window.open(link, "_blank", "noopener,noreferrer");
+        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+          // Fallback for strict popup blockers on mobile devices
+          window.location.href = link;
+        }
+      }
+      
       setTimeout(() => {
-        const link = passwordModalChar.chatLink !== undefined ? passwordModalChar.chatLink : passwordModalChar.chatbotUrl;
         setPasswordModalChar(null);
         setStoryCharacter(null);
         setIsUnlocked(false);
-        if (link) {
-          window.open(link, "_blank", "noopener,noreferrer");
-        }
       }, 800);
     } else {
       playClickSound(300, 0.1);
