@@ -716,10 +716,14 @@ export default function App() {
     
     const link = character.chatLink !== undefined ? character.chatLink : character.chatbotUrl;
     if (link) {
-      const newWindow = window.open(link, "_blank", "noopener,noreferrer");
-      if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-        // Fallback for strict popup blockers on mobile devices
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
         window.location.href = link;
+      } else {
+        const newWindow = window.open(link, "_blank", "noopener,noreferrer");
+        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+          window.location.href = link;
+        }
       }
     }
   };
@@ -737,11 +741,14 @@ export default function App() {
       
       const link = passwordModalChar.chatLink !== undefined ? passwordModalChar.chatLink : passwordModalChar.chatbotUrl;
       if (link) {
-        // Mở tab mới, có fallback cho mobile
-        const newWindow = window.open(link, "_blank", "noopener,noreferrer");
-        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-          // Fallback for strict popup blockers on mobile devices
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
           window.location.href = link;
+        } else {
+          const newWindow = window.open(link, "_blank", "noopener,noreferrer");
+          if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+            window.location.href = link;
+          }
         }
       }
       
