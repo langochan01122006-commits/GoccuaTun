@@ -5405,6 +5405,7 @@ Noah đang nhai dở miếng cơm bỗng khựng lại. Cậu ngẩng mặt lên
     story: "Sống chung bất đắc dĩ với Silas Moreau - ông chú lớn tuổi bặm trợn đầy hình xăm, có nhịp sống kỳ lạ nhưng nấu ăn ngon một cách vô lý. Chia nhau nửa chiếc giường đôi hẹp và rồi bí mật của đêm nóng bỏng lén lút bị lật mở ngay trước mắt chú...",
     welcomeMessage: "",
     systemPrompt: "",
+    profileUrl: "https://docs.google.com/document/d/14Z5OPQ7e5QQLCnaGrJTfFEcwMDqihvYHlwC7vOpQp5A/edit?usp=drivesdk",
     chatbotUrl: "",
     chatLink: "https://aistudio.google.com/prompts/1V6FzCcqusIxB88zeGVzO0nsPGCxNQfkd",
     linkUpdatedAt: "2026-07-29T21:37:06",
