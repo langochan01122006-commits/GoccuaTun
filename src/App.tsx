@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, CSSProperties } from "react";
 import { CHARACTERS, Character } from "./characters";
-import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User, Package, PackageOpen, Megaphone, Star, Info, PenTool, DoorOpen, Flame, Shield, Map, Crown, Leaf } from "lucide-react";
+import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User, Package, PackageOpen, Megaphone, Star, Info, PenTool, DoorOpen, Flame, Shield, Map, Crown, Leaf, Eye, EyeOff } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
@@ -209,6 +209,12 @@ export default function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
+  const [passwordModalChar, setPasswordModalChar] = useState<Character | null>(null);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isShaking, setIsShaking] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [tunStatus, setTunStatus] = useState<"Online" | "Idle" | "Coding">("Coding");
@@ -695,13 +701,45 @@ export default function App() {
     }
   };
 
-  // Triggers immediate chat in a new tab using the chatbotUrl
+  // Triggers immediate chat in a new tab using the chatbotUrl or chatLink
   const handleStartChat = (character: Character, initialPrompt?: string) => {
     playClickSound(550, 0.1);
+    
+    if (character.passwordRequired) {
+      setPasswordModalChar(character);
+      setPasswordInput("");
+      setPasswordError("");
+      return;
+    }
+    
     setStoryCharacter(null); // Close story popup if open
     
-    if (character.chatbotUrl) {
-      window.open(character.chatbotUrl, "_blank", "noopener,noreferrer");
+    const link = character.chatLink !== undefined ? character.chatLink : character.chatbotUrl;
+    if (link) {
+      window.open(link, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const handlePasswordSubmit = () => {
+    if (!passwordModalChar) return;
+    
+    if (passwordInput === passwordModalChar.password) {
+      playClickSound(600, 0.1);
+      setIsUnlocked(true);
+      setTimeout(() => {
+        const link = passwordModalChar.chatLink !== undefined ? passwordModalChar.chatLink : passwordModalChar.chatbotUrl;
+        setPasswordModalChar(null);
+        setStoryCharacter(null);
+        setIsUnlocked(false);
+        if (link) {
+          window.open(link, "_blank", "noopener,noreferrer");
+        }
+      }, 800);
+    } else {
+      playClickSound(300, 0.1);
+      setPasswordError("Mật khẩu không đúng. Vui lòng thử lại!");
+      setIsShaking(true);
+      setTimeout(() => setIsShaking(false), 500);
     }
   };
 
@@ -1648,7 +1686,7 @@ export default function App() {
                       {/* Clickable Actions block */}
                       <div className="flex items-center gap-1.5 md:gap-2 w-full md:w-auto shrink-0 mt-2 md:mt-0 relative z-10 border-t md:border-t-0 border-white/10 pt-2.5 md:pt-0">
                         {/* Interactive Chat Trigger */}
-                        {!featuredHubby.chatbotUrl ? (
+                        {!(featuredHubby.chatbotUrl || featuredHubby.chatLink) ? (
                           <button
                             disabled
                             id={`featured-chat-btn-${featuredHubby.id}`}
@@ -2035,7 +2073,7 @@ export default function App() {
                                             {/* Row of buttons */}
                                             <div className="flex gap-2">
                                               {/* Chat Button */}
-                                              {!char.chatbotUrl ? (
+                                              {!(char.chatbotUrl || char.chatLink) ? (
                                                 <button
                                                   disabled
                                                   onClick={(e) => e.stopPropagation()}
@@ -3990,9 +4028,12 @@ export default function App() {
                       
                       <div className="shrink-0 self-end sm:self-auto w-full sm:w-auto flex justify-end mt-2 sm:mt-0">
                         {hasLink ? (
-                          <div className="bg-gradient-to-r from-[#e2a85c] to-[#b8860b] border-2 border-[#fffacd] text-red-950 font-black text-[10px] md:text-xs px-3 py-1.5 rounded-xl shadow-[0_0_15px_rgba(226,168,92,0.6)] flex items-center justify-center gap-1.5 min-w-[100px]">
+                          <button
+                            onClick={() => handleStartChat(char)}
+                            className="bg-gradient-to-r from-[#e2a85c] to-[#b8860b] hover:from-[#b8860b] hover:to-[#e2a85c] border-2 border-[#fffacd] text-red-950 font-black text-[10px] md:text-xs px-3 py-1.5 rounded-xl shadow-[0_0_15px_rgba(226,168,92,0.6)] flex items-center justify-center gap-1.5 min-w-[100px] transition-all active:scale-95 cursor-pointer"
+                          >
                             <span className="text-pink-100 animate-pulse drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">🌸</span> ĐÃ MỞ
-                          </div>
+                          </button>
                         ) : (
                           <div className="bg-stone-800/80 border border-dashed border-[#e2a85c]/60 text-[#e2a85c]/80 font-bold text-[10px] md:text-xs px-3 py-1.5 rounded-xl shadow-inner flex items-center justify-center gap-1.5 min-w-[100px]">
                             <span>⏳</span> CHỜ LINK
@@ -4019,6 +4060,118 @@ export default function App() {
           </div>
         )}
       </AnimatePresence>
+      {/* Password Modal */}
+      <AnimatePresence>
+        {passwordModalChar && (
+          <div className="fixed inset-0 z-[9999] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1, 
+                y: 0,
+                x: isShaking ? [-10, 10, -10, 10, -5, 5, 0] : 0 
+              }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ x: { duration: 0.4 } }}
+              className="relative w-full max-w-md bg-gradient-to-b from-[#2a1010] via-[#1a0808] to-[#2a1010] border-2 border-[#e2a85c] rounded-3xl p-5 md:p-6 shadow-[0_0_40px_rgba(226,168,92,0.3)] flex flex-col overflow-hidden"
+            >
+              <div className="absolute top-4 right-4 z-50">
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.1);
+                    setPasswordModalChar(null);
+                    setPasswordError("");
+                    setPasswordInput("");
+                    setIsUnlocked(false);
+                    setShowPassword(false);
+                  }}
+                  className="p-1.5 rounded-lg hover:bg-[#e2a85c]/20 text-[#e2a85c] transition cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="text-center mb-5 border-b border-[#e2a85c]/30 pb-4 relative z-10 flex flex-col items-center">
+                <motion.div 
+                  className="text-4xl mb-2 drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]"
+                  animate={isUnlocked ? { scale: [1, 1.2, 1], rotate: [0, 15, -15, 0] } : {}}
+                  transition={{ duration: 0.5 }}
+                >
+                  {isUnlocked ? "🔓" : "🔐"}
+                </motion.div>
+                <h2 className="text-xl md:text-2xl font-black text-[#e2a85c] tracking-widest uppercase drop-shadow-[0_0_8px_rgba(226,168,92,0.5)]">
+                  XÁC NHẬN MẬT KHẨU
+                </h2>
+                <div className="mt-2.5 inline-block bg-[#3a0a0a] border border-[#e2a85c]/40 text-[#fde047] px-4 py-1 rounded-full text-xs font-bold tracking-wider shadow-inner">
+                  {passwordModalChar.name}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 relative z-10 text-[#fef08a] text-sm">
+                {passwordModalChar.passwordQuestion && (
+                  <div className="font-bold text-center text-base">
+                    <span className="text-[#e2a85c] block text-xs mb-1">CÂU HỎI BẢO MẬT:</span>
+                    {passwordModalChar.passwordQuestion}
+                  </div>
+                )}
+                
+                {passwordModalChar.passwordHint && (
+                  <div className="italic text-center text-xs opacity-90">
+                    <span className="text-[#e2a85c] font-bold">GỢI Ý: </span>
+                    {passwordModalChar.passwordHint}
+                  </div>
+                )}
+                
+                {passwordModalChar.passwordNote && (
+                  <div className="text-xs whitespace-pre-wrap opacity-95 bg-[#4a0a0a] p-3 rounded-xl border border-dashed border-[#e2a85c] text-red-200 shadow-inner">
+                    {passwordModalChar.passwordNote}
+                  </div>
+                )}
+
+                <div className="mt-2 relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value.toUpperCase().replace(/\s/g, ""))}
+                    placeholder="NHẬP MẬT KHẨU..."
+                    className={`w-full bg-[#110505] border-2 ${passwordError ? 'border-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'border-[#b8860b] focus:border-[#ffd700] focus:shadow-[0_0_15px_rgba(255,215,0,0.6)]'} text-[#fde047] placeholder:text-[#fde047]/30 px-4 py-3.5 rounded-xl outline-none transition-all font-bold text-center uppercase tracking-widest`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handlePasswordSubmit();
+                      }
+                    }}
+                  />
+                  <button 
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-3.5 p-1 text-[#e2a85c] hover:text-[#ffd700] transition-colors cursor-pointer"
+                    title={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                  {passwordError && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -5 }} 
+                      animate={{ opacity: 1, y: 0 }} 
+                      className="text-red-400 text-xs text-center mt-2 font-bold drop-shadow-md"
+                    >
+                      {passwordError}
+                    </motion.div>
+                  )}
+                </div>
+
+                <button 
+                  onClick={handlePasswordSubmit}
+                  className="mt-3 w-full relative group overflow-hidden bg-gradient-to-b from-[#7a1515] to-[#4a0a0a] border-2 border-[#ffd700] text-[#ffd700] font-black text-sm md:text-base uppercase py-3.5 rounded-xl shadow-[0_4px_0_#b8860b,0_0_15px_rgba(255,215,0,0.4)] hover:shadow-[0_2px_0_#b8860b,0_0_25px_rgba(255,215,0,0.6)] hover:-translate-y-[2px] transition-all active:scale-95 active:translate-y-[2px] active:shadow-[0_0px_0_#b8860b,0_0_10px_rgba(255,215,0,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] skew-x-12 transition-transform duration-700 ease-in-out group-hover:translate-x-full" />
+                  XÁC NHẬN
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+            </AnimatePresence>
     </div>
   );
 }

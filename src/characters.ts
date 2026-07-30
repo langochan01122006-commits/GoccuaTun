@@ -17,6 +17,11 @@ export interface Character {
   createdTime?: string;
   chatLink?: string;
   linkUpdatedAt?: string;
+  passwordRequired?: boolean;
+  password?: string;
+  passwordQuestion?: string;
+  passwordHint?: string;
+  passwordNote?: string;
 }
 
 export const CHARACTERS: Character[] = [
@@ -5401,8 +5406,13 @@ Noah đang nhai dở miếng cơm bỗng khựng lại. Cậu ngẩng mặt lên
     welcomeMessage: "",
     systemPrompt: "",
     chatbotUrl: "",
-    chatLink: "",
-    linkUpdatedAt: "",
+    chatLink: "https://aistudio.google.com/prompts/1V6FzCcqusIxB88zeGVzO0nsPGCxNQfkd",
+    linkUpdatedAt: "2026-07-29T21:37:06",
+    passwordRequired: true,
+    password: "USERDUOI18TUOI",
+    passwordQuestion: "Trong bài post của Silas Moreau câu nào được nhắc lại nhiều nhất ?",
+    passwordHint: "Có trong tất cả bài post",
+    passwordNote: "⚠️ Pass viết bằng chữ in hoa, không dấu, không cách.\n⚠️ Nếu giải được pass vui lòng không công khai pass. Nếu Tun phát hiện sẽ đổi lại pass !!!",
     storyline: `THÀNH PHỐ - 20:00
 
 Thành phố tám giờ tối, mưa phùn bắt đầu rơi nặng hạt. Những ánh đèn đường phản chiếu xuống mặt đường nhựa ướt đẫm, nhập nhoạng và xa lạ.
