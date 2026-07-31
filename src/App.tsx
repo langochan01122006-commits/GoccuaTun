@@ -28,13 +28,16 @@ const musicPlaylists = {
     { id: 12, title: "Em Đau", playlist: "Playlist #12", url: "https://files.catbox.moe/u913wi.mp3" },
     { id: 13, title: "Thành Phố Phía Đông", playlist: "Playlist #13", url: "https://files.catbox.moe/8peyzn.mp3" },
     { id: 14, title: "Tây Thi", playlist: "Playlist #14", url: "https://files.catbox.moe/pt49xb.mp3" },
-    { id: 15, title: "Liệm", playlist: "Playlist #15", url: "https://files.catbox.moe/ypka6v.mp3" }
+    { id: 15, title: "Liệm", playlist: "Playlist #15", url: "https://files.catbox.moe/ypka6v.mp3" },
+    { id: 16, title: "Cuộc Gọi Về Nhà", playlist: "Playlist #16", url: "https://files.catbox.moe/orqvtb.mp3" },
+    { id: 17, title: "Cõi Hoang Vu", playlist: "Playlist #17", url: "https://files.catbox.moe/1fh2on.mp3" },
+    { id: 18, title: "Nếu Như Ta Chẳng Còn", playlist: "Playlist #18", url: "https://files.catbox.moe/lzwh88.mp3" }
   ],
   "c-pop": [
-    { id: 16, title: "Điên Cuồng Vì Yêu", playlist: "Playlist #16", url: "https://files.catbox.moe/726hnl.mp3" },
-    { id: 17, title: "Biển, Đảo Và Em", playlist: "Playlist #17", url: "https://files.catbox.moe/kdwtw8.mp3" },
-    { id: 18, title: "Người Yêu Bỏ Lỡ", playlist: "Playlist #18", url: "https://files.catbox.moe/d27dfd.mp3" },
-    { id: 19, title: "Đường Màu Đỏ", playlist: "Playlist #19", url: "https://files.catbox.moe/nvs08s.mp3" }
+    { id: 19, title: "Điên Cuồng Vì Yêu", playlist: "Playlist #19", url: "https://files.catbox.moe/726hnl.mp3" },
+    { id: 20, title: "Biển, Đảo Và Em", playlist: "Playlist #20", url: "https://files.catbox.moe/kdwtw8.mp3" },
+    { id: 21, title: "Người Yêu Bỏ Lỡ", playlist: "Playlist #21", url: "https://files.catbox.moe/d27dfd.mp3" },
+    { id: 22, title: "Đường Màu Đỏ", playlist: "Playlist #22", url: "https://files.catbox.moe/nvs08s.mp3" }
   ]
 };
 
@@ -3728,7 +3731,10 @@ export default function App() {
                                   : 'bg-[#291202]/55 border-[#8a5d30]/20 text-amber-100/85 hover:bg-[#522b10]/40 hover:text-amber-100'
                               }`}
                             >
-                              <span className="font-serif italic text-xs truncate mr-2">{track.title}</span>
+                              <span className="font-serif italic text-xs truncate mr-2">
+                                <span className="text-amber-300/80 mr-1.5 font-sans font-semibold">{track.id}.</span>
+                                {track.title}
+                              </span>
                               {isCurrentPlaying && isPlaying && (
                                 <Music className="w-3.5 h-3.5 animate-pulse shrink-0 text-[#ffd175]" />
                               )}
