@@ -57,7 +57,7 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
   }, [isGalleryOpen, isCommissionOpen, isConfessionOpen]);
 
   // Gallery interactive states
-  const [activeArtIdx, setActiveArtIdx] = useState(0);
+  const [selectedArt, setSelectedArt] = useState<typeof GALLERY_ARTWORKS[0] | null>(null);
   const [likedArts, setLikedArts] = useState<Record<number, boolean>>({});
   const [artLikes, setArtLikes] = useState<Record<number, number>>({
     1: 0, 2: 0
@@ -275,7 +275,7 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
 
       {/* ================= MODALS ================= */}
 
-      {/* A. GALLERY SHOWCASE MODAL */}
+      {/* A. GALLERY SHOWCASE MODAL (GRID SHOWCASE) */}
       {mounted && createPortal(
         <AnimatePresence>
           {isGalleryOpen && (
@@ -283,7 +283,7 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md overflow-hidden touch-none"
+              className="fixed inset-0 z-[9999] flex items-center justify-center p-3 md:p-6 bg-black/90 backdrop-blur-md overflow-hidden"
               onClick={() => setIsGalleryOpen(false)}
               id="gallery-modal"
             >
@@ -292,114 +292,174 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.9, y: 30 }}
                 transition={{ type: "spring", damping: 25, stiffness: 350 }}
-                className="relative w-full max-w-lg bg-gradient-to-b from-[#2E1A16] to-[#1F100D] border-2 border-amber-500/50 rounded-2xl overflow-hidden p-5 shadow-2xl flex flex-col gap-4 text-amber-100"
+                className="relative w-full max-w-5xl bg-[#1a0808] border-2 border-[#e2a85c] rounded-2xl md:rounded-3xl overflow-hidden p-4 md:p-6 shadow-[0_0_50px_rgba(226,168,92,0.3)] flex flex-col gap-4 text-amber-100 max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Header */}
-                <div className="flex items-center justify-between border-b border-amber-500/20 pb-3">
-                  <div className="flex items-center gap-2">
-                    <ImageIcon className="w-5 h-5 text-amber-400" />
-                    <span className="font-serif font-black tracking-widest text-sm uppercase text-amber-200">
-                      PHÒNG TRIỂN LÃM TRANH
-                    </span>
+                <div className="flex items-center justify-between border-b border-[#e2a85c]/30 pb-3.5 px-1">
+                  <div className="flex items-center gap-2.5">
+                    <ImageIcon className="w-5 h-5 md:w-6 md:h-6 text-[#fde047]" />
+                    <div>
+                      <span className="font-serif font-black tracking-widest text-sm md:text-base uppercase text-[#fde047] drop-shadow-md block">
+                        PHÒNG TRIỂN LÃM TRANH
+                      </span>
+                      <span className="text-[10px] md:text-xs text-amber-200/70 font-sans italic">
+                        Nhấp vào tranh để xem chi tiết & thả tym cho Artist nhé 🌸
+                      </span>
+                    </div>
                   </div>
                   <button
                     onClick={() => {
                       playClickSound(300, 0.08);
                       setIsGalleryOpen(false);
                     }}
-                    className="p-1 rounded-full hover:bg-white/10 text-amber-300 transition-colors cursor-pointer"
+                    className="p-1.5 rounded-full hover:bg-white/10 text-[#fde047] transition-colors cursor-pointer border border-[#e2a85c]/30"
                     aria-label="Close"
                   >
                     <X className="w-5 h-5" />
                   </button>
                 </div>
 
-                {/* Main Artwork Frame */}
-                <div className="relative w-full rounded-xl overflow-hidden border-4 border-amber-950/80 bg-black/30 shadow-inner group flex items-center justify-center bg-[#130908]">
+                {/* Grid Showcase Body (2 cols on Mobile, 3-4 cols on PC, scrollable) */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4.5 p-1 overflow-y-auto max-h-[72vh] custom-scrollbar pr-1.5">
+                  {GALLERY_ARTWORKS.map((art) => (
+                    <motion.div
+                      key={art.id}
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.2 }}
+                      onClick={() => {
+                        playClickSound(440, 0.05);
+                        setSelectedArt(art);
+                      }}
+                      className="relative group rounded-xl md:rounded-2xl overflow-hidden bg-[#240c0c] border-2 border-[#e2a85c]/50 hover:border-[#ffd700] hover:-translate-y-1 hover:shadow-[0_0_22px_rgba(226,168,92,0.45)] transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-lg"
+                    >
+                      {/* Image Frame Container */}
+                      <div className="relative w-full aspect-[4/5] bg-black/50 overflow-hidden flex items-center justify-center">
+                        <img 
+                          src={art.imageUrl} 
+                          alt={art.title} 
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          referrerPolicy="no-referrer"
+                        />
+
+                        {/* Top-Right Floating Heart Badge Overlay */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleLike(art.id);
+                          }}
+                          className="absolute top-2 right-2 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-[#e2a85c]/60 hover:border-[#ffd700] text-xs font-bold text-[#fde047] shadow-md transition active:scale-90 cursor-pointer"
+                          title="Thả tym cho bức tranh"
+                        >
+                          <Heart 
+                            className={`w-3.5 h-3.5 ${likedArts[art.id] ? "fill-rose-500 text-rose-500" : "text-[#fde047]"}`} 
+                          />
+                          <span>{artLikes[art.id] || 0}</span>
+                        </button>
+                      </div>
+
+                      {/* Footer Info */}
+                      <div className="p-2.5 md:p-3 bg-gradient-to-b from-[#1a0808]/90 to-[#280d0d] border-t border-[#e2a85c]/30 flex flex-col gap-1 text-left">
+                        {/* Line 1: Title in Classic Gold Font */}
+                        <h3 className="font-serif font-bold text-[#fde047] text-xs md:text-sm tracking-wide truncate drop-shadow-sm">
+                          {art.title}
+                        </h3>
+                        {/* Line 2: Artist Badge */}
+                        <div>
+                          <span className="inline-flex items-center text-[10px] md:text-xs font-semibold text-amber-200/90 bg-black/50 px-2 py-0.5 rounded border border-[#e2a85c]/30">
+                            Artist: {art.artist}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
+      {/* LIGHTBOX FULLSCREEN ZOOM MODAL */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedArt && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[10000] flex items-center justify-center p-3 md:p-6 bg-black/90 backdrop-blur-md overflow-hidden"
+              onClick={() => setSelectedArt(null)}
+              id="gallery-lightbox"
+            >
+              <motion.div
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 350 }}
+                className="relative w-full max-w-2xl bg-gradient-to-b from-[#280c0c] via-[#1a0808] to-[#280c0c] border-2 border-[#e2a85c] rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-[0_0_50px_rgba(226,168,92,0.4)] flex flex-col gap-4 max-h-[92vh] overflow-y-auto text-amber-100"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Lightbox Header */}
+                <div className="flex items-center justify-between border-b border-[#e2a85c]/30 pb-3">
+                  <div className="flex items-center gap-2">
+                    <Eye className="w-5 h-5 text-[#fde047]" />
+                    <span className="font-serif font-black tracking-widest text-sm md:text-base uppercase text-[#fde047]">
+                      CHI TIẾT BỨC TRANH
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      playClickSound(300, 0.08);
+                      setSelectedArt(null);
+                    }}
+                    className="p-1.5 rounded-full hover:bg-white/10 text-[#fde047] transition-colors cursor-pointer border border-[#e2a85c]/30"
+                    aria-label="Close Lightbox"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Lightbox Artwork Image Frame */}
+                <div className="relative w-full rounded-xl md:rounded-2xl overflow-hidden border-2 border-[#e2a85c]/70 bg-black/80 flex items-center justify-center max-h-[55vh] shadow-inner p-2">
                   <img 
-                    src={GALLERY_ARTWORKS[activeArtIdx].imageUrl} 
-                    alt={GALLERY_ARTWORKS[activeArtIdx].title} 
-                    className="w-full h-auto max-h-[60vh] object-contain transition-transform duration-500 group-hover:scale-105"
+                    src={selectedArt.imageUrl} 
+                    alt={selectedArt.title} 
+                    className="max-h-[50vh] w-auto h-auto object-contain rounded-lg"
                     referrerPolicy="no-referrer"
                   />
-                  
-                  {/* Artist Tag */}
-                  <span className="absolute top-3 left-3 bg-black/70 text-amber-300 text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded border border-amber-500/30">
-                    {GALLERY_ARTWORKS[activeArtIdx].artist}
-                  </span>
-
-                  {/* Left/Right floating controls */}
-                  <div className="absolute inset-x-3 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        playClickSound(480, 0.05);
-                        setActiveArtIdx((prev) => (prev - 1 + GALLERY_ARTWORKS.length) % GALLERY_ARTWORKS.length);
-                      }}
-                      className="p-2 rounded-full bg-black/60 text-white pointer-events-auto hover:bg-black/80 transition active:scale-90 border border-amber-500/20 cursor-pointer"
-                      aria-label="Prev"
-                    >
-                      ❮
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        playClickSound(480, 0.05);
-                        setActiveArtIdx((prev) => (prev + 1) % GALLERY_ARTWORKS.length);
-                      }}
-                      className="p-2 rounded-full bg-black/60 text-white pointer-events-auto hover:bg-black/80 transition active:scale-90 border border-amber-500/20 cursor-pointer"
-                      aria-label="Next"
-                    >
-                      ❯
-                    </button>
-                  </div>
                 </div>
 
-                {/* Artwork Information */}
-                <div className="bg-[#1C0E0B]/80 rounded-xl p-4 border border-amber-500/10">
-                  <div className="flex items-start justify-between gap-2">
+                {/* Artwork Information in Lightbox */}
+                <div className="bg-[#240c0c]/80 rounded-xl p-4 border border-[#e2a85c]/30 flex flex-col gap-2">
+                  <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h3 className="font-serif font-black text-amber-200 text-base">
-                        {GALLERY_ARTWORKS[activeArtIdx].title}
+                      <h3 className="font-serif font-black text-[#fde047] text-lg md:text-xl">
+                        {selectedArt.title}
                       </h3>
-                      <div className="flex flex-wrap gap-1 mt-1">
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-500/10">
-                          Artist : Tịch Sơ Ảnh
-                        </span>
-                      </div>
+                      <span className="inline-block mt-1 text-xs font-bold px-2.5 py-0.5 rounded bg-black/60 text-amber-200 border border-[#e2a85c]/30">
+                        Artist: {selectedArt.artist}
+                      </span>
                     </div>
 
-                    {/* Like interaction */}
+                    {/* Like interaction in Lightbox */}
                     <button
-                      onClick={() => toggleLike(GALLERY_ARTWORKS[activeArtIdx].id)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2E1612] border border-amber-500/30 hover:border-amber-400 text-xs font-bold transition active:scale-90 cursor-pointer"
+                      onClick={() => toggleLike(selectedArt.id)}
+                      className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/70 border border-[#e2a85c]/60 hover:border-[#ffd700] text-xs font-bold text-[#fde047] transition active:scale-95 cursor-pointer shadow-md"
                     >
                       <Heart 
-                        className={`w-3.5 h-3.5 ${likedArts[GALLERY_ARTWORKS[activeArtIdx].id] ? "fill-rose-500 text-rose-500" : "text-amber-400"}`} 
+                        className={`w-4 h-4 ${likedArts[selectedArt.id] ? "fill-rose-500 text-rose-500" : "text-[#fde047]"}`} 
                       />
-                      <span>{artLikes[GALLERY_ARTWORKS[activeArtIdx].id]}</span>
+                      <span>{artLikes[selectedArt.id] || 0} Tym</span>
                     </button>
                   </div>
 
-                  <p className="mt-3 text-xs text-amber-100/80 leading-relaxed font-sans">
-                    {GALLERY_ARTWORKS[activeArtIdx].description}
-                  </p>
-                </div>
-
-                {/* Carousel Indicators */}
-                <div className="flex justify-center gap-2 mt-1">
-                  {GALLERY_ARTWORKS.map((art, idx) => (
-                    <button
-                      key={art.id}
-                      onClick={() => {
-                        playClickSound(400, 0.05);
-                        setActiveArtIdx(idx);
-                      }}
-                      className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${idx === activeArtIdx ? "bg-amber-400 scale-125" : "bg-amber-900 hover:bg-amber-700"}`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
+                  {selectedArt.description && (
+                    <p className="mt-2 text-xs md:text-sm text-amber-100/90 leading-relaxed font-sans bg-black/40 p-3 rounded-lg border border-[#e2a85c]/15 italic">
+                      "{selectedArt.description}"
+                    </p>
+                  )}
                 </div>
               </motion.div>
             </motion.div>
