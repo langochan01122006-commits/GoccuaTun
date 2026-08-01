@@ -41,6 +41,35 @@
         }
       },
       "required": ["artworkId", "likes"]
+    },
+    "SubmittedArtwork": {
+      "title": "SubmittedArtwork",
+      "description": "User-submitted artwork for auto-publishing in the Art Gallery.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the artwork."
+        },
+        "artist": {
+          "type": "string",
+          "description": "Name of the artist/author."
+        },
+        "description": {
+          "type": "string",
+          "description": "Message or description for Tun."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Direct URL link to the image file."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp when the artwork was submitted."
+        }
+      },
+      "required": ["title", "artist", "description", "imageUrl", "createdAt"]
     }
   },
   "firestore": {
@@ -51,6 +80,10 @@
     "art_likes/{artworkId}": {
       "schema": "ArtGalleryLikes",
       "description": "Collection where each document represents the like stats for a single artwork."
+    },
+    "artworks/{artworkId}": {
+      "schema": "SubmittedArtwork",
+      "description": "Collection where each document represents a user-submitted artwork in the gallery."
     }
   }
 }

@@ -33,6 +33,14 @@ service cloud.firestore {
         && data.likes <= 10000000;
     }
 
+    function isValidArtwork(data) {
+      return data.title is string && data.title.size() <= 300 && data.title.size() >= 1
+        && data.artist is string && data.artist.size() <= 200 && data.artist.size() >= 1
+        && data.description is string && data.description.size() <= 3000
+        && data.imageUrl is string && data.imageUrl.size() <= 2000 && data.imageUrl.size() >= 5
+        && data.createdAt is string;
+    }
+
     // 2. Votes collection
     match /votes/{characterId} {
       allow get, list: if true;
@@ -57,6 +65,13 @@ service cloud.firestore {
         && isValidArtLike(incoming())
         && (!('artworkId' in incoming()) || incoming().artworkId == artworkId)
         && (incoming().likes == existing().likes + 1 || incoming().likes == existing().likes - 1 || incoming().likes == existing().likes);
+    }
+
+    // 4. Submitted Artworks collection
+    match /artworks/{artworkId} {
+      allow get, list: if true;
+      allow create: if isValidId(artworkId) && isValidArtwork(incoming());
+      allow update, delete: if false;
     }
   }
 }

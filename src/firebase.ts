@@ -208,3 +208,73 @@ export function subscribeToArtLikes(callback: (likesMap: Record<string, number>)
   );
 }
 
+export interface SubmittedArtworkData {
+  id: string;
+  title: string;
+  artist: string;
+  description: string;
+  imageUrl: string;
+  createdAt: string;
+  likes?: number;
+  tags?: string[];
+}
+
+// Submit a new artwork
+export async function submitArtwork(artwork: {
+  title: string;
+  artist: string;
+  description: string;
+  imageUrl: string;
+}): Promise<string> {
+  const collectionName = "artworks";
+  const artId = `art_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+  const docRef = doc(db, collectionName, artId);
+  try {
+    const payload = {
+      title: artwork.title,
+      artist: artwork.artist,
+      description: artwork.description,
+      imageUrl: artwork.imageUrl,
+      createdAt: new Date().toISOString()
+    };
+    await setDoc(docRef, payload);
+    return artId;
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, `${collectionName}/${artId}`);
+    throw error;
+  }
+}
+
+// Subscribe to artworks real-time updates
+export function subscribeToArtworks(callback: (artworks: SubmittedArtworkData[]) => void) {
+  const collectionName = "artworks";
+  return onSnapshot(
+    collection(db, collectionName),
+    (snapshot) => {
+      const artList: SubmittedArtworkData[] = [];
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        if (data && data.imageUrl && data.title) {
+          artList.push({
+            id: docSnap.id,
+            title: data.title || "Tác phẩm",
+            artist: data.artist || "Vô danh",
+            description: data.description || "",
+            imageUrl: data.imageUrl,
+            createdAt: data.createdAt || new Date().toISOString(),
+            likes: 0,
+            tags: []
+          });
+        }
+      });
+      // Sort newest first
+      artList.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      callback(artList);
+    },
+    (error) => {
+      handleFirestoreError(error, OperationType.GET, collectionName);
+    }
+  );
+}
+
+
