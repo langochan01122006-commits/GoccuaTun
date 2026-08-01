@@ -31,7 +31,7 @@ const musicPlaylists = {
     { id: 15, title: "Liệm", playlist: "Playlist #15", url: "https://files.catbox.moe/ypka6v.mp3" },
     { id: 16, title: "Cuộc Gọi Về Nhà", playlist: "Playlist #16", url: "https://www.image2url.com/r2/default/audio/1785565026249-d80f95f9-652c-48f5-8656-19e28e6bcb05.mp3" },
     { id: 17, title: "Cõi Hoang Vu", playlist: "Playlist #17", url: "https://files.catbox.moe/1fh2on.mp3" },
-    { id: 18, title: "Nếu Như Ta Chẳng Còn", playlist: "Playlist #18", url: "https://files.catbox.moe/lzwh88.mp3" }
+    { id: 18, title: "Nếu Như Ta Chẳng Còn", playlist: "Playlist #18", url: "https://litter.catbox.moe/qodaf9my1et7fplr.mp3" }
   ],
   "c-pop": [
     { id: 19, title: "Điên Cuồng Vì Yêu", playlist: "Playlist #19", url: "https://files.catbox.moe/726hnl.mp3" },
@@ -3733,7 +3733,6 @@ export default function App() {
                       <div className="flex-1 overflow-y-auto mb-4 pr-1 space-y-2 no-scrollbar custom-scrollbar">
                         {musicPlaylists[selectedPlaylist].map((track, index) => {
                           const isCurrentPlaying = selectedPlaylist === activePlaylist && index === currentTrackIndex;
-                          const isZeroByteTrack = track.id === 18;
                           return (
                             <button
                               key={index}
@@ -3752,11 +3751,6 @@ export default function App() {
                               <span className="font-serif italic text-xs truncate mr-2 flex items-center gap-1">
                                 <span className="text-amber-300/80 mr-1 font-sans font-semibold">{track.id}.</span>
                                 <span className="truncate">{track.title}</span>
-                                {isZeroByteTrack && (
-                                  <span className="ml-1 px-1.5 py-0.5 text-[9px] font-sans font-bold bg-rose-900/90 text-rose-200 border border-rose-500/40 rounded shrink-0">
-                                    0B - Lỗi link MP3
-                                  </span>
-                                )}
                               </span>
                               {isCurrentPlaying && isPlaying && (
                                 <Music className="w-3.5 h-3.5 animate-pulse shrink-0 text-[#ffd175]" />
