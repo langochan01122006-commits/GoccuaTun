@@ -27,6 +27,24 @@ const GALLERY_ARTWORKS = [
     artist: "Tịch Sơ Ảnh",
     likes: 0,
     tags: []
+  },
+  {
+    id: 3,
+    title: "Silas Moreau Kitty",
+    description: "cục cức iu Yummi vẽ Silas",
+    imageUrl: "https://i.imgur.com/hwZFkll.png",
+    artist: "Yummi",
+    likes: 0,
+    tags: []
+  },
+  {
+    id: 4,
+    title: "Silas Moreau vâm",
+    description: "cục cức iu Yummi vẽ Silas nhưng bản này ⚡️hơn",
+    imageUrl: "https://i.imgur.com/5E0kcos.png",
+    artist: "Yummi",
+    likes: 0,
+    tags: []
   }
 ];
 
@@ -60,7 +78,7 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
   const [selectedArt, setSelectedArt] = useState<typeof GALLERY_ARTWORKS[0] | null>(null);
   const [likedArts, setLikedArts] = useState<Record<number, boolean>>({});
   const [artLikes, setArtLikes] = useState<Record<number, number>>({
-    1: 0, 2: 0
+    1: 0, 2: 0, 3: 0, 4: 0
   });
 
   // Fetch initial likes
