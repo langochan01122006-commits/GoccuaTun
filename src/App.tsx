@@ -29,7 +29,7 @@ const musicPlaylists = {
     { id: 13, title: "Thành Phố Phía Đông", playlist: "Playlist #13", url: "https://files.catbox.moe/8peyzn.mp3" },
     { id: 14, title: "Tây Thi", playlist: "Playlist #14", url: "https://files.catbox.moe/pt49xb.mp3" },
     { id: 15, title: "Liệm", playlist: "Playlist #15", url: "https://files.catbox.moe/ypka6v.mp3" },
-    { id: 16, title: "Cuộc Gọi Về Nhà", playlist: "Playlist #16", url: "https://files.catbox.moe/orqvtb.mp3" },
+    { id: 16, title: "Cuộc Gọi Về Nhà", playlist: "Playlist #16", url: "https://www.image2url.com/r2/default/audio/1785565026249-d80f95f9-652c-48f5-8656-19e28e6bcb05.mp3" },
     { id: 17, title: "Cõi Hoang Vu", playlist: "Playlist #17", url: "https://files.catbox.moe/1fh2on.mp3" },
     { id: 18, title: "Nếu Như Ta Chẳng Còn", playlist: "Playlist #18", url: "https://files.catbox.moe/lzwh88.mp3" }
   ],
@@ -277,6 +277,7 @@ export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [musicProgress, setMusicProgress] = useState(0);
   const [musicDuration, setMusicDuration] = useState(0);
+  const [audioError, setAudioError] = useState<string | null>(null);
   const [isPlaylistViewOpen, setIsPlaylistViewOpen] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [selectedPlaylist, setSelectedPlaylist] = useState<"us-uk" | "v-pop" | "c-pop">("us-uk");
@@ -384,21 +385,30 @@ export default function App() {
   const handleTimeUpdate = () => {
     if (audioRef.current) {
       setMusicProgress(audioRef.current.currentTime);
-      console.log("Audio time update:", audioRef.current.currentTime, "duration:", audioRef.current.duration);
     }
   };
 
   const handleDurationChange = () => {
     if (audioRef.current) {
-      setMusicDuration(audioRef.current.duration || 0);
-      console.log("Audio duration change:", audioRef.current.duration);
+      const dur = audioRef.current.duration;
+      setMusicDuration(dur || 0);
+      if (dur === 0 || isNaN(dur)) {
+        setAudioError("File audio bị trống (0 byte) trên máy chủ Catbox.");
+      } else {
+        setAudioError(null);
+      }
     }
   };
 
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
-      setMusicDuration(audioRef.current.duration || 0);
-      console.log("Audio loaded metadata, duration:", audioRef.current.duration);
+      const dur = audioRef.current.duration;
+      setMusicDuration(dur || 0);
+      if (dur === 0 || isNaN(dur)) {
+        setAudioError("File audio bị trống (0 byte) trên máy chủ Catbox.");
+      } else {
+        setAudioError(null);
+      }
     }
   };
 
@@ -409,6 +419,7 @@ export default function App() {
 
   const handleAudioError = (e: any) => {
     console.error("Audio error encountered:", e, audioRef.current?.error);
+    setAudioError("Link MP3 bị lỗi hoặc file 0 byte không thể phát.");
   };
 
   // Sync play/pause state of the DOM audio node
@@ -416,17 +427,17 @@ export default function App() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    console.log("Audio state sync effect: isPlaying =", isPlaying, "src =", audio.src, "readyState =", audio.readyState);
     if (isPlaying) {
       audio.load();
       audio.play().then(() => {
-        console.log("Audio play succeeded for:", audio.src);
+        if (audio.duration && audio.duration > 0) {
+          setAudioError(null);
+        }
       }).catch((err) => {
         console.warn("Audio play failed/prevented:", err);
       });
     } else {
       audio.pause();
-      console.log("Audio paused.");
     }
   }, [isPlaying, currentTrackIndex, activePlaylist]);
 
@@ -434,6 +445,7 @@ export default function App() {
   useEffect(() => {
     setMusicProgress(0);
     setMusicDuration(0);
+    setAudioError(null);
   }, [currentTrackIndex, activePlaylist]);
 
   const toggleMusicPlay = () => {
@@ -3607,13 +3619,18 @@ export default function App() {
                       </div>
 
                       {/* Song information with soft italic fonts */}
-                      <div className="text-center mb-4 px-2 relative z-10">
+                      <div className="text-center mb-3 px-2 relative z-10">
                         <h4 className="text-base md:text-lg font-serif italic text-[#FFE79A] text-center tracking-wide line-clamp-1 drop-shadow-md pr-1">
                           {currentSong?.title || "No track selected"}
                         </h4>
                         <p className="text-[11px] font-serif italic text-amber-300/60 mt-0.5 tracking-wider">
                           {currentSong?.playlist || `Album #${currentTrackIndex + 1}`}
                         </p>
+                        {audioError && (
+                          <div className="mt-2 px-2.5 py-1 rounded-lg bg-rose-950/80 border border-rose-500/50 text-[10px] text-rose-200 font-sans font-medium">
+                            ⚠️ {audioError}
+                          </div>
+                        )}
                       </div>
 
                       {/* Classic wood-carved timeline groove with brass accents */}
@@ -3716,6 +3733,7 @@ export default function App() {
                       <div className="flex-1 overflow-y-auto mb-4 pr-1 space-y-2 no-scrollbar custom-scrollbar">
                         {musicPlaylists[selectedPlaylist].map((track, index) => {
                           const isCurrentPlaying = selectedPlaylist === activePlaylist && index === currentTrackIndex;
+                          const isZeroByteTrack = track.id === 18;
                           return (
                             <button
                               key={index}
@@ -3731,9 +3749,14 @@ export default function App() {
                                   : 'bg-[#291202]/55 border-[#8a5d30]/20 text-amber-100/85 hover:bg-[#522b10]/40 hover:text-amber-100'
                               }`}
                             >
-                              <span className="font-serif italic text-xs truncate mr-2">
-                                <span className="text-amber-300/80 mr-1.5 font-sans font-semibold">{track.id}.</span>
-                                {track.title}
+                              <span className="font-serif italic text-xs truncate mr-2 flex items-center gap-1">
+                                <span className="text-amber-300/80 mr-1 font-sans font-semibold">{track.id}.</span>
+                                <span className="truncate">{track.title}</span>
+                                {isZeroByteTrack && (
+                                  <span className="ml-1 px-1.5 py-0.5 text-[9px] font-sans font-bold bg-rose-900/90 text-rose-200 border border-rose-500/40 rounded shrink-0">
+                                    0B - Lỗi link MP3
+                                  </span>
+                                )}
                               </span>
                               {isCurrentPlaying && isPlaying && (
                                 <Music className="w-3.5 h-3.5 animate-pulse shrink-0 text-[#ffd175]" />
