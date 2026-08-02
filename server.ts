@@ -75,10 +75,10 @@ async function startServer() {
       const responseText = apiResponse.text;
       res.json({ text: responseText });
     } catch (error: any) {
-      console.error("Gemini API Error:", error);
+      console.error("Gemini API Error:", error?.message || error);
       res.status(500).json({
         error: "Xin lỗi, đã xảy ra lỗi khi kết nối với tinh hồn của nhân vật.",
-        details: error.message || error,
+        details: error?.message || String(error),
       });
     }
   });

@@ -41,7 +41,10 @@ const musicPlaylists = {
   "phonk-funk": [
     { id: 23, title: "PALADIN", playlist: "Playlist #23", url: "https://files.catbox.moe/s7c5bf.mp3" },
     { id: 24, title: "TURAN", playlist: "Playlist #24", url: "https://files.catbox.moe/a2p242.mp3" },
-    { id: 25, title: "FUNK TAKA", playlist: "Playlist #25", url: "https://files.catbox.moe/gp4pvi.mp3" }
+    { id: 25, title: "FUNK TAKA", playlist: "Playlist #25", url: "https://files.catbox.moe/gp4pvi.mp3" },
+    { id: 26, title: "FUNK SERENO", playlist: "Playlist #26", url: "https://files.catbox.moe/quotop.mp3" },
+    { id: 27, title: "MONTAGEM ELDER", playlist: "Playlist #27", url: "https://files.catbox.moe/wiz7x8.mp3" },
+    { id: 28, title: "MONTAGEM UNKNOWN", playlist: "Playlist #28", url: "https://files.catbox.moe/o0cing.mp3" }
   ]
 };
 
