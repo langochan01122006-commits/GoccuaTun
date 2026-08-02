@@ -37,6 +37,11 @@ const musicPlaylists = {
     { id: 20, title: "Biển, Đảo Và Em", playlist: "Playlist #20", url: "https://files.catbox.moe/kdwtw8.mp3" },
     { id: 21, title: "Người Yêu Bỏ Lỡ", playlist: "Playlist #21", url: "https://files.catbox.moe/d27dfd.mp3" },
     { id: 22, title: "Đường Màu Đỏ", playlist: "Playlist #22", url: "https://files.catbox.moe/nvs08s.mp3" }
+  ],
+  "phonk-funk": [
+    { id: 23, title: "PALADIN", playlist: "Playlist #23", url: "https://files.catbox.moe/s7c5bf.mp3" },
+    { id: 24, title: "TURAN", playlist: "Playlist #24", url: "https://files.catbox.moe/a2p242.mp3" },
+    { id: 25, title: "FUNK TAKA", playlist: "Playlist #25", url: "https://files.catbox.moe/gp4pvi.mp3" }
   ]
 };
 
@@ -279,8 +284,9 @@ export default function App() {
   const [audioError, setAudioError] = useState<string | null>(null);
   const [isPlaylistViewOpen, setIsPlaylistViewOpen] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [selectedPlaylist, setSelectedPlaylist] = useState<"us-uk" | "v-pop" | "c-pop">("us-uk");
-  const [activePlaylist, setActivePlaylist] = useState<"us-uk" | "v-pop" | "c-pop">("us-uk");
+  type PlaylistCategory = keyof typeof musicPlaylists;
+  const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistCategory>("us-uk");
+  const [activePlaylist, setActivePlaylist] = useState<PlaylistCategory>("us-uk");
   const [gachaResult, setGachaResult] = useState<Character | null>(null);
   const [isSummoning, setIsSummoning] = useState(false);
   const [floatingNotes, setFloatingNotes] = useState<{ id: number; text: string; left: string; size: string; duration: string; color: string }[]>([]);
@@ -3486,9 +3492,10 @@ export default function App() {
         onTimeUpdate={handleTimeUpdate}
         onDurationChange={handleDurationChange}
         onLoadedMetadata={handleLoadedMetadata}
+        onCanPlay={handleDurationChange}
         onEnded={handleEnded}
         onError={handleAudioError}
-        preload="metadata"
+        preload="auto"
         className="hidden"
       />
 
@@ -3842,13 +3849,14 @@ export default function App() {
                           value={selectedPlaylist}
                           onChange={(e) => {
                             playClickSound(300, 0.08);
-                            setSelectedPlaylist(e.target.value as "us-uk" | "v-pop" | "c-pop");
+                            setSelectedPlaylist(e.target.value as PlaylistCategory);
                           }}
                           className="w-full bg-[#291202] border border-amber-500/40 text-[#ffd175] text-xs font-serif rounded-xl p-2.5 outline-none focus:border-amber-400/80 transition cursor-pointer"
                         >
                           <option value="us-uk">US - UK</option>
                           <option value="v-pop">V-POP</option>
                           <option value="c-pop">C-POP</option>
+                          <option value="phonk-funk">Phonk - Funk</option>
                         </select>
                       </div>
                       {/* Current Playlist */}
