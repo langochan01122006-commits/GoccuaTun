@@ -30,8 +30,7 @@ const musicPlaylists = {
     { id: 14, title: "Tây Thi", playlist: "Playlist #14", url: "https://files.catbox.moe/pt49xb.mp3" },
     { id: 15, title: "Liệm", playlist: "Playlist #15", url: "https://files.catbox.moe/ypka6v.mp3" },
     { id: 16, title: "Cuộc Gọi Về Nhà", playlist: "Playlist #16", url: "https://www.image2url.com/r2/default/audio/1785565026249-d80f95f9-652c-48f5-8656-19e28e6bcb05.mp3" },
-    { id: 17, title: "Cõi Hoang Vu", playlist: "Playlist #17", url: "https://files.catbox.moe/1fh2on.mp3" },
-    { id: 18, title: "Nếu Như Ta Chẳng Còn", playlist: "Playlist #18", url: "https://litter.catbox.moe/qodaf9my1et7fplr.mp3" }
+    { id: 17, title: "Cõi Hoang Vu", playlist: "Playlist #17", url: "https://files.catbox.moe/1fh2on.mp3" }
   ],
   "c-pop": [
     { id: 19, title: "Điên Cuồng Vì Yêu", playlist: "Playlist #19", url: "https://files.catbox.moe/726hnl.mp3" },
@@ -381,6 +380,48 @@ export default function App() {
     };
   }, []);
 
+  const formatAudioUrl = (url: string | undefined): string => {
+    if (!url) return "";
+    let formatted = url.trim();
+    if (formatted.includes("drive.google.com") || formatted.includes("drive.usercontent.google.com")) {
+      const fileIdMatch = formatted.match(/\/d\/([a-zA-Z0-9_-]+)/) || formatted.match(/id=([a-zA-Z0-9_-]+)/);
+      if (fileIdMatch && fileIdMatch[1]) {
+        return `https://drive.google.com/uc?export=download&id=${fileIdMatch[1]}`;
+      }
+    }
+    return formatted;
+  };
+
+  const lastTrackKeyRef = useRef<string | null>(null);
+  const errorAutoSkipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Clear auto-skip timer on unmount
+  useEffect(() => {
+    return () => {
+      if (errorAutoSkipTimeoutRef.current) {
+        clearTimeout(errorAutoSkipTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Ensure currentTrackIndex is valid when activePlaylist changes
+  useEffect(() => {
+    const trackList = musicPlaylists[activePlaylist];
+    if (trackList && currentTrackIndex >= trackList.length) {
+      setCurrentTrackIndex(0);
+    }
+  }, [activePlaylist, currentTrackIndex]);
+
+  const scheduleAutoNextTrack = () => {
+    if (errorAutoSkipTimeoutRef.current) {
+      clearTimeout(errorAutoSkipTimeoutRef.current);
+    }
+    errorAutoSkipTimeoutRef.current = setTimeout(() => {
+      console.warn("Auto-skipping unplayable or empty track...");
+      playNextTrack();
+    }, 1800);
+  };
+
   // Music Player logic
   const handleTimeUpdate = () => {
     if (audioRef.current) {
@@ -391,10 +432,12 @@ export default function App() {
   const handleDurationChange = () => {
     if (audioRef.current) {
       const dur = audioRef.current.duration;
-      setMusicDuration(dur || 0);
-      if (dur === 0 || isNaN(dur)) {
-        setAudioError("File audio bị trống (0 byte) trên máy chủ Catbox.");
-      } else {
+      if (dur && !isNaN(dur) && isFinite(dur) && dur > 0) {
+        setMusicDuration(dur);
+        if (errorAutoSkipTimeoutRef.current) {
+          clearTimeout(errorAutoSkipTimeoutRef.current);
+          errorAutoSkipTimeoutRef.current = null;
+        }
         setAudioError(null);
       }
     }
@@ -403,50 +446,87 @@ export default function App() {
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
       const dur = audioRef.current.duration;
-      setMusicDuration(dur || 0);
-      if (dur === 0 || isNaN(dur)) {
-        setAudioError("File audio bị trống (0 byte) trên máy chủ Catbox.");
-      } else {
+      if (dur && !isNaN(dur) && isFinite(dur) && dur > 0) {
+        setMusicDuration(dur);
+        if (errorAutoSkipTimeoutRef.current) {
+          clearTimeout(errorAutoSkipTimeoutRef.current);
+          errorAutoSkipTimeoutRef.current = null;
+        }
         setAudioError(null);
+      } else if (dur === 0) {
+        setAudioError("Tệp âm thanh trống hoặc không thể phát. Đang tự động chuyển bài...");
+        scheduleAutoNextTrack();
       }
     }
   };
 
   const handleEnded = () => {
     console.log("Audio track ended, playing next...");
+    if (errorAutoSkipTimeoutRef.current) {
+      clearTimeout(errorAutoSkipTimeoutRef.current);
+      errorAutoSkipTimeoutRef.current = null;
+    }
     playNextTrack();
   };
 
   const handleAudioError = (e: any) => {
     console.error("Audio error encountered:", e, audioRef.current?.error);
-    setAudioError("Link MP3 bị lỗi hoặc file 0 byte không thể phát.");
+    setAudioError("Link MP3 bị lỗi hoặc không thể phát. Đang tự động chuyển bài...");
+    scheduleAutoNextTrack();
   };
 
-  // Sync play/pause state of the DOM audio node
+  // Sync play/pause state and track loading of the DOM audio node
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
+    const currentTrackKey = `${activePlaylist}_${currentTrackIndex}`;
+    const currentTrack = musicPlaylists[activePlaylist]?.[currentTrackIndex];
+    const targetUrl = formatAudioUrl(currentTrack?.url);
+
+    // Only load audio when the active track (playlist + index) changes
+    if (lastTrackKeyRef.current !== currentTrackKey) {
+      lastTrackKeyRef.current = currentTrackKey;
+      if (errorAutoSkipTimeoutRef.current) {
+        clearTimeout(errorAutoSkipTimeoutRef.current);
+        errorAutoSkipTimeoutRef.current = null;
+      }
+      setMusicProgress(0);
+      setMusicDuration(0);
+      setAudioError(null);
+
+      if (targetUrl) {
+        audio.src = targetUrl;
+        audio.load();
+      } else {
+        audio.removeAttribute("src");
+        setAudioError("Không tìm thấy đường dẫn bài hát.");
+      }
+    }
+
     if (isPlaying) {
-      audio.load();
-      audio.play().then(() => {
-        if (audio.duration && audio.duration > 0) {
-          setAudioError(null);
+      if (audio.src) {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              if (audio.duration && audio.duration > 0) {
+                setAudioError(null);
+              }
+            })
+            .catch((err) => {
+              console.warn("Audio play failed or prevented:", err);
+              if (err.name !== "NotAllowedError" && err.name !== "AbortError") {
+                setAudioError("Không thể phát bài hát này. Đang tự động chuyển bài...");
+                scheduleAutoNextTrack();
+              }
+            });
         }
-      }).catch((err) => {
-        console.warn("Audio play failed/prevented:", err);
-      });
+      }
     } else {
       audio.pause();
     }
   }, [isPlaying, currentTrackIndex, activePlaylist]);
-
-  // Handle immediate track change, clearing previous state
-  useEffect(() => {
-    setMusicProgress(0);
-    setMusicDuration(0);
-    setAudioError(null);
-  }, [currentTrackIndex, activePlaylist]);
 
   const toggleMusicPlay = () => {
     playClickSound(300, 0.08);
@@ -455,15 +535,45 @@ export default function App() {
 
   const playNextTrack = () => {
     playClickSound(300, 0.08);
+    if (errorAutoSkipTimeoutRef.current) {
+      clearTimeout(errorAutoSkipTimeoutRef.current);
+    }
     const trackList = musicPlaylists[activePlaylist];
-    setCurrentTrackIndex((prev) => (prev + 1) % trackList.length);
+    if (!trackList || trackList.length === 0) return;
+
+    setCurrentTrackIndex((prev) => {
+      const nextIndex = (prev + 1) % trackList.length;
+      if (nextIndex === prev && audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.load();
+        if (isPlaying) {
+          audioRef.current.play().catch(() => {});
+        }
+      }
+      return nextIndex;
+    });
     setIsPlaying(true);
   };
 
   const playPrevTrack = () => {
     playClickSound(300, 0.08);
+    if (errorAutoSkipTimeoutRef.current) {
+      clearTimeout(errorAutoSkipTimeoutRef.current);
+    }
     const trackList = musicPlaylists[activePlaylist];
-    setCurrentTrackIndex((prev) => (prev - 1 + trackList.length) % trackList.length);
+    if (!trackList || trackList.length === 0) return;
+
+    setCurrentTrackIndex((prev) => {
+      const prevIndex = (prev - 1 + trackList.length) % trackList.length;
+      if (prevIndex === prev && audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.load();
+        if (isPlaying) {
+          audioRef.current.play().catch(() => {});
+        }
+      }
+      return prevIndex;
+    });
     setIsPlaying(true);
   };
 
@@ -3369,6 +3479,18 @@ export default function App() {
           </p>
         )}
       </footer>
+
+      {/* Hidden Audio Element for Background & Gramophone Music */}
+      <audio
+        ref={audioRef}
+        onTimeUpdate={handleTimeUpdate}
+        onDurationChange={handleDurationChange}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleEnded}
+        onError={handleAudioError}
+        preload="metadata"
+        className="hidden"
+      />
 
       {/* Floating Music Button */}
       {hasEntered && (
