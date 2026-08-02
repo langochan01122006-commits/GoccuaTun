@@ -32,7 +32,7 @@ const GALLERY_ARTWORKS = [
     id: 3,
     title: "Silas Moreau Kitty",
     description: "cục cức iu Yummi vẽ Silas",
-    imageUrl: "https://i.imgur.com/hwZFkll.png",
+    imageUrl: "https://i.imgur.com/jrFhrVG.png",
     artist: "Yummi",
     likes: 0,
     tags: []
