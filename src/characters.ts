@@ -5671,5 +5671,228 @@ Cô nhổm người dậy, khẽ nhìn kỹ.
 Dưới ánh đèn mờ ảo, gương mặt với những hình thù quái lạ ban nãy bỗng chốc biến mất, trả lại một khuôn mặt người bằng xương bằng thịt đẹp đến nao lòng đang nhắm nghiền ngủ say.
 
 Rốt cuộc... anh là ai vậy? Tại sao em lại chẳng thể nhớ nổi một chút gì về chúng ta thế này?`
+  },
+  {
+    id: "32",
+    no: "032",
+    createdTime: "2026-08-04T22:17:00",
+    name: "Bình Minh Đỏ",
+    avatar: "🌤️",
+    avatarBg: "from-amber-600 via-rose-700 to-red-900",
+    image: "https://i.imgur.com/EhK7e64.jpeg",
+    tags: ["HIỆN ĐẠI", "Open World", "BG", "2 Couple", "Tận Thế"],
+    description: "Đại dịch zombie bùng phát tại Seoul đẩy bạn và cô bạn thân vào cuộc sinh tồn nghẹt thở. Giữa vòng vây quái vật, hai gã hàng xóm bí ẩn, điển trai bất ngờ ra tay giải cứu.",
+    story: "Sống cùng cô bạn thân Bae Yeon-hee tại chung cư ở Seoul, cuộc sống bình yên của bạn sụp đổ khi đại dịch virus biến người thành zombie bùng phát. Cạn kiệt lương thực sau một tuần cố thủ, hai bạn buộc phải mạo hiểm ra ngoài kiếm ăn. Bị quái vật bao vây tiến lui không xong, trong khoảnh khắc cận kề cái chết, bạn và Yeon-hee bất ngờ được hai gã hàng xóm điển trai nhưng lạnh lùng — Seo Gun-woo và Pyo Do-hyun — kéo vào phòng giải cứu.",
+    welcomeMessage: "",
+    systemPrompt: "",
+    chatbotUrl: "",
+    chatLink: "",
+    storyline: `Hàn Quốc – 2026
+
+"...Ngành y tế ghi nhận thêm hàng loạt ca nhập viện do biến thể cúm mùa mới,triệu chứng ban đầu gồm sốt cao và mệt mỏi kéo dài. Các bác sĩ khuyến cáo người dân giữ ấm và uống đủ nước. Tiếp theo là thông tin thị trường chứng khoán..."
+
+Tít.
+
+Cô với tay lấy chiếc điều khiển trên bàn, thẳng tay tắt phụt tivi. Xoay người lại, cô khoanh tay nhìn con bạn thân đang nằm dài trên sofa đắp mặt nạ, thong thả dưỡng da.
+
+"Bae Yeon-hee. Tao nhớ hôm nay đến lượt mày đi đổ rác cơ mà?"
+
+Chưa để con bạn kịp phản ứng, cô vung tay phát một cái rõ kêu vào cặp mông đang vểnh lên của nó.
+
+"Á! Biết rồi màaaa!"
+
+Yeon-hee xoa xoa mông, rên rỉ bò dậy. Nó lóc cóc xách bịch rác đi ra cửa, miệng vẫn không quên lầm bầm chửi thề.
+
+19:21 - Tối hôm đó
+
+Gió rít nhẹ, từng đợt mưa lất phất hắt lên tấm kính cửa sổ. Cô — một nhân viên văn phòng bình thường như bao người — đang sống cùng cô bạn thân trong một khu chung cư nhỏ giữa lòng Seoul.
+
+"Ê ê! Phòng bên cạnh mới có hai anh đẹp trai cực phẩm chuyển tới đấy mày!"
+
+Yeon-hee đứng ngoài ban công, lén lút thò đầu qua vách ngăn nhìn sang ban công đối diện, giọng phấn khích tột độ.
+
+"Đâu? Đâu? Tránh ra tao xem nào!"
+
+Cô cũng vội vàng thò đầu ra ngó nghiêng. Hai đứa con gái chen chúc nhau rình mò giữa đêm khuya, trông chẳng khác gì hai kẻ biến thái.
+
+"Ngày mai tao sẽ nướng một mẻ bánh thật ngon mang qua làm quen!" Yeon-hee tủm tỉm cười, mắt sáng rực lên.
+
+"Hí hí, duyệt!"
+
+Cô bạn thân nhảy chân sáo vào phòng, hì hục lật tung các trang web tìm công thức làm bánh.
+
+Nói không giấu gì, cô và Yeon-hee là hai minh chứng sống cho hệ tư tưởng "ế trường tồn". Vừa hướng nội lại còn lowkey, đâm ra đến tận tuổi này hai đứa vẫn chẳng có nổi một mảnh tình vắt vai. Tự hỏi sao lần này lại bạo gan thế ư? Chắc tại cái máu mê trai nó đã vượt ngưỡng kiểm soát rồi!
+
+Sáng hôm sau
+
+Sau màn đánh vật trong bếp và cho ra lò mười mẻ bánh khét lẹt như than tổ ong, cuối cùng hai đứa cũng chắt lọc được một đĩa bánh nhìn "có vẻ" giống con người ăn được để đem đi cưa cẩm.
+
+Cốc. Cốc. Cốc.
+
+"Chào hai anh, tụi mình là hàng xóm ngay phòng bên. Có chút bánh tự làm mang qua gọi là ra mắt..."
+
+Cô và Yeon-hee đứng ngoài cửa, tim đập chân run, bẽn lẽn vuốt tóc như chuẩn bị đi fanmeeting gặp idol.
+
+Cạch.
+
+Cửa mở. Một người đàn ông cao lớn với gương mặt lạnh tanh như băng ngó xuống.
+
+"..."
+
+"..."
+
+"Ừm... Cảm ơn."
+
+Cầm đĩa bánh. Đóng sầm cửa. Cạch.
+
+"Hả?!?" "Ủa alo???"
+
+Cô và con bạn thân đứng hóa đá giữa hành lang, ngơ ngác nhìn nhau, tay vẫn còn giữ nguyên tư thế đưa bánh.
+
+"Chắc... chắc ảnh thuộc tuýp nam chính lạnh lùng chiếm hữu mày ạ..." Yeon-hee cố đấm ăn xôi vớt vát.
+
+"Lạnh lùng cái đầu mày! ĐẸP TRAI SÁU MÚI THƠM PHỨC THÌ ĐƯỢC PHÉP CHẢNH CHÓ À?!"
+
+Tối đó, hai đứa hậm hực ngồi trong phòng, thi nhau nói xấu hai gã hàng xóm mới chuyển đến. Tổn thương lòng tự trọng sâu sắc!
+
+"Thôi, mẹ đi ngủ đây!" Yeon-hee trèo lên giường, kéo chăn kín cổ. "Ê mà dạo này nhiều ca cúm vãi, mai ra đường nhớ đeo khẩu trang nha mày."
+
+Hai tên phòng bên là Seo Gun-woo và Pyo Do-hyun. Đẹp trai thì có đẹp trai, nhưng thoắt ẩn thoắt hiện như ma, gặp ngoài thang máy cũng chẳng buồn gật đầu lấy một cái. Nhưng thôi kệ đi, đẹp là được tha thứ.
+
+"Chúng tôi vừa nhận được tin báo khẩn về các hành vi bạo lực bùng phát hàng loạt tại khu vực trung tâm. Cảnh sát đã phải sử dụng biện pháp mạnh nhưng... đối tượng dường như không có phản ứng với hơi cay hay đạn cao su! Vẫn chưa có kết luận đây là loại virus gây ảo giác hay..."
+
+Tiếng bản tin thời sự vẫn đều đều phát ra từ tivi, kèm theo những đoạn video bạo loạn mờ ảo.
+
+"Ê má, xem sợ vãi. Mai ra đường tao phải cầm theo cái chích điện cho an tâm." Yeon-hee lắc đầu, với tay tắt phụt tivi. "Ngủ đi, mai tao dẫn mày ra quán cà phê ngắm trai gỡ gạc."
+
+04:49 - Sáng sớm hôm sau
+
+"AAAAAAAAA!!!"
+
+Tiếng hét thất thanh xé toạc màn đêm khiến cô giật nảy mình, tim đập thót lên tận cổ họng. Tiếng hét vang lên ngay từ hành lang bên ngoài.
+
+Cô lồm cồm bò dậy, tát bình bịch vào người con bạn: "Ê! Ê! Dậy đi! Mày có nghe thấy tiếng bà nào hét ghê lắm không?"
+
+Yeon-hee ngáp ngắn ngáp dài, mắt vẫn nhắm tịt, lầu bầu: "Đi xem thử coi..."
+
+Bằng một thế lực tâm linh nào đó, hai đứa lôi nhau ra cửa. Mắt dán vào lỗ châu mai, hé mở cánh cửa một khe nhỏ. Ngoài hành lang vắng tanh, lạnh lẽo, đèn nê-on chớp tắt liên hồi.
+
+"Quái lạ, tầm này mấy ông bà dưới sân tập thể dụ dưỡng sinh rôm rả lắm mà ta..."
+
+Cộp... cộp... cộp...
+
+Từ cuối hành lang vẳng lại tiếng bước chân kéo lê nặng nhọc. Hình bóng mờ ảo tiến lại gần. À, là cô hàng xóm tốt bụng hay cho đồ ăn vặt phòng bên.
+
+"Cô ơi? Cô đi đâu mà dậy sớm thế?" Cô lên tiếng gọi qua khe cửa. "Cháu vừa nghe tiếng hét, có vụ gì vậy cô?"
+
+"..."
+
+Không gian im lặng đến rợn gáy. Chỉ có tiếng bước chân ngày một dồn dập, kéo lê trên sàn gạch...
+
+Khè... Grừ...
+
+"Cô... cô ơi?"
+
+Cộp cộp cộp cộp! Bước chân đột nhiên tăng tốc thành một cuộc chạy nước rút điên cuồng.
+
+"Đóng cửa! YEON-HEE ĐÓNG CỬA LẠI!!!"
+
+"GRÀAAAAAA!!!"
+
+Người phụ nữ lao sầm tới với tốc độ kinh hồn. Dưới ánh đèn nhợt nhạt, khuôn mặt hiền lành mọi ngày giờ lõm một hố sâu hoắm. Răng môi nát bét trộn lẫn với máu tươi chảy ròng ròng xuống cổ. Nhãn cầu ả vỡ nát, lộ cả phần mô não xám ngoét qua hốc mắt.
+
+RẦM!
+
+Cô hoảng loạn kéo gập Yeon-hee lại, dùng cả mạng sống đóng sầm cánh cửa, vội vàng gạt khóa chốt. Hai đứa mặt cắt không còn một giọt máu, trượt dài xuống cửa, ngồi co ro dưới sàn, toàn thân run bần bật.
+
+"Cái... cái đéo gì thế..." Cô lắp bắp, hai hàm răng đánh bò cạp vào nhau.
+
+Yeon-hee run rẩy bám tay nắm cửa bò lên, dán mắt vào lỗ nhòm. Chỉ một giây sau, nó ngồi phịch xuống đất, mặt trắng bệch như tờ giấy.
+
+"Zoo..." "Sở thú cái gì? Mày điên à?" "Zo... Zoobie!!!"
+
+Con bạn vừa khóc vừa lắc đầu như hóa dại, tay chỉ run rẩy về phía cánh cửa.
+
+Cô lấy hết can đảm đứng dậy nhìn ra ngoài. Trước cửa phòng, một sinh vật máu me be bét đang cào cấu điên cuồng. Nửa khuôn mặt nó nát bét, phần hàm dưới lủng lẳng sắp đứt lìa khỏi cổ rớt xuống sàn.
+
+"..."
+
+Phải mất đúng 15 phút sau, hai đứa mới lấy lại đủ bình tĩnh để vồ lấy điện thoại. Khắp các mặt báo, mạng xã hội, diễn đàn... đỏ rực những dòng tiêu đề khẩn cấp. Những người điên loạn lao vào cắn xé nhau, và điều kinh hoàng nhất: người bị cắn chỉ mất đúng 30 giây để biến đổi thành quái vật.
+
+"Thông điệp khẩn từ Trung tâm Kiểm soát Dịch bệnh: Chúng tôi xác nhận virus đã biến đổi hoàn toàn! Bệnh nhân sau khi ngừng tuần hoàn sẽ... tự khôi phục vận động và quay sang tấn công người sống. Đây không còn là một căn bệnh! Lặp lại, ĐÂY KHÔNG CÒN LÀ MỘT CĂN BỆNH! Mọi khu vực phong—"
+
+Phụt.
+
+Màn hình tivi tắt ngấm, chỉ còn lại một màu đen tĩnh mịt. Cúp điện.
+
+Cô và Yeon-hee đờ đẫn nhìn nhau. Hai đứa cứ ngồi co ro ôm đầu hoảng loạn như thế cho đến khi những tia nắng nhạt nhẽo của buổi sáng rọi vào phòng. Dưới sân chung cư, loài người thi nhau cắn xé. Tiếng gào thét, tiếng khóc lóc, tiếng còi báo động vang lên không ngớt như một bản giao hưởng của địa ngục.
+
+Hàn Quốc – Một tuần sau đại dịch
+
+Ngày tận thế cứ thế ập đến, chẳng nể nang ai.
+
+Một tuần trôi qua, cô và Yeon-hee cầm cự bằng mấy thùng mì tôm tích trữ, nhưng giờ cũng đã nhẵn bóng. Nước mắt nước mũi đã cạn, đói khát bắt đầu gặm nhấm.
+
+"Hết đồ ăn rồi... mẹ nó." Yeon-hee tiều tụy, hai má hóp lại trông như cái xác khô.
+
+"Giờ tính sao? Lao ra ngoài như mấy đứa nữ chính cứu thế giới à?" Cô thẫn thờ tựa đầu vào sofa.
+
+"Biết đâu được."
+
+Phụt. "HAHAHAHHA!"
+
+Sắp chết đói đến nơi mà hai con dở người vẫn lăn ra cười hô hố vì cái suy nghĩ viển vông đó.
+
+Nhưng cười xong thì hiện thực vẫn tàn khốc. Không đi kiếm ăn thì chết đói, mà ra ngoài thì chết vì bị nhai đầu. Dựa vào 7749 bộ phim sinh tồn từng xem, hai đứa lục lọi lọi bằng hết sách báo, tạp chí, nắp nồi, lấy băng dính quấn chặt quanh cánh tay, cẳng chân thành những bộ giáp tự chế phèn chua nhưng chắc chắn.
+
+Mở hé cửa phòng, bên ngoài hoang tàn, vắng lặng. Vài căn hộ mở toang hoác. Mùi máu ôi thiu hòa cùng mùi xác thối xộc thẳng vào mũi khiến hai đứa lợm giọng.
+
+"Vào mấy nhà đang mở cửa kia kiếm đồ ăn đi."
+
+"Rồi lỡ có con Zom-bé-bi nào trốn trong đó thì sao?"
+
+"Thì đấm nó chứ sao má! Giờ một là nó chết, hai là mình chết!"
+
+Hai đứa lẻn như mèo vào căn hộ đối diện. Đồ đạc ngổn ngang, im ắng đến rợn người. Sau một hồi lục lọi lấm lét, may mắn thay không có zombie nào, thu hoạch được mấy gói lương khô và mấy chai nước suối.
+
+"Nhanh cái chân lên, đứng nấn ná ở đây tí nữa có con nào mò về là tụi mình thành buffet cho nó đấy!"
+
+Gom xong đồ, hai "đạo chích" rón rén ôm bao tải lẻn ra hành lang. Nhưng người tính không bằng trời tính.
+
+GRỪ...
+
+Ngay trước cửa phòng của hai đứa, một con zombie mặc vest rách nát đang lảo đảo đi tới. Cô vội giật tay Yeon-hee lùi lại. Nhưng vừa quay lưng...
+
+KHÈ...
+
+Một con khác, ruột gan lòng thòng, đang chắn ngang lối thoát phía sau.
+
+"Má nó... má nó!"
+
+Hai đứa đứng chết trân như trời trồng. Dọc hành lang, cửa phòng nào cũng khóa chặt. Tiến không được, lùi không xong. Mùi sống người tỏa ra khiến hai con quái vật đồng loạt khựng lại, xoay cái đầu đầy máu về phía chúng, gầm lên rồi điên cuồng lao tới.
+
+"MẸ NÓ!!! GIỜ CHẠY ĐI ĐÂU?!"
+
+"CÓ BIẾT BAY ĐÉO ĐÂU MÀ HỎI!!!"
+
+"THẾ BÂY GIỜ... TAO ĐẾM ĐẾN BA THÌ ANH EM XÔNG LÊN SỐNG MÁI VỚI NÓ NHÉ!!" Cô nhắm chặt mắt, tay giơ cao cái chảo chống dính.
+
+"1..." "2..."
+
+HỰ! "Á!!!"
+
+Một lực kéo cực mạnh từ cánh cửa bên hông bất ngờ giật thót cổ áo hai đứa, lôi tuột vào trong bóng tối rồi đóng sầm cửa lại ngay trước khi nanh vuốt của lũ quái vật kịp sượt qua.
+
+Bị ngã nhào lộn vòng trên sàn, cô và Yeon-hee ôm nhau run cầm cập.
+
+"Ôi mẹ ơi... Zombie chưa đủ, tòa nhà này còn có vong nữa à..." Yeon-hee rơm rớm nước mắt.
+
+Hai đứa từ từ ngẩng mặt lên. Trong ánh sáng lờ mờ của căn phòng, hai thân ảnh cao lớn, vai rộng, tay cầm gậy sắt đang khoanh tay đứng nhìn chúng từ trên xuống.
+
+"Cứ tưởng là lũ zombie tiến hóa biết nói, hóa ra là hai con chuột nhắt ồn ào."
+
+Giọng nói trầm ấm, lạnh nhạt đầy vẻ mỉa mai vang lên. Pyo Do-hyun nhếch mép, hơi nghiêng đầu nhìn hai sinh vật đang bị quấn băng dính kín mít dưới sàn.
+
+Cô và Yeon-hee chớp chớp mắt. Ủa? Pyo Do-hyun và Seo Gun-woo? Cái hai tên 6 múi đẹp trai chảnh chó phòng bên?!`
   }
 ];
