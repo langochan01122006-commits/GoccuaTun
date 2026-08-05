@@ -3811,7 +3811,7 @@ export default function App() {
               }}
             >
               <img
-                src="https://cdn.phototourl.com/free/2026-07-29-524d8e1c-d308-44f8-905e-f874e5c666f0.jpg"
+                src="https://i.imgur.com/akkolzf.jpeg"
                 alt="Vinyl Cover"
                 className="w-full h-full object-cover rounded-full"
                 referrerPolicy="no-referrer"
@@ -4043,7 +4043,7 @@ export default function App() {
                             {/* Center Golden Record Label */}
                             <div className="w-14 h-14 md:w-16 md:h-16 rounded-full relative flex items-center justify-center overflow-hidden border-2 border-[#b5863d] shadow-[0_2px_5px_rgba(0,0,0,0.55)]" style={{ background: 'linear-gradient(135deg, #2d1607 0%, #522b10 50%, #170801 100%)' }}>
                               <div className="absolute inset-0.5 rounded-full border border-[#f5cc60]/40 pointer-events-none" />
-                              <div className="w-full h-full opacity-70 scale-90 rounded-full bg-cover bg-center" style={{ backgroundImage: "url('https://i.pinimg.com/736x/88/df/d2/88dfd27be6fd7170abdef1921379f6e7.jpg')" }} />
+                              <div className="w-full h-full opacity-70 scale-90 rounded-full bg-cover bg-center" style={{ backgroundImage: "url('https://i.imgur.com/akkolzf.jpeg')" }} />
                               {/* Spindle hole */}
                               <div className="absolute w-3.5 h-3.5 rounded-full bg-[#f3d078] border border-[#522b10] flex items-center justify-center shadow-inner z-10">
                                 <div className="w-1 h-1 rounded-full bg-black" />
