@@ -1512,57 +1512,142 @@ export default function App() {
           <AnimatePresence>
             {isPortalCharging && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-[#06010B]/90 backdrop-blur-xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-[#FFE4E1]/95 backdrop-blur-md overflow-hidden"
               >
-                <div className="w-full max-w-sm border-2 border-[#FFD700] p-8 md:p-10 rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.95),0_0_60px_rgba(255,215,0,0.35)] flex flex-col items-center bg-gradient-to-b from-[rgba(75,18,32,0.95)] via-[rgba(45,10,20,0.98)] to-[rgba(18,3,10,0.99)] relative overflow-hidden text-center">
-                  
-                  {/* Ambient Glowing Shimmer Backlight */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#FFD700]/10 via-transparent to-[#FFAE34]/10 pointer-events-none animate-pulse" />
+                {/* Bối cảnh nền: Bụi sao lấp lánh (Stardust) */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {[...Array(40)].map((_, i) => (
+                    <motion.div
+                      key={`star-${i}`}
+                      className="absolute rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                      style={{
+                        top: `${Math.random() * 100}%`,
+                        left: `${Math.random() * 100}%`,
+                        width: `${Math.random() * 3 + 1}px`,
+                        height: `${Math.random() * 3 + 1}px`,
+                      }}
+                      animate={{
+                        opacity: [0.1, 0.8, 0.1],
+                        scale: [1, 1.5, 1],
+                      }}
+                      transition={{
+                        duration: Math.random() * 3 + 2,
+                        repeat: Infinity,
+                        delay: Math.random() * 2,
+                      }}
+                    />
+                  ))}
+                </div>
 
-                  {/* Rotating Portal Ring with Crown Sparkles */}
-                  <div className="relative mb-6 flex items-center justify-center">
+                {/* Bối cảnh nền: Cánh hoa bay nhẹ nhàng */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {[...Array(15)].map((_, i) => (
+                    <motion.div
+                      key={`petal-${i}`}
+                      className="absolute text-pink-300/60 drop-shadow-sm text-sm"
+                      style={{
+                        top: `-10%`,
+                        left: `${Math.random() * 100}%`,
+                      }}
+                      animate={{
+                        top: `110%`,
+                        left: `${Math.random() * 100}%`,
+                        rotate: Math.random() * 360,
+                      }}
+                      transition={{
+                        duration: Math.random() * 10 + 10,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: Math.random() * 10,
+                      }}
+                    >
+                      🌸
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Khung chứa nội dung (Container Modal) */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="w-full max-w-sm border-[3px] border-[#B87333] p-8 md:p-10 rounded-3xl shadow-[0_20px_60px_rgba(184,115,51,0.25),0_0_40px_rgba(255,250,240,0.8)] flex flex-col items-center bg-[#FFFAF0] relative text-center"
+                >
+                  
+                  {/* Trang trí viền: Dây leo hoa hồng vàng và ngọc trai */}
+                  <div className="absolute top-0 left-0 w-full h-full pointer-events-none rounded-3xl overflow-hidden">
+                    <div className="absolute -top-4 -left-4 text-4xl opacity-40" style={{ transform: 'rotate(-45deg)' }}>🌿</div>
+                    <div className="absolute -top-4 -right-4 text-4xl opacity-40" style={{ transform: 'rotate(45deg) scaleX(-1)' }}>🌿</div>
+                    <div className="absolute -bottom-4 -left-4 text-4xl opacity-40" style={{ transform: 'rotate(-135deg) scaleX(-1)' }}>🌿</div>
+                    <div className="absolute -bottom-4 -right-4 text-4xl opacity-40" style={{ transform: 'rotate(135deg)' }}>🌿</div>
+                  </div>
+                  
+                  {/* Các viên ngọc trai nhỏ (Pearls) */}
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,1),inset_0_0_2px_rgba(200,200,200,1)]"></div>
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,1),inset_0_0_2px_rgba(200,200,200,1)]"></div>
+                  <div className="absolute top-1/2 left-2 -translate-y-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,1),inset_0_0_2px_rgba(200,200,200,1)]"></div>
+                  <div className="absolute top-1/2 right-2 -translate-y-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,1),inset_0_0_2px_rgba(200,200,200,1)]"></div>
+
+                  {/* Logo trung tâm với vòng hoa hồng vàng */}
+                  <div className="relative mb-8 flex items-center justify-center mt-2">
+                    {/* Vòng hoa hồng vàng (Golden rose wreath) */}
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                      className="w-20 h-20 rounded-full border-2 border-dashed border-[#FFD700] flex items-center justify-center shadow-[0_0_25px_rgba(255,215,0,0.7)]"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center text-3xl select-none filter drop-shadow-[0_0_10px_#FFD700]">
-                      ✨
-                    </div>
+                      transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 -m-5 border border-dashed border-[#B87333]/40 rounded-full flex items-center justify-center"
+                    >
+                      <span className="absolute -top-3 text-lg opacity-80 filter drop-shadow-[0_0_2px_#B87333]">🌹</span>
+                      <span className="absolute -bottom-3 text-lg opacity-80 filter drop-shadow-[0_0_2px_#B87333]">🌹</span>
+                      <span className="absolute -left-3 text-lg opacity-80 filter drop-shadow-[0_0_2px_#B87333]">🌹</span>
+                      <span className="absolute -right-3 text-lg opacity-80 filter drop-shadow-[0_0_2px_#B87333]">🌹</span>
+                    </motion.div>
+                    
+                    <motion.div
+                      animate={{ scale: [0.95, 1.05, 0.95] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      className="w-24 h-24 rounded-full overflow-hidden border-[3px] border-[#FFD700] shadow-[0_0_20px_rgba(255,215,0,0.5)] relative z-10"
+                    >
+                      <img 
+                        src="https://i.imgur.com/UBryS3E.jpeg" 
+                        alt="Loading Avatar" 
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
                   </div>
 
-                  {/* Loading Title & Status Counter */}
+                  {/* Chữ và Thanh Loading (Rose Gold - #B87333 / #E0BFB8) */}
                   <h3 
-                    className="font-serif italic font-bold text-[#FFE79A] text-lg sm:text-xl tracking-widest uppercase mb-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
-                    style={{ textShadow: "0 0 12px #FFAE34" }}
+                    className="font-serif italic font-bold text-[#B87333] text-lg sm:text-xl uppercase mb-3 drop-shadow-sm"
+                    style={{ textShadow: "1px 1px 2px rgba(255,255,255,0.8)" }}
                   >
-                    Đang Xé Vé Vào Cổng...
+                    Đang xé vé vào cổng...
                   </h3>
                   
-                  <p className="text-xs text-[#FFD700] font-sans tracking-widest uppercase font-semibold mb-5 flex items-center gap-1.5">
-                    <span>Nạp Năng Lượng Không Gian:</span>
-                    <span className="font-serif font-black text-sm text-[#FFF59D]">{Math.floor(chargeProgress)}%</span>
+                  <p className="text-xs text-[#B87333] font-serif uppercase font-bold mb-5 flex items-center gap-1.5 justify-center">
+                    <span>Nạp năng lượng không gian:</span>
+                    <span className="font-bold text-[#A65E2E]">{Math.floor(chargeProgress)}%</span>
                   </p>
 
                   {/* Energy Bar Container */}
-                  <div className="w-full h-4 bg-[#18040C] rounded-full border border-[#FFD700]/70 p-0.5 overflow-hidden shadow-[inset_0_2px_8px_rgba(0,0,0,0.9)] relative">
+                  <div className="w-full h-3 bg-[#FFF0F5] rounded-full border border-[#B87333]/30 p-[1.5px] overflow-hidden shadow-inner relative">
                     <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-[#FF9800] via-[#FFD700] to-[#FFF9C4] shadow-[0_0_14px_#FFD700]"
+                      className="h-full rounded-full bg-gradient-to-r from-[#F4C2C2] via-[#B87333] to-[#E0BFB8] shadow-[0_0_8px_#B87333]"
                       style={{ width: `${chargeProgress}%` }}
                     />
                   </div>
 
                   {/* Floating Particle Stars inside Loading Modal */}
-                  <div className="flex items-center gap-2 mt-4 text-[#FFD700]/80 text-xs font-serif italic">
+                  <div className="flex items-center gap-2 mt-4 text-[#B87333]/80 text-xs font-serif italic">
                     <span>✦</span>
-                    <span>Khai mở không gian Wonder World...</span>
+                    <span>Khai mở không gian lâu đài cổ...</span>
                     <span>✦</span>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
