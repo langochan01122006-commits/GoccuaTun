@@ -273,7 +273,7 @@ export default function App() {
     setChargeProgress(0);
 
     const startTime = Date.now();
-    const duration = 2000; // 2.0s loading animation
+    const duration = 5000; // 5.0s loading animation
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
