@@ -1,9 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
+import { Calendar, Tag, Sparkles, Bell } from "lucide-react";
 
-const letterNotices = [
-  "1. Ra char Silas có gắn pass, pass rất dễ nên mn chill chill thôi đừng bully tun 😭",
-  "2. Cập nhật giao diện mới cho wed 🎁",
-  "3. Mở triển lãm tranh cả nhà vào tym cho Artist nhá 🌸🖼️"
+interface NoticeItem {
+  id: number;
+  title: string;
+  content: string;
+  date: string;
+  tag: string;
+  tagType: "new" | "update" | "event";
+  isNewest?: boolean;
+}
+
+const letterNotices: NoticeItem[] = [
+  {
+    id: 1,
+    title: "Thông Báo Từ Tun",
+    content: "Tạm thời Tun đang chưa ổn định nên hẹn link hai con mã mới lâu một chút 💐",
+    date: "05/08/2026",
+    tag: "MỚI NHẤT",
+    tagType: "new",
+    isNewest: true,
+  },
+  {
+    id: 2,
+    title: "Nâng Cấp Giao Diện Website",
+    content: "Cập nhật giao diện mới cho web, thiết kế thẻ bài thanh thoát và tối ưu không gian hiển thị 🎁",
+    date: "03/08/2026",
+    tag: "CẬP NHẬT",
+    tagType: "update",
+  },
+  {
+    id: 3,
+    title: "Triển Lãm Tranh Nghệ Thuật",
+    content: "Mở triển lãm tranh cả nhà vào tym ủng hộ các Artist nhá 🌸🖼️",
+    date: "01/08/2026",
+    tag: "SỰ KIỆN",
+    tagType: "event",
+  },
 ];
 
 interface LetterNoticeProps {
@@ -11,93 +44,65 @@ interface LetterNoticeProps {
 }
 
 export const LetterNotice: React.FC<LetterNoticeProps> = ({ playClickSound }) => {
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [displayText, setDisplayText] = useState(letterNotices[0]);
-  const [fadeState, setFadeState] = useState<"idle" | "fade-out" | "fade-in-prepare">("idle");
-  const autoSlideTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const triggerChange = (newIdx: number) => {
-    setFadeState("fade-out");
-    setTimeout(() => {
-      setCurrentIdx(newIdx);
-      setDisplayText(letterNotices[newIdx]);
-      setFadeState("fade-in-prepare");
-      setTimeout(() => {
-        setFadeState("idle");
-      }, 50);
-    }, 300);
-  };
-
-  const handleNext = () => {
-    if (playClickSound) {
-      playClickSound(600, 0.08);
-    }
-    const nextIdx = (currentIdx + 1) % letterNotices.length;
-    triggerChange(nextIdx);
-  };
-
-  const handlePrev = () => {
-    if (playClickSound) {
-      playClickSound(600, 0.08);
-    }
-    const prevIdx = (currentIdx - 1 + letterNotices.length) % letterNotices.length;
-    triggerChange(prevIdx);
-  };
-
-  useEffect(() => {
-    // Start sliding timer
-    autoSlideTimerRef.current = setInterval(() => {
-      const nextIdx = (currentIdx + 1) % letterNotices.length;
-      triggerChange(nextIdx);
-    }, 6000);
-
-    return () => {
-      if (autoSlideTimerRef.current) {
-        clearInterval(autoSlideTimerRef.current);
-      }
-    };
-  }, [currentIdx]);
-
   return (
     <div className="letter-notice-container" id="letter-notice-box">
       {/* Đầu bức thư & Tiêu đề */}
       <div className="letter-header" id="letter-header-section">
         <span className="letter-stamp">✉️</span>
         <span className="letter-title">THƯ THÔNG BÁO CẬP NHẬT</span>
-        <span className="letter-badge">MỚI</span>
+        <span className="letter-badge">{letterNotices.length} THƯ</span>
       </div>
 
-      {/* Thân bức thư (Nền giấy cổ & Chứa nội dung đổi liên tục) */}
-      <div className="letter-body" id="letter-body-section">
-        <button 
-          className="letter-nav-btn" 
-          onClick={handlePrev}
-          aria-label="Previous Notice"
-          id="letter-prev-btn"
-        >
-          ❮
-        </button>
-        
-        <div className="letter-content-wrapper" id="letter-wrapper">
-          <div className={`letter-text ${fadeState === "fade-out" ? "fade-out" : fadeState === "fade-in-prepare" ? "fade-in-prepare" : ""}`} id="letter-notice-text">
-            {displayText}
+      {/* Thân bức thư - Danh sách cuộn dọc */}
+      <div className="letter-vertical-body space-y-3 max-h-[380px] overflow-y-auto pr-1 py-1" id="letter-vertical-list">
+        {letterNotices.map((notice) => (
+          <div
+            key={notice.id}
+            className={`letter-card-item relative transition-all duration-200 hover:-translate-y-0.5 ${
+              notice.isNewest ? "letter-card-newest" : ""
+            }`}
+            onClick={() => playClickSound && playClickSound(500, 0.05)}
+          >
+            {/* Thẻ Tiêu Đề & Thời Gian */}
+            <div className="flex items-center justify-between gap-2 mb-1.5 border-b border-[#D4B87C]/60 pb-1.5">
+              <div className="flex items-center gap-1.5">
+                <span
+                  className={`text-[9px] font-bold px-2 py-0.5 rounded-full border shadow-sm ${
+                    notice.tagType === "new"
+                      ? "bg-[#A83232] text-white border-[#FFD700]"
+                      : notice.tagType === "update"
+                      ? "bg-[#2563EB] text-white border-[#93C5FD]"
+                      : "bg-[#D97706] text-white border-[#FDE68A]"
+                  }`}
+                >
+                  {notice.tag}
+                </span>
+                <span className="font-bold text-[#4A2E13] text-xs sm:text-sm">
+                  {notice.title}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 text-[10px] text-[#8C6239] font-semibold shrink-0">
+                <Calendar className="w-3 h-3 text-[#A87B4F]" />
+                <span>{notice.date}</span>
+              </div>
+            </div>
+
+            {/* Nội Dung Thông Báo */}
+            <p className="text-[#3d240f] text-xs sm:text-[13px] leading-relaxed font-medium pl-1">
+              {notice.content}
+            </p>
           </div>
-        </div>
-
-        <button 
-          className="letter-nav-btn" 
-          onClick={handleNext}
-          aria-label="Next Notice"
-          id="letter-next-btn"
-        >
-          ❯
-        </button>
+        ))}
       </div>
 
-      {/* Chân bức thư (Ghi chú số trang) */}
-      <div className="letter-footer" id="letter-footer-section">
-        <span id="letter-counter">Tin {currentIdx + 1} / {letterNotices.length}</span>
+      {/* Chân bức thư */}
+      <div className="letter-footer flex items-center justify-between pt-2 border-t border-[#C59B27]/30 mt-2 text-[10px] text-[#C59B27] font-semibold">
+        <span className="flex items-center gap-1">
+          <Sparkles className="w-3 h-3 text-[#FFD700]" /> Danh sách thông báo mới nhất
+        </span>
+        <span>Tổng {letterNotices.length} thư</span>
       </div>
     </div>
   );
 };
+

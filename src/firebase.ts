@@ -38,7 +38,14 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
   };
   let errorMsg = "";
   try {
-    errorMsg = JSON.stringify(errInfo);
+    const seen = new WeakSet();
+    errorMsg = JSON.stringify(errInfo, (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (seen.has(value)) return "[Circular]";
+        seen.add(value);
+      }
+      return value;
+    });
   } catch {
     errorMsg = `Firestore Error in ${operationType} at ${path}: ${errInfo.error}`;
   }

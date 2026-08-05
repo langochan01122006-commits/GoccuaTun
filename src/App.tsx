@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, CSSProperties } from "react";
 import { CHARACTERS, Character } from "./characters";
-import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User, Package, PackageOpen, Megaphone, Star, Info, PenTool, DoorOpen, Flame, Shield, Map, Crown, Leaf, Eye, EyeOff } from "lucide-react";
+import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User, Package, PackageOpen, Megaphone, Star, Info, PenTool, DoorOpen, Flame, Shield, Map, Crown, Leaf, Eye, EyeOff, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
@@ -48,8 +48,8 @@ const musicPlaylists = {
   ]
 };
 
-const welcomeBgUrl = "https://cdn.phototourl.com/free/2026-07-14-3e758a1d-f3bd-4717-afe2-d30d1c8a10cd.jpg";
-const mainBgUrl = "https://cdn.phototourl.com/free/2026-07-14-ffafd17a-5573-4d6b-b2bd-4af530540d39.jpg";
+const welcomeBgUrl = "https://i.imgur.com/ytsgDLA.jpeg";
+const mainBgUrl = "https://i.imgur.com/bMFDQo1.jpeg";
 
 function isNewCharacter(char: Character): boolean {
   const link = char.chatLink !== undefined ? char.chatLink : char.chatbotUrl;
@@ -232,6 +232,7 @@ export default function App() {
   const [isPricingZoomed, setIsPricingZoomed] = useState(false);
   const [punchedTicketId, setPunchedTicketId] = useState<string | null>(null);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
+  const [isLetterNoticeModalOpen, setIsLetterNoticeModalOpen] = useState(false);
   const [isGuestbookModalOpen, setIsGuestbookModalOpen] = useState(false);
   const [guestbookName, setGuestbookName] = useState("");
   const [guestbookContent, setGuestbookContent] = useState("");
@@ -249,6 +250,70 @@ export default function App() {
   const [dispensedTicket, setDispensedTicket] = useState<'cam_nang' | 'ho_than' | 'chuyen_sinh_couple' | 'chuyen_sinh_world' | null>(null);
   const [isArcadeVibrating, setIsArcadeVibrating] = useState(false);
   const [isArcadeSmoke, setIsArcadeSmoke] = useState(false);
+
+  // Portal charge loading states
+  const [isPortalCharging, setIsPortalCharging] = useState(false);
+  const [chargeProgress, setChargeProgress] = useState(0);
+
+  const handleStartTicketEnter = () => {
+    if (isPortalCharging || hasEnteredOrTransitioning) return;
+
+    // Phát nhạc ngay lập tức đồng bộ khi nhấn nút để tránh trễ hoặc chặn trên điện thoại di động
+    if (audioRef.current) {
+      audioRef.current.play().then(() => {
+        console.log("Music started smoothly on user click!");
+      }).catch(err => {
+        console.warn("Autoplay block or audio not ready:", err);
+      });
+    }
+    setIsPlaying(true);
+    playClickSound(600, 0.1);
+
+    setIsPortalCharging(true);
+    setChargeProgress(0);
+
+    const startTime = Date.now();
+    const duration = 2000; // 2.0s loading animation
+
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(100, (elapsed / duration) * 100);
+      setChargeProgress(progress);
+
+      if (progress >= 100) {
+        clearInterval(interval);
+
+        setHasEnteredOrTransitioning(true);
+
+        setTimeout(() => {
+          const welcomeEl = document.getElementById('welcome');
+          if (welcomeEl) {
+            welcomeEl.classList.remove('fade-in-back');
+            welcomeEl.classList.add('fade-out');
+          }
+
+          const mainEl = document.getElementById('main');
+          if (mainEl) {
+            mainEl.classList.remove('fade-out-back');
+            mainEl.classList.add('fade-in');
+          }
+
+          setTimeout(() => {
+            if (welcomeEl) {
+              welcomeEl.style.display = 'none';
+            }
+            setIsPortalCharging(false);
+            setHasEntered(true);
+            setShowAgeVerify(true);
+          }, 800);
+        }, 50);
+      }
+    }, 30);
+  };
+
+  // Mouse-following sparkle effect for Royal Portal frame
+  const [portalSparkles, setPortalSparkles] = useState<Array<{ id: number; x: number; y: number; size: number; char: string; color: string; dx: number; dy: number }>>([]);
+  const lastSparkleTimeRef = useRef<number>(0);
 
   // Feedback states for command cards
   const [commandFeedbacks, setCommandFeedbacks] = useState<Record<string, 'hong' | 'ngon' | 'henxui'>>(() => {
@@ -403,6 +468,7 @@ export default function App() {
 
   const lastTrackKeyRef = useRef<string | null>(null);
   const errorAutoSkipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastTimeUpdateRef = useRef<number>(0);
 
   // Clear auto-skip timer on unmount
   useEffect(() => {
@@ -431,10 +497,14 @@ export default function App() {
     }, 1800);
   };
 
-  // Music Player logic
+  // Music Player logic with throttling (max once every 300ms) to ensure smooth 60fps UI performance
   const handleTimeUpdate = () => {
     if (audioRef.current) {
-      setMusicProgress(audioRef.current.currentTime);
+      const now = Date.now();
+      if (now - lastTimeUpdateRef.current > 300) {
+        lastTimeUpdateRef.current = now;
+        setMusicProgress(audioRef.current.currentTime);
+      }
     }
   };
 
@@ -919,21 +989,23 @@ export default function App() {
       className={`min-h-screen ${getBackgroundStyles()} transition-all duration-700 font-sans flex flex-col items-center select-none relative overflow-x-hidden ${hasEntered ? "p-4 md:p-6" : "justify-center p-6"}`}
     >
       {/* Fixed background div behind everything for visual continuity and mobile compatibility */}
-      <div 
-        id="main-fixed-bg"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          backgroundImage: `url('${mainBgUrl}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1
-        }}
-      />
+      {(hasEntered || hasEnteredOrTransitioning) && (
+        <div 
+          id="main-fixed-bg"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundImage: `url('${mainBgUrl}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            zIndex: -1
+          }}
+        />
+      )}
       {/* Real-time DOM audio element properly integrated with React state and events */}
       <audio
         ref={audioRef}
@@ -952,256 +1024,303 @@ export default function App() {
       {!hasEntered && (
         <div
           id="welcome"
-          className={`welcome-screen flex flex-col items-center justify-center p-6 ${!hasEnteredOrTransitioning ? "fade-in-back" : ""}`}
+          className={`welcome-screen flex flex-col items-center justify-center p-6 fixed inset-0 z-[9999] overflow-hidden ${!hasEnteredOrTransitioning ? "fade-in-back" : ""}`}
           style={{
             backgroundImage: `url('${welcomeBgUrl}')`,
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed'
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: "#06010B",
           }}
         >
+          {/* Ambient Cosmic Background Sparkle Particles & Twinkling Stars */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            {/* Floating Twinkling Star Field */}
+            {[
+              { top: "10%", left: "15%", delay: 0, size: "text-xs", char: "✦" },
+              { top: "18%", left: "80%", delay: 0.5, size: "text-sm", char: "✨" },
+              { top: "25%", left: "30%", delay: 1.2, size: "text-xs", char: "⭐" },
+              { top: "35%", left: "88%", delay: 0.8, size: "text-xs", char: "✦" },
+              { top: "45%", left: "10%", delay: 1.5, size: "text-sm", char: "✨" },
+              { top: "60%", left: "82%", delay: 0.3, size: "text-xs", char: "⭐" },
+              { top: "72%", left: "20%", delay: 1.8, size: "text-sm", char: "✦" },
+              { top: "80%", left: "75%", delay: 1.0, size: "text-xs", char: "✨" },
+              { top: "15%", left: "55%", delay: 2.1, size: "text-xs", char: "✦" },
+              { top: "68%", left: "48%", delay: 1.4, size: "text-xs", char: "⭐" },
+            ].map((star, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0.2, scale: 0.8 }}
+                animate={{
+                  opacity: [0.2, 0.9, 0.2],
+                  scale: [0.8, 1.2, 0.8],
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 3 + (idx % 3),
+                  repeat: Infinity,
+                  delay: star.delay,
+                  ease: "easeInOut",
+                }}
+                className={`absolute ${star.size} text-[#FFE79A]/60 select-none filter drop-shadow-[0_0_6px_rgba(255,231,154,0.6)]`}
+                style={{ top: star.top, left: star.left }}
+              >
+                {star.char}
+              </motion.div>
+            ))}
+          </div>
+
           <div
             className="w-full max-w-xl flex flex-col items-center justify-center min-h-[85vh] px-4 py-8 z-10 text-center relative font-sans my-auto mt-16 md:mt-24"
           >
-            {/* Elegant glowing board with glassmorphic backing - Royal Burgundy Gold theme */}
+            {/* Archway Portal Royal Badge Container - Dark Wine & Gold Glassmorphism */}
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="w-full border-2 border-[#FFAE34] p-8 md:p-12 rounded-[28px] shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_40px_rgba(255,174,52,0.12)] flex flex-col items-center relative overflow-visible"
+              onMouseMove={(e) => {
+                const now = Date.now();
+                if (now - lastSparkleTimeRef.current < 40) return;
+                lastSparkleTimeRef.current = now;
+
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const chars = ["✨", "✦", "⭐", "💫", "⋆", "✧"];
+                const colors = ["#FFD700", "#FFF8C4", "#FFAE34", "#FFE79A", "#FFFFFF"];
+                const size = Math.floor(Math.random() * 8) + 12;
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const dx = (Math.random() - 0.5) * 24;
+                const dy = -15 - Math.random() * 20;
+
+                const newParticle = {
+                  id: now + Math.random(),
+                  x,
+                  y,
+                  size,
+                  char,
+                  color,
+                  dx,
+                  dy,
+                };
+
+                setPortalSparkles((prev) => [...prev.slice(-20), newParticle]);
+              }}
+              className="w-full max-w-md border-2 border-[#FFD700] px-6 py-10 md:px-10 md:py-14 rounded-t-[120px] md:rounded-t-[160px] rounded-b-[40px] shadow-[0_30px_80px_rgba(0,0,0,0.95),0_0_50px_rgba(255,215,0,0.25)] flex flex-col items-center relative overflow-visible border-t-[#FFF8C4]"
               style={{
-                background: "rgba(110, 35, 20, 0.7) !important",
-                backgroundColor: "rgba(110, 35, 20, 0.7)",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
+                background: "linear-gradient(180deg, rgba(80, 20, 32, 0.78) 0%, rgba(45, 10, 18, 0.85) 100%)",
+                backgroundColor: "rgba(60, 15, 25, 0.78)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
               }}
             >
-              <div className="absolute inset-2 border border-[#FFAE34]/20 rounded-[22px] pointer-events-none" />
+              {/* Mouse-following Ephemeral Glowing Star Particles Overlay */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-t-[120px] md:rounded-t-[160px] rounded-b-[40px] z-20">
+                <AnimatePresence>
+                  {portalSparkles.map((p) => (
+                    <motion.div
+                      key={p.id}
+                      initial={{ opacity: 1, scale: 0.5, x: p.x - p.size / 2, y: p.y - p.size / 2 }}
+                      animate={{
+                        opacity: 0,
+                        scale: 1.4,
+                        x: p.x - p.size / 2 + p.dx,
+                        y: p.y - p.size / 2 + p.dy,
+                      }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.75, ease: "easeOut" }}
+                      className="absolute font-bold select-none pointer-events-none"
+                      style={{
+                        fontSize: `${p.size}px`,
+                        color: p.color,
+                        filter: `drop-shadow(0 0 8px ${p.color})`,
+                      }}
+                      onAnimationComplete={() => {
+                        setPortalSparkles((prev) => prev.filter((item) => item.id !== p.id));
+                      }}
+                    >
+                      {p.char}
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
 
-              {/* Glowing hollow royal crown floating precisely on top edge with floating stars */}
-              <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 flex flex-col items-center z-20 pointer-events-none select-none">
-                {/* Sparkles / Twinkling stars */}
-                <div className="relative w-44 h-20 sm:w-52 sm:h-24 overflow-visible flex justify-center">
-                  {/* Sparkle 1: Gold, top center-left */}
-                  <motion.div
-                    animate={{ y: [0, -4, 0], opacity: [0.4, 1, 0.4], scale: [0.8, 1.2, 0.8] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-2 left-6 sm:left-10 w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFF6C5] filter drop-shadow-[0_0_6px_#FFE79A]"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
-                    </svg>
-                  </motion.div>
-
-                  {/* Sparkle 2: Cyan/Blue, top center-right */}
-                  <motion.div
-                    animate={{ y: [-3, 1, -3], opacity: [0.6, 1, 0.6], scale: [1, 0.7, 1] }}
-                    transition={{ duration: 2.7, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                    className="absolute top-0 right-10 sm:right-12 w-4.5 h-4.5 sm:w-5 sm:h-5 text-[#FFF6C5] filter drop-shadow-[0_0_8px_#FFD700]"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
-                    </svg>
-                  </motion.div>
-
-                  {/* Sparkle 3: Gold, further left, very tiny */}
-                  <motion.div
-                    animate={{ y: [2, -2, 2], opacity: [0.2, 0.9, 0.2] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-                    className="absolute top-8 left-2 sm:left-4 w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFE79A] filter drop-shadow-[0_0_4px_#FFE79A]"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
-                    </svg>
-                  </motion.div>
-
-                  {/* Sparkle 4: Gold, further right, tiny */}
-                  <motion.div
-                    animate={{ y: [-1, 3, -1], opacity: [0.3, 0.8, 0.3] }}
-                    transition={{ duration: 2.3, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
-                    className="absolute top-6 right-3 sm:right-5 w-3 h-3 text-[#FFD700] filter drop-shadow-[0_0_5px_#FFD700]"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2 Q12 12 22 12 Q12 12 12 22 Q12 12 2 12 Q12 12 12 2" />
-                    </svg>
-                  </motion.div>
-                </div>
-
-                {/* Custom Royal Crown sitting directly on the line */}
+              {/* One-time Magical Barrier Activation Shimmer Sweep */}
+              <div className="absolute inset-0 rounded-t-[120px] md:rounded-t-[160px] rounded-b-[40px] overflow-hidden pointer-events-none z-10">
                 <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex items-center justify-center -mt-10 sm:-mt-14"
+                  initial={{ x: "-120%", opacity: 0 }}
+                  animate={{ x: "180%", opacity: [0, 0.9, 0.9, 0] }}
+                  transition={{ duration: 1.8, delay: 0.8, ease: "easeInOut" }}
+                  className="w-full h-full absolute inset-0"
+                  style={{
+                    background: "linear-gradient(115deg, transparent 20%, rgba(255, 248, 196, 0.2) 40%, rgba(255, 215, 0, 0.85) 49%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 215, 0, 0.85) 51%, rgba(255, 248, 196, 0.2) 60%, transparent 80%)",
+                    filter: "drop-shadow(0 0 15px rgba(255, 215, 0, 0.85))",
+                  }}
+                />
+              </div>
+
+              {/* Inner Archway Bright Gold Filigree Accent Outline */}
+              <div className="absolute inset-2.5 border border-[#FFD700]/40 rounded-t-[110px] md:rounded-t-[150px] rounded-b-[32px] pointer-events-none" />
+              <div className="absolute inset-3.5 border border-[#FFF5B8]/20 rounded-t-[105px] md:rounded-t-[145px] rounded-b-[28px] pointer-events-none" />
+
+              {/* 1. Phần trên cùng: Logo hình tròn 3D với vương miện hoàng gia đặt đội lệch chéo nghiêng sang BÊN TRÁI của vành avatar */}
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                className="relative flex items-center justify-center mb-5 z-20 mt-4"
+              >
+                {/* Vòng hào quang sáng lấp lánh rực rỡ xung quanh logo */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#FFD700] via-[#FFAE34] to-[#FFF6C5] blur-xl opacity-90 animate-pulse" />
+                
+                {/* Tilted Royal Crown hovering delicately over TOP-LEFT rim of the circular logo */}
+                <motion.div 
+                  animate={{ 
+                    y: [0, -7, 0],
+                    rotate: [-20, -23, -18, -20],
+                    scale: [1, 1.03, 0.99, 1]
+                  }}
+                  transition={{ 
+                    duration: 3.5, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                  className="absolute -top-7 -left-3 sm:-top-9 sm:-left-4 z-30 pointer-events-none select-none filter drop-shadow-[0_6px_16px_rgba(0,0,0,0.85)]"
                 >
                   <svg 
                     viewBox="0 0 100 65" 
-                    className="w-32 h-26 sm:w-40 sm:h-32 overflow-visible select-none"
-                    style={{ filter: "drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5))" }}
+                    className="w-16 h-12 sm:w-20 sm:h-16 overflow-visible"
+                    style={{ filter: "drop-shadow(0 0 10px rgba(255, 215, 0, 0.95))" }}
                   >
                     <defs>
-                      <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#FFF2A8" />
-                        <stop offset="50%" stopColor="#FFD700" />
-                        <stop offset="100%" stopColor="#FF8C00" />
+                      <linearGradient id="avatarGoldCrownLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFF9C4" />
+                        <stop offset="40%" stopColor="#FFD700" />
+                        <stop offset="100%" stopColor="#FF9800" />
                       </linearGradient>
-                      <linearGradient id="goldGradientBase" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#FFD700" />
-                        <stop offset="100%" stopColor="#E69500" />
+                      <linearGradient id="avatarCrownBaseLeft" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#FFEE58" />
+                        <stop offset="100%" stopColor="#F57C00" />
                       </linearGradient>
                     </defs>
 
-                    {/* Masking dark fill to prevent background from shining through transparent parts (if any) */}
+                    {/* Masking backing */}
                     <path
                       d="M 12 43 L 22 18 L 38 36 L 50 10 L 62 36 L 78 18 L 88 43 L 85 50 L 15 50 Z"
-                      fill="rgba(110, 35, 20, 0.98)"
+                      fill="rgba(40, 10, 18, 0.9)"
                     />
-                    
-                    {/* Crown Body Solid Base */}
+
+                    {/* Crown Main Body */}
                     <path
                       d="M 15 50 L 12 43 L 22 18 L 38 36 L 50 10 L 62 36 L 78 18 L 88 43 L 85 50 Z"
-                      fill="url(#goldGradient)"
-                      stroke="#FFEA70"
-                      strokeWidth="1.5"
+                      fill="url(#avatarGoldCrownLeft)"
+                      stroke="#FFFDF0"
+                      strokeWidth="1.8"
                       strokeLinejoin="round"
                     />
                     
-                    {/* Crown Base Line */}
+                    {/* Crown Base */}
                     <path
                       d="M 8 50 L 92 50 L 88 56 L 12 56 Z"
-                      fill="url(#goldGradientBase)"
-                      stroke="#FFEA70"
-                      strokeWidth="1"
-                      strokeLinecap="round"
-                    />
-                    
-                    {/* Thin royal inner accent lines */}
-                    <path
-                      d="M 14 46 L 86 46"
-                      stroke="#FFF6C5"
-                      strokeWidth="1.5"
-                      opacity="0.9"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M 16 53 L 84 53"
-                      stroke="#FFF6C5"
+                      fill="url(#avatarCrownBaseLeft)"
+                      stroke="#FFFDF0"
                       strokeWidth="1.2"
-                      opacity="0.8"
                       strokeLinecap="round"
                     />
                     
-                    {/* Inner glowing contours */}
-                    <path
-                      d="M 22 18 L 26 43 M 38 36 L 38 45 M 50 10 L 50 45 M 62 36 L 62 45 M 78 18 L 74 43"
-                      stroke="#FFF6C5"
-                      strokeWidth="1.5"
-                      opacity="0.75"
-                      strokeLinecap="round"
-                    />
+                    {/* Royal Inner Lines */}
+                    <path d="M 14 46 L 86 46" stroke="#FFFFFF" strokeWidth="1.8" opacity="0.95" strokeLinecap="round" />
+                    <path d="M 16 53 L 84 53" stroke="#FFFFFF" strokeWidth="1.2" opacity="0.85" strokeLinecap="round" />
+                    <path d="M 22 18 L 26 43 M 38 36 L 38 45 M 50 10 L 50 45 M 62 36 L 62 45 M 78 18 L 74 43" stroke="#FFF9C4" strokeWidth="1.5" opacity="0.8" strokeLinecap="round" />
                     
-                    {/* Peaks royal jewels - bright diamond white/blueish to pop against gold */}
-                    <circle cx="22" cy="18" r="3.5" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1" />
-                    <circle cx="50" cy="10" r="4.5" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1" />
-                    <circle cx="78" cy="18" r="3.5" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1" />
-                    
-                    {/* Inner accent diamond in the center */}
-                    <path d="M 50 24 L 44 32 L 50 40 L 56 32 Z" fill="#FFFFFF" stroke="#FFC107" strokeWidth="1" />
+                    {/* Jewels */}
+                    <circle cx="22" cy="18" r="3.5" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1.2" />
+                    <circle cx="50" cy="10" r="4.8" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1.5" />
+                    <circle cx="78" cy="18" r="3.5" fill="#FFFFFF" stroke="#FFD700" strokeWidth="1.2" />
+                    <path d="M 50 24 L 44 32 L 50 40 L 56 32 Z" fill="#FFFFFF" stroke="#FFB300" strokeWidth="1" />
                     <circle cx="34" cy="36" r="2.5" fill="#FFFFFF" />
                     <circle cx="66" cy="36" r="2.5" fill="#FFFFFF" />
                   </svg>
                 </motion.div>
-              </div>
 
-              <div className="absolute top-4 left-4 text-[#FFAE34]/40 animate-pulse">✦</div>
-              <div className="absolute bottom-4 right-4 text-[#FFAE34]/40 animate-pulse">✦</div>
-              <div className="absolute top-1/4 right-6 text-pink-400/20 animate-pulse">✨</div>
-              <div className="absolute bottom-1/4 left-6 text-blue-400/20 animate-pulse">✨</div>
+                {/* Floating sparkles particles around avatar */}
+                <motion.div 
+                  animate={{ y: [-4, 4, -4], opacity: [0.6, 1, 0.6] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-3 -right-3 text-[#FFD700] font-bold text-lg select-none filter drop-shadow-[0_0_8px_#FFD700]"
+                >
+                  ✨
+                </motion.div>
+                <motion.div 
+                  animate={{ y: [3, -3, 3], opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                  className="absolute -bottom-2 -left-3 text-[#FFD700] font-bold text-base select-none filter drop-shadow-[0_0_8px_#FFD700]"
+                >
+                  ✦
+                </motion.div>
+                <motion.div 
+                  animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                  className="absolute top-1/2 -right-5 text-[#FFE79A] font-bold text-sm select-none filter drop-shadow-[0_0_8px_#FFD700]"
+                >
+                  ⭐
+                </motion.div>
 
-              {/* Spacer for Floating Crown */}
-              <div className="h-8 sm:h-12 mt-2" />
+                {/* Khung viền vàng kim 3D lộng lẫy */}
+                <div className="relative p-1.5 rounded-full bg-gradient-to-b from-[#FFFDF0] via-[#FFD700] to-[#B8860B] shadow-[0_15px_35px_rgba(0,0,0,0.85),0_0_30px_rgba(255,215,0,0.85)] border-2 border-[#FFFFFF]">
+                  <img
+                    src="https://i.imgur.com/8bkSIex.png"
+                    alt="Góc của Tun Logo"
+                    className="w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover shadow-inner block select-none pointer-events-none"
+                  />
+                </div>
+              </motion.div>
 
+              <div className="absolute top-6 left-6 text-[#FFD700]/40 animate-pulse">✦</div>
+              <div className="absolute top-6 right-6 text-[#FFD700]/40 animate-pulse">✦</div>
+              <div className="absolute top-1/3 right-8 text-amber-300/30 animate-pulse">✨</div>
+              <div className="absolute bottom-1/3 left-8 text-amber-300/30 animate-pulse">✨</div>
+
+              {/* 2. Phần giữa khung: Tiêu đề WONDER WORLD thanh mảnh, nghệ thuật, thon gọn */}
               <h1 
-                className="text-3xl md:text-5xl font-serif italic font-black tracking-widest drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] mb-2 uppercase select-none"
+                className="text-2xl sm:text-3xl md:text-4xl font-serif italic font-bold tracking-[0.2em] md:tracking-[0.25em] drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] mt-1 mb-8 uppercase select-none text-center leading-snug"
                 style={{
                   color: "#FFE79A",
-                  textShadow: "0 0 10px #FFAE34",
+                  textShadow: "0 0 14px #FFAE34, 0 0 28px rgba(255, 215, 0, 0.6)",
                 }}
               >
                 WONDER WORLD
               </h1>
-              
-              <div className="text-sm font-serif font-black text-[#FFE79A] tracking-[0.15em] mb-5 uppercase select-none">
-                🎠 Góc của Tun 🎠
-              </div>
 
-              <p className="text-sm md:text-base text-white/90 leading-relaxed font-serif italic max-w-sm mb-8 filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] select-none">
-                “Viết nên chương truyện kỳ ảo của riêng ta...”
-              </p>
-
+              {/* 3. Đáy khung: Nút bấm "Xé vé vào cổng" với hiệu ứng sáng bóng */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                animate={{ boxShadow: ["0 0 10px rgba(255,174,52,0.3)", "0 0 25px rgba(255,174,52,0.65)", "0 0 10px rgba(255,174,52,0.3)"] }}
+                animate={{ boxShadow: ["0 0 15px rgba(255,174,52,0.5)", "0 0 32px rgba(255,215,0,0.9)", "0 0 15px rgba(255,174,52,0.5)"] }}
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                onClick={() => {
-                  // Phát nhạc ngay lập tức đồng bộ khi nhấn nút để tránh trễ hoạc chặn trên điện thoại di động
-                  if (audioRef.current) {
-                    audioRef.current.play().then(() => {
-                      console.log("Music started smoothly on user click!");
-                    }).catch(err => {
-                      console.warn("Autoplay block or audio not ready:", err);
-                    });
-                  }
-                  setIsPlaying(true);
-                  playClickSound(600, 0.1);
-                  setHasEnteredOrTransitioning(true);
-                  
-                  setTimeout(() => {
-                    // Kích hoạt hiệu ứng nhòe và mờ dần cho Welcome
-                    const welcomeEl = document.getElementById('welcome');
-                    if (welcomeEl) {
-                      welcomeEl.classList.remove('fade-in-back');
-                      welcomeEl.classList.add('fade-out');
-                    }
-                    
-                    // Kích hoạt hiệu ứng rõ nét dần cho trang chính
-                    const mainEl = document.getElementById('main');
-                    if (mainEl) {
-                      mainEl.classList.remove('fade-out-back');
-                      mainEl.classList.add('fade-in');
-                    }
-                    
-                    // Đợi hiệu ứng chạy xong xuôi (0.8 giây), mới ẩn hẳn Welcome để giải phóng màn hình
-                    setTimeout(() => {
-                      if (welcomeEl) {
-                        welcomeEl.style.display = 'none';
-                      }
-                      setHasEntered(true);
-                      setShowAgeVerify(true);
-                    }, 800);
-                  }, 50);
-                }}
-                className="relative w-full max-w-xs py-4 px-8 font-serif font-black text-[#6E2314] rounded-xl hover:brightness-110 active:scale-95 duration-150 cursor-pointer overflow-visible group tracking-[0.2em] text-xs uppercase ticket-enter-btn"
+                onClick={handleStartTicketEnter}
+                className="relative w-full max-w-xs py-4 px-8 font-serif font-black text-[#4A1208] rounded-xl hover:brightness-110 active:scale-95 duration-150 cursor-pointer overflow-visible group tracking-[0.2em] text-xs uppercase ticket-enter-btn mb-2 border border-[#FFFDF0]"
                 style={{
-                  background: "linear-gradient(135deg, #FFAE34, #FFE79A, #FFAE34)",
+                  background: "linear-gradient(135deg, #FFB300, #FFF59D, #FFA000)",
                 }}
               >
                 {/* Left ticket cutout notch */}
                 <div 
-                  className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-r border-[#FFAE34]/35 z-10"
-                  style={{ backgroundColor: "rgba(110, 35, 20, 1)" }}
+                  className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-r border-[#FFD700]/70 z-10"
+                  style={{ backgroundColor: "rgba(60, 15, 25, 1)" }}
                 />
                 {/* Right ticket cutout notch */}
                 <div 
-                  className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-l border-[#FFAE34]/35 z-10"
-                  style={{ backgroundColor: "rgba(110, 35, 20, 1)" }}
+                  className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-l border-[#FFD700]/70 z-10"
+                  style={{ backgroundColor: "rgba(60, 15, 25, 1)" }}
                 />
 
-                <span className="relative z-10 flex items-center justify-center gap-1.5 font-bold">
+                <span className="relative z-10 flex items-center justify-center gap-1.5 font-bold drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
                   XÉ VÉ VÀO CỔNG 🎟️
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               </motion.button>
             </motion.div>
 
@@ -1388,6 +1507,65 @@ export default function App() {
               </motion.a>
             </div>
           </div>
+
+          {/* Magical Portal Charging Loading Screen Modal Overlay */}
+          <AnimatePresence>
+            {isPortalCharging && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-[#06010B]/90 backdrop-blur-xl"
+              >
+                <div className="w-full max-w-sm border-2 border-[#FFD700] p-8 md:p-10 rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.95),0_0_60px_rgba(255,215,0,0.35)] flex flex-col items-center bg-gradient-to-b from-[rgba(75,18,32,0.95)] via-[rgba(45,10,20,0.98)] to-[rgba(18,3,10,0.99)] relative overflow-hidden text-center">
+                  
+                  {/* Ambient Glowing Shimmer Backlight */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#FFD700]/10 via-transparent to-[#FFAE34]/10 pointer-events-none animate-pulse" />
+
+                  {/* Rotating Portal Ring with Crown Sparkles */}
+                  <div className="relative mb-6 flex items-center justify-center">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                      className="w-20 h-20 rounded-full border-2 border-dashed border-[#FFD700] flex items-center justify-center shadow-[0_0_25px_rgba(255,215,0,0.7)]"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl select-none filter drop-shadow-[0_0_10px_#FFD700]">
+                      ✨
+                    </div>
+                  </div>
+
+                  {/* Loading Title & Status Counter */}
+                  <h3 
+                    className="font-serif italic font-bold text-[#FFE79A] text-lg sm:text-xl tracking-widest uppercase mb-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+                    style={{ textShadow: "0 0 12px #FFAE34" }}
+                  >
+                    Đang Xé Vé Vào Cổng...
+                  </h3>
+                  
+                  <p className="text-xs text-[#FFD700] font-sans tracking-widest uppercase font-semibold mb-5 flex items-center gap-1.5">
+                    <span>Nạp Năng Lượng Không Gian:</span>
+                    <span className="font-serif font-black text-sm text-[#FFF59D]">{Math.floor(chargeProgress)}%</span>
+                  </p>
+
+                  {/* Energy Bar Container */}
+                  <div className="w-full h-4 bg-[#18040C] rounded-full border border-[#FFD700]/70 p-0.5 overflow-hidden shadow-[inset_0_2px_8px_rgba(0,0,0,0.9)] relative">
+                    <motion.div
+                      className="h-full rounded-full bg-gradient-to-r from-[#FF9800] via-[#FFD700] to-[#FFF9C4] shadow-[0_0_14px_#FFD700]"
+                      style={{ width: `${chargeProgress}%` }}
+                    />
+                  </div>
+
+                  {/* Floating Particle Stars inside Loading Modal */}
+                  <div className="flex items-center gap-2 mt-4 text-[#FFD700]/80 text-xs font-serif italic">
+                    <span>✦</span>
+                    <span>Khai mở không gian Wonder World...</span>
+                    <span>✦</span>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       )}
 
@@ -1595,8 +1773,17 @@ export default function App() {
                   transition={{ duration: 0.4 }}
                   className="space-y-6"
                 >
-                  {/* Interactive Option Buttons panel */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 w-full">
+                  {/* Banner Image above the 4 function buttons */}
+                  <div className="w-full flex justify-center overflow-hidden rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] border-2 border-[#C59B27]/40 hover:border-[#FFD700]/70 transition-all duration-300">
+                    <img
+                      src="https://i.imgur.com/husmW2U.jpeg"
+                      alt="Banner"
+                      className="w-full h-auto object-cover rounded-2xl select-none pointer-events-none"
+                    />
+                  </div>
+
+                  {/* Interactive Option Buttons panel - Single straight horizontal row with clean card layout */}
+                  <div className="grid grid-cols-4 gap-1 sm:gap-2 md:gap-3 w-full">
                     {/* Pink sen button (Góc trái) */}
                     <button
                       onClick={() => {
@@ -1606,11 +1793,9 @@ export default function App() {
                         setIsCommandModalOpen(false);
                       }}
                       id="welcome-vote-btn"
-                      className={`w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap ${highlightedMenuIdx === 0 ? "shimmer-sweep-active" : ""}`}
+                      className={`w-full flex items-center justify-center py-2.5 sm:py-3 px-1 sm:px-2 rounded-lg font-bold royal-card-btn compact-row shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[10px] min-[360px]:text-[11px] sm:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap overflow-hidden ${highlightedMenuIdx === 0 ? "shimmer-sweep-active" : ""}`}
                     >
-                      <div className="ticket-stub-line"></div>
-                      <Star className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" fill="#FFAE34" />
-                      <span className="relative z-10">Vé Ưu Tiên ⭐</span>
+                      <span className="relative z-10 leading-none">⭐️𝓥𝓸𝓽𝓮</span>
                     </button>
 
                     {/* Orange button (Góc phải) - Updated to Blue Donate✨ */}
@@ -1622,11 +1807,9 @@ export default function App() {
                         setIsCommandModalOpen(false);
                       }}
                       id="welcome-donate-btn"
-                      className={`w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap ${highlightedMenuIdx === 1 ? "shimmer-sweep-active" : ""}`}
+                      className={`w-full flex items-center justify-center py-2.5 sm:py-3 px-1 sm:px-2 rounded-lg font-bold royal-card-btn compact-row shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[10px] min-[360px]:text-[11px] sm:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap overflow-hidden ${highlightedMenuIdx === 1 ? "shimmer-sweep-active" : ""}`}
                     >
-                      <div className="ticket-stub-line"></div>
-                      <Sparkles className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" />
-                      <span className="relative z-10">Giếng Ước Nguyện 🔮</span>
+                      <span className="relative z-10 leading-none">⛲️𝓖𝓲𝓮̂́𝓷𝓰 𝓤̛𝓸̛́𝓬</span>
                     </button>
 
                     {/* Command button */}
@@ -1638,11 +1821,9 @@ export default function App() {
                         setIsDonateModalOpen(false);
                       }}
                       id="welcome-command-btn"
-                      className={`w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap ${highlightedMenuIdx === 2 ? "shimmer-sweep-active" : ""}`}
+                      className={`w-full flex items-center justify-center py-2.5 sm:py-3 px-1 sm:px-2 rounded-lg font-bold royal-card-btn compact-row shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[10px] min-[360px]:text-[11px] sm:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap overflow-hidden ${highlightedMenuIdx === 2 ? "shimmer-sweep-active" : ""}`}
                     >
-                      <div className="ticket-stub-line"></div>
-                      <Info className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" />
-                      <span className="relative z-10">Quầy Hướng Dẫn 🎪</span>
+                      <span className="relative z-10 leading-none">🎪𝓗𝓾̛𝓸̛̃𝓷𝓰 𝓓𝓪̂̃𝓷</span>
                     </button>
 
                     {/* Feedback button */}
@@ -1652,15 +1833,11 @@ export default function App() {
                         setIsGuestbookModalOpen(true);
                       }}
                       id="welcome-feedback-btn"
-                      className={`w-full flex items-center justify-center gap-1 py-3 pr-1 pl-4.5 min-[375px]:pl-5 md:pr-2 md:pl-6 rounded-md font-bold royal-card-btn shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[9.5px] min-[320px]:text-[10px] min-[375px]:text-[11px] md:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap border-none ${highlightedMenuIdx === 3 ? "shimmer-sweep-active" : ""}`}
+                      className={`w-full flex items-center justify-center py-2.5 sm:py-3 px-1 sm:px-2 rounded-lg font-bold royal-card-btn compact-row shadow-md active:scale-95 transform hover:-translate-y-0.5 text-[10px] min-[360px]:text-[11px] sm:text-xs lg:text-sm cursor-pointer text-center relative whitespace-nowrap overflow-hidden border-none ${highlightedMenuIdx === 3 ? "shimmer-sweep-active" : ""}`}
                     >
-                      <div className="ticket-stub-line"></div>
-                      <PenTool className="w-3 h-3 md:w-4 md:h-4 relative z-10 shrink-0 text-[#FFAE34]" />
-                      <span className="relative z-10">Lưu Bút Du Khách 📜</span>
+                      <span className="relative z-10 leading-none">📜𝓛𝓾̛𝓾 𝓑𝓾́𝓽</span>
                     </button>
                   </div>
-
-                  <LetterNotice playClickSound={playClickSound} />
 
                   <div className="space-y-4">
                     <div className="relative w-full">
@@ -3561,6 +3738,65 @@ export default function App() {
           </button>
         </div>
       )}
+
+      {/* Floating Letter Notice Button (Bottom Left) */}
+      {hasEntered && (
+        <div className="fixed bottom-6 left-6 z-40">
+          <button
+            onClick={() => {
+              playClickSound(300, 0.08);
+              setIsLetterNoticeModalOpen(true);
+            }}
+            className="relative w-14 h-14 rounded-full bg-gradient-to-tr from-[#3a2522] via-[#5c3a2e] to-[#2b1810] border-2 border-[#c59b27] shadow-[0_4px_20px_rgba(0,0,0,0.6),inset_0_0_8px_rgba(255,215,0,0.3)] flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(197,155,39,0.8)] active:scale-95 transition-all group cursor-pointer overflow-hidden"
+            title="Thư Thông Báo Cập Nhật ✉️"
+            id="floating-letter-notice-btn"
+          >
+            {/* Notification badge pulse */}
+            <div className="absolute top-1.5 right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-[#2b1810] animate-pulse z-10" />
+            <Mail className="w-6 h-6 text-[#f3e5ab] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+            {/* Shine highlight */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none rounded-full" />
+          </button>
+        </div>
+      )}
+
+      {/* Letter Notice Popup Modal */}
+      <AnimatePresence>
+        {isLetterNoticeModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => {
+                playClickSound(300, 0.08);
+                setIsLetterNoticeModalOpen(false);
+              }}
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-[460px] mx-auto z-10 flex flex-col"
+            >
+              <div className="relative">
+                <button
+                  onClick={() => {
+                    playClickSound(300, 0.08);
+                    setIsLetterNoticeModalOpen(false);
+                  }}
+                  className="absolute -top-3 -right-3 z-20 w-8 h-8 rounded-full bg-[#3A2522] border-2 border-[#C59B27] text-[#F3E5AB] hover:text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform cursor-pointer"
+                  title="Đóng"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+                <LetterNotice playClickSound={playClickSound} />
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Music Player Modal */}
       <AnimatePresence>
