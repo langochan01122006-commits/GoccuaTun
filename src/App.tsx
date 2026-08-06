@@ -339,16 +339,17 @@ export default function App() {
     } catch (error: any) {
       console.error("Google login failed:", error);
       const code = error?.code || "";
+      let msg = "";
       if (code === "auth/operation-not-allowed") {
-        setLoginErrorMessage("Phương thức Google Auth chưa được bật trong Firebase Console.");
-        setShowLoginErrorModal(true);
+        msg = "Google Provider is not enabled in Firebase Console (Authentication -> Sign-in method -> Google).";
       } else if (code === "auth/unauthorized-domain") {
-        setLoginErrorMessage("Tên miền chưa được cấp phép trong Firebase Auth.");
-        setShowLoginErrorModal(true);
+        msg = "This domain is not in the Authorized Domains list in Firebase Console (Authentication -> Settings -> Authorized Domains).";
       } else {
-        setLoginErrorMessage(`Đăng nhập Google: ${formatAuthError(error)}`);
-        setShowLoginErrorModal(true);
+        msg = `Google sign-in error: ${formatAuthError(error)}`;
       }
+      setAuthModalError(msg);
+      setLoginErrorMessage(msg);
+      setShowLoginErrorModal(true);
     } finally {
       setIsAuthLoading(false);
     }
