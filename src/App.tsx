@@ -1516,101 +1516,68 @@ export default function App() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-[#FFE4E1]/95 backdrop-blur-md overflow-hidden"
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-[#F3E5AB]/95 backdrop-blur-md overflow-hidden"
               >
-                {/* Bối cảnh nền: Bụi sao lấp lánh (Stardust) */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(40)].map((_, i) => (
-                    <motion.div
-                      key={`star-${i}`}
-                      className="absolute rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-                      style={{
-                        top: `${Math.random() * 100}%`,
-                        left: `${Math.random() * 100}%`,
-                        width: `${Math.random() * 3 + 1}px`,
-                        height: `${Math.random() * 3 + 1}px`,
-                      }}
-                      animate={{
-                        opacity: [0.1, 0.8, 0.1],
-                        scale: [1, 1.5, 1],
-                      }}
-                      transition={{
-                        duration: Math.random() * 3 + 2,
-                        repeat: Infinity,
-                        delay: Math.random() * 2,
-                      }}
-                    />
-                  ))}
+                {/* Bối cảnh nền: Giấy da cổ (Parchment Paper) */}
+                <div className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-60">
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage: `
+                        radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(139, 69, 19, 0.05) 0%, transparent 50%),
+                        linear-gradient(to right, rgba(210, 180, 140, 0.1) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(210, 180, 140, 0.1) 1px, transparent 1px)
+                      `,
+                      backgroundSize: '100% 100%, 100% 100%, 20px 20px, 20px 20px',
+                    }}
+                  />
+                  {/* Hoa văn chìm hoàng gia */}
+                  <div className="absolute top-1/4 left-1/4 text-9xl opacity-5 text-[#8B4513] filter blur-[1px] transform -rotate-12 select-none">⚜️</div>
+                  <div className="absolute bottom-1/4 right-1/4 text-9xl opacity-5 text-[#8B4513] filter blur-[1px] transform rotate-12 select-none">👑</div>
                 </div>
 
-                {/* Bối cảnh nền: Cánh hoa bay nhẹ nhàng */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(15)].map((_, i) => (
-                    <motion.div
-                      key={`petal-${i}`}
-                      className="absolute text-pink-300/60 drop-shadow-sm text-sm"
-                      style={{
-                        top: `-10%`,
-                        left: `${Math.random() * 100}%`,
-                      }}
-                      animate={{
-                        top: `110%`,
-                        left: `${Math.random() * 100}%`,
-                        rotate: Math.random() * 360,
-                      }}
-                      transition={{
-                        duration: Math.random() * 10 + 10,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: Math.random() * 10,
-                      }}
-                    >
-                      🌸
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Khung chứa nội dung (Container Modal) */}
+                {/* Khung chứa nội dung (Container Modal) - Bọc kim loại vàng đồng */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  initial={{ opacity: 0, scale: 0.95, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 1.05 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="w-full max-w-sm border-[3px] border-[#B87333] p-8 md:p-10 rounded-3xl shadow-[0_20px_60px_rgba(184,115,51,0.25),0_0_40px_rgba(255,250,240,0.8)] flex flex-col items-center bg-[#FFFAF0] relative text-center"
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="w-full max-w-sm border-[6px] border-[#B8860B] p-8 md:p-10 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_30px_rgba(139,69,19,0.3)] flex flex-col items-center bg-[#E6D5B8] relative text-center"
+                  style={{
+                    backgroundImage: 'radial-gradient(circle, #E6D5B8 60%, #D4C3A3 100%)'
+                  }}
                 >
                   
-                  {/* Trang trí viền: Dây leo hoa hồng vàng và ngọc trai */}
-                  <div className="absolute top-0 left-0 w-full h-full pointer-events-none rounded-3xl overflow-hidden">
-                    <div className="absolute -top-4 -left-4 text-4xl opacity-40" style={{ transform: 'rotate(-45deg)' }}>🌿</div>
-                    <div className="absolute -top-4 -right-4 text-4xl opacity-40" style={{ transform: 'rotate(45deg) scaleX(-1)' }}>🌿</div>
-                    <div className="absolute -bottom-4 -left-4 text-4xl opacity-40" style={{ transform: 'rotate(-135deg) scaleX(-1)' }}>🌿</div>
-                    <div className="absolute -bottom-4 -right-4 text-4xl opacity-40" style={{ transform: 'rotate(135deg)' }}>🌿</div>
+                  {/* Trang trí viền kim loại vàng đồng chạm trổ */}
+                  <div className="absolute top-0 left-0 w-full h-full pointer-events-none rounded-xl overflow-hidden">
+                    <div className="absolute top-0 left-0 border-t-[8px] border-l-[8px] border-[#DAA520] w-12 h-12 rounded-tl-xl shadow-[2px_2px_4px_rgba(0,0,0,0.3)]"></div>
+                    <div className="absolute top-0 right-0 border-t-[8px] border-r-[8px] border-[#DAA520] w-12 h-12 rounded-tr-xl shadow-[-2px_2px_4px_rgba(0,0,0,0.3)]"></div>
+                    <div className="absolute bottom-0 left-0 border-b-[8px] border-l-[8px] border-[#DAA520] w-12 h-12 rounded-bl-xl shadow-[2px_-2px_4px_rgba(0,0,0,0.3)]"></div>
+                    <div className="absolute bottom-0 right-0 border-b-[8px] border-r-[8px] border-[#DAA520] w-12 h-12 rounded-br-xl shadow-[-2px_-2px_4px_rgba(0,0,0,0.3)]"></div>
                   </div>
-                  
-                  {/* Các viên ngọc trai nhỏ (Pearls) */}
-                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,1),inset_0_0_2px_rgba(200,200,200,1)]"></div>
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,1),inset_0_0_2px_rgba(200,200,200,1)]"></div>
-                  <div className="absolute top-1/2 left-2 -translate-y-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,1),inset_0_0_2px_rgba(200,200,200,1)]"></div>
-                  <div className="absolute top-1/2 right-2 -translate-y-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,1),inset_0_0_2px_rgba(200,200,200,1)]"></div>
 
-                  {/* Logo trung tâm với vòng hoa hồng vàng */}
-                  <div className="relative mb-8 flex items-center justify-center mt-2">
-                    {/* Vòng hoa hồng vàng (Golden rose wreath) */}
+                  {/* Logo trung tâm với hoa văn dây leo và con dấu sáp */}
+                  <div className="relative mb-12 flex items-center justify-center mt-4">
+                    {/* Dây leo vàng nhỏ xung quanh */}
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                      className="absolute inset-0 -m-5 border border-dashed border-[#B87333]/40 rounded-full flex items-center justify-center"
+                      transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 -m-8 rounded-full flex items-center justify-center"
                     >
-                      <span className="absolute -top-3 text-lg opacity-80 filter drop-shadow-[0_0_2px_#B87333]">🌹</span>
-                      <span className="absolute -bottom-3 text-lg opacity-80 filter drop-shadow-[0_0_2px_#B87333]">🌹</span>
-                      <span className="absolute -left-3 text-lg opacity-80 filter drop-shadow-[0_0_2px_#B87333]">🌹</span>
-                      <span className="absolute -right-3 text-lg opacity-80 filter drop-shadow-[0_0_2px_#B87333]">🌹</span>
+                      <svg className="w-full h-full text-[#B8860B] opacity-80" viewBox="0 0 100 100">
+                        <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="5,5" />
+                        <text className="text-[10px] font-serif fill-[#B8860B]">
+                          <textPath href="#circlePath" startOffset="0%">✧ Royal Seal ✧ Imperial Decree ✧</textPath>
+                          <textPath href="#circlePath" startOffset="50%">✧ Royal Seal ✧ Imperial Decree ✧</textPath>
+                        </text>
+                      </svg>
                     </motion.div>
                     
                     <motion.div
-                      animate={{ scale: [0.95, 1.05, 0.95] }}
+                      animate={{ scale: [0.98, 1.02, 0.98] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                      className="w-24 h-24 rounded-full overflow-hidden border-[3px] border-[#FFD700] shadow-[0_0_20px_rgba(255,215,0,0.5)] relative z-10"
+                      className="w-24 h-24 rounded-full overflow-hidden border-[3px] border-[#FFD700] shadow-[0_0_20px_rgba(184,134,11,0.5)] relative z-10"
                     >
                       <img 
                         src="https://i.imgur.com/UBryS3E.jpeg" 
@@ -1618,34 +1585,39 @@ export default function App() {
                         className="w-full h-full object-cover"
                       />
                     </motion.div>
+
+                    {/* Con dấu sáp đỏ hoàng gia (Wax Seal) */}
+                    <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-[#8B0000] rounded-full flex items-center justify-center z-20 shadow-[2px_4px_8px_rgba(0,0,0,0.6),inset_0_0_8px_rgba(255,215,0,0.4)] border border-[#DAA520]" style={{ background: 'radial-gradient(circle at 30% 30%, #A52A2A, #800000)' }}>
+                      <span className="text-[#FFD700] text-xl font-serif font-black" style={{ textShadow: '1px 1px 1px rgba(0,0,0,0.5)' }}>⚜</span>
+                    </div>
                   </div>
 
-                  {/* Chữ và Thanh Loading (Rose Gold - #B87333 / #E0BFB8) */}
+                  {/* Chữ và Thanh Loading (Nâu đồng cổ điển / Đỏ trầm) */}
                   <h3 
-                    className="font-serif italic font-bold text-[#B87333] text-lg sm:text-xl uppercase mb-3 drop-shadow-sm"
-                    style={{ textShadow: "1px 1px 2px rgba(255,255,255,0.8)" }}
+                    className="text-[#5C4033] text-2xl sm:text-3xl mb-4 drop-shadow-sm tracking-wide"
+                    style={{ fontFamily: "'Dancing Script', 'Caveat', 'Great Vibes', 'Brush Script MT', cursive" }}
                   >
                     Đang xé vé vào cổng...
                   </h3>
                   
-                  <p className="text-xs text-[#B87333] font-serif uppercase font-bold mb-5 flex items-center gap-1.5 justify-center">
-                    <span>Nạp năng lượng không gian:</span>
-                    <span className="font-bold text-[#A65E2E]">{Math.floor(chargeProgress)}%</span>
+                  <p className="text-sm text-[#8B0000] mb-6 flex items-center gap-2 justify-center tracking-wide" style={{ fontFamily: "'Dancing Script', 'Caveat', 'Great Vibes', 'Brush Script MT', cursive" }}>
+                    <span>Đang tiến vào lâu đài....</span>
+                    <span className="font-bold text-[#5C4033] text-lg">{Math.floor(chargeProgress)}%</span>
                   </p>
 
-                  {/* Energy Bar Container */}
-                  <div className="w-full h-3 bg-[#FFF0F5] rounded-full border border-[#B87333]/30 p-[1.5px] overflow-hidden shadow-inner relative">
+                  {/* Energy Bar Container (Đỏ trầm / Nâu) */}
+                  <div className="w-full h-3 bg-[#D2B48C] rounded-full border border-[#8B4513] p-[1.5px] overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)] relative">
                     <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-[#F4C2C2] via-[#B87333] to-[#E0BFB8] shadow-[0_0_8px_#B87333]"
+                      className="h-full rounded-full bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B4513] shadow-[0_0_8px_rgba(139,0,0,0.6)]"
                       style={{ width: `${chargeProgress}%` }}
                     />
                   </div>
 
-                  {/* Floating Particle Stars inside Loading Modal */}
-                  <div className="flex items-center gap-2 mt-4 text-[#B87333]/80 text-xs font-serif italic">
-                    <span>✦</span>
-                    <span>Khai mở không gian lâu đài cổ...</span>
-                    <span>✦</span>
+                  {/* Decorative Elements at bottom */}
+                  <div className="flex items-center gap-3 mt-6 text-[#8B4513] text-lg opacity-80" style={{ fontFamily: "'Dancing Script', 'Caveat', 'Great Vibes', 'Brush Script MT', cursive" }}>
+                    <span className="text-[#DAA520]">~</span>
+                    <span>Thư đã niêm phong</span>
+                    <span className="text-[#DAA520]">~</span>
                   </div>
                 </motion.div>
               </motion.div>
@@ -1967,23 +1939,6 @@ export default function App() {
                           Cốc Cốc Cốc ai gọi đó 🐰
                         </div>
                       </button>
-                    </div>
-
-                    {/* Trạm Cảm Xúc Link Button */}
-                    <div className="magic-ticket-wrapper mt-3">
-                      <a
-                        href="https://m-ng-x-h-i-mini.ai.studio/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="magic-ticket-pink focus:outline-none block"
-                        onClick={() => {
-                          playClickSound(600, 0.1);
-                        }}
-                      >
-                        <div className="magic-ticket-inner">
-                          Ideas & Feedback 🕯️
-                        </div>
-                      </a>
                     </div>
 
                     {/* Tag Filters list matching theme colors (Primary: Blue "Tất cả", Secondary: Pink categories tags) */}
