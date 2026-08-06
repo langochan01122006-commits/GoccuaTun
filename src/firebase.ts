@@ -1,15 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection, onSnapshot, deleteDoc, query, where } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithRedirect, getRedirectResult, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
+
+const env = (import.meta as any).env || {};
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC2HKQLcC_6sMDo49ufQWANt1LwpnKXMqg",
-  authDomain: "gocnhocuatunn.firebaseapp.com",
-  projectId: "gocnhocuatunn",
-  storageBucket: "gocnhocuatunn.firebasestorage.app",
-  messagingSenderId: "227094223631",
-  appId: "1:227094223631:web:3cc735a2e36829f6ef3c7a",
-  measurementId: "G-BQ0LP5JE0R"
+  apiKey: env.VITE_FIREBASE_API_KEY || "AIzaSyC2HKQLcC_6sMDo49ufQWANt1LwpnKXMqg",
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "gocnhocuatunn.firebaseapp.com",
+  projectId: env.VITE_FIREBASE_PROJECT_ID || "gocnhocuatunn",
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "gocnhocuatunn.firebasestorage.app",
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || "227094223631",
+  appId: env.VITE_FIREBASE_APP_ID || "1:227094223631:web:3cc735a2e36829f6ef3c7a",
+  measurementId: env.VITE_FIREBASE_MEASUREMENT_ID || "G-BQ0LP5JE0R"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -35,19 +37,59 @@ export async function handleRedirectResult() {
   return null;
 }
 
-export async function signInWithGoogle() {
+export async function signInWithGoogle(): Promise<User | null> {
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({
     prompt: 'select_account'
   });
-  await signInWithRedirect(auth, provider);
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
+  } catch (error: any) {
+    console.warn("Google popup sign-in failed, trying redirect fallback...", error);
+    const code = error?.code || "";
+    const msg = error?.message || String(error);
+    if (
+      code === 'auth/popup-blocked' ||
+      code === 'auth/popup-closed-by-user' ||
+      code === 'auth/cancelled-popup-request' ||
+      msg.includes('popup') ||
+      msg.includes('cross-origin') ||
+      msg.includes('iframe')
+    ) {
+      await signInWithRedirect(auth, provider);
+      return null;
+    }
+    throw error;
+  }
 }
 
-export async function signInWithApple() {
+export async function signInWithApple(): Promise<User | null> {
   const provider = new OAuthProvider('apple.com');
   provider.addScope('email');
   provider.addScope('name');
-  await signInWithRedirect(auth, provider);
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
+  } catch (error: any) {
+    console.warn("Apple popup sign-in failed, trying redirect fallback...", error);
+    const code = error?.code || "";
+    const msg = error?.message || String(error);
+    if (
+      code === 'auth/popup-blocked' ||
+      code === 'auth/popup-closed-by-user' ||
+      code === 'auth/cancelled-popup-request' ||
+      msg.includes('popup') ||
+      msg.includes('cross-origin') ||
+      msg.includes('iframe')
+    ) {
+      await signInWithRedirect(auth, provider);
+      return null;
+    }
+    throw error;
+  }
 }
 
 export async function registerWithEmailPassword(email: string, pass: string, displayName: string, photoURL?: string) {

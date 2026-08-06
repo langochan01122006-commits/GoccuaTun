@@ -332,7 +332,10 @@ export default function App() {
     setAuthModalError('');
     try {
       playClickSound(600, 0.1);
-      await signInWithGoogle();
+      const user = await signInWithGoogle();
+      if (user) {
+        setShowAuthModal(false);
+      }
     } catch (error: any) {
       console.error("Google login failed:", error);
       const code = error?.code || "";
@@ -356,7 +359,10 @@ export default function App() {
     setAuthModalError('');
     try {
       playClickSound(600, 0.1);
-      await signInWithApple();
+      const user = await signInWithApple();
+      if (user) {
+        setShowAuthModal(false);
+      }
     } catch (error: any) {
       console.error("Apple login failed:", error);
       const code = error?.code || "";
