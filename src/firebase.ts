@@ -1,16 +1,21 @@
 import { initializeApp } from "firebase/app";
 import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection, onSnapshot, deleteDoc, query, where } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithRedirect, getRedirectResult, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
-import firebaseConfig from "../firebase-applet-config.json";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC2HKQLcC_6sMDo49ufQWANt1LwpnKXMqg",
+  authDomain: "gocnhocuatunn.firebaseapp.com",
+  projectId: "gocnhocuatunn",
+  storageBucket: "gocnhocuatunn.firebasestorage.app",
+  messagingSenderId: "227094223631",
+  appId: "1:227094223631:web:3cc735a2e36829f6ef3c7a",
+  measurementId: "G-BQ0LP5JE0R"
+};
 
 const app = initializeApp(firebaseConfig);
-export const db = initializeFirestore(
-  app,
-  { experimentalForceLongPolling: true },
-  firebaseConfig.firestoreDatabaseId && firebaseConfig.firestoreDatabaseId !== "(default)"
-    ? firebaseConfig.firestoreDatabaseId
-    : undefined
-);
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+});
 
 export const auth = getAuth(app);
 setPersistence(auth, browserLocalPersistence).catch((err) => {
