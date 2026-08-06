@@ -1,17 +1,49 @@
 import { initializeApp } from "firebase/app";
 import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection, onSnapshot, deleteDoc, query, where } from "firebase/firestore";
-import { getAuth, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithRedirect, getRedirectResult, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
 import firebaseConfig from "../firebase-applet-config.json";
 
 const app = initializeApp(firebaseConfig);
-export const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true,
-}, firebaseConfig.firestoreDatabaseId);
+export const db = initializeFirestore(
+  app,
+  { experimentalForceLongPolling: true },
+  firebaseConfig.firestoreDatabaseId && firebaseConfig.firestoreDatabaseId !== "(default)"
+    ? firebaseConfig.firestoreDatabaseId
+    : undefined
+);
 
 export const auth = getAuth(app);
 setPersistence(auth, browserLocalPersistence).catch((err) => {
   console.error("Auth persistence error:", err);
 });
+
+export async function handleRedirectResult() {
+  try {
+    const result = await getRedirectResult(auth);
+    if (result && result.user) {
+      return result.user;
+    }
+  } catch (error: any) {
+    console.error("Redirect result error:", error);
+    throw error;
+  }
+  return null;
+}
+
+export async function signInWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: 'select_account'
+  });
+  await signInWithRedirect(auth, provider);
+}
+
+export async function signInWithApple() {
+  const provider = new OAuthProvider('apple.com');
+  provider.addScope('email');
+  provider.addScope('name');
+  await signInWithRedirect(auth, provider);
+}
 
 export async function registerWithEmailPassword(email: string, pass: string, displayName: string, photoURL?: string) {
   try {
