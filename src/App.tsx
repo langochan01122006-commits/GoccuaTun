@@ -227,8 +227,19 @@ export default function App() {
       if (user) {
         setShowAuthModal(false);
       }
-    }).catch((err) => {
+    }).catch((err: any) => {
       console.error("Error processing OAuth redirect:", err);
+      const code = err?.code || "";
+      let msg = "";
+      if (code === "auth/operation-not-allowed") {
+        msg = "Google Provider chưa được bật trong Firebase Console (Authentication -> Sign-in method -> Google).";
+      } else if (code === "auth/unauthorized-domain") {
+        msg = "Tên miền hiện tại chưa được thêm vào Authorized Domains trong Firebase Console (Authentication -> Settings -> Authorized Domains).";
+      } else {
+        msg = `Đăng nhập Google thất bại: ${formatAuthError(err)}`;
+      }
+      setLoginErrorMessage(msg);
+      setShowLoginErrorModal(true);
     });
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -332,25 +343,21 @@ export default function App() {
     setAuthModalError('');
     try {
       playClickSound(600, 0.1);
-      const user = await signInWithGoogle();
-      if (user) {
-        setShowAuthModal(false);
-      }
+      await signInWithGoogle();
     } catch (error: any) {
-      console.error("Google login failed:", error);
+      console.error("Google login error:", error);
       const code = error?.code || "";
       let msg = "";
       if (code === "auth/operation-not-allowed") {
-        msg = "Google Provider is not enabled in Firebase Console (Authentication -> Sign-in method -> Google).";
+        msg = "Google Provider chưa được bật trong Firebase Console (Authentication -> Sign-in method -> Google).";
       } else if (code === "auth/unauthorized-domain") {
-        msg = "This domain is not in the Authorized Domains list in Firebase Console (Authentication -> Settings -> Authorized Domains).";
+        msg = "Tên miền này chưa có trong Authorized Domains của Firebase Console.";
       } else {
-        msg = `Google sign-in error: ${formatAuthError(error)}`;
+        msg = `Đăng nhập Google thất bại: ${formatAuthError(error)}`;
       }
       setAuthModalError(msg);
       setLoginErrorMessage(msg);
       setShowLoginErrorModal(true);
-    } finally {
       setIsAuthLoading(false);
     }
   };
@@ -360,12 +367,9 @@ export default function App() {
     setAuthModalError('');
     try {
       playClickSound(600, 0.1);
-      const user = await signInWithApple();
-      if (user) {
-        setShowAuthModal(false);
-      }
+      await signInWithApple();
     } catch (error: any) {
-      console.error("Apple login failed:", error);
+      console.error("Apple login error:", error);
       const code = error?.code || "";
       if (code === "auth/operation-not-allowed" || code === "auth/invalid-provider-id") {
         setLoginErrorMessage("Đăng nhập bằng Apple ID cần được cấu hình trong Firebase Console.");
@@ -374,7 +378,6 @@ export default function App() {
         setLoginErrorMessage(`Đăng nhập Apple ID: ${formatAuthError(error)}`);
         setShowLoginErrorModal(true);
       }
-    } finally {
       setIsAuthLoading(false);
     }
   };

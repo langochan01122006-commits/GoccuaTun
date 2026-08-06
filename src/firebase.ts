@@ -37,59 +37,19 @@ export async function handleRedirectResult() {
   return null;
 }
 
-export async function signInWithGoogle(): Promise<User | null> {
+export async function signInWithGoogle(): Promise<void> {
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({
     prompt: 'select_account'
   });
-
-  try {
-    const result = await signInWithPopup(auth, provider);
-    return result.user;
-  } catch (error: any) {
-    console.warn("Google popup sign-in failed, trying redirect fallback...", error);
-    const code = error?.code || "";
-    const msg = error?.message || String(error);
-    if (
-      code === 'auth/popup-blocked' ||
-      code === 'auth/popup-closed-by-user' ||
-      code === 'auth/cancelled-popup-request' ||
-      msg.includes('popup') ||
-      msg.includes('cross-origin') ||
-      msg.includes('iframe')
-    ) {
-      await signInWithRedirect(auth, provider);
-      return null;
-    }
-    throw error;
-  }
+  await signInWithRedirect(auth, provider);
 }
 
-export async function signInWithApple(): Promise<User | null> {
+export async function signInWithApple(): Promise<void> {
   const provider = new OAuthProvider('apple.com');
   provider.addScope('email');
   provider.addScope('name');
-
-  try {
-    const result = await signInWithPopup(auth, provider);
-    return result.user;
-  } catch (error: any) {
-    console.warn("Apple popup sign-in failed, trying redirect fallback...", error);
-    const code = error?.code || "";
-    const msg = error?.message || String(error);
-    if (
-      code === 'auth/popup-blocked' ||
-      code === 'auth/popup-closed-by-user' ||
-      code === 'auth/cancelled-popup-request' ||
-      msg.includes('popup') ||
-      msg.includes('cross-origin') ||
-      msg.includes('iframe')
-    ) {
-      await signInWithRedirect(auth, provider);
-      return null;
-    }
-    throw error;
-  }
+  await signInWithRedirect(auth, provider);
 }
 
 export async function registerWithEmailPassword(email: string, pass: string, displayName: string, photoURL?: string) {
