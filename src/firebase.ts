@@ -1,11 +1,90 @@
 import { initializeApp } from "firebase/app";
-import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection, onSnapshot } from "firebase/firestore";
+import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection, onSnapshot, deleteDoc, query, where } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
 import firebaseConfig from "../firebase-applet-config.json";
 
 const app = initializeApp(firebaseConfig);
 export const db = initializeFirestore(app, {
   experimentalForceLongPolling: true,
 }, firebaseConfig.firestoreDatabaseId);
+
+export const auth = getAuth(app);
+setPersistence(auth, browserLocalPersistence).catch((err) => {
+  console.error("Auth persistence error:", err);
+});
+
+export async function signInWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
+  } catch (error: any) {
+    console.error("Google login error:", error);
+    throw error;
+  }
+}
+
+export async function signInWithApple() {
+  const provider = new OAuthProvider('apple.com');
+  provider.addScope('email');
+  provider.addScope('name');
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
+  } catch (error: any) {
+    console.error("Apple login error:", error);
+    throw error;
+  }
+}
+
+export async function registerWithEmailPassword(email: string, pass: string, displayName: string, photoURL?: string) {
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    if (cred.user) {
+      await updateProfile(cred.user, {
+        displayName: displayName || email.split('@')[0],
+        photoURL: photoURL || "https://i.imgur.com/ALMc8Ct.jpeg"
+      });
+    }
+    return cred.user;
+  } catch (error: any) {
+    console.error("Email register error:", error);
+    throw error;
+  }
+}
+
+export async function loginWithEmailPassword(email: string, pass: string) {
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, pass);
+    return cred.user;
+  } catch (error: any) {
+    console.error("Email login error:", error);
+    throw error;
+  }
+}
+
+export async function updateUserCustomProfile(displayName: string, photoURL: string) {
+  if (!auth.currentUser) throw new Error("No user logged in");
+  try {
+    await updateProfile(auth.currentUser, {
+      displayName,
+      photoURL
+    });
+    return auth.currentUser;
+  } catch (error: any) {
+    console.error("Update profile error:", error);
+    throw error;
+  }
+}
+
+export async function logoutUser(): Promise<void> {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Logout error:", error);
+    throw error;
+  }
+}
 
 export enum OperationType {
   CREATE = 'create',
@@ -135,8 +214,43 @@ export async function getAllArtLikes(): Promise<Record<string, number>> {
   }
 }
 
+// Fetch all artwork IDs a user has liked
+export async function getUserLikedArtworks(userId: string): Promise<Record<string, boolean>> {
+  const collectionName = "user_art_likes";
+  try {
+    const q = query(collection(db, collectionName), where("userId", "==", userId));
+    const snapshot = await getDocs(q);
+    const likedMap: Record<string, boolean> = {};
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      if (data && data.artworkId) {
+        likedMap[data.artworkId] = true;
+      }
+    });
+    return likedMap;
+  } catch (error) {
+    console.error("Error fetching user liked artworks:", error);
+    return {};
+  }
+}
+
 // Increment like count for an artwork
-export async function likeArtwork(artworkId: string): Promise<number> {
+export async function likeArtwork(userId: string, artworkId: string): Promise<number> {
+  // 1. Record user's like in user_art_likes
+  const userLikesColl = "user_art_likes";
+  const userLikeDocId = `${userId}_${artworkId}`;
+  const userLikeDocRef = doc(db, userLikesColl, userLikeDocId);
+  try {
+    await setDoc(userLikeDocRef, {
+      userId,
+      artworkId,
+      likedAt: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error("Error saving user like record:", error);
+  }
+
+  // 2. Increment global art_likes count
   const collectionName = "art_likes";
   const docRef = doc(db, collectionName, artworkId);
   try {
@@ -161,7 +275,18 @@ export async function likeArtwork(artworkId: string): Promise<number> {
 }
 
 // Decrement like count for an artwork
-export async function unlikeArtwork(artworkId: string): Promise<number> {
+export async function unlikeArtwork(userId: string, artworkId: string): Promise<number> {
+  // 1. Delete user's like record
+  const userLikesColl = "user_art_likes";
+  const userLikeDocId = `${userId}_${artworkId}`;
+  const userLikeDocRef = doc(db, userLikesColl, userLikeDocId);
+  try {
+    await deleteDoc(userLikeDocRef);
+  } catch (error) {
+    console.error("Error deleting user like record:", error);
+  }
+
+  // 2. Decrement global art_likes count
   const collectionName = "art_likes";
   const docRef = doc(db, collectionName, artworkId);
   try {

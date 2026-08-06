@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -1908,7 +1909,6 @@
 }
 
 /* Custom hand-written font loaded from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
 
 .font-handwritten {
   font-family: 'Charm', cursive, serif;

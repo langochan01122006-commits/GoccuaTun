@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Heart, MessageSquare, Send, Sparkles, Image as ImageIcon, Paintbrush, HeartHandshake, Eye, PlusCircle } from "lucide-react";
-import { getAllArtLikes, likeArtwork, unlikeArtwork, submitArtwork, subscribeToArtworks, SubmittedArtworkData } from "../firebase";
+import { getAllArtLikes, likeArtwork, unlikeArtwork, submitArtwork, subscribeToArtworks, SubmittedArtworkData, getUserLikedArtworks, subscribeToArtLikes } from "../firebase";
 
 interface ArtGalleryProps {
   playClickSound: (freq?: number, duration?: number) => void;
+  currentUser?: any;
+  onPromptLogin?: (message: string) => void;
 }
 
 // Sample premium gallery artworks
@@ -48,7 +50,7 @@ const GALLERY_ARTWORKS = [
   }
 ];
 
-export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
+export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound, currentUser, onPromptLogin }) => {
   // Mount guard for React Portals
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -96,17 +98,29 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
     1: 0, 2: 0, 3: 0, 4: 0
   });
 
-  // Fetch initial likes
+  // Subscribe to real-time total likes
   useEffect(() => {
-    async function fetchLikes() {
-      const likes = await getAllArtLikes();
+    const unsubscribe = subscribeToArtLikes((likes) => {
       setArtLikes(prev => ({
         ...prev,
         ...likes
       }));
-    }
-    fetchLikes();
+    });
+    return () => unsubscribe();
   }, []);
+
+  // Fetch user specific likes
+  useEffect(() => {
+    async function fetchUserLikes() {
+      if (currentUser?.uid) {
+        const userLikes = await getUserLikedArtworks(currentUser.uid);
+        setLikedArts(userLikes);
+      } else {
+        setLikedArts({});
+      }
+    }
+    fetchUserLikes();
+  }, [currentUser]);
 
   // Artwork submission form states
   const [submitTitle, setSubmitTitle] = useState("");
@@ -131,6 +145,10 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
 
   const toggleLike = async (artId: string | number) => {
     playClickSound(880, 0.05);
+    if (!currentUser && onPromptLogin) {
+      onPromptLogin("Bạn cần đăng nhập trước khi thả tim cho tác phẩm!");
+      return;
+    }
     const isLiked = !!likedArts[artId];
     
     // Optimistic update
@@ -142,15 +160,19 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
 
     // Update in Firestore
     if (isLiked) {
-      await unlikeArtwork(artId.toString());
+      await unlikeArtwork(currentUser.uid, artId.toString());
     } else {
-      await likeArtwork(artId.toString());
+      await likeArtwork(currentUser.uid, artId.toString());
     }
   };
 
   // Submit Artwork to Firestore
   const handleSubmitArtwork = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!currentUser && onPromptLogin) {
+      onPromptLogin("Bạn cần đăng nhập trước khi nộp tranh triển lãm!");
+      return;
+    }
     if (!submitTitle.trim() || !submitArtist.trim() || !submitDesc.trim() || !submitUrl.trim()) {
       alert("Vui lòng điền đầy đủ tất cả các thông tin bắt buộc nhé! ✨");
       return;
@@ -390,6 +412,10 @@ export const ArtGallery: React.FC<ArtGalleryProps> = ({ playClickSound }) => {
                     <button
                       onClick={() => {
                         playClickSound(520, 0.08);
+                        if (!currentUser && onPromptLogin) {
+                          onPromptLogin("Bạn cần đăng nhập trước khi gửi tác phẩm vào triển lãm!");
+                          return;
+                        }
                         setIsSubmitArtOpen(true);
                       }}
                       className="px-3 py-1.5 rounded-xl border border-[#e2a85c] bg-[#2a0d0d] text-[#fde047] font-sans text-[10px] md:text-xs font-bold hover:bg-[#3f1212] hover:border-[#ffd700] transition cursor-pointer flex items-center gap-1 shadow-sm shrink-0"

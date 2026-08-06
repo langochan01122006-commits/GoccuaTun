@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, CSSProperties } from "react";
+import { useState, useEffect, useRef, CSSProperties, FormEvent } from "react";
 import { CHARACTERS, Character } from "./characters";
 import { Search, Heart, Sparkles, MessageCircle, BookOpen, Volume2, VolumeX, Moon, Sun, ArrowLeft, RotateCcw, BarChart3, Gift, Check, X, Copy, ScrollText, Music, Play, Pause, SkipBack, SkipForward, ListMusic, User, Package, PackageOpen, Megaphone, Star, Info, PenTool, DoorOpen, Flame, Shield, Map, Crown, Leaf, Eye, EyeOff, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -6,7 +6,8 @@ import StoryModal from "./components/StoryModal";
 import ChatBox from "./components/ChatBox";
 import { LetterNotice } from "./components/LetterNotice";
 import { ArtGallery } from "./components/ArtGallery";
-import { getAllVotes, voteForCharacter, unvoteForCharacter, subscribeToVotes } from "./firebase";
+import { getAllVotes, voteForCharacter, unvoteForCharacter, subscribeToVotes, signInWithGoogle, signInWithApple, loginWithEmailPassword, registerWithEmailPassword, updateUserCustomProfile, logoutUser, auth } from "./firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const donateQrImg = "/src/assets/images/donate_qr_code_1781767011629.jpg";
 
@@ -202,6 +203,126 @@ function getPlushieCardTheme(id: number, isTop: boolean): PlushieTheme {
 }
 
 export default function App() {
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [showLoginErrorModal, setShowLoginErrorModal] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState("");
+
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authTab, setAuthTab] = useState<'login' | 'register'>('login');
+  const [authEmail, setAuthEmail] = useState('');
+  const [authPassword, setAuthPassword] = useState('');
+  const [authDisplayName, setAuthDisplayName] = useState('');
+  const [authAvatar, setAuthAvatar] = useState('https://i.imgur.com/ALMc8Ct.jpeg');
+  const [authModalError, setAuthModalError] = useState('');
+
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [editDisplayName, setEditDisplayName] = useState('');
+  const [editAvatar, setEditAvatar] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      if (user) {
+        setEditDisplayName(user.displayName || '');
+        setEditAvatar(user.photoURL || '');
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleEmailAuthSubmit = async (e: any) => {
+    e.preventDefault();
+    setIsAuthLoading(true);
+    setAuthModalError('');
+    try {
+      playClickSound(500, 0.1);
+      if (authTab === 'login') {
+        await loginWithEmailPassword(authEmail, authPassword);
+      } else {
+        await registerWithEmailPassword(authEmail, authPassword, authDisplayName, authAvatar);
+      }
+      setShowAuthModal(false);
+      setAuthEmail('');
+      setAuthPassword('');
+      setAuthDisplayName('');
+    } catch (error: any) {
+      console.error("Auth error:", error);
+      setAuthModalError(error?.message || "Đăng nhập/Đăng ký thất bại. Vui lòng kiểm tra lại thông tin.");
+    } finally {
+      setIsAuthLoading(false);
+    }
+  };
+
+  const handleGoogleAuth = async () => {
+    setIsAuthLoading(true);
+    setAuthModalError('');
+    try {
+      playClickSound(600, 0.1);
+      await signInWithGoogle();
+      setShowAuthModal(false);
+    } catch (error: any) {
+      console.error("Google login failed:", error);
+      const msg = error?.message || String(error);
+      if (msg.includes("popup") || msg.includes("auth/") || msg.includes("closed") || msg.includes("cross-origin") || msg.includes("iframe")) {
+        setLoginErrorMessage("Trình duyệt trong khung xem thử (iframe) chặn cửa sổ đăng nhập Google. Vui lòng mở ứng dụng trong Tab Mới để đăng nhập mượt mà.");
+      } else {
+        setLoginErrorMessage(`Đăng nhập Google thất bại: ${msg}`);
+      }
+      setShowLoginErrorModal(true);
+    } finally {
+      setIsAuthLoading(false);
+    }
+  };
+
+  const handleAppleAuth = async () => {
+    setIsAuthLoading(true);
+    setAuthModalError('');
+    try {
+      playClickSound(600, 0.1);
+      await signInWithApple();
+      setShowAuthModal(false);
+    } catch (error: any) {
+      console.error("Apple login failed:", error);
+      const msg = error?.message || String(error);
+      if (msg.includes("popup") || msg.includes("auth/") || msg.includes("closed") || msg.includes("iframe")) {
+        setLoginErrorMessage("Trình duyệt trong khung xem thử (iframe) chặn cửa sổ đăng nhập Apple. Vui lòng mở ứng dụng trong Tab Mới để đăng nhập mượt mà.");
+      } else {
+        setLoginErrorMessage(`Đăng nhập Apple ID thất bại: ${msg}`);
+      }
+      setShowLoginErrorModal(true);
+    } finally {
+      setIsAuthLoading(false);
+    }
+  };
+
+  const handleUpdateProfileSubmit = async (e: any) => {
+    e.preventDefault();
+    setIsAuthLoading(true);
+    try {
+      playClickSound(500, 0.1);
+      await updateUserCustomProfile(editDisplayName, editAvatar);
+      setIsEditProfileOpen(false);
+      setIsProfileOpen(false);
+      alert("Cập nhật thông tin thành công!");
+    } catch (error: any) {
+      alert(`Cập nhật thất bại: ${error?.message || error}`);
+    } finally {
+      setIsAuthLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      playClickSound(400, 0.1);
+      await logoutUser();
+      setIsProfileOpen(false);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   const [hasEntered, setHasEntered] = useState(false);
   const [hasEnteredOrTransitioning, setHasEnteredOrTransitioning] = useState(false);
   const [showAgeVerify, setShowAgeVerify] = useState(false);
@@ -725,6 +846,13 @@ export default function App() {
   const handleVote = async (characterId: string) => {
     playClickSound(620, 0.08);
     
+    if (!currentUser) {
+      setAuthTab('login');
+      setAuthModalError('Bạn cần đăng nhập trước khi bình chọn cho nhân vật!');
+      setShowAuthModal(true);
+      return;
+    }
+    
     if (userVotedIds.includes(characterId)) {
       // Unvote optimistic update
       setVotes((prev) => ({
@@ -908,6 +1036,13 @@ export default function App() {
   // Triggers immediate chat in a new tab using the chatbotUrl or chatLink
   const handleStartChat = (character: Character, initialPrompt?: string) => {
     playClickSound(550, 0.1);
+    
+    if (!currentUser) {
+      setAuthTab('login');
+      setAuthModalError('Bạn cần đăng nhập trước khi bắt đầu trò chuyện với nhân vật!');
+      setShowAuthModal(true);
+      return;
+    }
     
     if (character.passwordRequired) {
       setPasswordModalChar(character);
@@ -1691,8 +1826,95 @@ export default function App() {
                 <span>Trở Về Cổng Chính</span>
               </button>
 
-              {/* Minimalist round tool buttons at the top right */}
-              <div className="flex items-center gap-1.5 md:gap-2">
+              {/* Minimalist round login/profile button and Multi-task Menu at the top right */}
+              <div className="flex items-center gap-2">
+                {/* Small round login/profile button to the left of the multi-task menu */}
+                <div className="relative">
+                  {currentUser ? (
+                    <button
+                      onClick={() => {
+                        playClickSound(400, 0.08);
+                        setIsProfileOpen(!isProfileOpen);
+                      }}
+                      className="w-10 h-10 rounded-full border-2 border-amber-400 overflow-hidden shadow-[0_0_12px_rgba(255,215,0,0.4)] hover:scale-105 active:scale-95 transition cursor-pointer flex items-center justify-center bg-[#2a1010]"
+                      title="Xem Profile & Đăng xuất"
+                    >
+                      {currentUser.photoURL ? (
+                        <img src={currentUser.photoURL} alt="Avatar" className="w-full h-full object-cover" />
+                      ) : (
+                        <User className="w-5 h-5 text-amber-300" />
+                      )}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        playClickSound(400, 0.08);
+                        setShowAuthModal(true);
+                      }}
+                      disabled={isAuthLoading}
+                      className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-[#4A1208] shadow-[0_0_12px_rgba(255,215,0,0.4)] hover:scale-105 active:scale-95 transition cursor-pointer flex items-center justify-center border border-[#FFFDF0]"
+                      title="Đăng Nhập / Đăng Ký"
+                    >
+                      <span className="text-base">{isAuthLoading ? "⏳" : "🔑"}</span>
+                    </button>
+                  )}
+
+                  {/* Profile Dropdown Popup */}
+                  <AnimatePresence>
+                    {isProfileOpen && currentUser && (
+                      <>
+                        <div 
+                          className="fixed inset-0 z-40" 
+                          onClick={() => setIsProfileOpen(false)} 
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95, y: -15 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.95, y: -15 }}
+                          transition={{ type: "spring", damping: 22, stiffness: 150 }}
+                          className="absolute right-0 mt-3 w-64 bg-[#1a0808] border-2 border-[#e2a85c] rounded-xl shadow-[0_15px_40px_rgba(0,0,0,0.9)] p-4 z-50 text-white select-none"
+                        >
+                          <div className="absolute -top-[7px] right-[20px] w-3 h-3 bg-[#1a0808] border-t-2 border-l-2 border-[#e2a85c] rotate-45" />
+
+                          <div className="flex items-center gap-3 mb-3 pb-3 border-b border-amber-500/30">
+                            {currentUser.photoURL ? (
+                              <img src={currentUser.photoURL} alt="Avatar" className="w-12 h-12 rounded-full object-cover border-2 border-amber-400 shadow-md" />
+                            ) : (
+                              <div className="w-12 h-12 rounded-full bg-amber-900/60 border-2 border-amber-400 flex items-center justify-center text-amber-300">
+                                <User className="w-6 h-6" />
+                              </div>
+                            )}
+                            <div className="overflow-hidden">
+                              <h4 className="font-bold text-sm text-amber-200 truncate">{currentUser.displayName || "Khách hàng"}</h4>
+                              <p className="text-[11px] text-amber-300/70 truncate">{currentUser.email}</p>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => {
+                              setIsProfileOpen(false);
+                              setIsEditProfileOpen(true);
+                            }}
+                            className="w-full bg-[#3a0a0a] hover:bg-[#4a1010] text-amber-200 border border-amber-500/40 py-2 px-3 rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md cursor-pointer mb-2"
+                          >
+                            <span>✏️ Chỉnh Sửa Hồ Sơ</span>
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              setIsProfileOpen(false);
+                              handleLogout();
+                            }}
+                            className="w-full bg-gradient-to-r from-red-950 to-red-900 hover:from-red-900 hover:to-red-800 text-red-200 border border-red-500/50 py-2 px-3 rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md cursor-pointer"
+                          >
+                            <span>🚪 Đăng Xuất</span>
+                          </button>
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 {/* Multi-task Menu Button (formerly flame) */}
                 <div className="relative">
                   <button
@@ -2238,7 +2460,15 @@ export default function App() {
                   )}
 
                   {/* Art Gallery & Commission Station */}
-                  <ArtGallery playClickSound={playClickSound} />
+                  <ArtGallery
+                    playClickSound={playClickSound}
+                    currentUser={currentUser}
+                    onPromptLogin={(message: string) => {
+                      setAuthTab('login');
+                      setAuthModalError(message);
+                      setShowAuthModal(true);
+                    }}
+                  />
 
                   {/* Characters scrollable vertical listing: "Bộ sưu tập thú bông lưu niệm" */}
                   <div className="space-y-4" id="character-list-section">
@@ -4626,6 +4856,268 @@ export default function App() {
           </div>
         )}
             </AnimatePresence>
+
+      {/* Login Error / Iframe Redirect Guidance Modal */}
+      <AnimatePresence>
+        {showLoginErrorModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-[#250808] border-2 border-[#e2a85c] rounded-2xl shadow-[0_0_50px_rgba(122,21,21,0.8)] p-6 text-white text-center"
+            >
+              <div className="text-4xl mb-3">⚠️</div>
+              <h3 className="text-xl font-black text-[#e2a85c] mb-2 uppercase tracking-wider">Thông Báo Đăng Nhập</h3>
+              <p className="text-sm text-amber-100/90 mb-6 leading-relaxed">
+                {loginErrorMessage}
+              </p>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => {
+                    window.open(window.location.href, '_blank');
+                  }}
+                  className="w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-[#4A1208] font-black text-xs uppercase py-3 rounded-xl shadow-md hover:brightness-110 transition cursor-pointer"
+                >
+                  🚀 Mở Ứng Dụng Trong Tab Mới (Khuyên Dùng)
+                </button>
+                <button
+                  onClick={() => setShowLoginErrorModal(false)}
+                  className="w-full bg-[#3a0a0a] text-amber-200 border border-amber-500/30 text-xs font-bold py-2.5 rounded-xl hover:bg-[#4a0a0a] transition cursor-pointer"
+                >
+                  Đóng
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Comprehensive Authentication Modal (Google, Apple, Email/Password Login & Register) */}
+      <AnimatePresence>
+        {showAuthModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-[#250808] border-2 border-[#e2a85c] rounded-2xl shadow-[0_0_50px_rgba(122,21,21,0.9)] p-6 md:p-8 text-white"
+            >
+              <button
+                onClick={() => setShowAuthModal(false)}
+                className="absolute top-4 right-4 text-amber-300 hover:text-white bg-amber-950/60 p-2 rounded-full border border-amber-500/40 transition cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-serif font-black text-amber-300 mb-1 tracking-wide">
+                  {authTab === 'login' ? 'ĐĂNG NHẬP TÀI KHOẢN' : 'ĐĂNG KÝ TÀI KHOẢN MỚI'}
+                </h3>
+                <p className="text-xs text-amber-100/70 italic">Thế giới tiểu thuyết Dark Romance & Bình Chọn Nhân Vật</p>
+              </div>
+
+              {/* Tabs */}
+              <div className="grid grid-cols-2 gap-2 mb-6 bg-[#180505] p-1.5 rounded-xl border border-amber-500/30">
+                <button
+                  type="button"
+                  onClick={() => { setAuthTab('login'); setAuthModalError(''); }}
+                  className={`py-2 rounded-lg font-bold text-xs uppercase tracking-wider transition cursor-pointer ${authTab === 'login' ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-[#4A1208] shadow-md' : 'text-amber-300/70 hover:text-white'}`}
+                >
+                  Đăng Nhập
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setAuthTab('register'); setAuthModalError(''); }}
+                  className={`py-2 rounded-lg font-bold text-xs uppercase tracking-wider transition cursor-pointer ${authTab === 'register' ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-[#4A1208] shadow-md' : 'text-amber-300/70 hover:text-white'}`}
+                >
+                  Đăng Ký
+                </button>
+              </div>
+
+              {/* Social Logins */}
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <button
+                  onClick={handleGoogleAuth}
+                  disabled={isAuthLoading}
+                  className="flex items-center justify-center gap-2 bg-white text-gray-800 hover:bg-gray-100 font-bold text-xs py-2.5 px-3 rounded-xl border border-gray-300 shadow transition cursor-pointer"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                  </svg>
+                  <span>Google</span>
+                </button>
+                <button
+                  onClick={handleAppleAuth}
+                  disabled={isAuthLoading}
+                  className="flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-900 font-bold text-xs py-2.5 px-3 rounded-xl border border-gray-700 shadow transition cursor-pointer"
+                >
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 5.75c.62-.75 1.04-1.79.93-2.83-.92.04-2.03.62-2.68 1.37-.58.67-1.09 1.74-.95 2.76 1.03.08 2.08-.55 2.7-1.3z"/>
+                  </svg>
+                  <span>Apple ID</span>
+                </button>
+              </div>
+
+              <div className="relative flex items-center justify-center mb-6">
+                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-amber-500/30" /></div>
+                <span className="relative px-3 bg-[#250808] text-xs text-amber-300/70 uppercase">Hoặc tài khoản & mật khẩu</span>
+              </div>
+
+              <form onSubmit={handleEmailAuthSubmit} className="space-y-4">
+                {authTab === 'register' && (
+                  <div>
+                    <label className="block text-xs font-bold text-amber-200 mb-1">Tên Hiển Thị (Display Name)</label>
+                    <input
+                      type="text"
+                      required
+                      value={authDisplayName}
+                      onChange={(e) => setAuthDisplayName(e.target.value)}
+                      placeholder="Nhập tên hiển thị của bạn..."
+                      className="w-full bg-[#180505] border border-amber-500/40 rounded-xl px-3 py-2 text-sm text-white placeholder-amber-300/30 focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-xs font-bold text-amber-200 mb-1">Email / Tên tài khoản</label>
+                  <input
+                    type="email"
+                    required
+                    value={authEmail}
+                    onChange={(e) => setAuthEmail(e.target.value)}
+                    placeholder="example@domain.com"
+                    className="w-full bg-[#180505] border border-amber-500/40 rounded-xl px-3 py-2 text-sm text-white placeholder-amber-300/30 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-amber-200 mb-1">Mật Khẩu</label>
+                  <input
+                    type="password"
+                    required
+                    value={authPassword}
+                    onChange={(e) => setAuthPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full bg-[#180505] border border-amber-500/40 rounded-xl px-3 py-2 text-sm text-white placeholder-amber-300/30 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                {authTab === 'register' && (
+                  <div>
+                    <label className="block text-xs font-bold text-amber-200 mb-1">Chọn Ảnh Đại Diện (Avatar)</label>
+                    <div className="grid grid-cols-4 gap-2 mb-2">
+                      {[
+                        "https://i.imgur.com/ALMc8Ct.jpeg",
+                        "https://i.imgur.com/k9k3keR.jpeg",
+                        "https://i.imgur.com/O3r9UNi.jpeg",
+                        "https://i.imgur.com/yo72bi3.jpeg"
+                      ].map((url, i) => (
+                        <button
+                          type="button"
+                          key={i}
+                          onClick={() => setAuthAvatar(url)}
+                          className={`w-12 h-12 rounded-full overflow-hidden border-2 transition cursor-pointer mx-auto ${authAvatar === url ? 'border-amber-400 scale-105 shadow-[0_0_10px_rgba(255,215,0,0.6)]' : 'border-amber-900 opacity-60'}`}
+                        >
+                          <img src={url} alt="preset" className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                    <input
+                      type="url"
+                      value={authAvatar}
+                      onChange={(e) => setAuthAvatar(e.target.value)}
+                      placeholder="Hoặc nhập link ảnh avatar tùy ý..."
+                      className="w-full bg-[#180505] border border-amber-500/40 rounded-xl px-3 py-1.5 text-xs text-white placeholder-amber-300/30 focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+                )}
+
+                {authModalError && (
+                  <p className="text-red-400 text-xs text-center font-bold">{authModalError}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isAuthLoading}
+                  className="w-full bg-gradient-to-r from-red-950 via-red-900 to-red-950 hover:from-red-900 hover:to-red-900 text-amber-200 border-2 border-amber-500/60 font-black text-xs uppercase py-3 rounded-xl shadow-[0_0_15px_rgba(122,21,21,0.6)] transition cursor-pointer"
+                >
+                  {isAuthLoading ? "⏳ Đang xử lý..." : (authTab === 'login' ? "Đăng Nhập Ngay" : "Hoàn Tất Đăng Ký")}
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Edit Profile Modal */}
+      <AnimatePresence>
+        {isEditProfileOpen && currentUser && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-[#250808] border-2 border-[#e2a85c] rounded-2xl shadow-[0_0_50px_rgba(122,21,21,0.9)] p-6 text-white"
+            >
+              <button
+                onClick={() => setIsEditProfileOpen(false)}
+                className="absolute top-4 right-4 text-amber-300 hover:text-white bg-amber-950/60 p-2 rounded-full border border-amber-500/40 transition cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <h3 className="text-xl font-serif font-black text-amber-300 mb-4 uppercase tracking-wide text-center">
+                Chỉnh Sửa Hồ Sơ Khách Hàng
+              </h3>
+
+              <form onSubmit={handleUpdateProfileSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-amber-200 mb-1">Tên Hiển Thị</label>
+                  <input
+                    type="text"
+                    required
+                    value={editDisplayName}
+                    onChange={(e) => setEditDisplayName(e.target.value)}
+                    className="w-full bg-[#180505] border border-amber-500/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-amber-200 mb-1">Link Ảnh Avatar</label>
+                  <input
+                    type="url"
+                    required
+                    value={editAvatar}
+                    onChange={(e) => setEditAvatar(e.target.value)}
+                    className="w-full bg-[#180505] border border-amber-500/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div className="flex gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsEditProfileOpen(false)}
+                    className="w-1/2 bg-[#3a0a0a] text-amber-200 border border-amber-500/30 text-xs font-bold py-2.5 rounded-xl hover:bg-[#4a0a0a] transition cursor-pointer"
+                  >
+                    Hủy
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isAuthLoading}
+                    className="w-1/2 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-[#4A1208] font-black text-xs uppercase py-2.5 rounded-xl shadow-md hover:brightness-110 transition cursor-pointer"
+                  >
+                    {isAuthLoading ? "⏳ Đang lưu..." : "Lưu Thay Đổi"}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
