@@ -80,30 +80,6 @@ export async function signInWithGoogle(): Promise<User | null> {
   }
 }
 
-export async function signInWithApple(): Promise<User | null> {
-  const provider = new OAuthProvider('apple.com');
-  provider.addScope('email');
-  provider.addScope('name');
-
-  try {
-    const result = await signInWithPopup(auth, provider);
-    return result.user;
-  } catch (error: any) {
-    console.warn("Apple popup sign-in failed, attempting redirect...", error);
-    const code = error?.code || "";
-    if (
-      code === 'auth/popup-blocked' ||
-      code === 'auth/popup-closed-by-user' ||
-      code === 'auth/cancelled-popup-request' ||
-      String(error?.message).toLowerCase().includes('popup')
-    ) {
-      await signInWithRedirect(auth, provider);
-      return null;
-    }
-    throw error;
-  }
-}
-
 export async function registerWithEmailPassword(email: string, pass: string, displayName: string, photoURL?: string) {
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, pass);
