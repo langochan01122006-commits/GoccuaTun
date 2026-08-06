@@ -247,6 +247,18 @@ export default function App() {
       if (user) {
         setEditDisplayName(user.displayName || '');
         setEditAvatar(user.photoURL || '');
+        try {
+          localStorage.setItem('firebase_user_session', JSON.stringify({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL
+          }));
+        } catch (e) {
+          // ignore
+        }
+      } else {
+        localStorage.removeItem('firebase_user_session');
       }
     });
     return () => unsubscribe();
@@ -343,7 +355,10 @@ export default function App() {
     setAuthModalError('');
     try {
       playClickSound(600, 0.1);
-      await signInWithGoogle();
+      const user = await signInWithGoogle();
+      if (user) {
+        setShowAuthModal(false);
+      }
     } catch (error: any) {
       console.error("Google login error:", error);
       const code = error?.code || "";
@@ -352,12 +367,15 @@ export default function App() {
         msg = "Google Provider chưa được bật trong Firebase Console (Authentication -> Sign-in method -> Google).";
       } else if (code === "auth/unauthorized-domain") {
         msg = "Tên miền này chưa có trong Authorized Domains của Firebase Console.";
+      } else if (code === "auth/api-key-not-valid") {
+        msg = "Khóa API Firebase không hợp lệ. Vui lòng kiểm tra lại cấu hình Firebase Console.";
       } else {
         msg = `Đăng nhập Google thất bại: ${formatAuthError(error)}`;
       }
       setAuthModalError(msg);
       setLoginErrorMessage(msg);
       setShowLoginErrorModal(true);
+    } finally {
       setIsAuthLoading(false);
     }
   };
@@ -367,7 +385,10 @@ export default function App() {
     setAuthModalError('');
     try {
       playClickSound(600, 0.1);
-      await signInWithApple();
+      const user = await signInWithApple();
+      if (user) {
+        setShowAuthModal(false);
+      }
     } catch (error: any) {
       console.error("Apple login error:", error);
       const code = error?.code || "";
@@ -378,6 +399,7 @@ export default function App() {
         setLoginErrorMessage(`Đăng nhập Apple ID: ${formatAuthError(error)}`);
         setShowLoginErrorModal(true);
       }
+    } finally {
       setIsAuthLoading(false);
     }
   };

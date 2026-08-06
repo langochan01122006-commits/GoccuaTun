@@ -1,17 +1,35 @@
 import { initializeApp } from "firebase/app";
 import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection, onSnapshot, deleteDoc, query, where } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
+import firebaseAppletConfig from "../firebase-applet-config.json";
 
 const env = (import.meta as any).env || {};
 
+function getValidApiKey(): string {
+  const envKey = env.VITE_FIREBASE_API_KEY;
+  if (typeof envKey === 'string' && envKey.trim().startsWith('AIza') && envKey.trim().length > 15) {
+    return envKey.trim();
+  }
+  return firebaseAppletConfig?.apiKey || "AIzaSyC2HKQLcC_6sMDo49ufQWANt1LwpnKXMqg";
+}
+
+function getValidAuthDomain(): string {
+  const envDomain = env.VITE_FIREBASE_AUTH_DOMAIN;
+  if (typeof envDomain === 'string' && envDomain.trim().includes('.') && envDomain.trim().length > 5) {
+    return envDomain.trim();
+  }
+  return firebaseAppletConfig?.authDomain || "gocnhocuatunn.firebaseapp.com";
+}
+
 const firebaseConfig = {
-  apiKey: env.VITE_FIREBASE_API_KEY || "AIzaSyC2HKQLcC_6sMDo49ufQWANt1LwpnKXMqg",
-  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "gocnhocuatunn.firebaseapp.com",
-  projectId: env.VITE_FIREBASE_PROJECT_ID || "gocnhocuatunn",
-  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "gocnhocuatunn.firebasestorage.app",
-  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || "227094223631",
-  appId: env.VITE_FIREBASE_APP_ID || "1:227094223631:web:3cc735a2e36829f6ef3c7a",
-  measurementId: env.VITE_FIREBASE_MEASUREMENT_ID || "G-BQ0LP5JE0R"
+  apiKey: getValidApiKey(),
+  authDomain: getValidAuthDomain(),
+  projectId: env.VITE_FIREBASE_PROJECT_ID || firebaseAppletConfig?.projectId || "gocnhocuatunn",
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || firebaseAppletConfig?.storageBucket || "gocnhocuatunn.firebasestorage.app",
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || firebaseAppletConfig?.messagingSenderId || "227094223631",
+  appId: env.VITE_FIREBASE_APP_ID || firebaseAppletConfig?.appId || "1:227094223631:web:3cc735a2e36829f6ef3c7a",
+  measurementId: env.VITE_FIREBASE_MEASUREMENT_ID || firebaseAppletConfig?.measurementId || "G-BQ0LP5JE0R",
+  firestoreDatabaseId: env.VITE_FIREBASE_DATABASE_ID || firebaseAppletConfig?.firestoreDatabaseId || "(default)"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -37,19 +55,53 @@ export async function handleRedirectResult() {
   return null;
 }
 
-export async function signInWithGoogle(): Promise<void> {
+export async function signInWithGoogle(): Promise<User | null> {
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({
     prompt: 'select_account'
   });
-  await signInWithRedirect(auth, provider);
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
+  } catch (error: any) {
+    console.warn("Popup sign-in failed or blocked, attempting redirect...", error);
+    const code = error?.code || "";
+    if (
+      code === 'auth/popup-blocked' ||
+      code === 'auth/popup-closed-by-user' ||
+      code === 'auth/cancelled-popup-request' ||
+      String(error?.message).toLowerCase().includes('popup')
+    ) {
+      await signInWithRedirect(auth, provider);
+      return null;
+    }
+    throw error;
+  }
 }
 
-export async function signInWithApple(): Promise<void> {
+export async function signInWithApple(): Promise<User | null> {
   const provider = new OAuthProvider('apple.com');
   provider.addScope('email');
   provider.addScope('name');
-  await signInWithRedirect(auth, provider);
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
+  } catch (error: any) {
+    console.warn("Apple popup sign-in failed, attempting redirect...", error);
+    const code = error?.code || "";
+    if (
+      code === 'auth/popup-blocked' ||
+      code === 'auth/popup-closed-by-user' ||
+      code === 'auth/cancelled-popup-request' ||
+      String(error?.message).toLowerCase().includes('popup')
+    ) {
+      await signInWithRedirect(auth, provider);
+      return null;
+    }
+    throw error;
+  }
 }
 
 export async function registerWithEmailPassword(email: string, pass: string, displayName: string, photoURL?: string) {
