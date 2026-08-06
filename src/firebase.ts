@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { initializeFirestore, doc, setDoc, updateDoc, getDoc, getDocs, collection, onSnapshot, deleteDoc, query, where } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from "firebase/auth";
 import firebaseConfig from "../firebase-applet-config.json";
 
 const app = initializeApp(firebaseConfig);
@@ -13,26 +13,79 @@ setPersistence(auth, browserLocalPersistence).catch((err) => {
   console.error("Auth persistence error:", err);
 });
 
-export async function signInWithGoogle() {
+export async function handleRedirectResult() {
+  try {
+    const result = await getRedirectResult(auth);
+    if (result && result.user) {
+      return result.user;
+    }
+  } catch (error: any) {
+    console.error("Redirect result error:", error);
+    throw error;
+  }
+  return null;
+}
+
+export async function signInWithGoogleRedirect() {
   const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
+  await signInWithRedirect(auth, provider);
+}
+
+export async function signInWithAppleRedirect() {
+  const provider = new OAuthProvider('apple.com');
+  provider.addScope('email');
+  provider.addScope('name');
+  await signInWithRedirect(auth, provider);
+}
+
+export async function signInWithGoogle(useRedirect: boolean = false) {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: 'select_account'
+  });
+
+  if (useRedirect) {
+    await signInWithRedirect(auth, provider);
+    return null;
+  }
+
   try {
     const result = await signInWithPopup(auth, provider);
     return result.user;
   } catch (error: any) {
-    console.error("Google login error:", error);
+    console.warn("Google popup sign in failed, trying redirect fallback...", error);
+    const code = error?.code || "";
+    const msg = error?.message || String(error);
+    if (code === 'auth/popup-blocked' || code === 'auth/popup-closed-by-user' || msg.includes('popup') || msg.includes('cross-origin') || msg.includes('iframe')) {
+      await signInWithRedirect(auth, provider);
+      return null;
+    }
     throw error;
   }
 }
 
-export async function signInWithApple() {
+export async function signInWithApple(useRedirect: boolean = false) {
   const provider = new OAuthProvider('apple.com');
   provider.addScope('email');
   provider.addScope('name');
+
+  if (useRedirect) {
+    await signInWithRedirect(auth, provider);
+    return null;
+  }
+
   try {
     const result = await signInWithPopup(auth, provider);
     return result.user;
   } catch (error: any) {
-    console.error("Apple login error:", error);
+    console.warn("Apple popup sign in failed, trying redirect fallback...", error);
+    const code = error?.code || "";
+    const msg = error?.message || String(error);
+    if (code === 'auth/popup-blocked' || code === 'auth/popup-closed-by-user' || msg.includes('popup') || msg.includes('cross-origin') || msg.includes('iframe')) {
+      await signInWithRedirect(auth, provider);
+      return null;
+    }
     throw error;
   }
 }
